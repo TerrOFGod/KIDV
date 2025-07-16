@@ -1,0 +1,11 @@
+services:
+  rmq:
+    image: rabbitmq:4-management
+    container_name: rabbitmq_gameacademy
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - '15672:15672'
+      - '5672:5672'
