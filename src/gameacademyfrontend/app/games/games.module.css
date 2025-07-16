@@ -1,0 +1,226 @@
+.container {
+    padding: 0 20px;
+}
+
+.searchWrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 24px;
+    overflow: visible;
+    z-index: 3000;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1500;
+    pointer-events: none;
+}
+
+.dropdown {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    max-height: 70vh;
+    overflow-y: auto;
+    z-index: 2000;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    min-height: 80px;
+    border-radius: 0;
+}
+
+.dropdownItem:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.dropdownItem:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: none;
+}
+
+.dropdownItem .cardImage {
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdownItem .cardContent {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dropdownItem .cardTitle {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.dropdownItem .cardDesc {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdownItem:hover {
+    background: #f9f9f9;
+}
+
+.noResults {
+    padding: 12px;
+    color: #777;
+    text-align: center;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 20px;
+    list-style: none;
+    margin: 0;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cardImage {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+}
+
+.cardIcon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: #f0f0f0;
+}
+
+.cardContent {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    font-size: 1.1rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+.cardDesc {
+    flex: 1;
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 0 12px;
+    line-height: 1.4;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.cardButton {
+    width: 90%;
+    margin: 0 auto 12px;
+    padding: 8px 0;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: auto;
+}
+
+.cardButton:hover {
+    background-color: #005bb5;
+}
+
+.cardLink {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.uploadButton {
+    padding: 8px 16px;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.uploadButton:hover {
+    background-color: #005bb5;
+}

@@ -1,0 +1,882 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.8.1",
+  "pathMappings": {
+    "@shared/contracts": [
+      "shared/contracts/src/index.ts"
+    ],
+    "@shared/interfaces": [
+      "shared/interfaces/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "tsconfig.base.json",
+        "hash": "5210854850387257718"
+      },
+      {
+        "file": "jest.config.ts",
+        "hash": "9882362695153092473"
+      },
+      {
+        "file": "jest.preset.js",
+        "hash": "7473220183190921152"
+      },
+      {
+        "file": ".github/instructions/nx.instructions.md",
+        "hash": "1194534901358898728"
+      },
+      {
+        "file": "eslint.config.mjs",
+        "hash": "97958994944379666"
+      },
+      {
+        "file": "apps/duplicate-checker/requirements.txt",
+        "hash": "11060189391648673784"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "5683759867490354017"
+      },
+      {
+        "file": "apps/duplicate-checker/app/models.py",
+        "hash": "17441346178484108448"
+      },
+      {
+        "file": "apps/duplicate-checker/app/utils.py",
+        "hash": "10444239509227168350"
+      },
+      {
+        "file": "README.md",
+        "hash": "16702885637928485952"
+      },
+      {
+        "file": "package.json",
+        "hash": "607872400804038361"
+      },
+      {
+        "file": "apps/duplicate-checker/app/api.py",
+        "hash": "5622635789116292655"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "17085498363870782104"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "11532813898455409296"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "6820402234827505055"
+      },
+      {
+        "file": "apps/duplicate-checker/main.py",
+        "hash": "8701792539752258161"
+      },
+      {
+        "file": "nx.json",
+        "hash": "8899546856522437760"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "17506975596103258717"
+      }
+    ],
+    "projectFileMap": {
+      "interfaces": [
+        {
+          "file": "shared/interfaces/README.md",
+          "hash": "16742255143066416646"
+        },
+        {
+          "file": "shared/interfaces/eslint.config.mjs",
+          "hash": "17189581178637948575",
+          "deps": [
+            [
+              "npm:jsonc-eslint-parser",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "shared/interfaces/package.json",
+          "hash": "12162345828598392135",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "shared/interfaces/project.json",
+          "hash": "14349984956055328773"
+        },
+        {
+          "file": "shared/interfaces/src/index.ts",
+          "hash": "12712636444747029916"
+        },
+        {
+          "file": "shared/interfaces/src/lib/auth.interface.ts",
+          "hash": "5445774291524148350"
+        },
+        {
+          "file": "shared/interfaces/src/lib/user.interface.ts",
+          "hash": "6837363685485748435",
+          "deps": [
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "shared/interfaces/tsconfig.json",
+          "hash": "11840559335071469310"
+        },
+        {
+          "file": "shared/interfaces/tsconfig.lib.json",
+          "hash": "6492511145659628946"
+        }
+      ],
+      "projects": [
+        {
+          "file": "apps/projects/eslint.config.mjs",
+          "hash": "825007401213781954"
+        },
+        {
+          "file": "apps/projects/jest.config.ts",
+          "hash": "17772582404429048217"
+        },
+        {
+          "file": "apps/projects/project.json",
+          "hash": "11799314227582718393"
+        },
+        {
+          "file": "apps/projects/src/admin/admin-duplicates.controller.ts",
+          "hash": "224452785293427532",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/admin/admin-games.controller.ts",
+          "hash": "18261647348893850491",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:nestjs-rmq",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/projects/src/admin/admin.module.ts",
+          "hash": "15674610501364397291",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/app.controller.ts",
+          "hash": "1345450293891055440",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/projects/src/app.module.ts",
+          "hash": "7586097030878489311",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/mongoose",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/projects/src/app.service.ts",
+          "hash": "15275323873054081339",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/projects/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/projects/src/comments/comments.controller.ts",
+          "hash": "7808345581831062506",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:nestjs-rmq",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/comments.module.ts",
+          "hash": "9596179167514560025",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/comments.service.ts",
+          "hash": "4888702509813489438",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/dtos/create-comment.dto.ts",
+          "hash": "838932595580121286",
+          "deps": [
+            "npm:class-validator",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/jwt.guard.ts",
+          "hash": "8294667724271169220",
+          "deps": [
+            "npm:@nestjs/passport"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/models/user.model.ts",
+          "hash": "5368076907263726632",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/schemas/comment.schema.ts",
+          "hash": "5989479019621330975",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/comments/schemas/user.schema.ts",
+          "hash": "5368076907263726632",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/configs/jwt.config.ts",
+          "hash": "15215887781100762227",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/projects/src/configs/minio.config.ts",
+          "hash": "11669903399718524908",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:minio"
+          ]
+        },
+        {
+          "file": "apps/projects/src/configs/mongo.config.ts",
+          "hash": "17710342362459825340",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/configs/rmq.config.ts",
+          "hash": "6209576689129469702",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/projects/src/duplicate/duplicate.controller.ts",
+          "hash": "12362895792240350163",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express"
+          ]
+        },
+        {
+          "file": "apps/projects/src/duplicate/duplicate.module.ts",
+          "hash": "16967818430135788603",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/duplicate/duplicate.service.ts",
+          "hash": "4683099756180007316",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose",
+            "npm:mongoose",
+            "npm:jszip"
+          ]
+        },
+        {
+          "file": "apps/projects/src/duplicate/schemas/duplicate.schema.ts",
+          "hash": "11401525434649133246",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/games/dto/create-game.dto.ts",
+          "hash": "10329331086134746171",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/projects/src/games/games.controller.ts",
+          "hash": "12244623089245772170",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express"
+          ]
+        },
+        {
+          "file": "apps/projects/src/games/games.module.ts",
+          "hash": "2332473838231482323",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/games/games.service.ts",
+          "hash": "15946035712174083961",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose",
+            "npm:mongoose",
+            "npm:unzipper"
+          ]
+        },
+        {
+          "file": "apps/projects/src/games/schemas/game.schema.ts",
+          "hash": "8236729455066653964",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/projects/src/main.ts",
+          "hash": "11951237915284650925",
+          "deps": [
+            "npm:@nestjs/core",
+            "npm:dotenv",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/projects/src/minio/minio.module.ts",
+          "hash": "16655309487858846653",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/projects/src/minio/minio.service.ts",
+          "hash": "4670458967819866566",
+          "deps": [
+            "npm:@aws-sdk/client-s3",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/projects/tsconfig.app.json",
+          "hash": "12947707009082198080"
+        },
+        {
+          "file": "apps/projects/tsconfig.json",
+          "hash": "7462419380158041776"
+        },
+        {
+          "file": "apps/projects/tsconfig.spec.json",
+          "hash": "16260686058541983629"
+        },
+        {
+          "file": "apps/projects/webpack.config.js",
+          "hash": "11337378123977611835",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "api": [
+        {
+          "file": "apps/api/eslint.config.mjs",
+          "hash": "825007401213781954"
+        },
+        {
+          "file": "apps/api/jest.config.ts",
+          "hash": "7656140197706953726"
+        },
+        {
+          "file": "apps/api/project.json",
+          "hash": "16277076724010798373"
+        },
+        {
+          "file": "apps/api/src/app/app.module.ts",
+          "hash": "18142244719005778724",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/jwt",
+            "npm:@nestjs/passport",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/configs/jwt.config.ts",
+          "hash": "15215887781100762227",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/configs/rmq.config.ts",
+          "hash": "506557269529057470",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/controllers/auth.controller.ts",
+          "hash": "655940750268121055",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/controllers/comments.controller.ts",
+          "hash": "13854212239012739788",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:nestjs-rmq",
+            "contracts",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/controllers/user.controller.ts",
+          "hash": "9403653083619756529",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:nestjs-rmq",
+            "contracts",
+            "interfaces"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/dtos/login.dto.ts",
+          "hash": "9804010629249960259",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/dtos/register.dto.ts",
+          "hash": "16150246114040478602",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/guards/jwt.guard.ts",
+          "hash": "8294667724271169220",
+          "deps": [
+            "npm:@nestjs/passport"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/guards/roles.guard.ts",
+          "hash": "8409443747907666234",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "interfaces"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/guards/user.decorator.ts",
+          "hash": "11450303228643358677",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/api/src/app/strategies/jwt.strategy.ts",
+          "hash": "8454111489684456515",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/passport",
+            "npm:passport-jwt",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/api/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/api/src/main.ts",
+          "hash": "16870207248836457466",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/api/tsconfig.app.json",
+          "hash": "12947707009082198080"
+        },
+        {
+          "file": "apps/api/tsconfig.json",
+          "hash": "7462419380158041776"
+        },
+        {
+          "file": "apps/api/tsconfig.spec.json",
+          "hash": "16260686058541983629"
+        },
+        {
+          "file": "apps/api/webpack.config.js",
+          "hash": "8108196802529087237",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "contracts": [
+        {
+          "file": "shared/contracts/README.md",
+          "hash": "17018599000932080847"
+        },
+        {
+          "file": "shared/contracts/eslint.config.mjs",
+          "hash": "17189581178637948575",
+          "deps": [
+            [
+              "npm:jsonc-eslint-parser",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "shared/contracts/package.json",
+          "hash": "3054565902540484359",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "shared/contracts/project.json",
+          "hash": "16008704192039192758"
+        },
+        {
+          "file": "shared/contracts/src/index.ts",
+          "hash": "13184093531314490564"
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.change-password-profile.ts",
+          "hash": "878526641481544503",
+          "deps": [
+            "npm:class-validator",
+            "npm:class-transformer"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.change-profile.ts",
+          "hash": "2240010541524913499",
+          "deps": [
+            "npm:class-transformer",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.change-role.ts",
+          "hash": "9348690746825543577",
+          "deps": [
+            "interfaces",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.delete-user.ts",
+          "hash": "8767070552181429384",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.login.ts",
+          "hash": "5868885604966442127",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.register.ts",
+          "hash": "12274880518484586824",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.user-info.ts",
+          "hash": "9010105875253329823",
+          "deps": [
+            "interfaces",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.user-list.ts",
+          "hash": "8452674848472969680"
+        },
+        {
+          "file": "shared/contracts/src/lib/account/account.user-search.ts",
+          "hash": "9119206072806274643",
+          "deps": [
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/project/comment.create.ts",
+          "hash": "15574636430282528756"
+        },
+        {
+          "file": "shared/contracts/src/lib/project/comment.list.ts",
+          "hash": "6808014198332072837"
+        },
+        {
+          "file": "shared/contracts/src/lib/project/game.create.ts",
+          "hash": "8533025612720187017",
+          "deps": [
+            "npm:multer"
+          ]
+        },
+        {
+          "file": "shared/contracts/src/lib/project/game.get-all.ts",
+          "hash": "5552086529179567968"
+        },
+        {
+          "file": "shared/contracts/tsconfig.json",
+          "hash": "17688081634027477908"
+        },
+        {
+          "file": "shared/contracts/tsconfig.lib.json",
+          "hash": "18036961262832485648"
+        }
+      ],
+      "account": [
+        {
+          "file": "apps/account/eslint.config.mjs",
+          "hash": "825007401213781954"
+        },
+        {
+          "file": "apps/account/jest.config.ts",
+          "hash": "14068678238457476733"
+        },
+        {
+          "file": "apps/account/project.json",
+          "hash": "9038141553179722255"
+        },
+        {
+          "file": "apps/account/src/app/app.module.ts",
+          "hash": "13434020222494250005",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/mongoose",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/auth/auth.controller.ts",
+          "hash": "12828418592320334283",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/auth/auth.module.ts",
+          "hash": "379412898330871150",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/auth/auth.service.ts",
+          "hash": "9048240922522510300",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "contracts",
+            "interfaces",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/auth/others/account.constants.ts",
+          "hash": "13547209928278306056"
+        },
+        {
+          "file": "apps/account/src/app/configs/jwt.config.ts",
+          "hash": "15215887781100762227",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/configs/mongo.config.ts",
+          "hash": "17710342362459825340",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/configs/rmq.config.ts",
+          "hash": "12246568531414073464",
+          "deps": [
+            "npm:@nestjs/config",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/entities/user.entity.ts",
+          "hash": "2367936488414987233",
+          "deps": [
+            "interfaces",
+            "npm:bcryptjs",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/models/user.model.ts",
+          "hash": "4907804735036226290",
+          "deps": [
+            "npm:@nestjs/mongoose",
+            "interfaces",
+            "npm:mongoose"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/repos/user.repository.ts",
+          "hash": "13303379889788481514",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose",
+            "npm:mongoose",
+            "interfaces"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/user.commands.ts",
+          "hash": "14293716422588462796",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/user.module.ts",
+          "hash": "12933064484595395462",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/mongoose"
+          ]
+        },
+        {
+          "file": "apps/account/src/app/user/user.quries.ts",
+          "hash": "3223291122632515373",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts",
+            "npm:nestjs-rmq"
+          ]
+        },
+        {
+          "file": "apps/account/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/account/src/main.ts",
+          "hash": "14092706712176323683",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "apps/account/tsconfig.app.json",
+          "hash": "12947707009082198080"
+        },
+        {
+          "file": "apps/account/tsconfig.json",
+          "hash": "7462419380158041776"
+        },
+        {
+          "file": "apps/account/tsconfig.spec.json",
+          "hash": "16260686058541983629"
+        },
+        {
+          "file": "apps/account/webpack.config.js",
+          "hash": "9863829030289931638",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ]
+    }
+  }
+}

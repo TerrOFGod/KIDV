@@ -1,0 +1,47 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./app/not-found.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+.not-found_container__PhdHT {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #121212;
+    color: #fff;
+    padding: 24px;
+    text-align: center;
+}
+
+.not-found_title__Vh7BH {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, #0070f3, #00c6ff);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.not-found_description__gCEE1 {
+    font-size: 1.125rem;
+    margin-bottom: 24px;
+    color: #ccc;
+}
+
+.not-found_link__UkSHF {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0070f3;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease, transform 0.2s;
+}
+
+.not-found_link__UkSHF:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px); }

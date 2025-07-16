@@ -1,0 +1,282 @@
+/* Унифицированные стили для жанрового селекта и поиска соавторов */
+
+/* Общие контейнеры и базовая стилизация формы */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    /* для корректного позиционирования dropdown-ов */
+}
+
+.heading {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    /* чтобы выпадающие списки внутри располагались относительно формы */
+}
+
+.label {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.input,
+.textarea,
+.fileInput,
+.select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus,
+.genreInput:focus,
+.authorInput:focus {
+    border-color: #0070f3;
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.checkboxGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkboxList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.checkboxItem {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.submitButton {
+    padding: 12px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submitButton:hover {
+    background-color: #005bb5;
+}
+
+/* Кнопка назад */
+.backButton {
+    left: 0;
+    background: transparent;
+    border: none;
+    color: #777;
+    font-size: 1rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* === Жанровый селект === */
+.genreSelect {
+    position: relative;
+    z-index: 1;
+    /* чтобы dropdown над другими элементами */
+}
+
+.selectedContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: text;
+    background: #fff;
+}
+
+.genreBadge {
+    background: #eef;
+    padding: 2px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.genreBadge button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #0070f3;
+    font-weight: 600;
+    padding: 0;
+}
+
+.genreBadge button:hover {
+    color: #005bb5;
+}
+
+.genreInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    min-width: 80px;
+    font-size: 1rem;
+}
+
+.genreDropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.genreItem {
+    padding: 6px 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.genreItem:hover {
+    background: #f0f0f0;
+}
+
+.noResults {
+    padding: 6px 8px;
+    color: #777;
+    font-size: 0.95rem;
+}
+
+/* === Список выбранных соавторов === */
+.selectedAuthorsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.authorBadge {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(0, 112, 243, 0.1);
+    color: #0070f3;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.authorBadge button {
+    background: transparent;
+    border: none;
+    color: #0070f3;
+    font-weight: bold;
+    margin-left: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.authorBadge button:hover {
+    color: #005bb5;
+}
+
+/* === Поле ввода для поиска соавторов === */
+.authorInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    position: relative;
+}
+
+/* === Выпадающий список подсказок (авторов) === */
+.authorDropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.authorDropdownItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.95rem;
+}
+
+.authorDropdownItem:hover {
+    background-color: rgba(0, 112, 243, 0.05);
+}
+
+.authorName {
+    font-weight: 500;
+    color: #333;
+}
+
+.authorEmail {
+    font-size: 0.85rem;
+    color: #666;
+}

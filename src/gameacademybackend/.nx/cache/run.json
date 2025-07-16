@@ -1,0 +1,43 @@
+{
+  "run": {
+    "command": "nx run projects:build:development",
+    "startTime": "2025-07-11T10:20:58.978Z",
+    "endTime": "2025-07-11T10:20:59.423Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "interfaces:build",
+      "target": "build",
+      "projectName": "interfaces",
+      "hash": "7128166768939237333",
+      "startTime": "2025-07-11T10:20:59.113Z",
+      "endTime": "2025-07-11T10:20:59.150Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "contracts:build",
+      "target": "build",
+      "projectName": "contracts",
+      "hash": "7603057187250828913",
+      "startTime": "2025-07-11T10:20:59.160Z",
+      "endTime": "2025-07-11T10:20:59.235Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "projects:build:development",
+      "target": "build",
+      "projectName": "projects",
+      "hash": "11034212449940991153",
+      "startTime": "2025-07-11T10:20:59.253Z",
+      "endTime": "2025-07-11T10:20:59.417Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    }
+  ]
+}

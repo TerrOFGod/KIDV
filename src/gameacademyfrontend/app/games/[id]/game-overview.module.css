@@ -1,0 +1,276 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+}
+
+.topRow {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.mediaBlock,
+.sidebarBlock {
+    height: 100%;
+    overflow: hidden;
+}
+
+.glassBlock {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.10);
+    padding: 20px;
+}
+
+.mediaBlock {
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.mediaBlock .gallery {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebarBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.coverContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.coverContainer img {
+    border-radius: 12px !important;
+}
+
+.breadcrumbs {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.breadcrumbLink {
+    color: #0070f3;
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+}
+
+.breadcrumbLink:hover {
+    text-decoration: underline;
+}
+
+.headerRow {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0 auto;
+    text-align: center;
+    flex: 1;
+}
+
+.backButton {
+    position: absolute;
+    left: 0;
+    background: transparent;
+    border: none;
+    color: #777;
+    font-size: 1rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.mediaPanel {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.mediaPanel> :first-child {
+    flex: 2;
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    max-width: 320px;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.coverContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+}
+
+
+.coverContainer img {
+    border-radius: 12px !important;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #005bb5;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background-color: #0070f3;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.modelsSection {
+    padding: 24px;
+}
+
+.modelsTitle {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+}
+
+.modelsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.details {
+    padding: 24px;
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.sectionTitle {
+    margin-top: 0;
+}
+
+.imagesGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.imageItem {
+    position: relative;
+    flex: 1 1 calc(33.333% - 12px);
+    min-width: 120px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.videosSection {
+    margin: 24px 0;
+}
+
+.videosGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.videoItem {
+    flex: 0 0 45%;
+    max-width: 45%;
+    height: auto;
+    border-radius: 4px;
+    background: transparent;
+}
+
+.authorBlock {
+    margin: 4px 0;
+    padding: 16px;
+    /* Сделаем фон более тёмным, чтобы блок выделялся на светлом фоне страницы */
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Лёгкая тень для чёткости контура */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.authorItem,
+.coauthorsContainer {
+    font-size: 0.95rem;
+    /* Текст сделаем максимально контрастным — белым */
+    color: #ffffff;
+}
+
+/* Имя автора (если нужно подчеркнуть, можно сделать чуть больше размер или жирнее) */
+.authorName {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Сообщение об ошибке — пусть остаётся красным, но на тёмном фоне хорошо контрастирует */
+.authorBlockError {
+    color: #ff6b6b;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/* Если нужно отдельно стилизовать заголовок списка авторов */
+.authorBlockTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 4px;
+}
