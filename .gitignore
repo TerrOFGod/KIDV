@@ -1,0 +1,188 @@
+# Создано https://www.toptal.com/developers/gitignore/api/nextjs,node,react
+# Редактировать по адресу https://www.toptal.com/developers/gitignore?templates=nextjs,node,react
+
+### NextJS ###
+# зависимости
+/node_modules
+/.pnp
+.pnp.js
+
+# тестирование
+/охват
+
+# следующий.js
+/.следующий/
+/вне/
+
+# производство
+/строить
+
+# разное
+.DS_Store
+*.pem
+
+# отладка
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# локальные файлы env
+.env*.local
+
+# версель
+.vercel
+
+# машинописный текст
+*.tsbuildinfo
+next-env.d.ts
+
+### Узел ###
+# Журналы
+журналы
+*.бревно
+lerna-debug.log*
+
+# Диагностические отчеты (https://nodejs.org/api/report.html)
+отчет.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Данные времени выполнения
+пидс
+*.pid
+*.семя
+*.pid.lock
+
+# Каталог для инструментированных библиотек, сгенерированных jscoverage/JSCover
+lib-cov
+
+# Каталог покрытия, используемый такими инструментами, как Стамбул
+охват
+*.lcov
+
+# тестовое покрытие в Нью-Йорке
+.nyc_output
+
+# Промежуточное хранилище Grunt (https://gruntjs.com/creating-plugins#storing-task-files)
+.хрюкать
+
+# Каталог зависимостей Bower (https://bower.io/)
+bower_components
+
+# конфигурация узла-waf
+.lock-wscript
+
+# Скомпилированные бинарные дополнения (https://nodejs.org/api/addons.html)
+сборка/выпуск
+
+# Каталоги зависимостей
+node_modules/
+jspm_packages/
+
+# Каталог зависимостей Snowpack (https://snowpack.dev/)
+веб_модули/
+
+# Кэш TypeScript
+
+# Дополнительный каталог кэша npm
+.npm
+
+# Дополнительный кэш eslint
+.eslintcache
+
+# Дополнительный кэш stylelint
+.stylelintcache
+
+# Кэш микропакетов
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Дополнительная история REPL
+.node_repl_history
+
+# Вывод 'npm pack'
+*.tgz
+
+# Файл целостности пряжи
+.yarn-целостность
+
+# файлы переменных среды dotenv
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# кэш упаковщика посылок (https://parceljs.org/)
+.кэш
+.parcel-cache
+
+# Результат сборки Next.js
+.следующий
+вне
+
+# Nuxt.js сборка/генерация выходных данных
+.nuxt
+расстояние
+
+# Файлы Гэтсби
+.кэш/
+# Комментарий в публичной строке, если ваш проект использует Gatsby, а не Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# публичный
+
+# вывод сборки vuepress
+.vuepress/dist
+
+# временный каталог и каталог кэша vuepress v2.x
+.temp
+
+# Кэш Docusaurus и сгенерированные файлы
+.докузавр
+
+# Бессерверные каталоги
+.serverless/
+
+# Кэш FuseBox
+.fusebox/
+
+# Локальные файлы DynamoDB
+.dynamodb/
+
+# Файл порта TernJS
+.tern-port
+
+# Сохраняет версии VSCode, используемые для тестирования расширений VSCode.
+.vscode-тест
+
+# пряжа v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+### Патч узла ###
+# Бессерверные каталоги Webpack
+.webpack/
+
+# Дополнительный кэш stylelint
+
+# Сборка SvelteKit / генерация выходных данных
+.svelte-kit
+
+### реагировать ###
+.DS_*
+**/*.резервная копия.*
+**/*.назад.*
+
+node_modules
+
+*.возвышенный*
+
+psd
+большой палец
+эскиз
+
+# Конец https://www.toptal.com/developers/gitignore/api/nextjs,node,react
