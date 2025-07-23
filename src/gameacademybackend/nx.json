@@ -18,7 +18,7 @@
     "appsDir": "apps",
     "libsDir": "shared"
   },
-  "nxCloudId": "680e1e9cf7d820161ac2e3df",
+  "nxCloudId": "6880d58dd1b6833bf1fd9e6c",
   "plugins": [
     {
       "plugin": "@nx/webpack/plugin",
@@ -44,7 +44,9 @@
       "exclude": [
         "apps/account-e2e/**/*",
         "apps/api-e2e/**/*",
-        "apps/projects-e2e/**/*"
+        "apps/projects-e2e/**/*",
+        "apps/news-e2e/**/*",
+        "apps/portfolio-e2e/**/*"
       ]
     }
   ],

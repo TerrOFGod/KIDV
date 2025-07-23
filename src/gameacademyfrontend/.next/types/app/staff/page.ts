@@ -1,4 +1,4 @@
-// File: D:\VTTrofimchuk\KIDV_site\gameacademyfrontend\app\staff\page.tsx
+// File: D:\VTTrofimchuk\repositories\KIDV\src\gameacademyfrontend\app\staff\page.tsx
 import * as entry from '../../../../app/staff/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

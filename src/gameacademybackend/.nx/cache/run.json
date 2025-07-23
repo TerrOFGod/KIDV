@@ -1,8 +1,8 @@
 {
   "run": {
-    "command": "nx run projects:build:development",
-    "startTime": "2025-07-11T10:20:58.978Z",
-    "endTime": "2025-07-11T10:20:59.423Z",
+    "command": "nx run-many --target=serve --all --parallel=10",
+    "startTime": "2025-07-23T10:03:26.011Z",
+    "endTime": "2025-07-23T11:35:54.044Z",
     "inner": false
   },
   "tasks": [
@@ -10,9 +10,9 @@
       "taskId": "interfaces:build",
       "target": "build",
       "projectName": "interfaces",
-      "hash": "7128166768939237333",
-      "startTime": "2025-07-11T10:20:59.113Z",
-      "endTime": "2025-07-11T10:20:59.150Z",
+      "hash": "15728637632180096418",
+      "startTime": "2025-07-23T10:03:26.148Z",
+      "endTime": "2025-07-23T10:03:26.215Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
@@ -21,23 +21,78 @@
       "taskId": "contracts:build",
       "target": "build",
       "projectName": "contracts",
-      "hash": "7603057187250828913",
-      "startTime": "2025-07-11T10:20:59.160Z",
-      "endTime": "2025-07-11T10:20:59.235Z",
+      "hash": "8861262200305481320",
+      "startTime": "2025-07-23T10:03:26.227Z",
+      "endTime": "2025-07-23T10:03:26.430Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
     },
     {
-      "taskId": "projects:build:development",
+      "taskId": "api:build",
       "target": "build",
-      "projectName": "projects",
-      "hash": "11034212449940991153",
-      "startTime": "2025-07-11T10:20:59.253Z",
-      "endTime": "2025-07-11T10:20:59.417Z",
+      "projectName": "api",
+      "hash": "15313632751968983738",
+      "startTime": "2025-07-23T10:03:26.448Z",
+      "endTime": "2025-07-23T10:03:26.593Z",
       "params": "",
       "cacheStatus": "local-cache-hit",
       "status": 0
+    },
+    {
+      "taskId": "projects:build",
+      "target": "build",
+      "projectName": "projects",
+      "hash": "7806701540875609801",
+      "startTime": "2025-07-23T10:03:26.449Z",
+      "endTime": "2025-07-23T10:03:26.625Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "account:build",
+      "target": "build",
+      "projectName": "account",
+      "hash": "5533004681743006436",
+      "startTime": "2025-07-23T10:03:26.449Z",
+      "endTime": "2025-07-23T10:03:26.709Z",
+      "params": "",
+      "cacheStatus": "local-cache-hit",
+      "status": 0
+    },
+    {
+      "taskId": "api:serve:development",
+      "target": "serve",
+      "projectName": "api",
+      "hash": "13714943624618845319",
+      "startTime": "2025-07-23T10:03:26.728Z",
+      "endTime": "2025-07-23T11:35:41.938Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "projects:serve:development",
+      "target": "serve",
+      "projectName": "projects",
+      "hash": "644149296052593226",
+      "startTime": "2025-07-23T10:03:26.853Z",
+      "endTime": "2025-07-23T11:35:41.943Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    },
+    {
+      "taskId": "account:serve:development",
+      "target": "serve",
+      "projectName": "account",
+      "hash": "12184234395448644705",
+      "startTime": "2025-07-23T10:03:26.885Z",
+      "endTime": "2025-07-23T11:35:41.967Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
     }
   ]
 }

@@ -1,8 +1,6 @@
 {
-  "/hall-of-fame/page": "app/hall-of-fame/page.js",
-  "/games/page": "app/games/page.js",
-  "/upload/page": "app/upload/page.js",
-  "/portfolio/page": "app/portfolio/page.js",
-  "/map-success/page": "app/map-success/page.js",
-  "/page": "app/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/staff/page": "app/staff/page.js",
+  "/staff/[slug]/page": "app/staff/[slug]/page.js"
 }

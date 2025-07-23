@@ -177,6 +177,193 @@
         "implicitDependencies": []
       }
     },
+    "portfolio": {
+      "name": "portfolio",
+      "type": "app",
+      "data": {
+        "root": "apps/portfolio",
+        "projectType": "application",
+        "metadata": {},
+        "targets": {
+          "build": {
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production",
+              {
+                "externalDependencies": [
+                  "webpack-cli"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist\\apps\\portfolio"
+            ],
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Runs Webpack build",
+              "help": {
+                "command": "npx webpack-cli build --help",
+                "example": {
+                  "options": {
+                    "json": "stats.json"
+                  },
+                  "args": [
+                    "--profile"
+                  ]
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "apps/portfolio",
+              "args": [
+                "node-env=production"
+              ],
+              "command": "webpack-cli build"
+            },
+            "configurations": {
+              "development": {
+                "args": [
+                  "node-env=development"
+                ]
+              }
+            },
+            "parallelism": true
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "dependsOn": [
+              "build"
+            ],
+            "options": {
+              "buildTarget": "portfolio:build",
+              "runBuildTargetDependencies": false
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "portfolio:build:development"
+              },
+              "production": {
+                "buildTarget": "portfolio:build:production"
+              }
+            },
+            "parallelism": true
+          },
+          "preview": {
+            "options": {
+              "cwd": "apps/portfolio",
+              "args": [
+                "--node-env=production"
+              ],
+              "command": "webpack-cli serve"
+            },
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Starts Webpack dev server in production mode",
+              "help": {
+                "command": "npx webpack-cli serve --help",
+                "example": {
+                  "options": {
+                    "args": [
+                      "--client-progress",
+                      "--history-api-fallback "
+                    ]
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          },
+          "serve-static": {
+            "dependsOn": [
+              "build"
+            ],
+            "executor": "@nx/web:file-server",
+            "options": {
+              "buildTarget": "build",
+              "spa": true
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build-deps": {
+            "dependsOn": [
+              "^build"
+            ],
+            "configurations": {},
+            "options": {},
+            "parallelism": true,
+            "executor": "nx:noop"
+          },
+          "watch-deps": {
+            "dependsOn": [
+              "build-deps"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "npx nx watch --projects portfolio --includeDependentProjects -- npx nx build-deps portfolio"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "apps/portfolio",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "^default",
+              "{workspaceRoot}/eslint.config.mjs",
+              "{projectRoot}/eslint.config.mjs",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "metadata": {
+              "technologies": [
+                "eslint"
+              ],
+              "description": "Runs ESLint on project",
+              "help": {
+                "command": "npx eslint --help",
+                "example": {
+                  "options": {
+                    "max-warnings": 0
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "name": "portfolio",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/portfolio/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
     "projects": {
       "name": "projects",
       "type": "app",
@@ -633,6 +820,421 @@
         "implicitDependencies": []
       }
     },
+    "staff": {
+      "name": "staff",
+      "type": "app",
+      "data": {
+        "root": "apps/staff",
+        "projectType": "application",
+        "metadata": {},
+        "targets": {
+          "build": {
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production",
+              {
+                "externalDependencies": [
+                  "webpack-cli"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist\\apps\\staff"
+            ],
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Runs Webpack build",
+              "help": {
+                "command": "npx webpack-cli build --help",
+                "example": {
+                  "options": {
+                    "json": "stats.json"
+                  },
+                  "args": [
+                    "--profile"
+                  ]
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "apps/staff",
+              "args": [
+                "node-env=production"
+              ],
+              "command": "webpack-cli build"
+            },
+            "configurations": {
+              "development": {
+                "args": [
+                  "node-env=development"
+                ]
+              }
+            },
+            "parallelism": true
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "dependsOn": [
+              "build"
+            ],
+            "options": {
+              "buildTarget": "staff:build",
+              "runBuildTargetDependencies": false
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "staff:build:development"
+              },
+              "production": {
+                "buildTarget": "staff:build:production"
+              }
+            },
+            "parallelism": true
+          },
+          "preview": {
+            "options": {
+              "cwd": "apps/staff",
+              "args": [
+                "--node-env=production"
+              ],
+              "command": "webpack-cli serve"
+            },
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Starts Webpack dev server in production mode",
+              "help": {
+                "command": "npx webpack-cli serve --help",
+                "example": {
+                  "options": {
+                    "args": [
+                      "--client-progress",
+                      "--history-api-fallback "
+                    ]
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          },
+          "serve-static": {
+            "dependsOn": [
+              "build"
+            ],
+            "executor": "@nx/web:file-server",
+            "options": {
+              "buildTarget": "build",
+              "spa": true
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build-deps": {
+            "dependsOn": [
+              "^build"
+            ],
+            "configurations": {},
+            "options": {},
+            "parallelism": true,
+            "executor": "nx:noop"
+          },
+          "watch-deps": {
+            "dependsOn": [
+              "build-deps"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "npx nx watch --projects staff --includeDependentProjects -- npx nx build-deps staff"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "apps/staff",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "^default",
+              "{workspaceRoot}/eslint.config.mjs",
+              "{projectRoot}/eslint.config.mjs",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "metadata": {
+              "technologies": [
+                "eslint"
+              ],
+              "description": "Runs ESLint on project",
+              "help": {
+                "command": "npx eslint --help",
+                "example": {
+                  "options": {
+                    "max-warnings": 0
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "name": "staff",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/staff/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "news": {
+      "name": "news",
+      "type": "app",
+      "data": {
+        "root": "apps/news",
+        "projectType": "application",
+        "metadata": {},
+        "targets": {
+          "build": {
+            "cache": true,
+            "dependsOn": [
+              "^build"
+            ],
+            "inputs": [
+              "production",
+              "^production",
+              {
+                "externalDependencies": [
+                  "webpack-cli"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}/dist\\apps\\news"
+            ],
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Runs Webpack build",
+              "help": {
+                "command": "npx webpack-cli build --help",
+                "example": {
+                  "options": {
+                    "json": "stats.json"
+                  },
+                  "args": [
+                    "--profile"
+                  ]
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "apps/news",
+              "args": [
+                "node-env=production"
+              ],
+              "command": "webpack-cli build"
+            },
+            "configurations": {
+              "development": {
+                "args": [
+                  "node-env=development"
+                ]
+              }
+            },
+            "parallelism": true
+          },
+          "serve": {
+            "executor": "@nx/js:node",
+            "defaultConfiguration": "development",
+            "dependsOn": [
+              "build"
+            ],
+            "options": {
+              "buildTarget": "news:build",
+              "runBuildTargetDependencies": false
+            },
+            "configurations": {
+              "development": {
+                "buildTarget": "news:build:development"
+              },
+              "production": {
+                "buildTarget": "news:build:production"
+              }
+            },
+            "parallelism": true
+          },
+          "preview": {
+            "options": {
+              "cwd": "apps/news",
+              "args": [
+                "--node-env=production"
+              ],
+              "command": "webpack-cli serve"
+            },
+            "metadata": {
+              "technologies": [
+                "webpack"
+              ],
+              "description": "Starts Webpack dev server in production mode",
+              "help": {
+                "command": "npx webpack-cli serve --help",
+                "example": {
+                  "options": {
+                    "args": [
+                      "--client-progress",
+                      "--history-api-fallback "
+                    ]
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          },
+          "serve-static": {
+            "dependsOn": [
+              "build"
+            ],
+            "executor": "@nx/web:file-server",
+            "options": {
+              "buildTarget": "build",
+              "spa": true
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "build-deps": {
+            "dependsOn": [
+              "^build"
+            ],
+            "configurations": {},
+            "options": {},
+            "parallelism": true,
+            "executor": "nx:noop"
+          },
+          "watch-deps": {
+            "dependsOn": [
+              "build-deps"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "command": "npx nx watch --projects news --includeDependentProjects -- npx nx build-deps news"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "lint": {
+            "cache": true,
+            "options": {
+              "cwd": "apps/news",
+              "command": "eslint ."
+            },
+            "inputs": [
+              "default",
+              "^default",
+              "{workspaceRoot}/eslint.config.mjs",
+              "{projectRoot}/eslint.config.mjs",
+              "{workspaceRoot}/tools/eslint-rules/**/*",
+              {
+                "externalDependencies": [
+                  "eslint"
+                ]
+              }
+            ],
+            "outputs": [
+              "{options.outputFile}"
+            ],
+            "metadata": {
+              "technologies": [
+                "eslint"
+              ],
+              "description": "Runs ESLint on project",
+              "help": {
+                "command": "npx eslint --help",
+                "example": {
+                  "options": {
+                    "max-warnings": 0
+                  }
+                }
+              }
+            },
+            "executor": "nx:run-commands",
+            "configurations": {},
+            "parallelism": true
+          },
+          "test": {
+            "metadata": {
+              "technologies": [
+                "jest"
+              ],
+              "description": "Run Jest Tests",
+              "help": {
+                "command": "npx jest --help",
+                "example": {
+                  "options": {
+                    "coverage": true
+                  }
+                }
+              }
+            },
+            "cache": true,
+            "inputs": [
+              "default",
+              "^production",
+              "{workspaceRoot}\\jest.preset.js",
+              {
+                "externalDependencies": [
+                  "jest"
+                ]
+              }
+            ],
+            "outputs": [
+              "{workspaceRoot}\\coverage\\apps\\news"
+            ],
+            "executor": "nx:run-commands",
+            "options": {
+              "cwd": "apps/news",
+              "env": {
+                "TS_NODE_COMPILER_OPTIONS": "{\"moduleResolution\":\"node10\",\"module\":\"commonjs\",\"customConditions\":null}"
+              },
+              "command": "jest",
+              "passWithNoTests": true
+            },
+            "configurations": {},
+            "parallelism": true
+          }
+        },
+        "name": "news",
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "sourceRoot": "apps/news/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
     "api": {
       "name": "api",
       "type": "app",
@@ -858,6 +1460,26 @@
         "$schema": "../../node_modules/nx/schemas/project-schema.json",
         "sourceRoot": "apps/api/src",
         "tags": [],
+        "implicitDependencies": []
+      }
+    },
+    "@apigateway/source": {
+      "name": "@apigateway/source",
+      "type": "lib",
+      "data": {
+        "root": ".",
+        "name": "@apigateway/source",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@apigateway/source",
+            "isInPackageManagerWorkspaces": true
+          }
+        },
+        "targets": {},
         "implicitDependencies": []
       }
     }
@@ -12362,6 +12984,28 @@
         "type": "static"
       }
     ],
+    "portfolio": [
+      {
+        "source": "portfolio",
+        "target": "npm:@nestjs/testing",
+        "type": "static"
+      },
+      {
+        "source": "portfolio",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "portfolio",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "portfolio",
+        "target": "npm:@nx/webpack",
+        "type": "static"
+      }
+    ],
     "projects": [
       {
         "source": "projects",
@@ -12506,6 +13150,50 @@
         "type": "static"
       }
     ],
+    "staff": [
+      {
+        "source": "staff",
+        "target": "npm:@nestjs/testing",
+        "type": "static"
+      },
+      {
+        "source": "staff",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "staff",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "staff",
+        "target": "npm:@nx/webpack",
+        "type": "static"
+      }
+    ],
+    "news": [
+      {
+        "source": "news",
+        "target": "npm:@nestjs/testing",
+        "type": "static"
+      },
+      {
+        "source": "news",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "news",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "news",
+        "target": "npm:@nx/webpack",
+        "type": "static"
+      }
+    ],
     "api": [
       {
         "source": "api",
@@ -12565,6 +13253,393 @@
       {
         "source": "api",
         "target": "npm:@nx/webpack",
+        "type": "static"
+      }
+    ],
+    "@apigateway/source": [
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/common",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/common",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/core",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/core",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:tslib",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:tslib",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/config",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/config",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/mongoose",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/mongoose",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:nestjs-rmq",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:nestjs-rmq",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/jwt",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/jwt",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:mongoose",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:mongoose",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:class-transformer",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:class-transformer",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:class-validator",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:class-validator",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:multer",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:multer",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:bcryptjs",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:bcryptjs",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/passport",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/passport",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:passport-jwt",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:passport-jwt",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@aws-sdk/client-s3",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@aws-sdk/client-s3",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:unzipper",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:unzipper",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:jszip",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:jszip",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/platform-express",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/platform-express",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:dotenv",
+        "type": "dynamic"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "interfaces",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/eslint-plugin",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:eslint-plugin-prettier",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:jest",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/jest",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@eslint/js",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/schematics",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nestjs/testing",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/eslint",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/js",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/nest",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/node",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/web",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/webpack",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@nx/workspace",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@swc-node/register",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@swc/core",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@swc/helpers",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/express",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/jest",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/multer",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/node",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/passport-jwt",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:eslint",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:eslint-config-prettier",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:jest-environment-node",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:jsonc-eslint-parser",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:nx",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:prettier",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:ts-jest",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:ts-node",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:typescript",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:typescript-eslint",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:webpack-cli",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:@types/bcryptjs",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:axios",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:minio",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:passport",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:reflect-metadata",
+        "type": "static"
+      },
+      {
+        "source": "@apigateway/source",
+        "target": "npm:rxjs",
         "type": "static"
       }
     ],
@@ -29198,5 +30273,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1752660859495
+  "computedAt": 1753276203393
 }

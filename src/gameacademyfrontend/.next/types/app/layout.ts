@@ -1,4 +1,4 @@
-// File: D:\VTTrofimchuk\KIDV_site\gameacademyfrontend\app\layout.tsx
+// File: D:\VTTrofimchuk\repositories\KIDV\src\gameacademyfrontend\app\layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
