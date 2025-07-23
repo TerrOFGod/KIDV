@@ -185,7 +185,6 @@ psd
 thumb
 sketch
 
-/.nx/cache
-/.nx/workspace-data
+src/gameacademybackend/.nx/*
 .qodo
 # Конец https://www.toptal.com/developers/gitignore/api/nextjs,node,react
