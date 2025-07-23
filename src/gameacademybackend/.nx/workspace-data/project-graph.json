@@ -5,46 +5,20 @@
       "type": "lib",
       "data": {
         "root": "shared/interfaces",
+        "name": "interfaces",
+        "projectType": "library",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@shared/interfaces",
+            "packageMain": "./src/index.js",
+            "isInPackageManagerWorkspaces": false
+          }
+        },
         "targets": {
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "shared/interfaces",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
-          },
           "build": {
             "executor": "@nx/js:tsc",
             "outputs": [
@@ -70,19 +44,6 @@
             ]
           }
         },
-        "name": "interfaces",
-        "projectType": "library",
-        "tags": [
-          "npm:private"
-        ],
-        "metadata": {
-          "targetGroups": {},
-          "js": {
-            "packageName": "@shared/interfaces",
-            "packageMain": "./src/index.js",
-            "isInPackageManagerWorkspaces": false
-          }
-        },
         "$schema": "../../node_modules/nx/schemas/project-schema.json",
         "sourceRoot": "shared/interfaces/src",
         "importPath": "@shared/interfaces",
@@ -94,46 +55,20 @@
       "type": "lib",
       "data": {
         "root": "shared/contracts",
+        "name": "contracts",
+        "projectType": "library",
+        "tags": [
+          "npm:private"
+        ],
+        "metadata": {
+          "targetGroups": {},
+          "js": {
+            "packageName": "@shared/contracts",
+            "packageMain": "./src/index.js",
+            "isInPackageManagerWorkspaces": false
+          }
+        },
         "targets": {
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "shared/contracts",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
-          },
           "build": {
             "executor": "@nx/js:tsc",
             "outputs": [
@@ -157,19 +92,6 @@
               "production",
               "^production"
             ]
-          }
-        },
-        "name": "contracts",
-        "projectType": "library",
-        "tags": [
-          "npm:private"
-        ],
-        "metadata": {
-          "targetGroups": {},
-          "js": {
-            "packageName": "@shared/contracts",
-            "packageMain": "./src/index.js",
-            "isInPackageManagerWorkspaces": false
           }
         },
         "$schema": "../../node_modules/nx/schemas/project-schema.json",
@@ -314,45 +236,6 @@
             "options": {
               "command": "npx nx watch --projects portfolio --includeDependentProjects -- npx nx build-deps portfolio"
             },
-            "configurations": {},
-            "parallelism": true
-          },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/portfolio",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
             "configurations": {},
             "parallelism": true
           }
@@ -501,45 +384,6 @@
             "options": {
               "command": "npx nx watch --projects projects --includeDependentProjects -- npx nx build-deps projects"
             },
-            "configurations": {},
-            "parallelism": true
-          },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/projects",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
             "configurations": {},
             "parallelism": true
           },
@@ -732,45 +576,6 @@
             "configurations": {},
             "parallelism": true
           },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/account",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
-          },
           "test": {
             "metadata": {
               "technologies": [
@@ -959,45 +764,6 @@
             },
             "configurations": {},
             "parallelism": true
-          },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/staff",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
-            "configurations": {},
-            "parallelism": true
           }
         },
         "name": "staff",
@@ -1144,45 +910,6 @@
             "options": {
               "command": "npx nx watch --projects news --includeDependentProjects -- npx nx build-deps news"
             },
-            "configurations": {},
-            "parallelism": true
-          },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/news",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
             "configurations": {},
             "parallelism": true
           },
@@ -1372,45 +1099,6 @@
             "options": {
               "command": "npx nx watch --projects api --includeDependentProjects -- npx nx build-deps api"
             },
-            "configurations": {},
-            "parallelism": true
-          },
-          "lint": {
-            "cache": true,
-            "options": {
-              "cwd": "apps/api",
-              "command": "eslint ."
-            },
-            "inputs": [
-              "default",
-              "^default",
-              "{workspaceRoot}/eslint.config.mjs",
-              "{projectRoot}/eslint.config.mjs",
-              "{workspaceRoot}/tools/eslint-rules/**/*",
-              {
-                "externalDependencies": [
-                  "eslint"
-                ]
-              }
-            ],
-            "outputs": [
-              "{options.outputFile}"
-            ],
-            "metadata": {
-              "technologies": [
-                "eslint"
-              ],
-              "description": "Runs ESLint on project",
-              "help": {
-                "command": "npx eslint --help",
-                "example": {
-                  "options": {
-                    "max-warnings": 0
-                  }
-                }
-              }
-            },
-            "executor": "nx:run-commands",
             "configurations": {},
             "parallelism": true
           },
@@ -30272,6 +29960,27 @@
     ]
   },
   "version": "6.0",
-  "errors": [],
-  "computedAt": 1753276203393
+  "errors": [
+    {
+      "stack": " - Error: UNKNOWN: unknown error, open 'd:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\.nx\\workspace-data\\eslint-2654242865465226088.hash'\n    at writeFileSync (node:fs:2425:20)\n    at writeJsonFile (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\utils\\fileutils.js:63:33)\n    at writeTargetsToCache (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\@nx\\eslint\\src\\plugins\\plugin.js:40:32)\n    at exports.createNodesV2 (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\@nx\\eslint\\src\\plugins\\plugin.js:172:13)\n    at async LoadedNxPlugin.createNodes (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\loaded-nx-plugin.js:26:36)\n    at async LoadedNxPlugin.createNodes.<computed> (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\loaded-nx-plugin.js:36:28)\n    at async createNodes (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\isolation\\plugin-worker.js:76:36)\n    at async consumeMessage (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\isolation\\messaging.js:42:26)",
+      "message": "An error occurred while processing files for the @nx/eslint/plugin plugin (Defined at nx.json#plugins[1])\n.\n  - UNKNOWN: unknown error, open 'd:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\.nx\\workspace-data\\eslint-2654242865465226088.hash'",
+      "errors": [
+        [
+          null,
+          {
+            "stack": "Error: UNKNOWN: unknown error, open 'd:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\.nx\\workspace-data\\eslint-2654242865465226088.hash'\n    at writeFileSync (node:fs:2425:20)\n    at writeJsonFile (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\utils\\fileutils.js:63:33)\n    at writeTargetsToCache (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\@nx\\eslint\\src\\plugins\\plugin.js:40:32)\n    at exports.createNodesV2 (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\@nx\\eslint\\src\\plugins\\plugin.js:172:13)\n    at async LoadedNxPlugin.createNodes (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\loaded-nx-plugin.js:26:36)\n    at async LoadedNxPlugin.createNodes.<computed> (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\loaded-nx-plugin.js:36:28)\n    at async createNodes (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\isolation\\plugin-worker.js:76:36)\n    at async consumeMessage (d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\node_modules\\nx\\src\\project-graph\\plugins\\isolation\\messaging.js:42:26)",
+            "message": "UNKNOWN: unknown error, open 'd:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\.nx\\workspace-data\\eslint-2654242865465226088.hash'",
+            "errno": -4094,
+            "code": "UNKNOWN",
+            "syscall": "open",
+            "path": "d:\\VTTrofimchuk\\repositories\\KIDV\\src\\gameacademybackend\\.nx\\workspace-data\\eslint-2654242865465226088.hash"
+          }
+        ]
+      ],
+      "partialResults": [],
+      "name": "AggregateCreateNodesError",
+      "pluginIndex": 1
+    }
+  ],
+  "computedAt": 1753276239533
 }
