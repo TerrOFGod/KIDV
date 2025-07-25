@@ -56,5 +56,14 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "sharedDependencies": ["webpack-cli"],
+        "cacheableOperations": ["build", "test", "lint"]
+      }
+    }
   }
 }

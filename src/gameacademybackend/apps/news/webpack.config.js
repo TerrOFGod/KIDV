@@ -17,4 +17,15 @@ module.exports = {
       generatePackageJson: true,
     }),
   ],
+  ignoreWarnings: [
+    /Failed to parse source map/
+  ],
+  module:{
+      rules: [
+        {
+            test: /\.node$/,
+            use: 'node-loader'
+        }
+    ]
+  }
 };

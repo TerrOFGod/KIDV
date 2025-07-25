@@ -1,82 +1,82 @@
 # General ignores
-.DS_Store
-Thumbs.db
-*.log
-*.tmp
-*.bak
-*.swp
+#.DS_Store
+#Thumbs.db
+#*.log
+#*.tmp
+#*.bak
+#*.swp
 
 # Nx specific
-.nx/cache
-.nx/daemon
-.nx/local-runner
-dist/
-tmp/
+#.nx/cache
+#.nx/daemon
+#.nx/local-runner
+#dist/
+#tmp/
 
 # Node.js
 node_modules/
-npm-debug.log
-yarn-error.log
-pnpm-debug.log
+#npm-debug.log
+#yarn-error.log
+#pnpm-debug.log
 
 # Next.js
 .next/
 out/
 
 # Nest.js
-*.env
-*.env.local
-*.env.*.local
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+#*.env
+#*.env.local
+#*.env.*.local
+#.env
+#.env.local
+#.env.development.local
+#.env.test.local
+#.env.production.local
 
 # Testing
-coverage/
-jest.config.js
-/test-results/
+#coverage/
+#jest.config.js
+#/test-results/
 
 # Build artifacts
-*.d.ts
-*.js.map
-*.d.ts.map
+#*.d.ts
+#*.js.map
+#*.d.ts.map
 
 # IDE
-.vscode/
-.idea/
-*.iml
+#.vscode/
+#.idea/
+#*.iml
 
 # OS-specific
-ehthumbs.db
-Desktop.ini
+#ehthumbs.db
+#Desktop.ini
 
 # Package manager specific
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-shrinkwrap.yaml
+#package-lock.json
+#yarn.lock
+#pnpm-lock.yaml
+#shrinkwrap.yaml
 
 # MinIO local storage
-.minio.sys/
+#.minio.sys/
 
-.nx/workspace-data/
-src/gameacademybackend/**/*.asset
-src/gameacademybackend/**/*.bundle
-src/gameacademybackend/**/*.package
+#.nx/workspace-data/
+#src/gameacademybackend/**/*.asset
+#src/gameacademybackend/**/*.bundle
+#src/gameacademybackend/**/*.package
 
 # Large binary files
-*.bin
-*.assetbundle
-*.package
-*.unitypackage
-*.zip
-*.rar
-*.7z
+#*.bin
+#*.assetbundle
+#*.package
+#*.unitypackage
+#*.zip
+#*.rar
+#*.7z
 
 # NX debug logs
-*.log
-daemon.*
+#*.log
+#daemon.*
 /src/gameacademybackend/.nx
-/src/gameacademyfrontend/.next
+#/src/gameacademyfrontend/.next

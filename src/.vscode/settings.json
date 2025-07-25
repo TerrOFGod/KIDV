@@ -1,4 +1,5 @@
 {
     "nxConsole.nxWorkspacePath": "gameacademybackend",
-    "nxConsole.generateAiAgentRules": true
+    "nxConsole.generateAiAgentRules": true,
+    "git.ignoreLimitWarning": true
 }
