@@ -1,0 +1,1 @@
+{"version":3,"file":"news.create.js","sourceRoot":"","sources":["../../../../../../shared/contracts/src/lib/news/news.create.ts"],"names":[],"mappings":";;;AAAA,4DAAuD;AAEvD,IAAiB,UAAU,CAO1B;AAPD,WAAiB,UAAU;IACZ,gBAAK,GAAG,qBAAqB,CAAC;IAC3C,MAAa,OAAQ,SAAQ,+BAAa;KAAG;IAAhC,kBAAO,UAAyB,CAAA;IAC7C,MAAa,QAAQ;KAGpB;IAHY,mBAAQ,WAGpB,CAAA;AACH,CAAC,EAPgB,UAAU,0BAAV,UAAU,QAO1B"}

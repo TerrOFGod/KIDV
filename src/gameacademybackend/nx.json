@@ -18,7 +18,7 @@
     "appsDir": "apps",
     "libsDir": "shared"
   },
-  "nxCloudId": "6880d58dd1b6833bf1fd9e6c",
+  "nxCloudId": "68e4fe3819b7872ef9d7dda9",
   "plugins": [
     {
       "plugin": "@nx/webpack/plugin",
@@ -62,7 +62,10 @@
       "runner": "nx/tasks-runners/default",
       "options": {
         "sharedDependencies": ["webpack-cli"],
-        "cacheableOperations": ["build", "test", "lint"]
+        "cacheableOperations": ["build", "test", "lint"],
+        "env": {
+          "NODE_OPTIONS": "--max-old-space-size=4096"
+        }
       }
     }
   }

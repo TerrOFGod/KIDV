@@ -3,7 +3,98 @@ exports.id = 3;
 exports.ids = [3];
 exports.modules = {
 
-/***/ 2825:
+/***/ 2910:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  parseKnownFiles: () => (/* binding */ parseKnownFiles)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js + 2 modules
+var loadSharedConfigFiles = __webpack_require__(2581);
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
+const mergeConfigFiles = (...files) => {
+    const merged = {};
+    for (const file of files) {
+        for (const [key, values] of Object.entries(file)) {
+            if (merged[key] !== undefined) {
+                Object.assign(merged[key], values);
+            }
+            else {
+                merged[key] = values;
+            }
+        }
+    }
+    return merged;
+};
+
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js
+
+
+const parseKnownFiles = async (init) => {
+    const parsedFiles = await (0,loadSharedConfigFiles.loadSharedConfigFiles)(init);
+    return mergeConfigFiles(parsedFiles.configFile, parsedFiles.credentialsFile);
+};
+
+
+/***/ }),
+
+/***/ 2911:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getSSOTokenFromFile: () => (/* binding */ getSSOTokenFromFile),
+/* harmony export */   tokenIntercept: () => (/* binding */ tokenIntercept)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(692);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2912);
+
+
+const { readFile } = fs__WEBPACK_IMPORTED_MODULE_0__.promises;
+const tokenIntercept = {};
+const getSSOTokenFromFile = async (id) => {
+    if (tokenIntercept[id]) {
+        return tokenIntercept[id];
+    }
+    const ssoTokenFilepath = (0,_getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__.getSSOTokenFilepath)(id);
+    const ssoTokenText = await readFile(ssoTokenFilepath, "utf8");
+    return JSON.parse(ssoTokenText);
+};
+
+
+/***/ }),
+
+/***/ 2912:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getSSOTokenFilepath: () => (/* binding */ getSSOTokenFilepath)
+/* harmony export */ });
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(595);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(703);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2584);
+
+
+
+const getSSOTokenFilepath = (id) => {
+    const hasher = (0,crypto__WEBPACK_IMPORTED_MODULE_0__.createHash)("sha1");
+    const cacheName = hasher.update(id).digest("hex");
+    return (0,path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_getHomeDir__WEBPACK_IMPORTED_MODULE_2__.getHomeDir)(), ".aws", "sso", "cache", `${cacheName}.json`);
+};
+
+
+/***/ }),
+
+/***/ 2914:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -14,16 +105,20 @@ __webpack_require__.d(__webpack_exports__, {
   fromProcess: () => (/* reexport */ fromProcess)
 });
 
-// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/index.js + 14 modules
-var dist_es = __webpack_require__(2582);
-// EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/index.js + 6 modules
-var property_provider_dist_es = __webpack_require__(2581);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
+var parseKnownFiles = __webpack_require__(2910);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
+var getProfileName = __webpack_require__(2580);
+// EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
+var CredentialsProviderError = __webpack_require__(2579);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/externalDataInterceptor.js
+var externalDataInterceptor = __webpack_require__(2915);
 // EXTERNAL MODULE: external "child_process"
-var external_child_process_ = __webpack_require__(2158);
+var external_child_process_ = __webpack_require__(2137);
 // EXTERNAL MODULE: external "util"
 var external_util_ = __webpack_require__(78);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2589);
+var setCredentialFeature = __webpack_require__(2599);
 ;// ../../node_modules/@aws-sdk/credential-provider-process/dist-es/getValidatedProcessCredentials.js
 
 const getValidatedProcessCredentials = (profileName, data, profiles) => {
@@ -61,12 +156,13 @@ const getValidatedProcessCredentials = (profileName, data, profiles) => {
 
 
 
+
 const resolveProcessCredentials = async (profileName, profiles, logger) => {
     const profile = profiles[profileName];
     if (profiles[profileName]) {
         const credentialProcess = profile["credential_process"];
         if (credentialProcess !== undefined) {
-            const execPromise = (0,external_util_.promisify)(external_child_process_.exec);
+            const execPromise = (0,external_util_.promisify)(externalDataInterceptor.externalDataInterceptor?.getTokenRecord?.().exec ?? external_child_process_.exec);
             try {
                 const { stdout } = await execPromise(credentialProcess);
                 let data;
@@ -79,15 +175,15 @@ const resolveProcessCredentials = async (profileName, profiles, logger) => {
                 return getValidatedProcessCredentials(profileName, data, profiles);
             }
             catch (error) {
-                throw new property_provider_dist_es.CredentialsProviderError(error.message, { logger });
+                throw new CredentialsProviderError.CredentialsProviderError(error.message, { logger });
             }
         }
         else {
-            throw new property_provider_dist_es.CredentialsProviderError(`Profile ${profileName} did not contain credential_process.`, { logger });
+            throw new CredentialsProviderError.CredentialsProviderError(`Profile ${profileName} did not contain credential_process.`, { logger });
         }
     }
     else {
-        throw new property_provider_dist_es.CredentialsProviderError(`Profile ${profileName} could not be found in shared credentials file.`, {
+        throw new CredentialsProviderError.CredentialsProviderError(`Profile ${profileName} could not be found in shared credentials file.`, {
             logger,
         });
     }
@@ -98,14 +194,43 @@ const resolveProcessCredentials = async (profileName, profiles, logger) => {
 
 const fromProcess = (init = {}) => async ({ callerClientConfig } = {}) => {
     init.logger?.debug("@aws-sdk/credential-provider-process - fromProcess");
-    const profiles = await (0,dist_es.parseKnownFiles)(init);
-    return resolveProcessCredentials((0,dist_es.getProfileName)({
+    const profiles = await (0,parseKnownFiles.parseKnownFiles)(init);
+    return resolveProcessCredentials((0,getProfileName.getProfileName)({
         profile: init.profile ?? callerClientConfig?.profile,
     }), profiles, init.logger);
 };
 
 ;// ../../node_modules/@aws-sdk/credential-provider-process/dist-es/index.js
 
+
+
+/***/ }),
+
+/***/ 2915:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   externalDataInterceptor: () => (/* binding */ externalDataInterceptor)
+/* harmony export */ });
+/* harmony import */ var _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2911);
+/* harmony import */ var _slurpFile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2586);
+
+
+const externalDataInterceptor = {
+    getFileRecord() {
+        return _slurpFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept;
+    },
+    interceptFile(path, contents) {
+        _slurpFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept[path] = Promise.resolve(contents);
+    },
+    getTokenRecord() {
+        return _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__.tokenIntercept;
+    },
+    interceptToken(id, contents) {
+        _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__.tokenIntercept[id] = contents;
+    },
+};
 
 
 /***/ })

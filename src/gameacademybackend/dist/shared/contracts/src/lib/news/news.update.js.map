@@ -1,0 +1,1 @@
+{"version":3,"file":"news.update.js","sourceRoot":"","sources":["../../../../../../shared/contracts/src/lib/news/news.update.ts"],"names":[],"mappings":";;;AAAA,4DAAuD;AAEvD,IAAiB,UAAU,CAM1B;AAND,WAAiB,UAAU;IACZ,gBAAK,GAAG,qBAAqB,CAAC;IAC3C,MAAa,OAAQ,SAAQ,+BAAa;KAAG;IAAhC,kBAAO,UAAyB,CAAA;IAC7C,MAAa,QAAQ;KAEpB;IAFY,mBAAQ,WAEpB,CAAA;AACH,CAAC,EANgB,UAAU,0BAAV,UAAU,QAM1B"}

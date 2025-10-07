@@ -3,7 +3,7 @@ exports.id = 1;
 exports.ids = [1];
 exports.modules = {
 
-/***/ 2823:
+/***/ 2909:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -16,10 +16,40 @@ __webpack_require__.d(__webpack_exports__, {
   validateSsoProfile: () => (/* reexport */ validateSsoProfile)
 });
 
-// EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/index.js + 6 modules
-var dist_es = __webpack_require__(2581);
-// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/index.js + 14 modules
-var shared_ini_file_loader_dist_es = __webpack_require__(2582);
+// EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
+var CredentialsProviderError = __webpack_require__(2579);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
+var getProfileName = __webpack_require__(2580);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
+var parseKnownFiles = __webpack_require__(2910);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getConfigFilepath.js
+var getConfigFilepath = __webpack_require__(2583);
+// EXTERNAL MODULE: ../../node_modules/@smithy/types/dist-es/profile.js
+var profile = __webpack_require__(2582);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js + 2 modules
+var loadSharedConfigFiles = __webpack_require__(2581);
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSsoSessionData.js
+
+
+const getSsoSessionData = (data) => Object.entries(data)
+    .filter(([key]) => key.startsWith(profile.IniSectionType.SSO_SESSION + loadSharedConfigFiles.CONFIG_PREFIX_SEPARATOR))
+    .reduce((acc, [key, value]) => ({ ...acc, [key.substring(key.indexOf(loadSharedConfigFiles.CONFIG_PREFIX_SEPARATOR) + 1)]: value }), {});
+
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseIni.js
+var parseIni = __webpack_require__(2585);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/slurpFile.js
+var slurpFile = __webpack_require__(2586);
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSsoSessionData.js
+
+
+
+
+const swallowError = () => ({});
+const loadSsoSessionData = async (init = {}) => (0,slurpFile.slurpFile)(init.configFilepath ?? (0,getConfigFilepath.getConfigFilepath)())
+    .then(parseIni.parseIni)
+    .then(getSsoSessionData)
+    .catch(swallowError);
+
 ;// ../../node_modules/@aws-sdk/credential-provider-sso/dist-es/isSsoProfile.js
 const isSsoProfile = (arg) => arg &&
     (typeof arg.sso_start_url === "string" ||
@@ -29,14 +59,28 @@ const isSsoProfile = (arg) => arg &&
         typeof arg.sso_role_name === "string");
 
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2589);
+var setCredentialFeature = __webpack_require__(2599);
+// EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/ProviderError.js
+var ProviderError = __webpack_require__(2577);
+;// ../../node_modules/@smithy/property-provider/dist-es/TokenProviderError.js
+
+class TokenProviderError extends ProviderError.ProviderError {
+    name = "TokenProviderError";
+    constructor(message, options = true) {
+        super(message, options);
+        Object.setPrototypeOf(this, TokenProviderError.prototype);
+    }
+}
+
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFromFile.js
+var getSSOTokenFromFile = __webpack_require__(2911);
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/constants.js
 const EXPIRE_WINDOW_MS = 5 * 60 * 1000;
 const REFRESH_MESSAGE = `To refresh this SSO session run 'aws sso login' with the corresponding profile.`;
 
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/getSsoOidcClient.js
 const getSsoOidcClient = async (ssoRegion, init = {}) => {
-    const { SSOOIDCClient } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2832));
+    const { SSOOIDCClient } = await __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(__webpack_require__, 2923));
     const ssoOidcClient = new SSOOIDCClient(Object.assign({}, init.clientConfig ?? {}, {
         region: ssoRegion ?? init.clientConfig?.region,
         logger: init.clientConfig?.logger ?? init.parentClientConfig?.logger,
@@ -47,7 +91,7 @@ const getSsoOidcClient = async (ssoRegion, init = {}) => {
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/getNewSsoOidcToken.js
 
 const getNewSsoOidcToken = async (ssoToken, ssoRegion, init = {}) => {
-    const { CreateTokenCommand } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2832));
+    const { CreateTokenCommand } = await __webpack_require__.e(/* import() */ 10).then(__webpack_require__.bind(__webpack_require__, 2923));
     const ssoOidcClient = await getSsoOidcClient(ssoRegion, init);
     return ssoOidcClient.send(new CreateTokenCommand({
         clientId: ssoToken.clientId,
@@ -62,7 +106,7 @@ const getNewSsoOidcToken = async (ssoToken, ssoRegion, init = {}) => {
 
 const validateTokenExpiry = (token) => {
     if (token.expiration && token.expiration.getTime() < Date.now()) {
-        throw new dist_es.TokenProviderError(`Token is expired. ${REFRESH_MESSAGE}`, false);
+        throw new TokenProviderError(`Token is expired. ${REFRESH_MESSAGE}`, false);
     }
 };
 
@@ -71,10 +115,12 @@ const validateTokenExpiry = (token) => {
 
 const validateTokenKey = (key, value, forRefresh = false) => {
     if (typeof value === "undefined") {
-        throw new dist_es.TokenProviderError(`Value not present for '${key}' in SSO Token${forRefresh ? ". Cannot refresh" : ""}. ${REFRESH_MESSAGE}`, false);
+        throw new TokenProviderError(`Value not present for '${key}' in SSO Token${forRefresh ? ". Cannot refresh" : ""}. ${REFRESH_MESSAGE}`, false);
     }
 };
 
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFilepath.js
+var getSSOTokenFilepath = __webpack_require__(2912);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__(692);
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/writeSSOTokenToFile.js
@@ -82,7 +128,7 @@ var external_fs_ = __webpack_require__(692);
 
 const { writeFile } = external_fs_.promises;
 const writeSSOTokenToFile = (id, ssoToken) => {
-    const tokenFilepath = (0,shared_ini_file_loader_dist_es.getSSOTokenFilepath)(id);
+    const tokenFilepath = (0,getSSOTokenFilepath.getSSOTokenFilepath)(id);
     const tokenString = JSON.stringify(ssoToken, null, 2);
     return writeFile(tokenFilepath, tokenString);
 };
@@ -105,36 +151,36 @@ const fromSso = (_init = {}) => async ({ callerClientConfig } = {}) => {
         },
     };
     init.logger?.debug("@aws-sdk/token-providers - fromSso");
-    const profiles = await (0,shared_ini_file_loader_dist_es.parseKnownFiles)(init);
-    const profileName = (0,shared_ini_file_loader_dist_es.getProfileName)({
+    const profiles = await (0,parseKnownFiles.parseKnownFiles)(init);
+    const profileName = (0,getProfileName.getProfileName)({
         profile: init.profile ?? callerClientConfig?.profile,
     });
     const profile = profiles[profileName];
     if (!profile) {
-        throw new dist_es.TokenProviderError(`Profile '${profileName}' could not be found in shared credentials file.`, false);
+        throw new TokenProviderError(`Profile '${profileName}' could not be found in shared credentials file.`, false);
     }
     else if (!profile["sso_session"]) {
-        throw new dist_es.TokenProviderError(`Profile '${profileName}' is missing required property 'sso_session'.`);
+        throw new TokenProviderError(`Profile '${profileName}' is missing required property 'sso_session'.`);
     }
     const ssoSessionName = profile["sso_session"];
-    const ssoSessions = await (0,shared_ini_file_loader_dist_es.loadSsoSessionData)(init);
+    const ssoSessions = await loadSsoSessionData(init);
     const ssoSession = ssoSessions[ssoSessionName];
     if (!ssoSession) {
-        throw new dist_es.TokenProviderError(`Sso session '${ssoSessionName}' could not be found in shared credentials file.`, false);
+        throw new TokenProviderError(`Sso session '${ssoSessionName}' could not be found in shared credentials file.`, false);
     }
     for (const ssoSessionRequiredKey of ["sso_start_url", "sso_region"]) {
         if (!ssoSession[ssoSessionRequiredKey]) {
-            throw new dist_es.TokenProviderError(`Sso session '${ssoSessionName}' is missing required property '${ssoSessionRequiredKey}'.`, false);
+            throw new TokenProviderError(`Sso session '${ssoSessionName}' is missing required property '${ssoSessionRequiredKey}'.`, false);
         }
     }
     const ssoStartUrl = ssoSession["sso_start_url"];
     const ssoRegion = ssoSession["sso_region"];
     let ssoToken;
     try {
-        ssoToken = await (0,shared_ini_file_loader_dist_es.getSSOTokenFromFile)(ssoSessionName);
+        ssoToken = await (0,getSSOTokenFromFile.getSSOTokenFromFile)(ssoSessionName);
     }
     catch (e) {
-        throw new dist_es.TokenProviderError(`The SSO session token associated with profile=${profileName} was not found or is invalid. ${REFRESH_MESSAGE}`, false);
+        throw new TokenProviderError(`The SSO session token associated with profile=${profileName} was not found or is invalid. ${REFRESH_MESSAGE}`, false);
     }
     validateTokenKey("accessToken", ssoToken.accessToken);
     validateTokenKey("expiresAt", ssoToken.expiresAt);
@@ -183,19 +229,24 @@ const fromSso = (_init = {}) => async ({ callerClientConfig } = {}) => {
 
 
 const SHOULD_FAIL_CREDENTIAL_CHAIN = false;
-const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ssoRegion, ssoRoleName, ssoClient, clientConfig, parentClientConfig, profile, logger, }) => {
+const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ssoRegion, ssoRoleName, ssoClient, clientConfig, parentClientConfig, profile, filepath, configFilepath, ignoreCache, logger, }) => {
     let token;
     const refreshMessage = `To refresh this SSO session run aws sso login with the corresponding profile.`;
     if (ssoSession) {
         try {
-            const _token = await fromSso({ profile })();
+            const _token = await fromSso({
+                profile,
+                filepath,
+                configFilepath,
+                ignoreCache,
+            })();
             token = {
                 accessToken: _token.token,
                 expiresAt: new Date(_token.expiration).toISOString(),
             };
         }
         catch (e) {
-            throw new dist_es.CredentialsProviderError(e.message, {
+            throw new CredentialsProviderError.CredentialsProviderError(e.message, {
                 tryNextLink: SHOULD_FAIL_CREDENTIAL_CHAIN,
                 logger,
             });
@@ -203,23 +254,23 @@ const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ss
     }
     else {
         try {
-            token = await (0,shared_ini_file_loader_dist_es.getSSOTokenFromFile)(ssoStartUrl);
+            token = await (0,getSSOTokenFromFile.getSSOTokenFromFile)(ssoStartUrl);
         }
         catch (e) {
-            throw new dist_es.CredentialsProviderError(`The SSO session associated with this profile is invalid. ${refreshMessage}`, {
+            throw new CredentialsProviderError.CredentialsProviderError(`The SSO session associated with this profile is invalid. ${refreshMessage}`, {
                 tryNextLink: SHOULD_FAIL_CREDENTIAL_CHAIN,
                 logger,
             });
         }
     }
     if (new Date(token.expiresAt).getTime() - Date.now() <= 0) {
-        throw new dist_es.CredentialsProviderError(`The SSO session associated with this profile has expired. ${refreshMessage}`, {
+        throw new CredentialsProviderError.CredentialsProviderError(`The SSO session associated with this profile has expired. ${refreshMessage}`, {
             tryNextLink: SHOULD_FAIL_CREDENTIAL_CHAIN,
             logger,
         });
     }
     const { accessToken } = token;
-    const { SSOClient, GetRoleCredentialsCommand } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2829));
+    const { SSOClient, GetRoleCredentialsCommand } = await __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(__webpack_require__, 2919));
     const sso = ssoClient ||
         new SSOClient(Object.assign({}, clientConfig ?? {}, {
             logger: clientConfig?.logger ?? parentClientConfig?.logger,
@@ -234,14 +285,14 @@ const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ss
         }));
     }
     catch (e) {
-        throw new dist_es.CredentialsProviderError(e, {
+        throw new CredentialsProviderError.CredentialsProviderError(e, {
             tryNextLink: SHOULD_FAIL_CREDENTIAL_CHAIN,
             logger,
         });
     }
     const { roleCredentials: { accessKeyId, secretAccessKey, sessionToken, expiration, credentialScope, accountId } = {}, } = ssoResp;
     if (!accessKeyId || !secretAccessKey || !sessionToken || !expiration) {
-        throw new dist_es.CredentialsProviderError("SSO returns an invalid temporary credential.", {
+        throw new CredentialsProviderError.CredentialsProviderError("SSO returns an invalid temporary credential.", {
             tryNextLink: SHOULD_FAIL_CREDENTIAL_CHAIN,
             logger,
         });
@@ -268,7 +319,7 @@ const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ss
 const validateSsoProfile = (profile, logger) => {
     const { sso_start_url, sso_account_id, sso_region, sso_role_name } = profile;
     if (!sso_start_url || !sso_account_id || !sso_region || !sso_role_name) {
-        throw new dist_es.CredentialsProviderError(`Profile is configured with invalid SSO credentials. Required parameters "sso_account_id", ` +
+        throw new CredentialsProviderError.CredentialsProviderError(`Profile is configured with invalid SSO credentials. Required parameters "sso_account_id", ` +
             `"sso_region", "sso_role_name", "sso_start_url". Got ${Object.keys(profile).join(", ")}\nReference: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html`, { tryNextLink: false, logger });
     }
     return profile;
@@ -284,32 +335,32 @@ const fromSSO = (init = {}) => async ({ callerClientConfig } = {}) => {
     init.logger?.debug("@aws-sdk/credential-provider-sso - fromSSO");
     const { ssoStartUrl, ssoAccountId, ssoRegion, ssoRoleName, ssoSession } = init;
     const { ssoClient } = init;
-    const profileName = (0,shared_ini_file_loader_dist_es.getProfileName)({
+    const profileName = (0,getProfileName.getProfileName)({
         profile: init.profile ?? callerClientConfig?.profile,
     });
     if (!ssoStartUrl && !ssoAccountId && !ssoRegion && !ssoRoleName && !ssoSession) {
-        const profiles = await (0,shared_ini_file_loader_dist_es.parseKnownFiles)(init);
+        const profiles = await (0,parseKnownFiles.parseKnownFiles)(init);
         const profile = profiles[profileName];
         if (!profile) {
-            throw new dist_es.CredentialsProviderError(`Profile ${profileName} was not found.`, { logger: init.logger });
+            throw new CredentialsProviderError.CredentialsProviderError(`Profile ${profileName} was not found.`, { logger: init.logger });
         }
         if (!isSsoProfile(profile)) {
-            throw new dist_es.CredentialsProviderError(`Profile ${profileName} is not configured with SSO credentials.`, {
+            throw new CredentialsProviderError.CredentialsProviderError(`Profile ${profileName} is not configured with SSO credentials.`, {
                 logger: init.logger,
             });
         }
         if (profile?.sso_session) {
-            const ssoSessions = await (0,shared_ini_file_loader_dist_es.loadSsoSessionData)(init);
+            const ssoSessions = await loadSsoSessionData(init);
             const session = ssoSessions[profile.sso_session];
             const conflictMsg = ` configurations in profile ${profileName} and sso-session ${profile.sso_session}`;
             if (ssoRegion && ssoRegion !== session.sso_region) {
-                throw new dist_es.CredentialsProviderError(`Conflicting SSO region` + conflictMsg, {
+                throw new CredentialsProviderError.CredentialsProviderError(`Conflicting SSO region` + conflictMsg, {
                     tryNextLink: false,
                     logger: init.logger,
                 });
             }
             if (ssoStartUrl && ssoStartUrl !== session.sso_start_url) {
-                throw new dist_es.CredentialsProviderError(`Conflicting SSO start_url` + conflictMsg, {
+                throw new CredentialsProviderError.CredentialsProviderError(`Conflicting SSO start_url` + conflictMsg, {
                     tryNextLink: false,
                     logger: init.logger,
                 });
@@ -328,10 +379,14 @@ const fromSSO = (init = {}) => async ({ callerClientConfig } = {}) => {
             clientConfig: init.clientConfig,
             parentClientConfig: init.parentClientConfig,
             profile: profileName,
+            filepath: init.filepath,
+            configFilepath: init.configFilepath,
+            ignoreCache: init.ignoreCache,
+            logger: init.logger,
         });
     }
     else if (!ssoStartUrl || !ssoAccountId || !ssoRegion || !ssoRoleName) {
-        throw new dist_es.CredentialsProviderError("Incomplete configuration. The fromSSO() argument hash must include " +
+        throw new CredentialsProviderError.CredentialsProviderError("Incomplete configuration. The fromSSO() argument hash must include " +
             '"ssoStartUrl", "ssoAccountId", "ssoRegion", "ssoRoleName"', { tryNextLink: false, logger: init.logger });
     }
     else {
@@ -345,6 +400,10 @@ const fromSSO = (init = {}) => async ({ callerClientConfig } = {}) => {
             clientConfig: init.clientConfig,
             parentClientConfig: init.parentClientConfig,
             profile: profileName,
+            filepath: init.filepath,
+            configFilepath: init.configFilepath,
+            ignoreCache: init.ignoreCache,
+            logger: init.logger,
         });
     }
 };
@@ -354,6 +413,97 @@ const fromSSO = (init = {}) => async ({ callerClientConfig } = {}) => {
 
 
 
+
+
+/***/ }),
+
+/***/ 2910:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  parseKnownFiles: () => (/* binding */ parseKnownFiles)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js + 2 modules
+var loadSharedConfigFiles = __webpack_require__(2581);
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
+const mergeConfigFiles = (...files) => {
+    const merged = {};
+    for (const file of files) {
+        for (const [key, values] of Object.entries(file)) {
+            if (merged[key] !== undefined) {
+                Object.assign(merged[key], values);
+            }
+            else {
+                merged[key] = values;
+            }
+        }
+    }
+    return merged;
+};
+
+;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js
+
+
+const parseKnownFiles = async (init) => {
+    const parsedFiles = await (0,loadSharedConfigFiles.loadSharedConfigFiles)(init);
+    return mergeConfigFiles(parsedFiles.configFile, parsedFiles.credentialsFile);
+};
+
+
+/***/ }),
+
+/***/ 2911:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getSSOTokenFromFile: () => (/* binding */ getSSOTokenFromFile),
+/* harmony export */   tokenIntercept: () => (/* binding */ tokenIntercept)
+/* harmony export */ });
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(692);
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2912);
+
+
+const { readFile } = fs__WEBPACK_IMPORTED_MODULE_0__.promises;
+const tokenIntercept = {};
+const getSSOTokenFromFile = async (id) => {
+    if (tokenIntercept[id]) {
+        return tokenIntercept[id];
+    }
+    const ssoTokenFilepath = (0,_getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__.getSSOTokenFilepath)(id);
+    const ssoTokenText = await readFile(ssoTokenFilepath, "utf8");
+    return JSON.parse(ssoTokenText);
+};
+
+
+/***/ }),
+
+/***/ 2912:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getSSOTokenFilepath: () => (/* binding */ getSSOTokenFilepath)
+/* harmony export */ });
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(595);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(703);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2584);
+
+
+
+const getSSOTokenFilepath = (id) => {
+    const hasher = (0,crypto__WEBPACK_IMPORTED_MODULE_0__.createHash)("sha1");
+    const cacheName = hasher.update(id).digest("hex");
+    return (0,path__WEBPACK_IMPORTED_MODULE_1__.join)((0,_getHomeDir__WEBPACK_IMPORTED_MODULE_2__.getHomeDir)(), ".aws", "sso", "cache", `${cacheName}.json`);
+};
 
 
 /***/ })

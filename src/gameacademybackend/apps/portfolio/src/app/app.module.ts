@@ -4,12 +4,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { RMQModule } from 'nestjs-rmq';
 import { getMongoConfig } from './configs/mongo.config';
 import { getRMQConfig } from './configs/rmq.config';
-import { PortfolioService } from './portfolio/portfolio.service';
+import { PortfolioModule } from './portfolio/portfolio.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.portfolio.env' }),
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.portfolio.env' }),
     RMQModule.forRootAsync(getRMQConfig()),
-    PortfolioService,
-    MongooseModule.forRootAsync(getMongoConfig()),]
+    MongooseModule.forRootAsync(getMongoConfig()),
+    PortfolioModule,
+  ]
 })
 export class AppModule {}

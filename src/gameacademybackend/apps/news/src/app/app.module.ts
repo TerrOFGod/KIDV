@@ -7,9 +7,11 @@ import { getRMQConfig } from './configs/rmq.config';
 import { getMongoConfig } from './configs/mongo.config';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.news.env' }),
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.news.env' }),
     RMQModule.forRootAsync(getRMQConfig()),
+    MongooseModule.forRootAsync(getMongoConfig()),
     NewsModule,
-    MongooseModule.forRootAsync(getMongoConfig()),],
+  ],
 })
 export class AppModule {}
