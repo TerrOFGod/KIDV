@@ -32,11 +32,12 @@ export interface StaffAchievement {
 
 // Основной тип для сотрудника
 export interface StaffMember {
+  _id?: string;
   // Базовые поля
   slug: string;
   name: string;
   position: string; // Человекочитаемая должность
-  photo: string | StaticImageData; // URL изображения или статичный ресурс
+  photo: string; // URL изображения или статичный ресурс
   
   // Роли и квалификация
   title?: string; // Ключ для словаря ролей (например, "head", "senior")
@@ -59,4 +60,5 @@ export interface StaffMember {
   // Устаревшие/альтернативные поля (для совместимости)
   id?: string | number; // Для обратной совместимости
   image?: string; // Альтернатива для photo
+  tags?: string[];
 }

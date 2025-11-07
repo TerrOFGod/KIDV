@@ -36,7 +36,7 @@ const SkillFilter = ({
               onClick={() => toggleSkill(skill)}
               className={`px-4 py-1.5 text-sm rounded-full border-2 font-medium transition-colors ${
                 isSelected
-                  ? "bg-primary text-white border-primary"
+                  ? "bg-blue-300 text-white border-primary"
                   : "bg-white text-gray-700 hover:bg-gray-50 border-gray-300"
               }`}
               whileHover={{ scale: 1.05 }}

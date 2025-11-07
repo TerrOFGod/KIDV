@@ -1,198 +1,301 @@
-'use client'; // Директива для клиентского компонента
+// components/layout/Header.tsx
+'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import Link from "next/link"; // Измененный импорт для Next.js
-import axios from 'axios';
-import { Menu } from "lucide-react";
-import styles from "@/components/header.module.css"
+import { useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/contexts/AuthContext';
+import LoginModal from '@/components/features/auth/LoginModal';
+import RegisterModal from '@/components/features/auth/RegisterModal';
 
-function parseJwt<T extends Record<string, unknown>>(token: string): T {
-  const payload = token.split('.')[1];
-  return JSON.parse(atob(payload)) as T;
+interface HeaderProps {
+  activeSection: string;
+  onSectionChange: (section: string) => void;
 }
 
-// Тип для навигационных элементов
-type NavItem = {
-  label: string;
-  path: string;
-};
-
-export default function Header() {
+export default function Header({ activeSection, onSectionChange }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  
   const router = useRouter();
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const avatarWrapperRef = useRef<HTMLDivElement>(null);
+  const { user, logout, isAuthenticated } = useAuth();
 
-  const [checkedAuth, setCheckedAuth] = useState(false);
-
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  // Типизированный массив элементов навигации
-  const navItems: NavItem[] = [
-    { label: "О кафедре", path: "/" },
-    { label: "Сотрудники", path: "/staff" },
-    { label: "Проекты кафедры", path: "/portfolio" },
-    { label: "Новости", path: "/news" },
-    { label: "Карта успеха", path: "/map-success" },
-    { label: "Портфолио студентов", path: "/games" },
+  const mainMenuItems = [
+    { id: 'hero', label: 'Главная', path: '/' },
+    { id: 'projects', label: 'Проекты', path: '/' },
+    { id: 'team', label: 'Команда', path: '/' },
+    { id: 'blog', label: 'Блог', path: '/' },
+    { id: 'partners', label: 'Партнеры', path: '/' },
+    { id: 'awards', label: 'Награды', path: '/' },
+    { id: 'faq', label: 'FAQ', path: '/' },
+    { id: 'contact', label: 'Контакты', path: '/' },
   ];
 
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('token'));
-    setCheckedAuth(true);
-  }, [pathname]);
-
-  useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('token'));
-  }, [pathname]);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) return setUserRole(null);
-
-    const { id: userId } = parseJwt<{ id: string }>(token)
-    axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL_API}/user/info`,
-      { id: userId },
-      { headers: { Authorization: `Bearer ${token}` } }
-    )
-    .then(res => {
-      const { profile } = res.data as { profile: { role: string } };
-      setUserRole(profile.role);
-    })
-    .catch(() => {
-      setUserRole(null);
-    });
-  }, [isLoggedIn, pathname]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        menuOpen &&
-        avatarWrapperRef.current &&
-        !avatarWrapperRef.current.contains(e.target as Node)
-      ) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [menuOpen]);
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/auth/login');
+  const handleMainMenuClick = (item: typeof mainMenuItems[0]) => {
+    if (pathname !== '/') {
+      router.push('/');
+      // Ждем немного перед скроллом чтобы страница успела загрузиться
+      setTimeout(() => {
+        onSectionChange(item.id);
+        const element = document.getElementById(item.id);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      onSectionChange(item.id);
+      const element = document.getElementById(item.id);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
   };
 
-  if (!checkedAuth) return null;
+  const handleLogin = () => {
+    setShowLoginModal(true);
+    setIsMenuOpen(false);
+  };
 
+  const handleRegister = () => {
+    setShowRegisterModal(true);
+    setIsMenuOpen(false);
+  };
+
+  const handleProfile = () => {
+    router.push('/profile');
+    setShowUserMenu(false);
+    setIsMenuOpen(false);
+  };
+
+  const handleAdmin = () => {
+    router.push('/admin');
+    setShowUserMenu(false);
+    setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    setIsMenuOpen(false);
+    if (pathname !== '/') {
+      router.push('/');
+    }
+  };
+
+  const getUserInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase();
+  };
 
   return (
-    <header className="bg-black/95 text-white font-montserrat sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-5 flex items-center justify-between">
-        {/* Next.js Link с href вместо to */}
-        <Link
-          href="/"
-          className="text-xl font-bold text-white hover:text-primary transition"
-        >
-          ИТИС КИРВИ
-        </Link>
-
-        {/* Десктопная навигация */}
-        <nav className="hidden md:flex space-x-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className="hover:text-red-800 transition text-sm font-medium uppercase tracking-widest align-middle text-center"
+    <>
+      <header className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+        <nav className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            {/* Логотип */}
+            <button
+              onClick={() => {
+                router.push('/');
+                onSectionChange('hero');
+              }}
+              className="text-2xl font-bold text-primary hover:opacity-80 transition-opacity"
             >
-              {item.label}
-            </Link>
-          ))}
-          {isLoggedIn ? (
-            <div ref={avatarWrapperRef} className={styles.avatarWrapper}>
-              <div
-                className={styles.avatar}
-                onClick={() => setMenuOpen(v => !v)}
-              >
-                НП
-              </div>
-              {menuOpen && (
-                <nav className={styles.menu}>
-                  <Link
-                    href="/profile"
-                    className={styles.menuLink}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Профиль
-                  </Link>
-                  {userRole === 'Admin' && (
-                    <>
-                    <Link
-                      href="/admin/users"
-                      className={styles.menuLink}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Админ-панель пользователей
-                    </Link>
-                    <Link
-                      href="/admin/games"
-                      className={styles.menuLink}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      Админ-панель игр
-                    </Link>
-                    </>
-                  )}
+              ИТИС КИРВИ
+            </button>
+
+            {/* Десктопное меню */}
+            <div className="hidden md:flex items-center space-x-8">
+              {mainMenuItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleMainMenuClick(item)}
+                  className={`px-3 py-2 rounded-lg transition-colors ${
+                    activeSection === item.id && pathname === '/'
+                      ? 'text-primary font-semibold bg-blue-300/10'
+                      : 'text-gray-600 hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              
+              {/* Кнопки авторизации или профиль */}
+              {!isAuthenticated ? (
+                <div className="flex items-center space-x-4 ml-4">
                   <button
-                    className={styles.menuLogout}
-                    onClick={handleLogout}
+                    onClick={handleLogin}
+                    className="px-4 py-2 text-gray-600 hover:text-primary transition-colors"
                   >
-                    Выйти
+                    Войти
                   </button>
-                </nav>
+                  <button
+                    onClick={handleRegister}
+                    className="px-6 py-2 bg-blue-300 text-white rounded-lg hover:bg-blue-300/90 transition-colors"
+                  >
+                    Регистрация
+                  </button>
+                </div>
+              ) : (
+                <div className="relative ml-4">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    <div className="w-8 h-8 bg-blue-300 bg-blue-300 rounded-full flex items-center justify-center text-sm font-semibold">
+                      {getUserInitials(user?.displayName || 'U')}
+                    </div>
+                    <span className="text-gray-700">{user?.displayName}</span>
+                    <motion.span
+                      animate={{ rotate: showUserMenu ? 180 : 0 }}
+                      className="text-gray-500"
+                    >
+                      ▼
+                    </motion.span>
+                  </button>
+
+                  <AnimatePresence>
+                    {showUserMenu && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                      >
+                        <button
+                          onClick={handleProfile}
+                          className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                        >
+                          Мой профиль
+                        </button>
+                        <button
+                          onClick={handleAdmin}
+                          className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                        >
+                          Админ-панель
+                        </button>
+                        {user?.role === 'Admin' && (
+                          <button
+                            onClick={handleAdmin}
+                            className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                          >
+                            Админ-панель
+                          </button>
+                        )}
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          Выйти
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               )}
             </div>
-          ) : (
-            <>
-              <Link href="/auth/login" className="hover:text-red-800 transition text-sm font-medium uppercase tracking-widest">Войти</Link>
-              <Link href="/auth/register" className="hover:text-red-800 transition text-sm font-medium uppercase tracking-widest">Регистрация</Link>
-            </>
+
+            {/* Мобильное меню */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-gray-600"
+              >
+                ☰
+              </button>
+            </div>
+          </div>
+
+          {/* Мобильное меню выпадающее */}
+          {isMenuOpen && (
+            <div className="md:hidden mt-4 bg-white border rounded-lg shadow-lg">
+              {mainMenuItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleMainMenuClick(item)}
+                  className={`block w-full text-left px-4 py-3 border-b last:border-b-0 ${
+                    activeSection === item.id && pathname === '/'
+                      ? 'text-primary font-semibold bg-blue-300/10'
+                      : 'text-gray-600'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              
+              {/* Кнопки авторизации для мобильной версии */}
+              <div className="px-4 py-3 border-t">
+                {!isAuthenticated ? (
+                  <div className="flex flex-col space-y-3">
+                    <button
+                      onClick={handleLogin}
+                      className="w-full text-left py-2 text-gray-600"
+                    >
+                      Войти
+                    </button>
+                    <button
+                      onClick={handleRegister}
+                      className="w-full bg-blue-300 text-white py-2 rounded-lg text-center"
+                    >
+                      Регистрация
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2 py-2">
+                      <div className="w-8 h-8 bg-blue-300 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                        {getUserInitials(user?.displayName || 'U')}
+                      </div>
+                      <span className="text-gray-700">{user?.displayName}</span>
+                    </div>
+                    <button
+                      onClick={handleProfile}
+                      className="w-full text-left py-2 text-gray-600"
+                    >
+                      Мой профиль
+                    </button>
+                    {user?.role === 'Admin' && (
+                      <button
+                        onClick={handleAdmin}
+                        className="w-full text-left py-2 text-gray-600"
+                      >
+                        Админ-панель
+                      </button>
+                    )}
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left py-2 text-red-600"
+                    >
+                      Выйти
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
         </nav>
+      </header>
 
-        {/* Кнопка мобильного меню */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Закрыть меню" : "Открыть меню"}
-        >
-          <Menu className="w-8 h-8" />
-        </button>
-      </div>
+      {/* Модальные окна */}
+      <LoginModal 
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToRegister={() => {
+          setShowLoginModal(false);
+          setShowRegisterModal(true);
+        }}
+      />
 
-      {/* Мобильное меню */}
-      {isOpen && (
-        <div className="md:hidden bg-dark px-4 pb-4 space-y-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className="block text-white hover:text-primary transition py-1"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </header>
+      <RegisterModal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        onSwitchToLogin={() => {
+          setShowRegisterModal(false);
+          setShowLoginModal(true);
+        }}
+      />
+    </>
   );
-};
+}

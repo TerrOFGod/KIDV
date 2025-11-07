@@ -1,251 +1,208 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+// app/profile/page.tsx
+'use client';
 
-import { useState, useEffect, FormEvent } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './profile.module.css'
-import { useAuthExpiration } from '@/components/useAuthExp'
-
-const AUTH_API = process.env.NEXT_PUBLIC_API_URL_API!
-const GAMES_API = process.env.NEXT_PUBLIC_API_URL!
-
-function parseJwt<T extends Record<string, any>>(token: string): T {
-  const base64Url = token.split('.')[1]
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-  const jsonPayload = atob(base64)
-  return JSON.parse(jsonPayload) as T
-}
-
-interface Profile {
-  displayName: string
-  email: string
-  role: string
-}
-
-interface Game {
-  _id: string
-  title: string
-  cover?: string
-}
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [games, setGames] = useState<Game[]>([])
-  const [error, setError] = useState<string | null>(null)
-
-  const [oldPassword, setOldPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [changeError, setChangeError] = useState<string | null>(null)
-  const [changeSuccess, setChangeSuccess] = useState<string | null>(null)
-  const [isChanging, setIsChanging] = useState(false)
-  useAuthExpiration()
-
+  const [activeTab, setActiveTab] = useState('info');
+  const { user, isAuthenticated } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    async function loadProfile() {
-      const token = localStorage.getItem('token')
-      if (!token) {
-        setError('Не авторизованы')
-        return
-      }
-
-      let userId: string
-      try {
-        const payload = parseJwt<{ id: string }>(token)
-        userId = payload.id
-      } catch {
-        setError('Невалидный токен')
-        return
-      }
-
-      try {
-        const resProfile = await fetch(`${AUTH_API}/user/info`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ id: userId }),
-        })
-        if (!resProfile.ok) throw new Error(`Ошибка ${resProfile.status}`)
-        const { profile } = (await resProfile.json()) as { profile: Profile }
-        setProfile(profile)
-
-        const resGames = await fetch(
-          `${GAMES_API}/games?uploader=${encodeURIComponent(userId)}`,
-          { cache: 'no-store' }
-        )
-        if (!resGames.ok) throw new Error(`Ошибка ${resGames.status}`)
-        const list = (await resGames.json()) as Game[]
-        setGames(list)
-      } catch (e: any) {
-        setError(e.message)
-      }
+    if (!isAuthenticated) {
+      router.push('/');
     }
+  }, [isAuthenticated, router]);
 
-    loadProfile()
-  }, [])
-
-  const handleChangePassword = async (e: FormEvent) => {
-    e.preventDefault()
-    setChangeError(null)
-    setChangeSuccess(null)
-
-    if (!oldPassword || !newPassword || !confirmPassword) {
-      setChangeError('Пожалуйста, заполните все поля')
-      return
-    }
-    if (newPassword !== confirmPassword) {
-      setChangeError('Новый пароль и подтверждение не совпадают')
-      return
-    }
-    if (newPassword.length < 6) {
-      setChangeError('Новый пароль должен содержать минимум 6 символов')
-      return
-    }
-
-    setIsChanging(true)
-    try {
-      const token = localStorage.getItem('token')
-      if (!token) throw new Error('Не авторизованы')
-
-      const res = await fetch(`${AUTH_API}/user/change-password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          oldPassword,
-          newPassword,
-        }),
-      })
-
-      if (!res.ok) {
-        let errMsg = `Ошибка ${res.status}`
-        try {
-          const data = await res.json()
-          if (data.message) errMsg = data.message
-        } catch {
-          // ничего
-        }
-        throw new Error(errMsg)
-      }
-
-      setOldPassword('')
-      setNewPassword('')
-      setConfirmPassword('')
-      setChangeSuccess('Пароль успешно изменён')
-    } catch (e: any) {
-      setChangeError(e.message)
-    } finally {
-      setIsChanging(false)
-    }
-  }
-
-  if (error) {
-    return <p className={styles.messageError}>{error}</p>
-  }
-  if (!profile) {
-    return <p className={styles.message}>Загрузка...</p>
+  if (!isAuthenticated || !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Доступ запрещен</h2>
+          <p className="text-gray-600">Пожалуйста, войдите в систему</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <main className={styles.container}>
-      {/* === Блок с информацией о профиле === */}
-      <section className={styles.profile}>
-        <div className={styles.avatar}>
-          {profile.displayName?.[0].toUpperCase() ?? 'U'}
-        </div>
-        <div className={styles.info}>
-          <h1 className={styles.name}>{profile.displayName}</h1>
-          <span className={styles.role}>{profile.role}</span>
-        </div>
-      </section>
+    <div className="pt-20 min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-6xl mx-auto"
+        >
+          {/* Хлебные крошки */}
+          <nav className="mb-8">
+            <button
+              onClick={() => router.push('/')}
+              className="text-primary hover:text-primary/80 transition-colors"
+            >
+              ← На главную
+            </button>
+          </nav>
 
-      {/* === Форма «Смена пароля» === */}
-      <section className={styles.changePasswordSection}>
-        <h2 className={styles.projectsTitle}>Сменить пароль</h2>
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            {/* Заголовок профиля */}
+            <div className="bg-blue-300 text-white p-8">
+              <div className="flex items-center space-x-6">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold">
+                  {user.displayName.split(' ').map(part => part[0]).join('').toUpperCase()}
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold">{user.displayName}</h1>
+                  <p className="text-primary/80 text-lg">{user.email}</p>
+                  <span className="inline-block mt-2 px-4 py-1 bg-white/20 rounded-full text-sm">
+                    {user.role}
+                  </span>
+                </div>
+              </div>
+            </div>
 
-        <form onSubmit={handleChangePassword} className={styles.changePasswordForm}>
-          <div className={styles.formGroup}>
-            <label htmlFor="oldPassword">Старый пароль</label>
+            {/* Навигация по вкладкам */}
+            <div className="border-b border-gray-200">
+              <nav className="flex space-x-8 px-8">
+                {[
+                  { id: 'info', label: 'Основная информация' },
+                  { id: 'projects', label: 'Мои проекты' },
+                  { id: 'settings', label: 'Настройки' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                      activeTab === tab.id
+                        ? 'border-primary text-primary'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {/* Содержимое вкладок */}
+            <div className="p-8">
+              {activeTab === 'info' && <ProfileInfo user={user} />}
+              {activeTab === 'projects' && <ProfileProjects />}
+              {activeTab === 'settings' && <ProfileSettings />}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+function ProfileInfo({ user }: { user: any }) {
+  return (
+    <div className="grid md:grid-cols-2 gap-8">
+      <div>
+        <h4 className="text-lg font-semibold mb-4">Личная информация</h4>
+        <div className="space-y-3">
+          <div>
+            <label className="text-sm text-gray-500">Имя</label>
+            <p className="font-medium">{user.displayName}</p>
+          </div>
+          <div>
+            <label className="text-sm text-gray-500">Email</label>
+            <p className="font-medium">{user.email}</p>
+          </div>
+          <div>
+            <label className="text-sm text-gray-500">Роль</label>
+            <p className="font-medium">{user.role}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <h4 className="text-lg font-semibold mb-4">Статистика</h4>
+        <div className="space-y-3">
+          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+            <span>Проектов создано</span>
+            <span className="font-bold text-primary">0</span>
+          </div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+            <span>Участий в проектах</span>
+            <span className="font-bold text-primary">0</span>
+          </div>
+          <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+            <span>Дата регистрации</span>
+            <span className="font-bold text-primary">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProfileProjects() {
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h4 className="text-lg font-semibold">Мои проекты</h4>
+        <button className="bg-blue-300 text-white px-4 py-2 rounded-lg hover:bg-blue-300/90 transition-colors">
+          + Создать проект
+        </button>
+      </div>
+      
+      <div className="text-center py-12 text-gray-500">
+        <p>У вас пока нет проектов</p>
+        <button className="mt-4 bg-blue-300 text-white px-6 py-2 rounded-lg hover:bg-blue-300/90 transition-colors">
+          Создать первый проект
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ProfileSettings() {
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  return (
+    <div>
+      <h4 className="text-lg font-semibold mb-4">Настройки аккаунта</h4>
+      <div className="space-y-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Смена пароля
+          </label>
+          <div className="space-y-4 max-w-md">
             <input
               type="password"
-              id="oldPassword"
+              placeholder="Текущий пароль"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="newPassword">Новый пароль</label>
             <input
               type="password"
-              id="newPassword"
+              placeholder="Новый пароль"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              required
-              minLength={6}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="confirmPassword">Подтвердите новый пароль</label>
             <input
               type="password"
-              id="confirmPassword"
+              placeholder="Подтвердите новый пароль"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              minLength={6}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             />
+            <button className="bg-blue-300 text-white px-6 py-2 rounded-lg hover:bg-blue-300/90 transition-colors">
+              Обновить пароль
+            </button>
           </div>
-
-          {changeError && <p className={styles.errorText}>{changeError}</p>}
-          {changeSuccess && <p className={styles.successText}>{changeSuccess}</p>}
-
-          <button type="submit" className={styles.changePasswordButton} disabled={isChanging}>
-            {isChanging ? 'Смена пароля...' : 'Сменить пароль'}
-          </button>
-        </form>
-      </section>
-
-      {/* === Блок «Мои проекты» === */}
-      {games.length > 0 && (
-        <section className={styles.projects}>
-          <h2 className={styles.projectsTitle}>Мои проекты</h2>
-          <div className={styles.grid}>
-            {games.map((g) => (
-              <Link
-                href={`/games/${g._id}?from=profile`}
-                key={g._id}
-                className={styles.card}
-              >
-                <div className={styles.cover}>
-                  {g.cover ? (
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_MINIO_IMAGES_BASE_URL!}/${encodeURIComponent(
-                        g.cover
-                      )}`}
-                      alt={g.title}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      unoptimized
-                    />
-                  ) : (
-                    <div className={styles.placeholder}>🎮</div>
-                  )}
-                </div>
-                <h3 className={styles.title}>{g.title}</h3>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-    </main>
-  )
+        </div>
+      </div>
+    </div>
+  );
 }

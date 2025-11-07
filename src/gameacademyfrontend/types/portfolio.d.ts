@@ -23,10 +23,11 @@ export interface ProjectAuthor {
 
 // Основной тип для элемента портфолио
 export interface PortfolioItem {
+  _id?: string;
   slug: string;
   title: string;
   category: string;
-  image: string | StaticImageData;
+  image: string;
   description?: string;
   releaseDate?: string;
   download?: string;
@@ -38,4 +39,5 @@ export interface PortfolioItem {
   authors?: ProjectAuthor[];
   year?: number;
   markdown?: string; 
+  tags?: string[];
 }

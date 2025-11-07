@@ -42,7 +42,7 @@ const BackToTopButton = () => {
   return visible ? (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-primary hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg transition"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-blue-300 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-lg transition"
       aria-label="Вернуться к началу"
     >
       <FaArrowUp className="text-base" />

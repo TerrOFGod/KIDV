@@ -1,12 +1,12 @@
 import { PortfolioItem } from "@/types/portfolio";
-import cover from "../assets/portfolio/AR-VR-in-Healthcare-1.jpg";
+//import cover from "../assets/portfolio/AR-VR-in-Healthcare-1.jpg";
 
 const portfolioData: PortfolioItem[] = [
   {
     slug: "vr-medical-simulator",
     title: "VR-симулятор для медицины",
     category: "VR/AR",
-    image: cover,
+    image: "../assets/portfolio/AR-VR-in-Healthcare-1.jpg",
     description: "Интерактивный VR-симулятор для обучения медицинским манипуляциям.",
     releaseDate: "20-04-2025",
     download: "https://example.com/vr-simulator-download",

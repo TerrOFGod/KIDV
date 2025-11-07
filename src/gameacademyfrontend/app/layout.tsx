@@ -1,20 +1,35 @@
 'use client';
 
 import type { Metadata } from 'next'
-import Header from '@/components/layout/Header'
 import Script from 'next/script'
 import './globals.css'
-import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { AuthProvider } from '@/contexts/AuthContext';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-    const pathname = usePathname(); // Получаем текущий путь в Next.js
-    const isNewsDetail = pathname?.startsWith("/news/") || false;
+    const pathname = usePathname();
+    const [activeSection, setActiveSection] = useState('home');
+
+    useEffect(() => {
+        // Определяем активную секцию на основе пути
+        if (pathname === '/') setActiveSection('home');
+        else if (pathname === '/profile') setActiveSection('profile');
+        else if (pathname === '/admin') setActiveSection('admin');
+    }, [pathname]);
+
+    const handleSectionChange = (section: string) => {
+        setActiveSection(section);
+    };
+
     return (
-        <html lang="en">
+        <html lang="ru">
             <head>
                 <Script
                     src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
@@ -23,16 +38,15 @@ export default function RootLayout({
                 />
             </head>
             <body>
-                <div className="bg-light min-h-screen font-montserrat">
-                    <Header />
-                    <main
-                        className={`max-w-7xl mx-auto p-4 ${
-                        isNewsDetail ? "pt-0" : "pt-16 md:pt-24"
-                        } space-y-12`}
-                    >
-                        {children}
-                    </main>
-                </div>
+                <AuthProvider>
+                    <div className="min-h-screen">
+                        <Header activeSection={activeSection} onSectionChange={handleSectionChange} />
+                        <main>
+                            {children}
+                        </main>
+                        {pathname === '/' && <Footer />}
+                    </div>
+                </AuthProvider>
             </body>
         </html>
     )

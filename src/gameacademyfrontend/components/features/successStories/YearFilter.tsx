@@ -24,7 +24,7 @@ const YearFilter = ({
             onClick={() => onToggleYear(year)}
             className={`px-4 py-1 text-sm rounded-full border transition ${
               isSelected
-                ? "bg-primary text-white border-primary"
+                ? "bg-blue-300 text-white border-primary"
                 : "bg-white text-gray-700 hover:bg-gray-100 border-gray-300"
             }`}
           >
