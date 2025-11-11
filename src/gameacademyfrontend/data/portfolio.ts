@@ -6,7 +6,7 @@ const portfolioData: PortfolioItem[] = [
     slug: "vr-medical-simulator",
     title: "VR-симулятор для медицины",
     category: "VR/AR",
-    image: "../assets/portfolio/AR-VR-in-Healthcare-1.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/portfolio/AR-VR-in-Healthcare-1.jpg",
     description: "Интерактивный VR-симулятор для обучения медицинским манипуляциям.",
     releaseDate: "20-04-2025",
     download: "https://example.com/vr-simulator-download",
@@ -75,7 +75,7 @@ const portfolioData: PortfolioItem[] = [
     slug: "ar-education-app",
     title: "AR-приложение для обучения",
     category: "VR/AR",
-    image: "https://miro.medium.com/v2/resize:fit:1400/1*S8aT0HfsYQ5XkWC48wV4NA.jpeg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/portfolio/AR-VR-in-Healthcare-1.jpg",
     releaseDate: "20-04-2025",
     download: "https://example.com/vr-simulator-download",
     phases: [
@@ -144,7 +144,7 @@ const portfolioData: PortfolioItem[] = [
     slug: "3d-character-design",
     title: "3D-дизайн персонажа",
     category: "3D",
-    image: "https://images-rsg.storage.googleapis.com/wp-content/uploads/2023/07/stylized-3d-characters-cowboy-office-construction-worker.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/portfolio/AR-VR-in-Healthcare-1.jpg",
     hallOfFame: true,
     year: 2024
   },

@@ -5,7 +5,7 @@ const newsData: NewsItem[] = [
     slug: "vr-gamedev-methodology",
     title: "Методология VR/AR в геймдеве",
     category: "Выпускники",
-    image: "https://verpex.com/assets/uploads/images/blog/Is-Selling-3d-Models-Profitable.webp?v=1713956983", // Локальное изображение (импортированное)
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/news/arvr.jpg", // Локальное изображение (импортированное)
     date: "2025-04-01",
     markdown: "/content/vr-gamedev-methodology.md",
   },
@@ -13,7 +13,7 @@ const newsData: NewsItem[] = [
     slug: "uiux-hackathon-winners",
     title: "Победители хакатона UI/UX",
     category: "Студенты",
-    image: "https://verpex.com/assets/uploads/images/blog/Is-Selling-3d-Models-Profitable.webp?v=1713956983", // Локальное изображение (импортированное)
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/news/hackaton.webp", // Локальное изображение (импортированное)
     date: "2024-12-10",
     markdown: "/content/uiux-hackathon-winners.md",
   },
@@ -21,7 +21,7 @@ const newsData: NewsItem[] = [
     slug: "gazizov-3d-modeling-in-games",
     title: "Применение 3D-моделирования в разработке игр",
     category: "Факультет",
-    image: "https://verpex.com/assets/uploads/images/blog/Is-Selling-3d-Models-Profitable.webp?v=1713956983", // Внешний URL
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/news/arvr.jpg", // Внешний URL
     date: "2023-09-20",
     markdown: "/content/gazizov-3d-modeling-in-games.md",
   },
@@ -29,7 +29,7 @@ const newsData: NewsItem[] = [
     slug: "kugurakova-game-education-strategy",
     title: "Образовательные стратегии в сфере разработки игр",
     category: "Факультет",
-    image: "https://www.tinkercoders.com/wp-content/uploads/2022/06/game-developme.jpeg", // Внешний URL
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/news/arvr.jpg", // Внешний URL
     date: "2023-05-10",
     markdown: "/content/kugurakova-game-education-strategy.md",
   },
@@ -37,7 +37,7 @@ const newsData: NewsItem[] = [
     slug: "kostuk-vr-crane-training",
     title: "Реализация динамических уровней VR для обучения работе с башенным краном",
     category: "Факультет",
-    image: "https://www.agilitypr.com/wp-content/uploads/2024/10/gamification-1080x497.jpg", // Внешний URL
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/news/arvr.jpg", // Внешний URL
     date: "2023-11-15",
     markdown: "/content/kostuk-vr-crane-training.md",
   },

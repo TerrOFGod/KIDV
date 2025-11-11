@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StaticImageData } from "next/image";
 
 // Тип для навыка в фазе проекта
@@ -27,7 +28,7 @@ export interface PortfolioItem {
   slug: string;
   title: string;
   category: string;
-  image: string;
+  image?: string;
   description?: string;
   releaseDate?: string;
   download?: string;

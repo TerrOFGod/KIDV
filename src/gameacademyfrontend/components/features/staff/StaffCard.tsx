@@ -1,83 +1,74 @@
-import Link from "next/link";
-import Image from "next/image"
-import SocialLinks from "@/components/features/SocialLinks";
-
-import Label from "@/components/ui/Label";
-
-import { NewsItem } from "@/types/news";
-import { StaffMember } from "@/types/staff"; // Предполагаем наличие типов
-import newsData from "@/data/news";
-import roles from "@/data/roles";
+import Link from 'next/link';
+import { StaffMember } from '@/types/staff';
+import SafeImage from '@/components/ui/SafeImage';
 
 interface StaffCardProps {
   staff: StaffMember;
 }
 
-const StaffCard = ({ staff }: StaffCardProps) => {
-  const { 
-    id, 
-    photo, 
-    name, 
-    title, 
-    email, 
-    telegram, 
-    github, 
-    bio 
-  } = staff;
-  
-  const authorArticles = newsData.filter(
-    (article: NewsItem) => article.authorId === id
-  );
-  
+export default function StaffCard({ staff }: StaffCardProps) {
   return (
-    <div className="border-t border-gray-300 pt-8 pb-8 space-y-6">
-      <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-        {/* Оптимизированное изображение Next.js */}
-        <div className="relative w-40 h-40">
-          <Image
-            src={photo}
-            alt={`Фото ${name}`}
-            className="w-full h-full object-cover rounded-full border shadow-sm"
-          />
-        </div>
-
-        <div className="flex-1 space-y-2 text-left">
-          <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
-
-          <p className="text-sm text-gray-700 font-semibold">
-            <Label dict={roles} value={title!} />
+    <Link
+      href={`/staff/${staff.slug}`}
+      className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:translate-y-2 block ${
+        staff.rarity === 'LEGENDARY' ? 'card-glow-legendary' : 
+        staff.rarity === 'RARE' ? 'card-glow-rare' : ''
+      }`}
+    >
+      <div className="relative h-64 bg-gray-200">
+        <SafeImage
+          src={staff.photo}
+          alt={staff.name}
+          fill
+          className="object-cover"
+          fallbackSrc="/images/staff/placeholder.jpg"
+        />
+        {staff.rarity !== 'COMMON' && (
+          <div className="absolute top-3 right-3">
+            <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${
+              staff.rarity === 'LEGENDARY' 
+                ? 'bg-yellow-100 text-yellow-800 border-yellow-300' 
+                : 'bg-purple-100 text-purple-800 border-purple-300'
+            }`}>
+              {staff.rarity === 'LEGENDARY' ? '⭐ Legendary' : '✨ Rare'}
+            </span>
+          </div>
+        )}
+      </div>
+      
+      <div className="p-6">
+        <h3 className="font-bold text-xl mb-2 text-gray-900">
+          {staff.name}
+        </h3>
+        <p className="text-blue-300 font-semibold mb-3">
+          {staff.position}
+        </p>
+        {staff.title && (
+          <p className="text-gray-600 text-sm mb-3">
+            {staff.title}
           </p>
-
-          {email && (
-            <a
-              href={`mailto:${email}`}
-              className="text-sm text-blue-600 hover:underline"
-            >
-              {email}
-            </a>
-          )}
-
-          <SocialLinks links={{ telegram, github }} />
+        )}
+        
+        {staff.researchInterests && staff.researchInterests.length > 0 && (
+          <div className="mb-4">
+            <p className="text-sm font-medium text-gray-700 mb-2">Expertise:</p>
+            <div className="flex flex-wrap gap-1">
+              {staff.researchInterests.slice(0, 3).map((interest, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-50 text-blue-700"
+                >
+                  {interest}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        <div className="text-sm text-gray-500">
+          View Profile →
         </div>
       </div>
-
-      {bio && (
-        <div className="text-gray-700 text-base leading-relaxed max-w-3xl">
-          {bio}
-        </div>
-      )}
-
-      {authorArticles.length > 0 && (
-        <Link
-          href={`/news/${authorArticles[0].slug}`}
-          className="inline-block mt-2 text-sm text-blue-600 hover:underline"
-          aria-label={`Читать статью автора ${name}`}
-        >
-          Читать статью →
-        </Link>
-      )}
-    </div>
+    </Link>
   );
-};
-
-export default StaffCard;
+}

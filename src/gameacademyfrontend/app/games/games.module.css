@@ -1,226 +1,377 @@
 .container {
-    padding: 0 20px;
-}
-
-.searchWrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 24px;
-    overflow: visible;
-    z-index: 3000;
-}
-
-.searchInput {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-}
-
-.backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 1500;
-    pointer-events: none;
-}
-
-.dropdown {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-    max-height: 70vh;
-    overflow-y: auto;
-    z-index: 2000;
-}
-
-.dropdownItem {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px;
-    text-decoration: none;
-    color: inherit;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    min-height: 80px;
-    border-radius: 0;
-}
-
-.dropdownItem:first-child {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-
-.dropdownItem:last-child {
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border-bottom: none;
-}
-
-.dropdownItem .cardImage {
-    flex: 0 0 80px;
-    width: 80px;
-    height: 80px;
-    background: #f0f0f0;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.dropdownItem .cardContent {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.dropdownItem .cardTitle {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.2;
-}
-
-.dropdownItem .cardDesc {
-    margin: 4px 0 0;
-    font-size: 0.85rem;
-    color: #555;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.dropdownItem:hover {
-    background: #f9f9f9;
-}
-
-.noResults {
-    padding: 12px;
-    color: #777;
-    text-align: center;
-}
-
-.list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
-    padding: 20px;
-    list-style: none;
-    margin: 0;
-}
-
-.card {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.cardImage {
-    position: relative;
-    width: 100%;
-    height: 160px;
-    overflow: hidden;
-}
-
-.cardIcon {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    background: #f0f0f0;
-}
-
-.cardContent {
-    padding: 16px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.cardTitle {
-    font-size: 1.1rem;
-    margin: 0 0 8px;
-    font-weight: 600;
-}
-
-.cardDesc {
-    flex: 1;
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0 0 12px;
-    line-height: 1.4;
-
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-.cardButton {
-    width: 90%;
-    margin: 0 auto 12px;
-    padding: 8px 0;
-    background-color: #0070f3;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: auto;
-}
-
-.cardButton:hover {
-    background-color: #005bb5;
-}
-
-.cardLink {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    text-decoration: none;
-    color: inherit;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .pageHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 0;
+  margin-bottom: 24px;
+}
+
+.pageHeader h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #0070f3, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 8px;
 }
 
 .uploadButton {
-    padding: 8px 16px;
-    background-color: #0070f3;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #0070f3, #00c6ff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .uploadButton:hover {
-    background-color: #005bb5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.3);
+}
+
+.filterBar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+.filterControls {
+  display: flex;
+  gap: 12px;
+}
+
+.filterSelect {
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #0070f3;
+}
+
+.content {
+  margin-top: 24px;
+}
+
+.statsBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.statsText {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.clearFilter {
+  background: none;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.clearFilter:hover {
+  background: #f5f5f5;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f8f9fa;
+}
+
+.cardIcon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.playableBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #00c6ff, #0070f3);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cardContent {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+}
+
+.cardDesc {
+  flex: 1;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  margin-top: auto;
+}
+
+.genreTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.genreTag {
+  background: #f0f7ff;
+  color: #0070f3;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.cardButton {
+  width: 100%;
+  padding: 10px 16px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cardButton:hover {
+  background: #005bb5;
+}
+
+.noResults {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.noResults h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.clearAllButton {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.clearAllButton:hover {
+  background: #005bb5;
+}
+
+/* Search Dropdown Styles */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1500;
+}
+
+.dropdown {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background: #f8f9fa;
+}
+
+.dropdownItem .cardImage {
+  flex: 0 0 60px;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdownItem .cardContent {
+  flex: 1;
+  padding: 0;
+}
+
+.dropdownItem .cardTitle {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.dropdownItem .cardDesc {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  -webkit-line-clamp: 2;
+}
+
+.dropdownItem .genreTags {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .pageHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .filterBar {
+    flex-direction: column;
+  }
+  
+  .searchWrapper {
+    min-width: auto;
+  }
+  
+  .filterControls {
+    width: 100%;
+  }
+  
+  .filterSelect {
+    flex: 1;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

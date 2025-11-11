@@ -1,250 +1,256 @@
-// components/admin/ProjectsManagement.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { StudentProject } from '@/types/studentProject';
-import ProjectForm from './forms/ProjectForm';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+
+interface StudentProject {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  authors: string[];
+  status: 'active' | 'completed' | 'archived';
+  createdAt: string;
+  tags: string[];
+}
 
 export default function ProjectsManagement() {
   const [projects, setProjects] = useState<StudentProject[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingProject, setEditingProject] = useState<StudentProject | null>(null);
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed' | 'archived'>('all');
+  const [filteredProjects, setFilteredProjects] = useState<StudentProject[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  const categories = ['all', 'game', 'web', 'mobile', 'ai', 'other'];
 
   useEffect(() => {
     fetchProjects();
   }, []);
 
+  useEffect(() => {
+    filterProjects();
+  }, [projects, searchTerm, selectedCategory]);
+
   const fetchProjects = async () => {
     try {
-      // Mock data
-      const mockData: StudentProject[] = [
-        {
-          _id: '1',
-          slug: 'student-game-project',
-          title: 'Student Game Project',
-          description: 'Инновационная игра разработанная студентами',
-          category: 'Game Development',
-          image: '/projects/game-project.jpg',
-          year: 2024,
-          authors: [
-            { name: 'Иван Иванов', slug: 'ivan-ivanov', role: 'Developer' },
-            { name: 'Мария Петрова', slug: 'maria-petrova', role: 'Designer' }
-          ],
-          tags: ['Unity', 'C#', 'Game Design'],
-          status: 'active',
-          githubUrl: 'https://github.com/example',
-          demoUrl: 'https://demo.example.com'
-        }
-      ];
-      setProjects(mockData);
-    } catch (error) {
-      console.error('Error fetching projects:', error);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/admin/projects`);
+      setProjects(response.data.projects);
+    } catch (err) {
+      setError('Failed to load projects');
+      console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredProjects = projects.filter(project => 
-    filter === 'all' || project.status === filter
-  );
+  const filterProjects = () => {
+    let filtered = projects;
 
-  const handleSave = async (data: StudentProject) => {
+    if (searchTerm) {
+      filtered = filtered.filter(project =>
+        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(project => project.category === selectedCategory);
+    }
+
+    setFilteredProjects(filtered);
+  };
+
+  const deleteProject = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this project?')) return;
+
     try {
-      if (editingProject) {
-        setProjects(prev => prev.map(item => 
-          item._id === editingProject._id ? data : item
-        ));
-      } else {
-        setProjects(prev => [...prev, { ...data, _id: Date.now().toString() }]);
-      }
-      setIsModalOpen(false);
-      setEditingProject(null);
-    } catch (error) {
-      console.error('Error saving project:', error);
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/admin/projects/${id}`);
+      setProjects(prev => prev.filter(p => p._id !== id));
+    } catch (err) {
+      alert('Error deleting project');
+      console.error('Error deleting project:', err);
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (confirm('Вы уверены, что хотите удалить этот проект?')) {
-      setProjects(prev => prev.filter(item => item._id !== id));
-    }
-  };
-
-  if (loading) {
-    return <div className="flex justify-center py-8">Загрузка...</div>;
-  }
+  if (loading) return <div className="flex justify-center p-8">Loading...</div>;
+  if (error) return <div className="text-red-500 text-center p-8">{error}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold">Управление проектами</h2>
-          <p className="text-gray-600">Студенческие проекты и работы</p>
+          <h2 className="text-2xl font-bold">Student Projects Management</h2>
+          <p className="text-gray-600">Manage student projects and assignments</p>
         </div>
-        <button
-          onClick={() => {
-            setEditingProject(null);
-            setIsModalOpen(true);
-          }}
-          className="bg-blue-300 text-white px-6 py-3 rounded-lg hover:bg-blue-300/90 transition-colors flex items-center space-x-2"
-        >
-          <span>+</span>
-          <span>Новый проект</span>
-        </button>
       </div>
 
-      {/* Фильтры и статистика */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
-        <div className="flex space-x-2">
-          {[
-            { id: 'all' as const, label: 'Все', count: projects.length },
-            { id: 'active' as const, label: 'Активные', count: projects.filter(p => p.status === 'active').length },
-            { id: 'completed' as const, label: 'Завершенные', count: projects.filter(p => p.status === 'completed').length },
-            { id: 'archived' as const, label: 'Архив', count: projects.filter(p => p.status === 'archived').length },
-          ].map((filterItem) => (
-            <button
-              key={filterItem.id}
-              onClick={() => setFilter(filterItem.id)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                filter === filterItem.id
-                  ? 'bg-blue-300 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
+      {/* Search and Filter */}
+      <div className="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Search Projects
+            </label>
+            <input
+              type="text"
+              placeholder="Search by title, description, or tags..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Filter by Category
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             >
-              {filterItem.label} ({filterItem.count})
-            </button>
-          ))}
-        </div>
-
-        <div className="text-sm text-gray-500">
-          Показано: {filteredProjects.length} из {projects.length}
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category.charAt(0).toUpperCase() + category.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* Сетка проектов */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProjects.map((project) => (
-          <motion.div
-            key={project._id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div className="h-40 bg-gray-200 relative">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              <div className={`absolute top-3 right-3 px-2 py-1 rounded text-xs font-bold text-white ${
-                project.status === 'active' ? 'bg-green-500' :
-                project.status === 'completed' ? 'bg-blue-500' :
-                'bg-gray-500'
-              }`}>
-                {project.status === 'active' ? 'Активный' :
-                 project.status === 'completed' ? 'Завершен' : 'Архив'}
-              </div>
-            </div>
-            
-            <div className="p-4">
-              <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                {project.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-1 mb-3">
-                {project.tags?.slice(0, 3).map((tag, index) => (
-                  <span
-                    key={index}
-                    className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
-                  >
-                    {tag}
+      {/* Statistics */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Total Projects</h3>
+          <div className="text-2xl font-bold text-gray-900">{projects.length}</div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Active</h3>
+          <div className="text-2xl font-bold text-green-600">
+            {projects.filter(p => p.status === 'active').length}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Completed</h3>
+          <div className="text-2xl font-bold text-blue-600">
+            {projects.filter(p => p.status === 'completed').length}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Categories</h3>
+          <div className="text-2xl font-bold text-gray-900">
+            {new Set(projects.map(p => p.category)).size}
+          </div>
+        </div>
+      </div>
+
+      {/* Projects Table */}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Project
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Category
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Authors
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Created
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {filteredProjects.map((project) => (
+              <motion.tr
+                key={project._id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div>
+                    <div className="text-sm font-medium text-gray-900">{project.title}</div>
+                    <div className="text-sm text-gray-500 truncate max-w-xs">
+                      {project.description}
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {project.tags.slice(0, 3).map((tag, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 3 && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                          +{project.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    {project.category}
                   </span>
-                ))}
-              </div>
-
-              <div className="flex justify-between items-center text-sm text-gray-500 mb-3">
-                <span>{project.year} год</span>
-                <span>{project.authors.length} участников</span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <div className="flex space-x-2">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-gray-600"
-                    >
-                      GitHub
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-gray-600"
-                    >
-                      Demo
-                    </a>
-                  )}
-                </div>
-                <div className="flex space-x-2">
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    project.status === 'active' 
+                      ? 'bg-green-100 text-green-800'
+                      : project.status === 'completed'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'bg-gray-100 text-gray-800'
+                  }`}>
+                    {project.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {project.authors.slice(0, 2).join(', ')}
+                  {project.authors.length > 2 && ` +${project.authors.length - 2}`}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(project.createdAt).toLocaleDateString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
-                    onClick={() => {
-                      setEditingProject(project);
-                      setIsModalOpen(true);
-                    }}
-                    className="text-primary hover:text-primary/80 text-sm"
+                    onClick={() => deleteProject(project._id)}
+                    className="text-red-600 hover:text-red-900 ml-4"
                   >
-                    Редакт.
+                    Delete
                   </button>
-                  <button
-                    onClick={() => handleDelete(project._id!)}
-                    className="text-red-600 hover:text-red-900 text-sm"
-                  >
-                    Удалить
-                  </button>
-                </div>
-              </div>
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
+
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-500">No projects found</div>
+            <div className="text-sm text-gray-400 mt-2">
+              {searchTerm || selectedCategory !== 'all' 
+                ? 'Try changing your search or filter criteria'
+                : 'No projects available'
+              }
             </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {filteredProjects.length === 0 && (
-        <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-          <p className="text-gray-500">
-            {projects.length === 0 
-              ? 'Нет студенческих проектов. Добавьте первый!' 
-              : `Нет проектов в категории "${filter}"`}
-          </p>
-        </div>
-      )}
-
-      {/* Модальное окно для проектов 
-      */}
-
-      <AnimatePresence>
-        {isModalOpen && (
-          <ProjectForm
-            project={editingProject}
-            onSave={handleSave}
-            onClose={() => {
-              setIsModalOpen(false);
-              setEditingProject(null);
-            }}
-          />
+          </div>
         )}
-      </AnimatePresence>
-
+      </div>
     </div>
   );
 }
-
-// Компонент ProjectForm будет аналогичен предыдущим формам

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StaticImageData } from "next/image";
 
 // Тип для редкости сотрудника
@@ -37,7 +38,7 @@ export interface StaffMember {
   slug: string;
   name: string;
   position: string; // Человекочитаемая должность
-  photo: string; // URL изображения или статичный ресурс
+  photo?: string; // URL изображения или статичный ресурс
   
   // Роли и квалификация
   title?: string; // Ключ для словаря ролей (например, "head", "senior")

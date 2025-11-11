@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: [
+      //'your-minio-domain.com', // для MINIO изображений
+      'localhost',
+      // другие домены, если используются
+    ],
+    formats: ['image/avif', 'image/webp'],
+    unoptimized: process.env.NODE_ENV === 'development',
     remotePatterns: [
       new URL('https://verpex.com/assets/uploads/images/blog/Is-Selling-3d-Models-Profitable.webp?v=1713956983'),
       new URL('https://www.tinkercoders.com/wp-content/uploads/2022/06/game-developme.jpeg'),

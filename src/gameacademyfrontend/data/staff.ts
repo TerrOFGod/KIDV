@@ -9,7 +9,8 @@ const staffList: StaffMember[] = [
     position: "Руководитель кафедры",
     title: "head", // Ключ для словаря ролей
     rarity: "LEGENDARY",
-    photo: "https://kpfu.ru/docs/F13042469430/img854158901.jpg", // Основное поле для фото
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/staff/avatar-vlada.jpg", // Основное поле для фото
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/staff/avatar-vlada.jpg",
     email: "vlada.kugurakova@example.com",
     telegram: "https://t.me/vlada_kugurakova",
     bio: "Доктор технических наук, профессор. Эксперт в области игровых технологий и VR/AR.",
@@ -74,7 +75,8 @@ const staffList: StaffMember[] = [
     position: "Преподаватель",
     title: "senior", // Ключ для словаря ролей
     rarity: "RARE",
-    photo: "https://shelly.kpfu.ru/e-ksu/docs/F738761626/sm6BPVcIJ_g.jpg?rnd=7502",
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
     email: "d.kostuk@example.com",
     github: "https://github.com/dkostuk",
     bio: "Специалист в области игровой разработки и 3D-моделирования.",
@@ -129,7 +131,8 @@ const staffList: StaffMember[] = [
     position: "Преподаватель",
     title: "senior", // Ключ для словаря ролей
     rarity: "RARE",
-    photo: "https://shelly.kpfu.ru/e-ksu/docs/F478398570/AsuwoTT94E8.jpg?rnd=5174",
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
     email: "r.gazizov@example.com",
     telegram: "https://t.me/rim_gazizov",
     bio: "Специалист в области разработки игр и компьютерной графики.",
@@ -180,7 +183,8 @@ const staffList: StaffMember[] = [
     position: "Аспирант",
     title: "assistant", // Ключ для словаря ролей
     rarity: "COMMON",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
     email: "a.lesnovskiy@example.com",
     github: "https://github.com/alesnovskiy",
     bio: "Аспирант, специализирующийся на игровых AI и алгоритмах.",
@@ -219,7 +223,8 @@ const staffList: StaffMember[] = [
     position: "Аспирант",
     title: "assistant", // Ключ для словаря ролей
     rarity: "COMMON",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
     email: "a.kucherov@example.com",
     telegram: "https://t.me/a_kucherov",
     bio: "Аспирант с фокусом на маркетинг игровых продуктов и аналитику.",
@@ -252,7 +257,8 @@ const staffList: StaffMember[] = [
     position: "Аспирант",
     title: "assistant", // Ключ для словаря ролей
     rarity: "COMMON",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+    photo: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
+    image: "D:/VTTrofimchuk/Corrections/KIDV/src/gameacademyfrontend/public/images/avatar-placeholder.jpg",
     email: "i.fedotov@example.com",
     github: "https://github.com/i_fedotov",
     bio: "Аспирант, специализирующийся на UX/UI дизайне для игр и приложений.",
