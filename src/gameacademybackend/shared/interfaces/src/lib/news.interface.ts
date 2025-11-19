@@ -5,8 +5,12 @@ export interface INews {
   slug: string;
   title: string;
   category: string;
-  image: string;
+  image?: string; // Для локальных и внешних изображений
   date: string;
-  markdown: string;
-  author?: { name: string; slug: string };
+  markdown?: string;
+  excerpt?: string;
+  content?: string;
+  readTime?: string;
+  author?: { name: string; slug: string }; // Опциональный идентификатор автора
+  tags?: string[];
 }

@@ -6,7 +6,7 @@ export class StaffEntity implements IStaff {
   slug: string;
   name: string;
   position: string;
-  photo: string;
+  photo?: string;
   title?: string;
   rarity?: "LEGENDARY" | "RARE" | "COMMON";
   email?: string;
@@ -26,12 +26,17 @@ export class StaffEntity implements IStaff {
     icon: string;
     description: string;
   }>;
+  // Устаревшие/альтернативные поля
+  id?: string | number;
+  image?: string;
+  tags?: string[];
+  contact?: string;
 
   constructor(staff: Partial<StaffEntity>) {
     this._id = staff._id;
-    this.slug = staff.slug;
-    this.name = staff.name;
-    this.position = staff.position;
+    this.slug = staff.slug || '';
+    this.name = staff.name || '';
+    this.position = staff.position || '';
     this.photo = staff.photo;
     this.title = staff.title;
     this.rarity = staff.rarity;
@@ -43,11 +48,16 @@ export class StaffEntity implements IStaff {
     this.stats = staff.stats;
     this.skills = staff.skills;
     this.achievements = staff.achievements;
+    // Устаревшие/альтернативные поля
+    this.id = staff.id;
+    this.image = staff.image;
+    this.tags = staff.tags;
+    this.contact = staff.contact;
   }
 
   public getPublicInfo() {
     return {
-      _id: this._id,
+      _id: this._id?.toString(),
       slug: this.slug,
       name: this.name,
       position: this.position,
@@ -62,6 +72,11 @@ export class StaffEntity implements IStaff {
       stats: this.stats,
       skills: this.skills,
       achievements: this.achievements,
+      // Устаревшие/альтернативные поля
+      id: this.id || this._id?.toString(),
+      image: this.image || this.photo,
+      tags: this.tags,
+      contact: this.contact,
     };
   }
 }

@@ -1,0 +1,1131 @@
+# Project Structure
+
+```
+gameacademybackend/
+  .github/
+    instructions/
+      nx.instructions.md
+  .nx/
+    cache/
+      22802656858540561/
+      82677263004880010/
+      308641554798215297/
+      1750387004527401195/
+      2600180920115784087/
+      2716380066995285946/
+      4679294894341810390/
+      5056714973422445551/
+      6536560024808434103/
+      8045767685434177015/
+      8120819562647974409/
+      12305225349302614887/
+      12884219674665590219/
+      15314450056001400609/
+      17441108415188746861/
+      17637770873383017136/
+      cloud/
+        2510.08.5/
+          lib/
+            daemon/
+              process-run-end.js
+            heartbeat/
+              background-process.js
+          static/
+            login-end.html
+            login-start.html
+          index.js
+          package.json
+        verify.lock
+      terminalOutputs/
+        22802656858540561
+        82677263004880010
+        308641554798215297
+        1750387004527401195
+        2508956842822562357
+        2600180920115784087
+        2716380066995285946
+        3139097111244740777
+        4679294894341810390
+        5056714973422445551
+        5569058427139607607
+        6536560024808434103
+        8045767685434177015
+        8120819562647974409
+        12305225349302614887
+        12884219674665590219
+        13723584268966013458
+        14774090910162369329
+        15314450056001400609
+        15831928518146301814
+        16531462274902407376
+        17441108415188746861
+        17637770873383017136
+      22802656858540561-logs.tar.gz
+      22802656858540561.tar.gz
+      82677263004880010-logs.tar.gz
+      82677263004880010.tar.gz
+      4679294894341810390-logs.tar.gz
+      4679294894341810390.tar.gz
+      5056714973422445551-logs.tar.gz
+      5056714973422445551.tar.gz
+      8045767685434177015-logs.tar.gz
+      8045767685434177015.tar.gz
+      12305225349302614887-logs.tar.gz
+      12305225349302614887.tar.gz
+      17441108415188746861-logs.tar.gz
+      17441108415188746861.tar.gz
+      run.json
+    workspace-data/
+      d/
+        daemon.log
+        server-process.json
+      6fa29ea5-2f52-401b-82a7-113e10cdd299.db
+      eslint-2654242865465226088.hash
+      file-map.json
+      file-map.json~1a133dcb
+      file-map.json~1e06c058
+      file-map.json~2cab9356
+      file-map.json~2d2f0357
+      file-map.json~5c7347df
+      file-map.json~8ec60e49
+      file-map.json~24b9b9f4
+      file-map.json~68fbebeb
+      file-map.json~84d070b6
+      file-map.json~300c4159
+      file-map.json~5866ecdd
+      file-map.json~081920a3
+      file-map.json~708871a5
+      file-map.json~1461924b
+      file-map.json~a3fa579b
+      file-map.json~aaa7cbe6
+      file-map.json~ab4c96d0
+      file-map.json~b8a3c0a0
+      file-map.json~c6076b64
+      file-map.json~c6508a1c
+      file-map.json~e076bcf2
+      file-map.json~e9127133
+      file-map.json~ec124cac
+      file-map.json~f33b4e54
+      file-map.json~faf91478
+      file-map.json~fe38f30d
+      jest-7930610538513362720.hash
+      lockfile.hash
+      nx_files.nxt
+      parsed-lock-file.json
+      project-graph.json
+      project-graph.json~0f36de79
+      project-graph.json~0fbe4883
+      project-graph.json~1b3f1864
+      project-graph.json~1cc3e13b
+      project-graph.json~02a2eeff
+      project-graph.json~2b6b906a
+      project-graph.json~2be92ea5
+      project-graph.json~3bbe9103
+      project-graph.json~4ae87cac
+      project-graph.json~4ffaf266
+      project-graph.json~5f56ea79
+      project-graph.json~06d68c2d
+      project-graph.json~7b573a83
+      project-graph.json~7d16e310
+      project-graph.json~9f077420
+      project-graph.json~26cf4d16
+      project-graph.json~49f67ad2
+      project-graph.json~53b2c53b
+      project-graph.json~58fab52c
+      project-graph.json~72f53ac5
+      project-graph.json~75f58cd6
+      project-graph.json~78e6349f
+      project-graph.json~86cd7851
+      project-graph.json~91e0476d
+      project-graph.json~148f6cbb
+      project-graph.json~218d5e69
+      project-graph.json~0315add3
+      project-graph.json~398b44dc
+      project-graph.json~473a2989
+      project-graph.json~549da99a
+      project-graph.json~613da3b6
+      project-graph.json~648f77e8
+      project-graph.json~868affdb
+      project-graph.json~874e06ea
+      project-graph.json~01760e1f
+      project-graph.json~1945dd2f
+      project-graph.json~5974b908
+      project-graph.json~6091ea17
+      project-graph.json~6413f22b
+      project-graph.json~9692c4fd
+      project-graph.json~35851c60
+      project-graph.json~65782b05
+      project-graph.json~339990c0
+      project-graph.json~752369be
+      project-graph.json~2894749a
+      project-graph.json~17630562
+      project-graph.json~58520417
+      project-graph.json~a04be246
+      project-graph.json~ab93b568
+      project-graph.json~b1c35033
+      project-graph.json~b14a8835
+      project-graph.json~b55b0887
+      project-graph.json~b80a4438
+      project-graph.json~be5a08c2
+      project-graph.json~c6c27876
+      project-graph.json~c49d2b29
+      project-graph.json~cfba1f4f
+      project-graph.json~d41a5245
+      project-graph.json~d786ef9b
+      project-graph.json~de045d41
+      project-graph.json~e047c778
+      project-graph.json~e7436ea1
+      project-graph.json~ebe642e4
+      project-graph.json~ec6f1f50
+      project-graph.json~ece4417f
+      project-graph.json~eefa1bfa
+      project-graph.json~f20b3bb8
+      project-graph.json~f70c43e4
+      project-graph.json~f8047458
+      project-graph.json~fb0ed796
+      source-maps.json
+      source-maps.json~1d8de1fb
+      source-maps.json~2d3df602
+      source-maps.json~4efe0c74
+      source-maps.json~5bee3b45
+      source-maps.json~08ecab58
+      source-maps.json~9f75e5ec
+      source-maps.json~30e9ab22
+      source-maps.json~469b11ae
+      source-maps.json~5413a5be
+      source-maps.json~26975a29
+      source-maps.json~83104e23
+      source-maps.json~6483991e
+      source-maps.json~a5428734
+      source-maps.json~c5cb081e
+      source-maps.json~ca09bb8d
+      source-maps.json~cfe67227
+      source-maps.json~d96bcaf9
+      source-maps.json~d2924573
+      source-maps.json~df68bcf7
+      source-maps.json~e6f2f82f
+      source-maps.json~e141e7e8
+      source-maps.json~ee4498a8
+      source-maps.json~efd3002c
+      source-maps.json~fa307ab5
+      source-maps.json~fc623013
+      webpack-5621830741124012108.hash
+  apps/
+    .github/
+      instructions/
+        nx.instructions.md
+    account/
+      src/
+        app/
+          auth/
+            others/
+              account.constants.ts
+            auth.controller.ts
+            auth.module.ts
+            auth.service.ts
+          configs/
+            jwt.config.ts
+            mongo.config.ts
+            rmq.config.ts
+          user/
+            entities/
+              user.entity.ts
+            models/
+              user.model.ts
+            repos/
+              user.repository.ts
+            user.commands.ts
+            user.module.ts
+            user.quries.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      jest.config.ts
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      tsconfig.spec.json
+      webpack.config.js
+    api/
+      src/
+        app/
+          configs/
+            jwt.config.ts
+            rmq.config.ts
+          controllers/
+            auth.controller.ts
+            comments.controller.ts
+            news.controller.ts
+            portfolio.controller.ts
+            staff.controller.ts
+            success-story.controller.ts
+            user.controller.ts
+          dtos/
+            login.dto.ts
+            register.dto.ts
+          guards/
+            jwt.guard.ts
+            roles.guard.ts
+            user.decorator.ts
+          strategies/
+            jwt.strategy.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      jest.config.ts
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      tsconfig.spec.json
+      webpack.config.js
+    duplicate-checker/
+      app/
+        api.py
+        models.py
+        utils.py
+      main.py
+      requirements.txt
+    news/
+      src/
+        app/
+          configs/
+            mongo.config.ts
+            rmq.config.ts
+          news/
+            entities/
+              news.entity.ts
+            models/
+              news.model.ts
+            repos/
+              news.repository.ts
+            news.commands.ts
+            news.module.ts
+            news.service.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      jest.config.ts
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      tsconfig.spec.json
+      webpack.config.js
+    portfolio/
+      src/
+        app/
+          configs/
+            mongo.config.ts
+            rmq.config.ts
+          portfolio/
+            entities/
+              portfolio.entity.ts
+            models/
+              portfolio.model.ts
+            repos/
+              portfolio.repository.ts
+            portfolio.commands.ts
+            portfolio.module.ts
+            portfolio.queries.ts
+            portfolio.service.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      webpack.config.js
+    projects/
+      src/
+        admin/
+          admin-duplicates.controller.ts
+          admin-games.controller.ts
+          admin.module.ts
+        assets/
+          .gitkeep
+        comments/
+          dtos/
+            create-comment.dto.ts
+          models/
+            user.model.ts
+          schemas/
+            comment.schema.ts
+            user.schema.ts
+          comments.controller.ts
+          comments.module.ts
+          comments.service.ts
+          jwt.guard.ts
+        configs/
+          jwt.config.ts
+          minio.config.ts
+          mongo.config.ts
+          rmq.config.ts
+        duplicate/
+          schemas/
+            duplicate.schema.ts
+          duplicate.controller.ts
+          duplicate.module.ts
+          duplicate.service.ts
+        games/
+          dto/
+            create-game.dto.ts
+          schemas/
+            game.schema.ts
+          games.controller.ts
+          games.module.ts
+          games.service.ts
+        minio/
+          minio.module.ts
+          minio.service.ts
+        app.controller.ts
+        app.module.ts
+        app.service.ts
+        main.ts
+      eslint.config.mjs
+      jest.config.ts
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      tsconfig.spec.json
+      webpack.config.js
+    staff/
+      src/
+        app/
+          configs/
+            mongo.config.ts
+            rmq.config.ts
+          staff/
+            entities/
+              staff.entity.ts
+            models/
+              staff.model.ts
+            repos/
+              staff.repository.ts
+            staff.commands.ts
+            staff.module.ts
+            staff.queries.ts
+            staff.service.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      webpack.config.js
+    success-story/
+      src/
+        app/
+          configs/
+            mongo.config.ts
+            rmq.config.ts
+          success-story/
+            entities/
+              success-story.entity.ts
+            models/
+              success-story.model.ts
+            repos/
+              success-story.repository.ts
+            success-story.commands.ts
+            success-story.module.ts
+            success-story.queries.ts
+            success-story.service.ts
+          app.module.ts
+        assets/
+          .gitkeep
+        main.ts
+      eslint.config.mjs
+      project.json
+      tsconfig.app.json
+      tsconfig.json
+      webpack.config.js
+  envs/
+    .account.env
+    .api.env
+    .news.env
+    .portfolio.env
+    .projects.env
+    .staff.env
+    .success-story.env
+  shared/
+    contracts/
+      src/
+        lib/
+          account/
+            account.change-password-profile.ts
+            account.change-profile.ts
+            account.change-role.ts
+            account.delete-user.ts
+            account.login.ts
+            account.register.ts
+            account.user-info.ts
+            account.user-list.ts
+            account.user-search.ts
+          news/
+            dtos/
+              news.author.dto.ts
+              news.create.dto.ts
+              news.update.dto.ts
+            news.create.ts
+            news.delete.ts
+            news.get-by-id.ts
+            news.get-by-slug.ts
+            news.get-list.ts
+            news.update.ts
+          portfolio/
+            dtos/
+              portfolio.create.dto.ts
+              project-author.dto.ts
+              project-phase.dto.ts
+              project-skill.dto.ts
+            portfolio.create.ts
+            portfolio.delete.ts
+            portfolio.get-by-slug.ts
+            portfolio.get-list.ts
+            portfolio.update.ts
+          project/
+            comment.create.ts
+            comment.list.ts
+            game.create.ts
+            game.get-all.ts
+          staff/
+            dtos/
+              staff-achievement.dto.ts
+              staff-skill.dto.ts
+              staff-stat.dto.ts
+              staff.create.dto.ts
+              subskill.dto.ts
+            types/
+              rarity.type.ts
+            staff.create.ts
+            staff.delete.ts
+            staff.get-by-slug.ts
+            staff.get-list.ts
+            staff.update.ts
+          success-story/
+            dtos/
+              success-story.create.dto.ts
+            success-story.create.ts
+            success-story.delete.ts
+            success-story.get-list.ts
+            success-story.update.ts
+        index.ts
+      eslint.config.mjs
+      package.json
+      project.json
+      README.md
+      tsconfig.json
+      tsconfig.lib.json
+    interfaces/
+      src/
+        lib/
+          auth.interface.ts
+          news.interface.ts
+          portfolio.interface.ts
+          staff.interface.ts
+          success-story.interface.ts
+          user.interface.ts
+        index.ts
+      eslint.config.mjs
+      package.json
+      project.json
+      README.md
+      tsconfig.json
+      tsconfig.lib.json
+  .editorconfig
+  .prettierignore
+  .prettierrc
+  eslint.config.mjs
+  jest.config.ts
+  jest.preset.js
+  migrations.json
+  nx.json
+  package-lock.json
+  package.json
+  README.md
+  tsconfig.base.json
+gameacademyfrontend/
+  .next/
+    cache/
+      images/
+        dyPlHJmbSPoMU-9mB1--FVbnlxvpLuoGHNIEYMror58/
+          60.1756803191212.MrVqM4qY-ry1u2sibqkr8YtZQvkImzknUhPZvXjgCCI.Vy8iNDA5YmYtMTk5MDlhMDViNmIi.webp
+        ftDgnDzyqFv_y1Ws_ojR9BIJBc5TEUAEQ6Iz_k4Ei-o/
+          60.1760351361454.PxGMBt57bbCxQaU5zz1h3egNNXxGDHBJnACnTS6prGM.Vy8iODc4My0xOTlkZDFjZjFkZiI.webp
+        gaDUbMKxNSVkMgQ4UoNS74OnXn621JkVWsWL1wFaKrM/
+          60.1753265294537.88xwDdSByoMMLEqCBr2SmCTIC5IHmxNqujL6y6pYoQ8.IzV8MjYMHPVOT4in4TFmcaZ9lXG2B92UW-b_i6Urs38.webp
+        htcEtFbJbPAexF8F28lZPGq2l2tnf0Tp8KHGJ4aF2qg/
+          31536000.1783420818263.WHtESvw5fnrJ1qIW51S8k2UK8r_tN-PoghdPXHKB9kk.IjY1NTdhZWQzLTUyNmI4Ig.webp
+        In1cfc_68LP4mhtLgDMHiW2BIitcxj9-pyHagUfZHbk/
+          30.1756803205940.EEOZfkfS4sDcOTUT5RyWPJu6u_OTmc3rvy69JJeZuW4.IjNmNTE4LTYxNmQ1YjUyZTg2YmYi.webp
+        LGdCpfZGaeqqOCZvrDsYNCOzAsRgsz7tLNNkjjQ9xps/
+          60.1752140966182.PwjwDRntXu4t22vixoPxcJZdIA9nM28L3wZAwj_Befg.kSqxFSkeUMg7o9Wc3gQn6UXbttrRaLFWlMAkiHzTFsA.webp
+        MISAD70Rftj3kyrZDXHJwJtnSN_qU9i9yQQ60CQh6LM/
+          60.1752142473562.A5UGrq6oOXbdEGtzDmjam_OizUZHb2ej1_4mFJ-3PtA.ZDc4ZGQ3YTMyYTI4YjNjZjVhYjk1ZGY2ZTQ4YTAwODE.webp
+        nMvrNoV2PhROebPZHyAQ8tu_dRtfXxzOHvuZyJjwO_Y/
+          60.1760351361425.JIudZalk2ykiwgHVrvbZmyBCghjyC6devAqqQD2OO6Q.Vy8iODc4My0xOTlkZDFjZjFkZiI.svg
+        oNwdft2RS1WvuePSN5WGc2uojZ1-_GrZ24pdoAXsQsM/
+          60.1753177534962.PxGMBt57bbCxQaU5zz1h3egNNXxGDHBJnACnTS6prGM.3CPtPN2H0fsih4kXtvR66B3OHwEJ2rP5NrC0ouN_p6g.webp
+        RHaRc_JpN152MHUPf0MhbvupaNwgAE_bXpP-RuD2Iv4/
+          31536000.1783513828028._lJHeGTfAPR_UAtKItycc4cCPQse9YvslV7Sx3ZuMMY.ImU5ZWEyZGViOGViMzgwYjAwMDY0ZWJmNWMyNmNmNGEzIg.webp
+        uX8evUpGxFAwn5XXZH8KSO3gLiD8rD5yJ4YdPuWm87E/
+          31536000.1783419703440.FbkXWAEEB037n0NwumVk9-gorEL0G8DhciVsZgIa6Ww.IjY3MGI3MGVjLTFmYTkyIg.webp
+        UzedaWXM9_-aQq1OMk7yUxhh3QVZu_0H5i7yp_tcMto/
+          28800.1751999176631.SGVIYIKVWLn9-FUmNYQP8mTRJymncqQqVQEXDw3AuWg.IjNmNTE4LTYxNmQ1YjUyZTg2YmYi.webp
+        watYcmT9x6wJbiV7DayPuPWGZTIS91N7mCzYpHRXYZY/
+          60.1753177560347.cI9Ybjw8UzZEvRNEfM-5SBNtfmaZJBPuXkUxwLYV5aA.Vy8iNDA5YmYtMTk4MzE4NTA3M2Yi.webp
+      swc/
+        plugins/
+          v7_windows_x86_64_9.0.0/
+      webpack/
+        client-development/
+          0.pack.gz
+          1.pack.gz
+          2.pack.gz
+          3.pack.gz
+          4.pack.gz
+          5.pack.gz
+          6.pack.gz
+          7.pack.gz
+          8.pack.gz
+          9.pack.gz
+          10.pack.gz
+          11.pack.gz
+          12.pack.gz
+          13.pack.gz
+          14.pack.gz
+          15.pack.gz
+          16.pack.gz
+          17.pack.gz
+          18.pack.gz
+          19.pack.gz
+          20.pack.gz
+          21.pack.gz
+          22.pack.gz
+          23.pack.gz
+          24.pack.gz
+          25.pack.gz
+          26.pack.gz
+          27.pack.gz
+          index.pack.gz
+          index.pack.gz.old
+        client-development-fallback/
+          0.pack.gz
+          1.pack.gz
+          2.pack.gz
+          3.pack.gz
+          index.pack.gz
+          index.pack.gz.old
+        server-development/
+          0.pack.gz
+          1.pack.gz
+          2.pack.gz
+          3.pack.gz
+          4.pack.gz
+          5.pack.gz
+          6.pack.gz
+          7.pack.gz
+          8.pack.gz
+          9.pack.gz
+          10.pack.gz
+          11.pack.gz
+          12.pack.gz
+          13.pack.gz
+          14.pack.gz
+          15.pack.gz
+          16.pack.gz
+          17.pack.gz
+          18.pack.gz
+          19.pack.gz
+          20.pack.gz
+          21.pack.gz
+          index.pack.gz
+          index.pack.gz.old
+      .rscinfo
+    server/
+      app/
+        _not-found/
+          page_client-reference-manifest.js
+          page.js
+        favicon.ico/
+          route.js
+        page_client-reference-manifest.js
+        page.js
+      vendor-chunks/
+        @swc.js
+        next.js
+        react-icons.js
+      app-paths-manifest.json
+      interception-route-rewrite-manifest.js
+      middleware-build-manifest.js
+      middleware-manifest.json
+      middleware-react-loadable-manifest.js
+      next-font-manifest.js
+      next-font-manifest.json
+      pages-manifest.json
+      server-reference-manifest.js
+      server-reference-manifest.json
+      webpack-runtime.js
+    static/
+      chunks/
+        app/
+          _not-found/
+            page.js
+          error.js
+          layout.js
+          not-found.js
+          page.js
+        _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js
+        app-pages-internals.js
+        main-app.js
+        polyfills.js
+        webpack.js
+      css/
+        app/
+          error.css
+          layout.css
+          not-found.css
+      development/
+        _buildManifest.js
+        _ssgManifest.js
+      webpack/
+        app/
+          layout.52950e48de26ba5d.hot-update.js
+          layout.f7c276fcd90ea8fd.hot-update.js
+          page.52950e48de26ba5d.hot-update.js
+        52950e48de26ba5d.webpack.hot-update.json
+        633457081244afec._.hot-update.json
+        f7c276fcd90ea8fd.webpack.hot-update.json
+        webpack.52950e48de26ba5d.hot-update.js
+        webpack.f7c276fcd90ea8fd.hot-update.js
+    types/
+      app/
+        layout.ts
+        page.ts
+      cache-life.d.ts
+      package.json
+    app-build-manifest.json
+    build-manifest.json
+    package.json
+    react-loadable-manifest.json
+    trace
+  app/
+    admin/
+      page.tsx
+    auth/
+      login/
+        login.module.css
+        page.tsx
+      register/
+        page.tsx
+        register.module.css
+    games/
+      [id]/
+        play/
+          ClientGame.tsx
+          ClientGameWrapper.tsx
+          page.tsx
+          play.module.css
+        AuthorsBlock.tsx
+        BreadcrumbsAndHeader.tsx
+        ClientCommentsSection.tsx
+        comments.module.css
+        CommentsSection.tsx
+        game-overview.module.css
+        media-gallery.module.css
+        MediaGallery.tsx
+        ModelsViewer.tsx
+        ModelsViewerWrapper.tsx
+        page.tsx
+      games.module.css
+      page.tsx
+    hall-of-fame/
+      page.tsx
+    map-success/
+      page.tsx
+    news/
+      [slug]/
+        page.tsx
+      page.tsx
+    portfolio/
+      [slug]/
+        page.tsx
+      page.tsx
+    profile/
+      page.tsx
+    staff/
+      [slug]/
+        page.tsx
+      page.tsx
+    upload/
+      page.tsx
+      upload.module.css
+    error.module.css
+    error.tsx
+    favicon.ico
+    globals.css
+    layout.tsx
+    not-found.module.css
+    not-found.tsx
+    page.module.css
+    page.tsx
+  components/
+    features/
+      admin/
+        forms/
+          NewsForm.tsx
+          PortfolioForm.tsx
+          ProjectForm.tsx
+          StaffForm.tsx
+        NewsManagement.tsx
+        PortfolioManagement.tsx
+        ProjectsManagement.tsx
+        StaffManagement.tsx
+        UsersManagement.tsx
+      auth/
+        LoginModal.tsx
+        RegisterModal.tsx
+      hallOfFame/
+        CallToAction.tsx
+        EmptyHallOfFame.tsx
+        HallOfFameHeader.tsx
+        ProjectAuthors.tsx
+        ProjectCard.tsx
+        ProjectGrid.tsx
+      news/
+        FullWidthImage.tsx
+        MarkdownContent.tsx
+        NewsCard.tsx
+        NewsFilterPanel.tsx
+        NewsGrid.tsx
+        NewsSidebar.tsx
+      portfolio/
+        detail/
+          EmptyPortfolio.tsx
+          PhaseModal.tsx
+          PortfolioDetail.tsx
+          ProjectAuthors.tsx
+          ProjectContent.tsx
+          ProjectCover.tsx
+          ProjectSidebar.tsx
+        CategoryFilter.tsx
+        EmptyProjects.tsx
+        PortfolioStats.tsx
+        ProjectCard.tsx
+        ProjectsGrid.tsx
+        SearchFilter.tsx
+      staff/
+        detail/
+          StaffAchievements.tsx
+          StaffContacts.tsx
+          StaffHeader.tsx
+          StaffProjects.tsx
+          StaffSkills.tsx
+        EmptyStaff.tsx
+        SearchFilter.tsx
+        SkillFilter.tsx
+        StaffCard.tsx
+        StaffCardGameStyle.tsx
+        StaffGrid.tsx
+      successStories/
+        SuccessMapView.tsx
+        SuccessMarker.tsx
+        YearFilter.tsx
+      Modal.tsx
+      SkillDetailModal.tsx
+      SkillTree.tsx
+      SocialLinks.tsx
+    layout/
+      AnimatedDiv.tsx
+      AnimatedSection.tsx
+      Footer.tsx
+      Header.tsx
+      Layout.tsx
+      ProjectTimeline.tsx
+    sections/
+      Awards.tsx
+      Blog.tsx
+      Contact.tsx
+      FAQ.tsx
+      Hero.tsx
+      Partners.tsx
+      Projects.tsx
+      Team.tsx
+    ui/
+      AnimatedSearchComponent.tsx
+      BackButton.tsx
+      BackToTopButton.tsx
+      ImageSlider.tsx
+      Label.tsx
+      PageTitle.tsx
+      SafeImage.tsx
+      ScrollToTop.tsx
+      SearchFilter.tsx
+      SectionWrapper.tsx
+    ClientWrapper.tsx
+    header.module.css
+    header.tsx
+    UnityCleanup.tsx
+    useAuthExp.ts
+  contexts/
+    AuthContext.tsx
+  data/
+    categories.ts
+    news.ts
+    portfolio.ts
+    roles.ts
+    staff.ts
+    successStories.ts
+  public/
+    content/
+      portfolio/
+        vr-medical-simulator.md
+      gazizov-3d-modeling-in-games.md
+      kostuk-vr-crane-training.md
+      kugurakova-game-education-strategy.md
+      uiux-hackathon-winners.md
+      vr-gamedev-methodology.md
+    images/
+      news/
+        arvr.jpg
+        hackaton.webp
+      portfolio/
+        AR-VR-in-Healthcare-1.jpg
+      staff/
+        avatar-vlada.jpg
+      avatar-placeholder.jpg
+      placeholder.jpg
+    file.svg
+    globe.svg
+    next.svg
+    vercel.svg
+    window.svg
+  types/
+    news.d.ts
+    portfolio.d.ts
+    roles.d.ts
+    staff.d.ts
+    studentProject.d.ts
+    successStories.d.ts
+  utils/
+    imageUtils.ts
+    markdownUtils.ts
+  .env.local
+  .export-ignore
+  cors.json
+  eslint.config.mjs
+  export.md
+  exportconfig.json
+  global.d.ts
+  next-env.d.ts
+  next.config.ts
+  package-lock.json
+  package.json
+  postcss.config.mjs
+  README.md
+  tailwind.config.js
+  tsconfig.json
+minio/
+  docker-compose.yml
+mongo/
+  docker-compose.yml
+rabbit/
+  docker-compose.yml
+```
+
+
+
+# Selected Files Content
+
+## gameacademybackend/apps/api/src/app/controllers/news.controller.ts
+
+```ts
+import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
+import { RMQService } from 'nestjs-rmq';
+import { NewsCreate, NewsUpdate, NewsDelete, NewsGetBySlug, NewsGetList } from '@shared/contracts';
+import { JWTAuthGuard } from '../guards/jwt.guard';
+import { Roles } from '../guards/roles.guard';
+import { UserRole } from '@shared/interfaces';
+
+@Controller('news')
+export class NewsController {
+  constructor(private readonly rmqService: RMQService) {}
+
+  @Get()
+  async getNewsList(@Query('category') category?: string, @Query('search') search?: string) {
+    return this.rmqService.send<NewsGetList.Request, NewsGetList.Response>(NewsGetList.topic, { category, search });
+  }
+
+  @Get(':slug')
+  async getNewsBySlug(@Param('slug') slug: string) {
+    return this.rmqService.send<NewsGetBySlug.Request, NewsGetBySlug.Response>(NewsGetBySlug.topic, { slug });
+  }
+
+  @Post()
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async createNews(@Body() dto: NewsCreate.Request) {
+    return this.rmqService.send<NewsCreate.Request, NewsCreate.Response>(NewsCreate.topic, dto);
+  }
+
+  @Put(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async updateNews(@Param('id') id: string, @Body() dto: NewsCreate.Request) {
+    return this.rmqService.send<NewsUpdate.Request, NewsUpdate.Response>(NewsUpdate.topic, { ...dto, id });
+  }
+
+  @Delete(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async deleteNews(@Param('id') id: string) {
+    return this.rmqService.send<NewsDelete.Request, NewsDelete.Response>(NewsDelete.topic, { id });
+  }
+}
+```
+
+## gameacademybackend/apps/api/src/app/controllers/portfolio.controller.ts
+
+```ts
+/* eslint-disable prettier/prettier */
+import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
+import { RMQService } from 'nestjs-rmq';
+import {
+  PortfolioCreate,
+  PortfolioUpdate,
+  PortfolioDelete,
+  PortfolioGetBySlug,
+  PortfolioGetList
+} from '@shared/contracts';
+import { JWTAuthGuard } from '../guards/jwt.guard';
+import { Roles } from '../guards/roles.guard';
+import { UserRole } from '@shared/interfaces';
+
+@Controller('portfolio')
+export class PortfolioController {
+  constructor(private readonly rmqService: RMQService) {}
+
+  @Get()
+  async getPortfolioList(@Query('category') category?: string, @Query('hallOfFrame') hallOfFrame?: boolean) {
+    return this.rmqService.send<PortfolioGetList.Request, PortfolioGetList.Response>(
+      PortfolioGetList.topic,
+      { category, hallOfFrame }
+    );
+  }
+
+  @Get(':slug')
+  async getPortfolioBySlug(@Param('slug') slug: string) {
+    return this.rmqService.send<PortfolioGetBySlug.Request, PortfolioGetBySlug.Response>(
+      PortfolioGetBySlug.topic,
+      { slug }
+    );
+  }
+
+  @Post()
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async createPortfolio(@Body() dto: PortfolioCreate.Request) {
+    return this.rmqService.send<PortfolioCreate.Request, PortfolioCreate.Response>(
+      PortfolioCreate.topic,
+      dto
+    );
+  }
+
+  @Put(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async updatePortfolio(@Param('id') id: string, @Body() dto: PortfolioCreate.Request) {
+    return this.rmqService.send<PortfolioUpdate.Request, PortfolioUpdate.Response>(
+      PortfolioUpdate.topic,
+      { ...dto, id }
+    );
+  }
+
+  @Delete(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async deletePortfolio(@Param('id') id: string) {
+    return this.rmqService.send<PortfolioDelete.Request, PortfolioDelete.Response>(
+      PortfolioDelete.topic,
+      { id }
+    );
+  }
+}
+```
+
+## gameacademybackend/apps/api/src/app/controllers/staff.controller.ts
+
+```ts
+import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
+import { RMQService } from 'nestjs-rmq';
+import { 
+  StaffCreate, 
+  StaffUpdate, 
+  StaffDelete, 
+  StaffGetBySlug, 
+  StaffGetList 
+} from '@shared/contracts';
+import { JWTAuthGuard } from '../guards/jwt.guard';
+import { Roles } from '../guards/roles.guard';
+import { UserRole } from '@shared/interfaces';
+
+@Controller('staff')
+export class StaffController {
+  constructor(private readonly rmqService: RMQService) {}
+
+  @Get()
+  async getStaffList(@Query('position') position?: string, @Query('rarity') rarity?: string) {
+    return this.rmqService.send<StaffGetList.Request, StaffGetList.Response>(
+      StaffGetList.topic, 
+      { position, rarity }
+    );
+  }
+
+  @Get(':slug')
+  async getStaffBySlug(@Param('slug') slug: string) {
+    return this.rmqService.send<StaffGetBySlug.Request, StaffGetBySlug.Response>(
+      StaffGetBySlug.topic, 
+      { slug }
+    );
+  }
+
+  @Post()
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async createStaff(@Body() dto: StaffCreate.Request) {
+    return this.rmqService.send<StaffCreate.Request, StaffCreate.Response>(
+      StaffCreate.topic, 
+      dto
+    );
+  }
+
+  @Put(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async updateStaff(@Param('id') id: string, @Body() dto: StaffCreate.Request) {
+    return this.rmqService.send<StaffUpdate.Request, StaffUpdate.Response>(
+      StaffUpdate.topic, 
+      { ...dto, id }
+    );
+  }
+
+  @Delete(':id')
+  @UseGuards(JWTAuthGuard)
+  @Roles(UserRole.Admin)
+  async deleteStaff(@Param('id') id: string) {
+    return this.rmqService.send<StaffDelete.Request, StaffDelete.Response>(
+      StaffDelete.topic, 
+      { id }
+    );
+  }
+}
+```
+

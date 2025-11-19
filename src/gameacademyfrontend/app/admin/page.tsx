@@ -17,22 +17,24 @@ export default function AdminPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  //useEffect(() => {
-    //if (!isAuthenticated || user?.role !== 'Admin') {
-      //router.push('/');
-    //}
-  //}, [isAuthenticated, user, router]);
+  /*
+  useEffect(() => {
+    if (!isAuthenticated || user?.role !== 'Admin') {
+      router.push('/');
+    }
+  }, [isAuthenticated, user, router]);
 
-  //if (!isAuthenticated || user?.role !== 'Admin') {
-    //return (
-      //<div className="min-h-screen flex items-center justify-center">
-        //<div className="text-center">
-          //<h2 className="text-2xl font-bold mb-4">Доступ запрещен</h2>
-          //<p className="text-gray-600">Требуются права администратора</p>
-       //</div>
-      //</div>
-    //);
-  //}
+  if (!isAuthenticated || user?.role !== 'Admin') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Доступ запрещен</h2>
+          <p className="text-gray-600">Требуются права администратора</p>
+       </div>
+      </div>
+    );
+  }
+  */
 
   const adminTabs = [
     { id: 'dashboard', label: 'Дашборд', icon: '📊' },

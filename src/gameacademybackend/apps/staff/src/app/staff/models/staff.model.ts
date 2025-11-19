@@ -14,8 +14,8 @@ export class Staff {
   @Prop({ required: true })
   position: string;
 
-  @Prop({ required: true })
-  photo: string;
+  @Prop()
+  photo?: string;
 
   @Prop()
   title?: string;
@@ -55,6 +55,16 @@ export class Staff {
     icon: string;
     description: string;
   }>;
+
+  // Устаревшие/альтернативные поля
+  @Prop()
+  image?: string;
+
+  @Prop({ type: [String] })
+  tags?: string[];
+
+  @Prop()
+  contact?: string;
 }
 
 export const StaffSchema = SchemaFactory.createForClass(Staff);

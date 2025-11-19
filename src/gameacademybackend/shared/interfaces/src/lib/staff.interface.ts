@@ -5,7 +5,7 @@ export interface IStaff {
   slug: string;
   name: string;
   position: string;
-  photo: string;
+  photo?: string;
   title?: string;
   rarity?: "LEGENDARY" | "RARE" | "COMMON";
   email?: string;
@@ -24,5 +24,10 @@ export interface IStaff {
     title: string;
     icon: string;
     description: string;
-  }>
+  }>;
+  // Устаревшие/альтернативные поля
+  id?: string | number;
+  image?: string;
+  tags?: string[];
+  contact?: string;
 }

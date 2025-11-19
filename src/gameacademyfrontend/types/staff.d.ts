@@ -62,4 +62,5 @@ export interface StaffMember {
   id?: string | number; // Для обратной совместимости
   image?: string; // Альтернатива для photo
   tags?: string[];
+  contact?: string;
 }

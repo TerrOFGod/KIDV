@@ -13,8 +13,9 @@ export class PortfolioCreateDto {
   @IsString()
   category: string;
 
+  @IsOptional()
   @IsString()
-  image: string;
+  image?: string;
 
   @IsOptional()
   @IsString()
@@ -51,7 +52,7 @@ export class PortfolioCreateDto {
 
   @IsOptional()
   @IsBoolean()
-  hallOfFrame?: boolean;
+  hallOfFame?: boolean;
 
   @IsOptional()
   @IsArray()
@@ -66,4 +67,9 @@ export class PortfolioCreateDto {
   @IsOptional()
   @IsString()
   markdown?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  tags?: string[];
 }

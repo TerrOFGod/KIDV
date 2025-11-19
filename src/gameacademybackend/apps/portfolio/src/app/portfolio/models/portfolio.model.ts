@@ -14,8 +14,8 @@ export class Portfolio {
   @Prop({ required: true })
   category: string;
 
-  @Prop({ required: true })
-  image: string;
+  @Prop()
+  image?: string;
 
   @Prop()
   description?: string;
@@ -44,7 +44,7 @@ export class Portfolio {
   screenshots?: string[];
 
   @Prop({ default: false })
-  hallOfFrame: boolean;
+  hallOfFame: boolean;
 
   @Prop({ type: [Object] })
   authors?: Array<{
@@ -58,6 +58,9 @@ export class Portfolio {
 
   @Prop()
   markdown?: string;
+
+  @Prop({ type: [String] })
+  tags?: string[];
 }
 
 export const PortfolioSchema = SchemaFactory.createForClass(Portfolio);

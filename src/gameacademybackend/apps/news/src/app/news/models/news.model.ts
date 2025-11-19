@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type NewsDocument = HydratedDocument<News>;
 
@@ -14,20 +14,32 @@ export class News {
   @Prop({ required: true })
   category: string;
 
-  @Prop({ required: true })
-  image: string;
+  @Prop()
+  image?: string;
 
   @Prop({ required: true })
   date: string;
 
-  @Prop({ required: true })
-  markdown: string;
+  @Prop()
+  markdown?: string;
+
+  @Prop()
+  excerpt?: string;
+
+  @Prop()
+  content?: string;
+
+  @Prop()
+  readTime?: string;
 
   @Prop({ type: Object })
   author?: {
     name: string;
     slug: string;
   };
+
+  @Prop({ type: [String] })
+  tags?: string[];
 }
 
 export const NewsSchema = SchemaFactory.createForClass(News);

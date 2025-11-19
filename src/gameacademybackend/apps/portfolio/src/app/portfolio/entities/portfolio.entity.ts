@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IPortfolio } from '@shared/interfaces';
 import { Types } from 'mongoose';
 
@@ -6,7 +7,7 @@ export class PortfolioEntity implements IPortfolio {
   slug: string;
   title: string;
   category: string;
-  image: string;
+  image?: string;
   description?: string;
   releaseDate?: string;
   download?: string;
@@ -19,7 +20,7 @@ export class PortfolioEntity implements IPortfolio {
   goals?: string[];
   features?: string[];
   screenshots?: string[];
-  hallOfFrame?: boolean;
+  hallOfFame?: boolean;
   authors?: Array<{
     name: string;
     slug: string;
@@ -27,12 +28,13 @@ export class PortfolioEntity implements IPortfolio {
   }>;
   year?: number;
   markdown?: string;
+  tags?: string[];
 
   constructor(portfolio: Partial<PortfolioEntity>) {
     this._id = portfolio._id;
-    this.slug = portfolio.slug;
-    this.title = portfolio.title;
-    this.category = portfolio.category;
+    this.slug = portfolio.slug || '';
+    this.title = portfolio.title || '';
+    this.category = portfolio.category || '';
     this.image = portfolio.image;
     this.description = portfolio.description;
     this.releaseDate = portfolio.releaseDate;
@@ -41,15 +43,16 @@ export class PortfolioEntity implements IPortfolio {
     this.goals = portfolio.goals;
     this.features = portfolio.features;
     this.screenshots = portfolio.screenshots;
-    this.hallOfFrame = portfolio.hallOfFrame;
+    this.hallOfFame = portfolio.hallOfFame;
     this.authors = portfolio.authors;
     this.year = portfolio.year;
     this.markdown = portfolio.markdown;
+    this.tags = portfolio.tags;
   }
 
   public getPublicInfo() {
     return {
-      _id: this._id,
+      _id: this._id?.toString(),
       slug: this.slug,
       title: this.title,
       category: this.category,
@@ -61,10 +64,11 @@ export class PortfolioEntity implements IPortfolio {
       goals: this.goals,
       features: this.features,
       screenshots: this.screenshots,
-      hallOfFrame: this.hallOfFrame,
+      hallOfFame: this.hallOfFame,
       authors: this.authors,
       year: this.year,
       markdown: this.markdown,
+      tags: this.tags,
     };
   }
 }

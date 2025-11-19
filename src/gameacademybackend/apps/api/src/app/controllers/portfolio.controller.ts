@@ -1,11 +1,12 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
-import { 
-  PortfolioCreate, 
-  PortfolioUpdate, 
-  PortfolioDelete, 
-  PortfolioGetBySlug, 
-  PortfolioGetList 
+import {
+  PortfolioCreate,
+  PortfolioUpdate,
+  PortfolioDelete,
+  PortfolioGetBySlug,
+  PortfolioGetList
 } from '@shared/contracts';
 import { JWTAuthGuard } from '../guards/jwt.guard';
 import { Roles } from '../guards/roles.guard';
@@ -18,7 +19,7 @@ export class PortfolioController {
   @Get()
   async getPortfolioList(@Query('category') category?: string, @Query('hallOfFrame') hallOfFrame?: boolean) {
     return this.rmqService.send<PortfolioGetList.Request, PortfolioGetList.Response>(
-      PortfolioGetList.topic, 
+      PortfolioGetList.topic,
       { category, hallOfFrame }
     );
   }
@@ -26,7 +27,7 @@ export class PortfolioController {
   @Get(':slug')
   async getPortfolioBySlug(@Param('slug') slug: string) {
     return this.rmqService.send<PortfolioGetBySlug.Request, PortfolioGetBySlug.Response>(
-      PortfolioGetBySlug.topic, 
+      PortfolioGetBySlug.topic,
       { slug }
     );
   }
@@ -36,7 +37,7 @@ export class PortfolioController {
   @Roles(UserRole.Admin)
   async createPortfolio(@Body() dto: PortfolioCreate.Request) {
     return this.rmqService.send<PortfolioCreate.Request, PortfolioCreate.Response>(
-      PortfolioCreate.topic, 
+      PortfolioCreate.topic,
       dto
     );
   }
@@ -46,7 +47,7 @@ export class PortfolioController {
   @Roles(UserRole.Admin)
   async updatePortfolio(@Param('id') id: string, @Body() dto: PortfolioCreate.Request) {
     return this.rmqService.send<PortfolioUpdate.Request, PortfolioUpdate.Response>(
-      PortfolioUpdate.topic, 
+      PortfolioUpdate.topic,
       { ...dto, id }
     );
   }
@@ -56,7 +57,7 @@ export class PortfolioController {
   @Roles(UserRole.Admin)
   async deletePortfolio(@Param('id') id: string) {
     return this.rmqService.send<PortfolioDelete.Request, PortfolioDelete.Response>(
-      PortfolioDelete.topic, 
+      PortfolioDelete.topic,
       { id }
     );
   }

@@ -15,8 +15,9 @@ export class StaffCreateDto {
   @IsString()
   position: string;
 
+  @IsOptional()
   @IsString()
-  photo: string;
+  photo?: string;
 
   @IsOptional()
   @IsString()
@@ -64,4 +65,18 @@ export class StaffCreateDto {
   @ValidateNested({ each: true })
   @Type(() => StaffAchievementDto)
   achievements?: StaffAchievementDto[];
+
+  // Устаревшие/альтернативные поля
+  @IsOptional()
+  @IsString()
+  image?: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  tags?: string[];
+
+  @IsOptional()
+  @IsString()
+  contact?: string;
 }

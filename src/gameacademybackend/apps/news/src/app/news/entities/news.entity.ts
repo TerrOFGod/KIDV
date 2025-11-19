@@ -6,10 +6,14 @@ export class NewsEntity implements INews {
   slug: string;
   title: string;
   category: string;
-  image: string;
+  image?: string; // Для локальных и внешних изображений
   date: string;
-  markdown: string;
-  author?: { name: string; slug: string };
+  markdown?: string;
+  excerpt?: string;
+  content?: string;
+  readTime?: string;
+  author?: { name: string; slug: string }; // Опциональный идентификатор автора
+  tags?: string[];
 
   constructor(news: Partial<NewsEntity>) {
     this._id = news._id;
@@ -19,7 +23,11 @@ export class NewsEntity implements INews {
     this.image = news.image;
     this.date = news.date;
     this.markdown = news.markdown;
+    this.excerpt = news.excerpt;
+    this.content = news.content;
+    this.readTime = news.readTime;
     this.author = news.author;
+    this.tags = news.tags;
   }
 
   public getPublicInfo() {
@@ -31,7 +39,11 @@ export class NewsEntity implements INews {
       image: this.image,
       date: this.date,
       markdown: this.markdown,
+      excerpt: this.excerpt,
+      content: this.content,
+      readTime: this.readTime,
       author: this.author,
+      tags: this.tags,
     };
   }
 }
