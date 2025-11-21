@@ -35,7 +35,7 @@ export class StaffService {
 
   async getStaffList(position?: string, rarity?: string) {
     const staff = await this.staffRepository.findAllStaff(position, rarity);
-    return staff.map(item => new StaffEntity(item.toObject()).getPublicInfo());
+    return staff.map((item) => new StaffEntity(item.toObject()).getPublicInfo());
   }
 
   async updateStaff(dto: any) {
@@ -59,6 +59,6 @@ export class StaffService {
 
   async searchStaff(searchTerm: string) {
     const staff = await this.staffRepository.searchStaff(searchTerm);
-    return staff.map(item => new StaffEntity(item.toObject()).getPublicInfo());
+    return staff.map((item) => new StaffEntity(item.toObject()).getPublicInfo());
   }
 }

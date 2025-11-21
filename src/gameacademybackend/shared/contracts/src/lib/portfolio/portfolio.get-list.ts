@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsBoolean, IsNumber, ValidateNested } from 'class-validator';
+import { IsString, IsOptional, IsBoolean } from 'class-validator';
 
 export namespace PortfolioGetList {
   export const topic = 'portfolio.get-list.query';

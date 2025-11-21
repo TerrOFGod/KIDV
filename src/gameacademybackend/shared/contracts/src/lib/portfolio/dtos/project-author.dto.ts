@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsBoolean, IsNumber, ValidateNested } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class ProjectAuthorDto {
   @IsString()

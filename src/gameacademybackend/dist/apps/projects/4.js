@@ -3,7 +3,7 @@ exports.id = 4;
 exports.ids = [4];
 exports.modules = {
 
-/***/ 2910:
+/***/ 2922:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -15,7 +15,7 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js + 2 modules
-var loadSharedConfigFiles = __webpack_require__(2581);
+var loadSharedConfigFiles = __webpack_require__(2582);
 ;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
 const mergeConfigFiles = (...files) => {
     const merged = {};
@@ -43,7 +43,7 @@ const parseKnownFiles = async (init) => {
 
 /***/ }),
 
-/***/ 2913:
+/***/ 2925:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -55,34 +55,34 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
-var parseKnownFiles = __webpack_require__(2910);
+var parseKnownFiles = __webpack_require__(2922);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
-var getProfileName = __webpack_require__(2580);
+var getProfileName = __webpack_require__(2581);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-var CredentialsProviderError = __webpack_require__(2579);
+var CredentialsProviderError = __webpack_require__(2580);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2599);
+var setCredentialFeature = __webpack_require__(2600);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/chain.js
-var chain = __webpack_require__(2576);
+var chain = __webpack_require__(2577);
 ;// ../../node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveCredentialSource.js
 
 
 const resolveCredentialSource = (credentialSource, profileName, logger) => {
     const sourceProvidersMap = {
         EcsContainer: async (options) => {
-            const { fromHttp } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2918));
-            const { fromContainerMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2917));
+            const { fromHttp } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2932));
+            const { fromContainerMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2931));
             logger?.debug("@aws-sdk/credential-provider-ini - credential_source is EcsContainer");
             return async () => (0,chain.chain)(fromHttp(options ?? {}), fromContainerMetadata(options))().then(setNamedProvider);
         },
         Ec2InstanceMetadata: async (options) => {
             logger?.debug("@aws-sdk/credential-provider-ini - credential_source is Ec2InstanceMetadata");
-            const { fromInstanceMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2917));
+            const { fromInstanceMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2931));
             return async () => fromInstanceMetadata(options)().then(setNamedProvider);
         },
         Environment: async (options) => {
             logger?.debug("@aws-sdk/credential-provider-ini - credential_source is Environment");
-            const { fromEnv } = await __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(__webpack_require__, 2926));
+            const { fromEnv } = await __webpack_require__.e(/* import() */ 15).then(__webpack_require__.bind(__webpack_require__, 2940));
             return async () => fromEnv(options)().then(setNamedProvider);
         },
     };
@@ -97,7 +97,6 @@ const resolveCredentialSource = (credentialSource, profileName, logger) => {
 const setNamedProvider = (creds) => (0,setCredentialFeature.setCredentialFeature)(creds, "CREDENTIALS_PROFILE_NAMED_PROVIDER", "p");
 
 ;// ../../node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveAssumeRoleCredentials.js
-
 
 
 
@@ -125,12 +124,12 @@ const isCredentialSourceProfile = (arg, { profile, logger }) => {
     }
     return withProviderProfile;
 };
-const resolveAssumeRoleCredentials = async (profileName, profiles, options, visitedProfiles = {}) => {
+const resolveAssumeRoleCredentials = async (profileName, profiles, options, visitedProfiles = {}, resolveProfileData) => {
     options.logger?.debug("@aws-sdk/credential-provider-ini - resolveAssumeRoleCredentials (STS)");
     const profileData = profiles[profileName];
     const { source_profile, region } = profileData;
     if (!options.roleAssumer) {
-        const { getDefaultRoleAssumer } = await __webpack_require__.e(/* import() */ 11).then(__webpack_require__.bind(__webpack_require__, 2925));
+        const { getDefaultRoleAssumer } = await __webpack_require__.e(/* import() */ 12).then(__webpack_require__.bind(__webpack_require__, 2939));
         options.roleAssumer = getDefaultRoleAssumer({
             ...options.clientConfig,
             credentialProviderLogger: options.logger,
@@ -178,10 +177,323 @@ const isCredentialSourceWithoutRoleArn = (section) => {
     return !section.role_arn && !!section.credential_source;
 };
 
+// EXTERNAL MODULE: ../../node_modules/@smithy/protocol-http/dist-es/httpRequest.js
+var httpRequest = __webpack_require__(2547);
+// EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/readFile.js + 1 modules
+var readFile = __webpack_require__(2588);
+// EXTERNAL MODULE: external "node:crypto"
+var external_node_crypto_ = __webpack_require__(2846);
+// EXTERNAL MODULE: external "node:fs"
+var external_node_fs_ = __webpack_require__(2136);
+// EXTERNAL MODULE: external "node:os"
+var external_node_os_ = __webpack_require__(2926);
+// EXTERNAL MODULE: external "node:path"
+var external_node_path_ = __webpack_require__(2927);
+;// ../../node_modules/@aws-sdk/credential-provider-login/dist-es/LoginCredentialsFetcher.js
+
+
+
+
+
+
+
+class LoginCredentialsFetcher {
+    profileData;
+    init;
+    callerClientConfig;
+    static REFRESH_THRESHOLD = 5 * 60 * 1000;
+    constructor(profileData, init, callerClientConfig) {
+        this.profileData = profileData;
+        this.init = init;
+        this.callerClientConfig = callerClientConfig;
+    }
+    async loadCredentials() {
+        const token = await this.loadToken();
+        if (!token) {
+            throw new CredentialsProviderError.CredentialsProviderError(`Failed to load a token for session ${this.loginSession}, please re-authenticate using aws login`, { tryNextLink: false, logger: this.logger });
+        }
+        const accessToken = token.accessToken;
+        const now = Date.now();
+        const expiryTime = new Date(accessToken.expiresAt).getTime();
+        const timeUntilExpiry = expiryTime - now;
+        if (timeUntilExpiry <= LoginCredentialsFetcher.REFRESH_THRESHOLD) {
+            return this.refresh(token);
+        }
+        return {
+            accessKeyId: accessToken.accessKeyId,
+            secretAccessKey: accessToken.secretAccessKey,
+            sessionToken: accessToken.sessionToken,
+            accountId: accessToken.accountId,
+            expiration: new Date(accessToken.expiresAt),
+        };
+    }
+    get logger() {
+        return this.init?.logger;
+    }
+    get loginSession() {
+        return this.profileData.login_session;
+    }
+    async refresh(token) {
+        const { SigninClient, CreateOAuth2TokenCommand } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(14)]).then(__webpack_require__.bind(__webpack_require__, 2941));
+        const { logger, userAgentAppId } = this.callerClientConfig ?? {};
+        const isH2 = (requestHandler) => {
+            return requestHandler?.metadata?.handlerProtocol === "h2";
+        };
+        const requestHandler = isH2(this.callerClientConfig?.requestHandler)
+            ? undefined
+            : this.callerClientConfig?.requestHandler;
+        const region = this.profileData.region ?? (await this.callerClientConfig?.region?.()) ?? process.env.AWS_REGION;
+        const client = new SigninClient({
+            credentials: {
+                accessKeyId: "",
+                secretAccessKey: "",
+            },
+            region,
+            requestHandler,
+            logger,
+            userAgentAppId,
+            ...this.init?.clientConfig,
+        });
+        this.createDPoPInterceptor(client.middlewareStack);
+        const commandInput = {
+            tokenInput: {
+                clientId: token.clientId,
+                refreshToken: token.refreshToken,
+                grantType: "refresh_token",
+            },
+        };
+        try {
+            const response = await client.send(new CreateOAuth2TokenCommand(commandInput));
+            const { accessKeyId, secretAccessKey, sessionToken } = response.tokenOutput?.accessToken ?? {};
+            const { refreshToken, expiresIn } = response.tokenOutput ?? {};
+            if (!accessKeyId || !secretAccessKey || !sessionToken || !refreshToken) {
+                throw new CredentialsProviderError.CredentialsProviderError("Token refresh response missing required fields", {
+                    logger: this.logger,
+                    tryNextLink: false,
+                });
+            }
+            const expiresInMs = (expiresIn ?? 900) * 1000;
+            const expiration = new Date(Date.now() + expiresInMs);
+            const updatedToken = {
+                ...token,
+                accessToken: {
+                    ...token.accessToken,
+                    accessKeyId: accessKeyId,
+                    secretAccessKey: secretAccessKey,
+                    sessionToken: sessionToken,
+                    expiresAt: expiration.toISOString(),
+                },
+                refreshToken: refreshToken,
+            };
+            await this.saveToken(updatedToken);
+            const newAccessToken = updatedToken.accessToken;
+            return {
+                accessKeyId: newAccessToken.accessKeyId,
+                secretAccessKey: newAccessToken.secretAccessKey,
+                sessionToken: newAccessToken.sessionToken,
+                accountId: newAccessToken.accountId,
+                expiration,
+            };
+        }
+        catch (error) {
+            if (error.name === "AccessDeniedException") {
+                const errorType = error.error;
+                let message;
+                switch (errorType) {
+                    case "TOKEN_EXPIRED":
+                        message = "Your session has expired. Please reauthenticate.";
+                        break;
+                    case "USER_CREDENTIALS_CHANGED":
+                        message =
+                            "Unable to refresh credentials because of a change in your password. Please reauthenticate with your new password.";
+                        break;
+                    case "INSUFFICIENT_PERMISSIONS":
+                        message =
+                            "Unable to refresh credentials due to insufficient permissions. You may be missing permission for the 'CreateOAuth2Token' action.";
+                        break;
+                    default:
+                        message = `Failed to refresh token: ${String(error)}. Please re-authenticate using \`aws login\``;
+                }
+                throw new CredentialsProviderError.CredentialsProviderError(message, { logger: this.logger, tryNextLink: false });
+            }
+            throw new CredentialsProviderError.CredentialsProviderError(`Failed to refresh token: ${String(error)}. Please re-authenticate using aws login`, { logger: this.logger });
+        }
+    }
+    async loadToken() {
+        const tokenFilePath = this.getTokenFilePath();
+        try {
+            let tokenData;
+            try {
+                tokenData = await (0,readFile.readFile)(tokenFilePath, { ignoreCache: this.init?.ignoreCache });
+            }
+            catch {
+                tokenData = await external_node_fs_.promises.readFile(tokenFilePath, "utf8");
+            }
+            const token = JSON.parse(tokenData);
+            const missingFields = ["accessToken", "clientId", "refreshToken", "dpopKey"].filter((k) => !token[k]);
+            if (!token.accessToken?.accountId) {
+                missingFields.push("accountId");
+            }
+            if (missingFields.length > 0) {
+                throw new CredentialsProviderError.CredentialsProviderError(`Token validation failed, missing fields: ${missingFields.join(", ")}`, {
+                    logger: this.logger,
+                    tryNextLink: false,
+                });
+            }
+            return token;
+        }
+        catch (error) {
+            throw new CredentialsProviderError.CredentialsProviderError(`Failed to load token from ${tokenFilePath}: ${String(error)}`, {
+                logger: this.logger,
+                tryNextLink: false,
+            });
+        }
+    }
+    async saveToken(token) {
+        const tokenFilePath = this.getTokenFilePath();
+        const directory = (0,external_node_path_.dirname)(tokenFilePath);
+        try {
+            await external_node_fs_.promises.mkdir(directory, { recursive: true });
+        }
+        catch (error) {
+        }
+        await external_node_fs_.promises.writeFile(tokenFilePath, JSON.stringify(token, null, 2), "utf8");
+    }
+    getTokenFilePath() {
+        const directory = process.env.AWS_LOGIN_CACHE_DIRECTORY ?? (0,external_node_path_.join)((0,external_node_os_.homedir)(), ".aws", "login", "cache");
+        const loginSessionBytes = Buffer.from(this.loginSession, "utf8");
+        const loginSessionSha256 = (0,external_node_crypto_.createHash)("sha256").update(loginSessionBytes).digest("hex");
+        return (0,external_node_path_.join)(directory, `${loginSessionSha256}.json`);
+    }
+    derToRawSignature(derSignature) {
+        let offset = 2;
+        if (derSignature[offset] !== 0x02) {
+            throw new Error("Invalid DER signature");
+        }
+        offset++;
+        const rLength = derSignature[offset++];
+        let r = derSignature.subarray(offset, offset + rLength);
+        offset += rLength;
+        if (derSignature[offset] !== 0x02) {
+            throw new Error("Invalid DER signature");
+        }
+        offset++;
+        const sLength = derSignature[offset++];
+        let s = derSignature.subarray(offset, offset + sLength);
+        r = r[0] === 0x00 ? r.subarray(1) : r;
+        s = s[0] === 0x00 ? s.subarray(1) : s;
+        const rPadded = Buffer.concat([Buffer.alloc(32 - r.length), r]);
+        const sPadded = Buffer.concat([Buffer.alloc(32 - s.length), s]);
+        return Buffer.concat([rPadded, sPadded]);
+    }
+    createDPoPInterceptor(middlewareStack) {
+        middlewareStack.add((next) => async (args) => {
+            if (httpRequest.HttpRequest.isInstance(args.request)) {
+                const request = args.request;
+                const actualEndpoint = `${request.protocol}//${request.hostname}${request.port ? `:${request.port}` : ""}${request.path}`;
+                const dpop = await this.generateDpop(request.method, actualEndpoint);
+                request.headers = {
+                    ...request.headers,
+                    DPoP: dpop,
+                };
+            }
+            return next(args);
+        }, {
+            step: "finalizeRequest",
+            name: "dpopInterceptor",
+            override: true,
+        });
+    }
+    async generateDpop(method = "POST", endpoint) {
+        const token = await this.loadToken();
+        try {
+            const privateKey = (0,external_node_crypto_.createPrivateKey)({
+                key: token.dpopKey,
+                format: "pem",
+                type: "sec1",
+            });
+            const publicKey = (0,external_node_crypto_.createPublicKey)(privateKey);
+            const publicDer = publicKey.export({ format: "der", type: "spki" });
+            let pointStart = -1;
+            for (let i = 0; i < publicDer.length; i++) {
+                if (publicDer[i] === 0x04) {
+                    pointStart = i;
+                    break;
+                }
+            }
+            const x = publicDer.slice(pointStart + 1, pointStart + 33);
+            const y = publicDer.slice(pointStart + 33, pointStart + 65);
+            const header = {
+                alg: "ES256",
+                typ: "dpop+jwt",
+                jwk: {
+                    kty: "EC",
+                    crv: "P-256",
+                    x: x.toString("base64url"),
+                    y: y.toString("base64url"),
+                },
+            };
+            const payload = {
+                jti: crypto.randomUUID(),
+                htm: method,
+                htu: endpoint,
+                iat: Math.floor(Date.now() / 1000),
+            };
+            const headerB64 = Buffer.from(JSON.stringify(header)).toString("base64url");
+            const payloadB64 = Buffer.from(JSON.stringify(payload)).toString("base64url");
+            const message = `${headerB64}.${payloadB64}`;
+            const asn1Signature = (0,external_node_crypto_.sign)("sha256", Buffer.from(message), privateKey);
+            const rawSignature = this.derToRawSignature(asn1Signature);
+            const signatureB64 = rawSignature.toString("base64url");
+            return `${message}.${signatureB64}`;
+        }
+        catch (error) {
+            throw new CredentialsProviderError.CredentialsProviderError(`Failed to generate Dpop proof: ${error instanceof Error ? error.message : String(error)}`, { logger: this.logger, tryNextLink: false });
+        }
+    }
+}
+
+;// ../../node_modules/@aws-sdk/credential-provider-login/dist-es/fromLoginCredentials.js
+
+
+
+
+const fromLoginCredentials = (init) => async ({ callerClientConfig } = {}) => {
+    init?.logger?.debug?.("@aws-sdk/credential-providers - fromLoginCredentials");
+    const profiles = await (0,parseKnownFiles.parseKnownFiles)(init || {});
+    const profileName = (0,getProfileName.getProfileName)({
+        profile: init?.profile ?? callerClientConfig?.profile,
+    });
+    const profile = profiles[profileName];
+    if (!profile?.login_session) {
+        throw new CredentialsProviderError.CredentialsProviderError(`Profile ${profileName} does not contain login_session.`, {
+            tryNextLink: true,
+            logger: init?.logger,
+        });
+    }
+    const fetcher = new LoginCredentialsFetcher(profile, init, callerClientConfig);
+    const credentials = await fetcher.loadCredentials();
+    return (0,setCredentialFeature.setCredentialFeature)(credentials, "CREDENTIALS_LOGIN", "AD");
+};
+
+;// ../../node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveLoginCredentials.js
+
+
+const isLoginProfile = (data) => {
+    return Boolean(data && data.login_session);
+};
+const resolveLoginCredentials = async (profileName, options) => {
+    const credentials = await fromLoginCredentials({
+        ...options,
+        profile: profileName,
+    })();
+    return (0,setCredentialFeature.setCredentialFeature)(credentials, "CREDENTIALS_PROFILE_LOGIN", "AC");
+};
+
 ;// ../../node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveProcessCredentials.js
 
 const isProcessProfile = (arg) => Boolean(arg) && typeof arg === "object" && typeof arg.credential_process === "string";
-const resolveProcessCredentials = async (options, profile) => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(__webpack_require__, 2914)).then(({ fromProcess }) => fromProcess({
+const resolveProcessCredentials = async (options, profile) => __webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(__webpack_require__, 2928)).then(({ fromProcess }) => fromProcess({
     ...options,
     profile,
 })().then((creds) => (0,setCredentialFeature.setCredentialFeature)(creds, "CREDENTIALS_PROFILE_PROCESS", "v")));
@@ -189,7 +501,7 @@ const resolveProcessCredentials = async (options, profile) => __webpack_require_
 ;// ../../node_modules/@aws-sdk/credential-provider-ini/dist-es/resolveSsoCredentials.js
 
 const resolveSsoCredentials = async (profile, profileData, options = {}) => {
-    const { fromSSO } = await __webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(__webpack_require__, 2909));
+    const { fromSSO } = await __webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(__webpack_require__, 2921));
     return fromSSO({
         profile,
         logger: options.logger,
@@ -238,7 +550,7 @@ const isWebIdentityProfile = (arg) => Boolean(arg) &&
     typeof arg.web_identity_token_file === "string" &&
     typeof arg.role_arn === "string" &&
     ["undefined", "string"].indexOf(typeof arg.role_session_name) > -1;
-const resolveWebIdentityCredentials = async (profile, options) => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(__webpack_require__, 2916)).then(({ fromTokenFile }) => fromTokenFile({
+const resolveWebIdentityCredentials = async (profile, options) => __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(__webpack_require__, 2930)).then(({ fromTokenFile }) => fromTokenFile({
     webIdentityTokenFile: profile.web_identity_token_file,
     roleArn: profile.role_arn,
     roleSessionName: profile.role_session_name,
@@ -254,13 +566,14 @@ const resolveWebIdentityCredentials = async (profile, options) => __webpack_requ
 
 
 
+
 const resolveProfileData = async (profileName, profiles, options, visitedProfiles = {}, isAssumeRoleRecursiveCall = false) => {
     const data = profiles[profileName];
     if (Object.keys(visitedProfiles).length > 0 && isStaticCredsProfile(data)) {
         return resolveStaticCredentials(data, options);
     }
     if (isAssumeRoleRecursiveCall || isAssumeRoleProfile(data, { profile: profileName, logger: options.logger })) {
-        return resolveAssumeRoleCredentials(profileName, profiles, options, visitedProfiles);
+        return resolveAssumeRoleCredentials(profileName, profiles, options, visitedProfiles, resolveProfileData);
     }
     if (isStaticCredsProfile(data)) {
         return resolveStaticCredentials(data, options);
@@ -273,6 +586,9 @@ const resolveProfileData = async (profileName, profiles, options, visitedProfile
     }
     if (isSsoProfile(data)) {
         return await resolveSsoCredentials(profileName, data, options);
+    }
+    if (isLoginProfile(data)) {
+        return resolveLoginCredentials(profileName, options);
     }
     throw new CredentialsProviderError.CredentialsProviderError(`Could not resolve credentials using profile: [${profileName}] in configuration/credentials file(s).`, { logger: options.logger });
 };

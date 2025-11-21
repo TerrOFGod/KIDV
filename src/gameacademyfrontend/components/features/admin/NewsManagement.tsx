@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // components/admin/NewsManagement.tsx
 'use client';
 
@@ -5,12 +6,14 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { NewsItem } from '@/types/news';
 import NewsForm from './forms/NewsForm';
+import axios from 'axios';
 
 export default function NewsManagement() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     fetchNews();
@@ -18,7 +21,7 @@ export default function NewsManagement() {
 
   const fetchNews = async () => {
     try {
-      // Здесь будет реальный API call
+      /*
       const mockNews: NewsItem[] = [
         {
           _id: '1',
@@ -33,7 +36,18 @@ export default function NewsManagement() {
         }
       ];
       setNews(mockNews);
+      */
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_API}/news`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setNews(data);
+      setError('');
     } catch (error) {
+      setError('Не удалось загрузить список новостей');
       console.error('Error fetching news:', error);
     } finally {
       setLoading(false);
@@ -42,25 +56,51 @@ export default function NewsManagement() {
 
   const handleSave = async (newsData: NewsItem) => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
       if (editingNews) {
         // Update existing
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/news/${editingNews._id}`,
+          newsData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setNews(prev => prev.map(item => 
           item._id === editingNews._id ? newsData : item
         ));
       } else {
         // Create new
-        setNews(prev => [...prev, { ...newsData, _id: Date.now().toString() }]);
+        const { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/news`,
+          newsData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setNews(prev => [...prev, { ...newsData, data }]);
       }
       setIsModalOpen(false);
       setEditingNews(null);
     } catch (error) {
       console.error('Error saving news:', error);
+      alert('Ошибка при сохранении поста');
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Вы уверены, что хотите удалить эту запись?')) {
+    if (!confirm('Вы уверены, что хотите удалить эту запись?')) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL_API}/news/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setNews(prev => prev.filter(item => item._id !== id));
+    } catch (error) {
+      console.error('Error deleting news:', error);
+      alert('Ошибка при удалении новости');
     }
   };
 
@@ -86,6 +126,12 @@ export default function NewsManagement() {
           <span>Новая статья</span>
         </button>
       </div>
+      
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )}
 
       {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -107,7 +153,13 @@ export default function NewsManagement() {
         </div>
         <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
           <h3 className="text-sm font-medium text-gray-500 mb-2">За этот месяц</h3>
-          <div className="text-2xl font-bold text-gray-900">0</div>
+          <div className="text-2xl font-bold text-gray-900">
+            {news.filter(item => {
+              const itemDate = new Date(item.date);
+              const now = new Date();
+              return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
+            }).length}
+          </div>
         </div>
       </div>
 

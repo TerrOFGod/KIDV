@@ -20,12 +20,10 @@ export class SuccessStoryQueries {
 
   @RMQValidate()
   @RMQRoute(SuccessStoryGetByLocation.topic)
-  async getStoriesByLocation(@Body() dto: SuccessStoryGetByLocation.Request): Promise<SuccessStoryGetByLocation.Response> {
-    const stories = await this.successStoryService.getStoriesByLocation(
-      dto.lat, 
-      dto.lng, 
-      dto.radius || 10000
-    );
+  async getStoriesByLocation(
+    @Body() dto: SuccessStoryGetByLocation.Request,
+  ): Promise<SuccessStoryGetByLocation.Response> {
+    const stories = await this.successStoryService.getStoriesByLocation(dto.lat, dto.lng, dto.radius || 10000);
     return { stories };
   }
 }

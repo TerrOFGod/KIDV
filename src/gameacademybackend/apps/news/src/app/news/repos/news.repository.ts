@@ -25,10 +25,7 @@ export class NewsRepository {
     const filter: any = {};
     if (category) filter.category = category;
     if (search) {
-      filter.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { 'author.name': { $regex: search, $options: 'i' } }
-      ];
+      filter.$or = [{ title: { $regex: search, $options: 'i' } }, { 'author.name': { $regex: search, $options: 'i' } }];
     }
     return this.newsModel.find(filter).sort({ date: -1 }).exec();
   }

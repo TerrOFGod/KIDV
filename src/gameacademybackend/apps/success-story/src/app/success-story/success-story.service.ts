@@ -22,7 +22,7 @@ export class SuccessStoryService {
 
   async getSuccessStories(year?: number, city?: string) {
     const stories = await this.successStoryRepository.findAllSuccessStories(year, city);
-    return stories.map(item => new SuccessStoryEntity(item.toObject()).getPublicInfo());
+    return stories.map((item) => new SuccessStoryEntity(item.toObject()).getPublicInfo());
   }
 
   async updateSuccessStory(dto: any) {
@@ -46,6 +46,6 @@ export class SuccessStoryService {
 
   async getStoriesByLocation(lat: number, lng: number, radius: number) {
     const stories = await this.successStoryRepository.getStoriesByLocation(lat, lng, radius);
-    return stories.map(item => new SuccessStoryEntity(item.toObject()).getPublicInfo());
+    return stories.map((item) => new SuccessStoryEntity(item.toObject()).getPublicInfo());
   }
 }

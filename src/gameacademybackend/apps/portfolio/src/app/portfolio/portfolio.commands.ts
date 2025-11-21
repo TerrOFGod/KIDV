@@ -1,10 +1,10 @@
 import { Body, Controller } from '@nestjs/common';
-import { 
-  PortfolioCreate, 
-  PortfolioUpdate, 
-  PortfolioDelete, 
-  PortfolioGetBySlug, 
-  PortfolioGetList 
+import {
+  PortfolioCreate,
+  PortfolioUpdate,
+  PortfolioDelete,
+  PortfolioGetBySlug,
+  PortfolioGetList,
 } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { PortfolioService } from './portfolio.service';

@@ -25,7 +25,7 @@ export class PortfolioRepository {
     const filter: any = {};
     if (category) filter.category = category;
     if (hallOfFrame !== undefined) filter.hallOfFrame = hallOfFrame;
-    
+
     return this.portfolioModel.find(filter).sort({ year: -1 }).exec();
   }
 
@@ -38,12 +38,14 @@ export class PortfolioRepository {
   }
 
   async searchPortfolio(searchTerm: string) {
-    return this.portfolioModel.find({
-      $or: [
-        { title: { $regex: searchTerm, $options: 'i' } },
-        { description: { $regex: searchTerm, $options: 'i' } },
-        { 'authors.name': { $regex: searchTerm, $options: 'i' } }
-      ]
-    }).exec();
+    return this.portfolioModel
+      .find({
+        $or: [
+          { title: { $regex: searchTerm, $options: 'i' } },
+          { description: { $regex: searchTerm, $options: 'i' } },
+          { 'authors.name': { $regex: searchTerm, $options: 'i' } },
+        ],
+      })
+      .exec();
   }
 }

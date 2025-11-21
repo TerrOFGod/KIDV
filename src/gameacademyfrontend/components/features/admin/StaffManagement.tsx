@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { StaffMember } from '@/types/staff';
 import StaffForm from './forms/StaffForm';
+import axios from 'axios';
 
 export default function StaffManagement() {
   const [staff, setStaff] = useState<StaffMember[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingMember, setEditingMember] = useState<StaffMember | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     fetchStaff();
@@ -18,6 +20,7 @@ export default function StaffManagement() {
 
   const fetchStaff = async () => {
     try {
+      /*
       // Mock data
       const mockData: StaffMember[] = [
         {
@@ -36,32 +39,71 @@ export default function StaffManagement() {
         }
       ];
       setStaff(mockData);
-    } catch (error) {
-      console.error('Error fetching staff:', error);
+      */
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setStaff(data);
+      setError('');
+    } catch (err) {
+      setError('Не удалось загрузить список сотрудников');
+      console.error('Error fetching staff:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSave = async (data: StaffMember) => {
+  const handleSave = async (staffData: StaffMember) => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
       if (editingMember) {
+        // Update existing
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${editingMember._id}`,
+          staffData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setStaff(prev => prev.map(item => 
-          item._id === editingMember._id ? data : item
+          item._id === editingMember._id ? staffData : item
         ));
       } else {
-        setStaff(prev => [...prev, { ...data, _id: Date.now().toString() }]);
+        // Create new
+        const { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
+          staffData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setStaff(prev => [...prev, data]);
       }
       setIsModalOpen(false);
       setEditingMember(null);
     } catch (error) {
       console.error('Error saving staff member:', error);
+      alert('Ошибка при сохранении сотрудника');
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Вы уверены, что хотите удалить этого сотрудника?')) {
+    if (!confirm('Вы уверены, что хотите удалить этого сотрудника?')) return;
+    
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setStaff(prev => prev.filter(item => item._id !== id));
+    } catch (error) {
+      console.error('Error deleting staff member:', error);
+      alert('Ошибка при удалении сотрудника');
     }
   };
 
@@ -87,6 +129,12 @@ export default function StaffManagement() {
           <span>Новый сотрудник</span>
         </button>
       </div>
+      
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )}
 
       {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

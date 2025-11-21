@@ -1,4 +1,4 @@
-import { NewsCreateDto } from "./dtos/news.create.dto";
+import { NewsCreateDto } from './dtos/news.create.dto';
 
 export namespace NewsCreate {
   export const topic = 'news.create.command';

@@ -4,7 +4,7 @@ export interface IPortfolio {
     slug: string;
     title: string;
     category: string;
-    image: string;
+    image?: string;
     description?: string;
     releaseDate?: string;
     download?: string;
@@ -20,7 +20,7 @@ export interface IPortfolio {
     goals?: string[];
     features?: string[];
     screenshots?: string[];
-    hallOfFrame?: boolean;
+    hallOfFame?: boolean;
     authors?: Array<{
         name: string;
         slug: string;
@@ -28,4 +28,5 @@ export interface IPortfolio {
     }>;
     year?: number;
     markdown?: string;
+    tags?: string[];
 }

@@ -35,7 +35,7 @@ export class PortfolioService {
 
   async getPortfolioList(category?: string, hallOfFrame?: boolean) {
     const portfolio = await this.portfolioRepository.findAllPortfolio(category, hallOfFrame);
-    return portfolio.map(item => new PortfolioEntity(item.toObject()).getPublicInfo());
+    return portfolio.map((item) => new PortfolioEntity(item.toObject()).getPublicInfo());
   }
 
   async updatePortfolio(dto: any) {
@@ -59,6 +59,6 @@ export class PortfolioService {
 
   async searchPortfolio(searchTerm: string) {
     const portfolio = await this.portfolioRepository.searchPortfolio(searchTerm);
-    return portfolio.map(item => new PortfolioEntity(item.toObject()).getPublicInfo());
+    return portfolio.map((item) => new PortfolioEntity(item.toObject()).getPublicInfo());
   }
 }

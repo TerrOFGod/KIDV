@@ -35,7 +35,7 @@ export class NewsService {
 
   async getNewsList(category?: string, search?: string) {
     const news = await this.newsRepository.findAllNews(category, search);
-    return news.map(item => new NewsEntity(item.toObject()).getPublicInfo());
+    return news.map((item) => new NewsEntity(item.toObject()).getPublicInfo());
   }
 
   async updateNews(dto: any) {

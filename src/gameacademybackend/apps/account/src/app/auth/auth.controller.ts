@@ -4,7 +4,7 @@ import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { AuthService } from './auth.service';
 
 @Controller()
-export class AuthContoller {
+export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @RMQValidate()
   @RMQRoute(AccountRegister.topic)

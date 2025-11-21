@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsBoolean, IsNumber, ValidateNested } from 'class-validator';
+import { IsString } from 'class-validator';
 import { PortfolioCreateDto } from './dtos/portfolio.create.dto';
 
 export namespace PortfolioUpdate {

@@ -54,6 +54,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ email, password }),
       });
 
+      console.error(response.ok);
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Ошибка авторизации');
@@ -87,8 +89,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ email, password, displayName }),
       });
 
+      //console.error(response.ok);
+      //console.error(await response.json());
+
       if (!response.ok) {
         const errorData = await response.json();
+        console.error(errorData.message);
         throw new Error(errorData.message || 'Ошибка регистрации');
       }
 
@@ -114,6 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     localStorage.removeItem('token');
+    console.error(localStorage.getItem('token'));
     setUser(null);
   };
 

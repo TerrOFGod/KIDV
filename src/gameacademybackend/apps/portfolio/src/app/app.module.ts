@@ -12,6 +12,6 @@ import { PortfolioModule } from './portfolio/portfolio.module';
     RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync(getMongoConfig()),
     PortfolioModule,
-  ]
+  ],
 })
 export class AppModule {}

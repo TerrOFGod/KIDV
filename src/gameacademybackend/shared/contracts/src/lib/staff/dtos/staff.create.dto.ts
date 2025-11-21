@@ -1,4 +1,5 @@
-import { IsString, IsOptional, IsArray, IsNumber, ValidateNested, IsEnum } from 'class-validator';
+/* eslint-disable prettier/prettier */
+import { IsString, IsOptional, IsArray, ValidateNested, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Rarity } from '../types/rarity.type';
 import { StaffStatDto } from './staff-stat.dto';

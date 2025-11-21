@@ -23,6 +23,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "position", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "photo", void 0);
@@ -83,4 +84,20 @@ tslib_1.__decorate([
     (0, class_transformer_1.Type)(() => staff_achievement_dto_1.StaffAchievementDto),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "achievements", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "image", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "tags", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "contact", void 0);
 //# sourceMappingURL=staff.create.dto.js.map

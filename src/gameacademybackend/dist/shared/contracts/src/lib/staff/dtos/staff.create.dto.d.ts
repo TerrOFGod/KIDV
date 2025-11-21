@@ -6,7 +6,7 @@ export declare class StaffCreateDto {
     slug: string;
     name: string;
     position: string;
-    photo: string;
+    photo?: string;
     title?: string;
     rarity?: Rarity;
     email?: string;
@@ -17,4 +17,7 @@ export declare class StaffCreateDto {
     stats?: StaffStatDto[];
     skills?: StaffSkillDto[];
     achievements?: StaffAchievementDto[];
+    image?: string;
+    tags?: string[];
+    contact?: string;
 }

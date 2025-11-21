@@ -12,6 +12,6 @@ import { StaffModule } from './staff/staff.module';
     RMQModule.forRootAsync(getRMQConfig()),
     MongooseModule.forRootAsync(getMongoConfig()),
     StaffModule,
-  ]
+  ],
 })
 export class AppModule {}

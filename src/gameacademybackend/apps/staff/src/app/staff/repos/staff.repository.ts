@@ -25,7 +25,7 @@ export class StaffRepository {
     const filter: any = {};
     if (position) filter.position = position;
     if (rarity) filter.rarity = rarity;
-    
+
     return this.staffModel.find(filter).sort({ name: 1 }).exec();
   }
 
@@ -38,13 +38,15 @@ export class StaffRepository {
   }
 
   async searchStaff(searchTerm: string) {
-    return this.staffModel.find({
-      $or: [
-        { name: { $regex: searchTerm, $options: 'i' } },
-        { position: { $regex: searchTerm, $options: 'i' } },
-        { bio: { $regex: searchTerm, $options: 'i' } },
-        { 'researchInterests': { $regex: searchTerm, $options: 'i' } }
-      ]
-    }).exec();
+    return this.staffModel
+      .find({
+        $or: [
+          { name: { $regex: searchTerm, $options: 'i' } },
+          { position: { $regex: searchTerm, $options: 'i' } },
+          { bio: { $regex: searchTerm, $options: 'i' } },
+          { researchInterests: { $regex: searchTerm, $options: 'i' } },
+        ],
+      })
+      .exec();
   }
 }

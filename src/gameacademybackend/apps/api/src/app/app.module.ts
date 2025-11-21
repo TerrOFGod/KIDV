@@ -22,7 +22,7 @@ import { SuccessStoryController } from './controllers/success-story.controller';
     JwtModule.registerAsync(getJwtConfig()),
     PassportModule,
   ],
-  controllers: [    
+  controllers: [
     AuthController,
     UserController,
     CommentsController,

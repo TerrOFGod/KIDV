@@ -4,7 +4,7 @@ export interface IStaff {
     slug: string;
     name: string;
     position: string;
-    photo: string;
+    photo?: string;
     title?: string;
     rarity?: "LEGENDARY" | "RARE" | "COMMON";
     email?: string;
@@ -30,4 +30,8 @@ export interface IStaff {
         icon: string;
         description: string;
     }>;
+    id?: string | number;
+    image?: string;
+    tags?: string[];
+    contact?: string;
 }

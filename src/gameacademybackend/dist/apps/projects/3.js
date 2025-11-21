@@ -3,7 +3,7 @@ exports.id = 3;
 exports.ids = [3];
 exports.modules = {
 
-/***/ 2910:
+/***/ 2922:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -15,7 +15,7 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSharedConfigFiles.js + 2 modules
-var loadSharedConfigFiles = __webpack_require__(2581);
+var loadSharedConfigFiles = __webpack_require__(2582);
 ;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/mergeConfigFiles.js
 const mergeConfigFiles = (...files) => {
     const merged = {};
@@ -43,7 +43,7 @@ const parseKnownFiles = async (init) => {
 
 /***/ }),
 
-/***/ 2911:
+/***/ 2923:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -51,26 +51,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getSSOTokenFromFile: () => (/* binding */ getSSOTokenFromFile),
 /* harmony export */   tokenIntercept: () => (/* binding */ tokenIntercept)
 /* harmony export */ });
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(692);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2912);
+/* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2185);
+/* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2924);
 
 
-const { readFile } = fs__WEBPACK_IMPORTED_MODULE_0__.promises;
 const tokenIntercept = {};
 const getSSOTokenFromFile = async (id) => {
     if (tokenIntercept[id]) {
         return tokenIntercept[id];
     }
     const ssoTokenFilepath = (0,_getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__.getSSOTokenFilepath)(id);
-    const ssoTokenText = await readFile(ssoTokenFilepath, "utf8");
+    const ssoTokenText = await (0,fs_promises__WEBPACK_IMPORTED_MODULE_0__.readFile)(ssoTokenFilepath, "utf8");
     return JSON.parse(ssoTokenText);
 };
 
 
 /***/ }),
 
-/***/ 2912:
+/***/ 2924:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -81,7 +80,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(703);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2584);
+/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2586);
 
 
 
@@ -94,7 +93,7 @@ const getSSOTokenFilepath = (id) => {
 
 /***/ }),
 
-/***/ 2914:
+/***/ 2928:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -106,19 +105,19 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
-var parseKnownFiles = __webpack_require__(2910);
+var parseKnownFiles = __webpack_require__(2922);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
-var getProfileName = __webpack_require__(2580);
+var getProfileName = __webpack_require__(2581);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-var CredentialsProviderError = __webpack_require__(2579);
+var CredentialsProviderError = __webpack_require__(2580);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/externalDataInterceptor.js
-var externalDataInterceptor = __webpack_require__(2915);
+var externalDataInterceptor = __webpack_require__(2929);
 // EXTERNAL MODULE: external "child_process"
 var external_child_process_ = __webpack_require__(2137);
 // EXTERNAL MODULE: external "util"
 var external_util_ = __webpack_require__(78);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2599);
+var setCredentialFeature = __webpack_require__(2600);
 ;// ../../node_modules/@aws-sdk/credential-provider-process/dist-es/getValidatedProcessCredentials.js
 
 const getValidatedProcessCredentials = (profileName, data, profiles) => {
@@ -206,23 +205,23 @@ const fromProcess = (init = {}) => async ({ callerClientConfig } = {}) => {
 
 /***/ }),
 
-/***/ 2915:
+/***/ 2929:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   externalDataInterceptor: () => (/* binding */ externalDataInterceptor)
 /* harmony export */ });
-/* harmony import */ var _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2911);
-/* harmony import */ var _slurpFile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2586);
+/* harmony import */ var _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2923);
+/* harmony import */ var _readFile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2588);
 
 
 const externalDataInterceptor = {
     getFileRecord() {
-        return _slurpFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept;
+        return _readFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept;
     },
     interceptFile(path, contents) {
-        _slurpFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept[path] = Promise.resolve(contents);
+        _readFile__WEBPACK_IMPORTED_MODULE_1__.fileIntercept[path] = Promise.resolve(contents);
     },
     getTokenRecord() {
         return _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__.tokenIntercept;

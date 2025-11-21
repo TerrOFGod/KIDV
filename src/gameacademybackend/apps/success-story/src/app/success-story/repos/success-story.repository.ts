@@ -21,7 +21,7 @@ export class SuccessStoryRepository {
     const filter: any = {};
     if (year) filter.year = year;
     if (city) filter.city = { $regex: city, $options: 'i' };
-    
+
     return this.successStoryModel.find(filter).sort({ year: -1 }).exec();
   }
 
@@ -35,13 +35,15 @@ export class SuccessStoryRepository {
 
   async getStoriesByLocation(lat: number, lng: number, radius: number) {
     // Для геопоиска нужно добавить индекс в MongoDB
-    return this.successStoryModel.find({
-      location: {
-        $near: {
-          $geometry: { type: "Point", coordinates: [lng, lat] },
-          $maxDistance: radius
-        }
-      }
-    }).exec();
+    return this.successStoryModel
+      .find({
+        location: {
+          $near: {
+            $geometry: { type: 'Point', coordinates: [lng, lat] },
+            $maxDistance: radius,
+          },
+        },
+      })
+      .exec();
   }
 }

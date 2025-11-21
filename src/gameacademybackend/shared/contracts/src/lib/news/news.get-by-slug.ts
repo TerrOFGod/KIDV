@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export namespace NewsGetBySlug {
   export const topic = 'news.get-by-slug.query';

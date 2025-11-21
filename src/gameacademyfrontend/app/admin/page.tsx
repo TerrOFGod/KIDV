@@ -17,7 +17,7 @@ export default function AdminPage() {
   const { user, isAuthenticated } = useAuth();
   const router = useRouter();
 
-  /*
+
   useEffect(() => {
     if (!isAuthenticated || user?.role !== 'Admin') {
       router.push('/');
@@ -34,7 +34,7 @@ export default function AdminPage() {
       </div>
     );
   }
-  */
+
 
   const adminTabs = [
     { id: 'dashboard', label: 'Дашборд', icon: '📊' },

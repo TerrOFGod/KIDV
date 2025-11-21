@@ -3,7 +3,7 @@ exports.id = 8;
 exports.ids = [8];
 exports.modules = {
 
-/***/ 2918:
+/***/ 2932:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -15,11 +15,11 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2599);
-// EXTERNAL MODULE: ../../node_modules/@smithy/node-http-handler/dist-es/node-http-handler.js + 8 modules
-var node_http_handler = __webpack_require__(2637);
+var setCredentialFeature = __webpack_require__(2600);
+// EXTERNAL MODULE: ../../node_modules/@smithy/node-http-handler/dist-es/node-http-handler.js + 9 modules
+var node_http_handler = __webpack_require__(2627);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-var CredentialsProviderError = __webpack_require__(2579);
+var CredentialsProviderError = __webpack_require__(2580);
 // EXTERNAL MODULE: external "fs/promises"
 var promises_ = __webpack_require__(2185);
 var promises_default = /*#__PURE__*/__webpack_require__.n(promises_);
@@ -69,10 +69,10 @@ const checkUrl = (url, logger) => {
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/protocol-http/dist-es/httpRequest.js
 var httpRequest = __webpack_require__(2547);
-// EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js
-var date_utils = __webpack_require__(2623);
+// EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js + 1 modules
+var date_utils = __webpack_require__(2648);
 // EXTERNAL MODULE: ../../node_modules/@smithy/util-stream/dist-es/sdk-stream-mixin.js + 2 modules
-var sdk_stream_mixin = __webpack_require__(2642);
+var sdk_stream_mixin = __webpack_require__(2634);
 ;// ../../node_modules/@aws-sdk/credential-provider-http/dist-es/fromHttp/requestHelpers.js
 
 

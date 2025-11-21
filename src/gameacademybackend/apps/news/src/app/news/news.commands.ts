@@ -1,12 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { 
-  NewsCreate, 
-  NewsUpdate, 
-  NewsDelete, 
-  NewsGetById, 
-  NewsGetBySlug, 
-  NewsGetList 
-} from '@shared/contracts';
+import { NewsCreate, NewsUpdate, NewsDelete, NewsGetById, NewsGetBySlug, NewsGetList } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { NewsService } from './news.service';
 

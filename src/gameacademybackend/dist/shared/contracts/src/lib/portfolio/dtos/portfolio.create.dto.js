@@ -22,6 +22,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], PortfolioCreateDto.prototype, "category", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
 ], PortfolioCreateDto.prototype, "image", void 0);
@@ -69,7 +70,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),
     tslib_1.__metadata("design:type", Boolean)
-], PortfolioCreateDto.prototype, "hallOfFrame", void 0);
+], PortfolioCreateDto.prototype, "hallOfFame", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -87,4 +88,10 @@ tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
 ], PortfolioCreateDto.prototype, "markdown", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    tslib_1.__metadata("design:type", Array)
+], PortfolioCreateDto.prototype, "tags", void 0);
 //# sourceMappingURL=portfolio.create.dto.js.map

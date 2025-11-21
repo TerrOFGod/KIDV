@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { IStaff } from '@shared/interfaces';
 import { Types } from 'mongoose';
 

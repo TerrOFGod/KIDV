@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PortfolioItem } from '@/types/portfolio';
 import PortfolioForm from './forms/PortfolioForm';
+import axios from 'axios';
 
 export default function PortfolioManagement() {
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<PortfolioItem | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     fetchPortfolio();
@@ -19,6 +21,7 @@ export default function PortfolioManagement() {
   const fetchPortfolio = async () => {
     try {
       // Mock data
+      /*
       const mockData: PortfolioItem[] = [
         {
           _id: '1',
@@ -33,32 +36,71 @@ export default function PortfolioManagement() {
         }
       ];
       setPortfolio(mockData);
+      */
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_API}/portfolio`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setPortfolio(data);
+      setError('');
     } catch (error) {
       console.error('Error fetching portfolio:', error);
+      setError('Не удалось загрузить портфолио');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSave = async (data: PortfolioItem) => {
+  const handleSave = async (portfolioData: PortfolioItem) => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
       if (editingItem) {
+        // Update existing
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/portfolio/${editingItem._id}`,
+          portfolioData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setPortfolio(prev => prev.map(item => 
-          item._id === editingItem._id ? data : item
+          item._id === editingItem._id ? portfolioData : item
         ));
       } else {
-        setPortfolio(prev => [...prev, { ...data, _id: Date.now().toString() }]);
+        // Create new
+        const { data } = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/portfolio`,
+          portfolioData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setPortfolio(prev => [...prev, data]);
       }
       setIsModalOpen(false);
       setEditingItem(null);
     } catch (error) {
       console.error('Error saving portfolio item:', error);
+      alert('Ошибка при сохранении проекта');
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (confirm('Вы уверены, что хотите удалить этот проект?')) {
+    if (!confirm('Вы уверены, что хотите удалить этот проект?')) return;
+    
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL_API}/portfolio/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setPortfolio(prev => prev.filter(item => item._id !== id));
+    } catch (error) {
+      console.error('Error deleting portfolio item:', error);
+      alert('Ошибка при удалении проекта');
     }
   };
 
@@ -84,6 +126,12 @@ export default function PortfolioManagement() {
           <span>Новый проект</span>
         </button>
       </div>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )}
 
       {/* Статистика */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

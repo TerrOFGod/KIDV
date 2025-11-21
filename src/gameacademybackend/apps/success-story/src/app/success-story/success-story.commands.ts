@@ -1,10 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { 
-  SuccessStoryCreate, 
-  SuccessStoryUpdate, 
-  SuccessStoryDelete, 
-  SuccessStoryGetList 
-} from '@shared/contracts';
+import { SuccessStoryCreate, SuccessStoryUpdate, SuccessStoryDelete, SuccessStoryGetList } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { SuccessStoryService } from './success-story.service';
 

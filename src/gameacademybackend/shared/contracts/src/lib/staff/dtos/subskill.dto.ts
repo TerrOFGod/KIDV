@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsNumber, ValidateNested, IsEnum } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export class SubskillDto {
   @IsString()

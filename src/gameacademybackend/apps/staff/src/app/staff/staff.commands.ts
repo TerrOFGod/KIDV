@@ -1,11 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { 
-  StaffCreate, 
-  StaffUpdate, 
-  StaffDelete, 
-  StaffGetBySlug, 
-  StaffGetList 
-} from '@shared/contracts';
+import { StaffCreate, StaffUpdate, StaffDelete, StaffGetBySlug, StaffGetList } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { StaffService } from './staff.service';
 
