@@ -1,19 +1,29 @@
 // components/layout/Header.tsx
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import LoginModal from '@/components/features/auth/LoginModal';
 import RegisterModal from '@/components/features/auth/RegisterModal';
+import axios from 'axios';
 
 interface HeaderProps {
   activeSection: string;
   onSectionChange: (section: string) => void;
 }
 
+function parseJwt<T extends Record<string, unknown>>(token: string): T {
+  const payload = token.split('.')[1];
+  return JSON.parse(atob(payload)) as T;
+}
+
 export default function Header({ activeSection, onSectionChange }: HeaderProps) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checkedAuth, setCheckedAuth] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -33,6 +43,34 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
     { id: 'faq', label: 'FAQ', path: '/' },
     { id: 'contact', label: 'Контакты', path: '/' },
   ];
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem('token'));
+    setCheckedAuth(true);
+  }, [pathname]);
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem('token'));
+  }, [pathname]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) return setUserRole(null);
+
+    const { id: userId } = parseJwt<{ id: string }>(token)
+    axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL_API}/user/info`,
+      { id: userId },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then(res => {
+      const { profile } = res.data as { profile: { role: string } };
+      setUserRole(profile.role);
+    })
+    .catch(() => {
+      setUserRole(null);
+    });
+  }, [isLoggedIn, pathname]);
 
   const handleMainMenuClick = (item: typeof mainMenuItems[0]) => {
     if (pathname !== '/') {
@@ -90,6 +128,8 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
       .toUpperCase();
   };
 
+  if (!checkedAuth) return null;
+
   return (
     <>
       <header className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
@@ -123,7 +163,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
               ))}
               
               {/* Кнопки авторизации или профиль */}
-              {!isAuthenticated ? (
+              {!isLoggedIn ? (
                 <div className="flex items-center space-x-4 ml-4">
                   <button
                     onClick={handleLogin}
@@ -144,7 +184,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    <div className="w-8 h-8 bg-blue-300 bg-blue-300 rounded-full flex items-center justify-center text-sm font-semibold">
+                    <div className="w-8 h-8 bg-blue-300 hover:bg-blue-300/90 rounded-full flex items-center justify-center text-sm font-semibold">
                       {getUserInitials(user?.displayName || 'U')}
                     </div>
                     <span className="text-gray-700">{user?.displayName}</span>
@@ -171,7 +211,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
                           Мой профиль
                         </button>
                         
-                        {user?.role === 'Admin' && (
+                        {userRole === 'Admin' && (
                           <button
                             onClick={handleAdmin}
                             className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"

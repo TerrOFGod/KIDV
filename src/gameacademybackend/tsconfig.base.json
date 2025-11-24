@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@apigateway/cfgs": ["shared/cfgs/src/index.ts"],
+      "@apigateway/configs": ["shared/src/index.ts"],
+      "@shared/configs": ["shared/configs/src/index.ts"],
       "@shared/contracts": ["shared/contracts/src/index.ts"],
       "@shared/interfaces": ["shared/interfaces/src/index.ts"]
     },

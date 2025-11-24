@@ -1,5 +1,11 @@
 import { Body, Controller } from '@nestjs/common';
-import { SuccessStoryCreate, SuccessStoryUpdate, SuccessStoryDelete, SuccessStoryGetList } from '@shared/contracts';
+import {
+  SuccessStoryCreate,
+  SuccessStoryUpdate,
+  SuccessStoryDelete,
+  SuccessStoryGetList,
+  HealthCheck,
+} from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { SuccessStoryService } from './success-story.service';
 
@@ -30,5 +36,44 @@ export class SuccessStoryCommands {
   async getSuccessStories(@Body() dto: SuccessStoryGetList.Request): Promise<SuccessStoryGetList.Response> {
     const stories = await this.successStoryService.getSuccessStories(dto.year, dto.city);
     return { stories };
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'success') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'success',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'success',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'success',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
   }
 }

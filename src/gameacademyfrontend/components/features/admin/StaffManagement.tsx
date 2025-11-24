@@ -44,10 +44,13 @@ export default function StaffManagement() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Не авторизованы');
 
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
+      axios.get<{ staff: StaffMember[] }>(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
         headers: { Authorization: `Bearer ${token}` },
+      }).then(res => {
+        setStaff(res.data.staff);
+      }).catch(() => {
+        setError('Не удалось загрузить команду.');
       });
-      setStaff(data);
       setError('');
     } catch (err) {
       setError('Не удалось загрузить список сотрудников');
@@ -74,12 +77,12 @@ export default function StaffManagement() {
         ));
       } else {
         // Create new
-        const { data } = await axios.post(
+        await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
           staffData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        setStaff(prev => [...prev, data]);
+        setStaff(prev => [...prev, staffData]);
       }
       setIsModalOpen(false);
       setEditingMember(null);

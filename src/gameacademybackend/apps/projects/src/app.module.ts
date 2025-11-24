@@ -6,7 +6,7 @@ import { getMongoConfig } from './configs/mongo.config';
 import { GamesModule } from './games/games.module';
 import { MinioModule } from './minio/minio.module';
 import { CommentsModule } from './comments/comments.module';
-import { getRMQConfig } from './configs/rmq.config';
+import { getRMQConfig } from '@shared/configs';
 import { RMQModule } from 'nestjs-rmq';
 import { DuplicateModule } from './duplicate/duplicate.module';
 import { AdminModule } from './admin/admin.module';
@@ -18,7 +18,7 @@ import { AdminModule } from './admin/admin.module';
       envFilePath: 'envs/.projects.env',
     }),
     MongooseModule.forRootAsync(getMongoConfig()),
-    RMQModule.forRootAsync(getRMQConfig()),
+    RMQModule.forRootAsync(getRMQConfig('projects')),
     MinioModule,
     CommentsModule,
     GamesModule,

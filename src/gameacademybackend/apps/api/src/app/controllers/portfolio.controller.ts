@@ -6,7 +6,7 @@ import {
   PortfolioUpdate,
   PortfolioDelete,
   PortfolioGetBySlug,
-  PortfolioGetList
+  PortfolioGetList,
 } from '@shared/contracts';
 import { JWTAuthGuard } from '../guards/jwt.guard';
 import { Roles } from '../guards/roles.guard';
@@ -18,47 +18,57 @@ export class PortfolioController {
 
   @Get()
   async getPortfolioList(@Query('category') category?: string, @Query('hallOfFrame') hallOfFrame?: boolean) {
-    return this.rmqService.send<PortfolioGetList.Request, PortfolioGetList.Response>(
-      PortfolioGetList.topic,
-      { category, hallOfFrame }
-    );
+    return this.rmqService.send<PortfolioGetList.Request, PortfolioGetList.Response>(PortfolioGetList.topic, {
+      category,
+      hallOfFrame,
+    });
   }
 
   @Get(':slug')
   async getPortfolioBySlug(@Param('slug') slug: string) {
-    return this.rmqService.send<PortfolioGetBySlug.Request, PortfolioGetBySlug.Response>(
-      PortfolioGetBySlug.topic,
-      { slug }
-    );
+    return this.rmqService.send<PortfolioGetBySlug.Request, PortfolioGetBySlug.Response>(PortfolioGetBySlug.topic, {
+      slug,
+    });
   }
 
   @Post()
   @UseGuards(JWTAuthGuard)
   @Roles(UserRole.Admin)
   async createPortfolio(@Body() dto: PortfolioCreate.Request) {
-    return this.rmqService.send<PortfolioCreate.Request, PortfolioCreate.Response>(
-      PortfolioCreate.topic,
-      dto
-    );
+    return this.rmqService.send<PortfolioCreate.Request, PortfolioCreate.Response>(PortfolioCreate.topic, dto);
   }
 
   @Put(':id')
   @UseGuards(JWTAuthGuard)
   @Roles(UserRole.Admin)
   async updatePortfolio(@Param('id') id: string, @Body() dto: PortfolioCreate.Request) {
-    return this.rmqService.send<PortfolioUpdate.Request, PortfolioUpdate.Response>(
-      PortfolioUpdate.topic,
-      { ...dto, id }
-    );
+    return this.rmqService.send<PortfolioUpdate.Request, PortfolioUpdate.Response>(PortfolioUpdate.topic, {
+      ...dto,
+      id,
+    });
   }
 
   @Delete(':id')
   @UseGuards(JWTAuthGuard)
   @Roles(UserRole.Admin)
   async deletePortfolio(@Param('id') id: string) {
-    return this.rmqService.send<PortfolioDelete.Request, PortfolioDelete.Response>(
-      PortfolioDelete.topic,
-      { id }
-    );
+    return this.rmqService.send<PortfolioDelete.Request, PortfolioDelete.Response>(PortfolioDelete.topic, { id });
+  }
+
+  @Get('health')
+  async health() {
+    const services = ['auth', 'user', 'news', 'portfolio', 'staff', 'success'];
+    const results = [];
+
+    for (const service of services) {
+      try {
+        const result = await this.rmqService.send(`${service}.health.check`, {});
+        results.push({ service, status: 'ok', data: result });
+      } catch (e) {
+        if (e instanceof Error) results.push({ service, status: 'error', error: e.message });
+      }
+    }
+
+    return results;
   }
 }

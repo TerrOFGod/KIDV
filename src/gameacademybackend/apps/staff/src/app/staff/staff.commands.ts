@@ -1,5 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { StaffCreate, StaffUpdate, StaffDelete, StaffGetBySlug, StaffGetList } from '@shared/contracts';
+import { StaffCreate, StaffUpdate, StaffDelete, StaffGetBySlug, StaffGetList, HealthCheck } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { StaffService } from './staff.service';
 
@@ -36,6 +36,45 @@ export class StaffCommands {
   @RMQRoute(StaffGetList.topic)
   async getStaffList(@Body() dto: StaffGetList.Request): Promise<StaffGetList.Response> {
     const staff = await this.staffService.getStaffList(dto.position, dto.rarity);
-    return { staff };
+    return { staff: staff };
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'staff') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'staff',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'staff',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'staff',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
   }
 }

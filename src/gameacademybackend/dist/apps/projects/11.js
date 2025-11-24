@@ -3,7 +3,7 @@ exports.id = 11;
 exports.ids = [11];
 exports.modules = {
 
-/***/ 2935:
+/***/ 2960:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -15,29 +15,29 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/protocols/HttpBindingProtocol.js + 1 modules
-var HttpBindingProtocol = __webpack_require__(2632);
+var HttpBindingProtocol = __webpack_require__(2656);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeSerializer.js + 2 modules
-var HttpInterceptingShapeSerializer = __webpack_require__(2647);
+var HttpInterceptingShapeSerializer = __webpack_require__(2671);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeDeserializer.js
-var HttpInterceptingShapeDeserializer = __webpack_require__(2642);
+var HttpInterceptingShapeDeserializer = __webpack_require__(2666);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/schema/schemas/NormalizedSchema.js
-var NormalizedSchema = __webpack_require__(2613);
+var NormalizedSchema = __webpack_require__(2637);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/schema/TypeRegistry.js
-var TypeRegistry = __webpack_require__(2616);
+var TypeRegistry = __webpack_require__(2640);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/ProtocolLib.js
-var ProtocolLib = __webpack_require__(2649);
+var ProtocolLib = __webpack_require__(2673);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js
-var ConfigurableSerdeContext = __webpack_require__(2653);
+var ConfigurableSerdeContext = __webpack_require__(2677);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/protocols/serde/determineTimestampFormat.js
-var determineTimestampFormat = __webpack_require__(2646);
+var determineTimestampFormat = __webpack_require__(2670);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/serde/lazy-json.js
-var lazy_json = __webpack_require__(2644);
+var lazy_json = __webpack_require__(2668);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js + 1 modules
-var date_utils = __webpack_require__(2648);
+var date_utils = __webpack_require__(2672);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/submodules/serde/value/NumericValue.js
-var NumericValue = __webpack_require__(2645);
+var NumericValue = __webpack_require__(2669);
 // EXTERNAL MODULE: ../../node_modules/@smithy/util-base64/dist-es/fromBase64.js
-var fromBase64 = __webpack_require__(2635);
+var fromBase64 = __webpack_require__(2659);
 ;// ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReviver.js
 
 function jsonReviver(key, value, context) {
@@ -59,7 +59,7 @@ function jsonReviver(key, value, context) {
 }
 
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/common.js
-var common = __webpack_require__(2652);
+var common = __webpack_require__(2676);
 ;// ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/parseJsonBody.js
 
 const parseJsonBody = (streamBody, context) => (0,common.collectBodyString)(streamBody, context).then((encoded) => {
@@ -241,9 +241,9 @@ class JsonShapeDeserializer extends ConfigurableSerdeContext.SerdeContextConfig 
 }
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/uuid/dist-es/v4.js + 1 modules
-var v4 = __webpack_require__(2596);
+var v4 = __webpack_require__(2620);
 // EXTERNAL MODULE: ../../node_modules/@smithy/util-base64/dist-es/toBase64.js
-var toBase64 = __webpack_require__(2636);
+var toBase64 = __webpack_require__(2660);
 ;// ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReplacer.js
 
 const NUMERIC_CONTROL_CHAR = String.fromCharCode(925);
@@ -533,7 +533,7 @@ class AwsRestJsonProtocol extends HttpBindingProtocol.HttpBindingProtocol {
 
 /***/ }),
 
-/***/ 2936:
+/***/ 2961:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

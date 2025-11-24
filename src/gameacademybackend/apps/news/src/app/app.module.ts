@@ -3,13 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RMQModule } from 'nestjs-rmq';
 import { NewsModule } from './news/news.module';
-import { getRMQConfig } from './configs/rmq.config';
+import { getRMQConfig } from '@shared/configs';
 import { getMongoConfig } from './configs/mongo.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.news.env' }),
-    RMQModule.forRootAsync(getRMQConfig()),
+    RMQModule.forRootAsync(getRMQConfig('news')),
     MongooseModule.forRootAsync(getMongoConfig()),
     NewsModule,
   ],

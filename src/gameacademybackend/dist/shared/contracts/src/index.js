@@ -34,4 +34,5 @@ tslib_1.__exportStar(require("./lib/success-story/success-story.create"), export
 tslib_1.__exportStar(require("./lib/success-story/success-story.delete"), exports);
 tslib_1.__exportStar(require("./lib/success-story/success-story.get-list"), exports);
 tslib_1.__exportStar(require("./lib/success-story/success-story.update"), exports);
+tslib_1.__exportStar(require("./lib/health/health.check"), exports);
 //# sourceMappingURL=index.js.map

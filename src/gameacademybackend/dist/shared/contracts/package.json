@@ -6,6 +6,10 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "class-validator": "0.14.3",
+    "class-transformer": "0.5.1",
+    "@shared/interfaces": "0.0.1",
+    "multer": "2.0.2"
   }
 }

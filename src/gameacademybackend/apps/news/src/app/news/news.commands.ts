@@ -1,5 +1,13 @@
 import { Body, Controller } from '@nestjs/common';
-import { NewsCreate, NewsUpdate, NewsDelete, NewsGetById, NewsGetBySlug, NewsGetList } from '@shared/contracts';
+import {
+  NewsCreate,
+  NewsUpdate,
+  NewsDelete,
+  NewsGetById,
+  NewsGetBySlug,
+  NewsGetList,
+  HealthCheck,
+} from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { NewsService } from './news.service';
 
@@ -44,5 +52,44 @@ export class NewsCommands {
   async getNewsList(@Body() dto: NewsGetList.Request): Promise<NewsGetList.Response> {
     const news = await this.newsService.getNewsList(dto.category, dto.search);
     return { news };
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'news') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'news',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'news',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'news',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
   }
 }

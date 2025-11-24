@@ -39,4 +39,21 @@ export class StaffController {
   async deleteStaff(@Param('id') id: string) {
     return this.rmqService.send<StaffDelete.Request, StaffDelete.Response>(StaffDelete.topic, { id });
   }
+
+  @Get('health')
+  async health() {
+    const services = ['auth', 'user', 'news', 'portfolio', 'staff', 'success'];
+    const results = [];
+
+    for (const service of services) {
+      try {
+        const result = await this.rmqService.send(`${service}.health.check`, {});
+        results.push({ service, status: 'ok', data: result });
+      } catch (e) {
+        if (e instanceof Error) results.push({ service, status: 'error', error: e.message });
+      }
+    }
+
+    return results;
+  }
 }

@@ -3,7 +3,7 @@ exports.id = 2;
 exports.ids = [2];
 exports.modules = {
 
-/***/ 2921:
+/***/ 2947:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -17,17 +17,17 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-var CredentialsProviderError = __webpack_require__(2580);
+var CredentialsProviderError = __webpack_require__(2604);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
-var getProfileName = __webpack_require__(2581);
+var getProfileName = __webpack_require__(2605);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
-var parseKnownFiles = __webpack_require__(2922);
+var parseKnownFiles = __webpack_require__(2948);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getConfigFilepath.js
-var getConfigFilepath = __webpack_require__(2585);
+var getConfigFilepath = __webpack_require__(2609);
 // EXTERNAL MODULE: ../../node_modules/@smithy/types/dist-es/profile.js
-var profile = __webpack_require__(2583);
+var profile = __webpack_require__(2607);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/constants.js
-var constants = __webpack_require__(2584);
+var constants = __webpack_require__(2608);
 ;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSsoSessionData.js
 
 
@@ -36,9 +36,9 @@ const getSsoSessionData = (data) => Object.entries(data)
     .reduce((acc, [key, value]) => ({ ...acc, [key.substring(key.indexOf(constants.CONFIG_PREFIX_SEPARATOR) + 1)]: value }), {});
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseIni.js
-var parseIni = __webpack_require__(2587);
+var parseIni = __webpack_require__(2611);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/readFile.js + 1 modules
-var readFile = __webpack_require__(2588);
+var readFile = __webpack_require__(2612);
 ;// ../../node_modules/@smithy/shared-ini-file-loader/dist-es/loadSsoSessionData.js
 
 
@@ -59,9 +59,9 @@ const isSsoProfile = (arg) => arg &&
         typeof arg.sso_role_name === "string");
 
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
-var setCredentialFeature = __webpack_require__(2600);
+var setCredentialFeature = __webpack_require__(2624);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/ProviderError.js
-var ProviderError = __webpack_require__(2578);
+var ProviderError = __webpack_require__(2602);
 ;// ../../node_modules/@smithy/property-provider/dist-es/TokenProviderError.js
 
 class TokenProviderError extends ProviderError.ProviderError {
@@ -73,14 +73,14 @@ class TokenProviderError extends ProviderError.ProviderError {
 }
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFromFile.js
-var getSSOTokenFromFile = __webpack_require__(2923);
+var getSSOTokenFromFile = __webpack_require__(2949);
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/constants.js
 const EXPIRE_WINDOW_MS = 5 * 60 * 1000;
 const REFRESH_MESSAGE = `To refresh this SSO session run 'aws sso login' with the corresponding profile.`;
 
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/getSsoOidcClient.js
 const getSsoOidcClient = async (ssoRegion, init = {}) => {
-    const { SSOOIDCClient } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(13)]).then(__webpack_require__.bind(__webpack_require__, 2937));
+    const { SSOOIDCClient } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(13)]).then(__webpack_require__.bind(__webpack_require__, 2962));
     const coalesce = (prop) => init.clientConfig?.[prop] ?? init.parentClientConfig?.[prop];
     const ssoOidcClient = new SSOOIDCClient(Object.assign({}, init.clientConfig ?? {}, {
         region: ssoRegion ?? init.clientConfig?.region,
@@ -93,7 +93,7 @@ const getSsoOidcClient = async (ssoRegion, init = {}) => {
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/getNewSsoOidcToken.js
 
 const getNewSsoOidcToken = async (ssoToken, ssoRegion, init = {}) => {
-    const { CreateTokenCommand } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(13)]).then(__webpack_require__.bind(__webpack_require__, 2937));
+    const { CreateTokenCommand } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(13)]).then(__webpack_require__.bind(__webpack_require__, 2962));
     const ssoOidcClient = await getSsoOidcClient(ssoRegion, init);
     return ssoOidcClient.send(new CreateTokenCommand({
         clientId: ssoToken.clientId,
@@ -122,9 +122,9 @@ const validateTokenKey = (key, value, forRefresh = false) => {
 };
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getSSOTokenFilepath.js
-var getSSOTokenFilepath = __webpack_require__(2924);
+var getSSOTokenFilepath = __webpack_require__(2950);
 // EXTERNAL MODULE: external "fs"
-var external_fs_ = __webpack_require__(692);
+var external_fs_ = __webpack_require__(701);
 ;// ../../node_modules/@aws-sdk/token-providers/dist-es/writeSSOTokenToFile.js
 
 
@@ -272,7 +272,7 @@ const resolveSSOCredentials = async ({ ssoStartUrl, ssoSession, ssoAccountId, ss
         });
     }
     const { accessToken } = token;
-    const { SSOClient, GetRoleCredentialsCommand } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(10)]).then(__webpack_require__.bind(__webpack_require__, 2934));
+    const { SSOClient, GetRoleCredentialsCommand } = await Promise.all(/* import() */[__webpack_require__.e(11), __webpack_require__.e(10)]).then(__webpack_require__.bind(__webpack_require__, 2959));
     const sso = ssoClient ||
         new SSOClient(Object.assign({}, clientConfig ?? {}, {
             logger: clientConfig?.logger ?? parentClientConfig?.logger,
@@ -420,7 +420,7 @@ const fromSSO = (init = {}) => async ({ callerClientConfig } = {}) => {
 
 /***/ }),
 
-/***/ 2923:
+/***/ 2949:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -428,9 +428,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getSSOTokenFromFile: () => (/* binding */ getSSOTokenFromFile),
 /* harmony export */   tokenIntercept: () => (/* binding */ tokenIntercept)
 /* harmony export */ });
-/* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2185);
+/* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2209);
 /* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2924);
+/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2950);
 
 
 const tokenIntercept = {};
@@ -446,18 +446,18 @@ const getSSOTokenFromFile = async (id) => {
 
 /***/ }),
 
-/***/ 2924:
+/***/ 2950:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getSSOTokenFilepath: () => (/* binding */ getSSOTokenFilepath)
 /* harmony export */ });
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(595);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(608);
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(703);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(712);
 /* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2586);
+/* harmony import */ var _getHomeDir__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(2610);
 
 
 

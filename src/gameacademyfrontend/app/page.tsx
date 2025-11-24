@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // app/page.tsx
 'use client';
 
@@ -11,6 +12,7 @@ import Partners from '@/components/sections/Partners';
 import Awards from '@/components/sections/Awards';
 import FAQ from '@/components/sections/FAQ';
 import Contact from '@/components/sections/Contact';
+import { HealthStatus } from '@/app/health/health-status';
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState('hero');

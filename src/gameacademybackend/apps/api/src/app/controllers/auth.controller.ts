@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Get, Post, UnauthorizedException } from '@nestjs/common';
 import { AccountLogin, AccountRegister } from '@shared/contracts';
 import { RMQService } from 'nestjs-rmq';
 import { LoginDto } from '../dtos/login.dto';
@@ -24,5 +24,23 @@ export class AuthContoller {
     } catch (e) {
       if (e instanceof Error) throw new UnauthorizedException(e.message);
     }
+  }
+
+  // В gateway для проверки всех сервисов
+  @Get('health')
+  async health() {
+    const services = ['auth', 'user', 'news', 'portfolio', 'staff', 'news'];
+    const results = [];
+
+    for (const service of services) {
+      try {
+        const result = await this.rmqService.send(`${service}.health.check`, {});
+        results.push({ service, status: 'ok', data: result });
+      } catch (e) {
+        if (e instanceof Error) results.push({ service, status: 'error', error: e.message });
+      }
+    }
+
+    return results;
   }
 }

@@ -3,7 +3,7 @@ exports.id = 9;
 exports.ids = [9];
 exports.modules = {
 
-/***/ 2933:
+/***/ 2958:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -15,9 +15,9 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/util-utf8/dist-es/toUtf8.js
-var toUtf8 = __webpack_require__(2637);
+var toUtf8 = __webpack_require__(2661);
 // EXTERNAL MODULE: ../../node_modules/@smithy/util-utf8/dist-es/fromUtf8.js
-var fromUtf8 = __webpack_require__(2604);
+var fromUtf8 = __webpack_require__(2628);
 ;// ../../node_modules/@smithy/core/dist-es/submodules/event-streams/EventStreamSerde.js
 
 class EventStreamSerde {

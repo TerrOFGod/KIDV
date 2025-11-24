@@ -3,7 +3,7 @@ exports.id = 7;
 exports.ids = [7];
 exports.modules = {
 
-/***/ 2931:
+/***/ 2956:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -25,15 +25,15 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
-var CredentialsProviderError = __webpack_require__(2580);
+var CredentialsProviderError = __webpack_require__(2604);
 // EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__(707);
+var external_url_ = __webpack_require__(716);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/ProviderError.js
-var ProviderError = __webpack_require__(2578);
+var ProviderError = __webpack_require__(2602);
 // EXTERNAL MODULE: external "buffer"
-var external_buffer_ = __webpack_require__(744);
+var external_buffer_ = __webpack_require__(753);
 // EXTERNAL MODULE: external "http"
-var external_http_ = __webpack_require__(691);
+var external_http_ = __webpack_require__(700);
 ;// ../../node_modules/@smithy/credential-provider-imds/dist-es/remoteProvider/httpRequest.js
 
 
@@ -181,7 +181,7 @@ const getCmdsUri = async ({ logger }) => {
 };
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/node-config-provider/dist-es/configLoader.js + 5 modules
-var configLoader = __webpack_require__(2576);
+var configLoader = __webpack_require__(2600);
 ;// ../../node_modules/@smithy/credential-provider-imds/dist-es/error/InstanceMetadataV1FallbackError.js
 
 class InstanceMetadataV1FallbackError extends CredentialsProviderError.CredentialsProviderError {
@@ -195,7 +195,7 @@ class InstanceMetadataV1FallbackError extends CredentialsProviderError.Credentia
 }
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/url-parser/dist-es/index.js + 1 modules
-var dist_es = __webpack_require__(2565);
+var dist_es = __webpack_require__(2589);
 ;// ../../node_modules/@smithy/credential-provider-imds/dist-es/config/Endpoint.js
 var Endpoint;
 (function (Endpoint) {

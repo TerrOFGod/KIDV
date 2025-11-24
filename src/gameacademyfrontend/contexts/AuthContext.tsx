@@ -1,6 +1,7 @@
 // contexts/AuthContext.tsx
 'use client';
 
+import axios from 'axios';
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface User {
@@ -20,6 +21,11 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function parseJwt<T extends Record<string, unknown>>(token: string): T {
+  const payload = token.split('.')[1];
+  return JSON.parse(atob(payload)) as T;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
@@ -29,17 +35,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (token) {
       // Декодируем токен для получения информации о пользователе
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        const userInfo: User = {
-          id: payload.id,
-          email: payload.email,
-          displayName: payload.displayName || payload.email,
-          role: payload.role || 'Student'
-        };
-        setUser(userInfo);
+        const { id: userId } = parseJwt<{ id: string }>(token);
+        axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/user/info`,
+          { id: userId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then(res => {
+          const profile = res.data as User;
+          setUser(profile);
+        })
+        .catch(() => {
+          setUser(null);
+        });
+        
       } catch (error) {
         console.error('Invalid token:', error);
         localStorage.removeItem('token');
+        throw error;
       }
     }
   }, []);
@@ -63,18 +76,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const data = await response.json();
       localStorage.setItem('token', data.access_token);
+      const token = localStorage.getItem('token');
 
       // Декодируем токен для получения информации о пользователе
-      const payload = JSON.parse(atob(data.access_token.split('.')[1]));
-      const userInfo: User = {
-        id: payload.id,
-        email: payload.email,
-        displayName: payload.displayName || payload.email,
-        role: payload.role || 'Student'
-      };
-      
-      setUser(userInfo);
+      const { id: userId } = parseJwt<{ id: string }>(token!);
+      axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL_API}/user/info`,
+        { id: userId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then(res => {
+        const profile = res.data as User;
+        setUser(profile);
+      })
+      .catch(() => {
+        setUser(null);
+      });
+
+      window.location.reload(); 
     } catch (error) {
+      console.error('Invalid token:', error);
+      localStorage.removeItem('token');
       throw error;
     }
   };
@@ -103,17 +125,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (data.access_token) {
         localStorage.setItem('token', data.access_token);
         
-        const payload = JSON.parse(atob(data.access_token.split('.')[1]));
-        const userInfo: User = {
-          id: payload.id,
-          email: payload.email,
-          displayName: payload.displayName || payload.email,
-          role: payload.role || 'Student'
-        };
+        const token = localStorage.getItem('token');
+
+        // Декодируем токен для получения информации о пользователе
+        const { id: userId } = parseJwt<{ id: string }>(token!);
+        axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/user/info`,
+          { id: userId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then(res => {
+          const profile = res.data as User;
+          setUser(profile);
+        })
+        .catch(() => {
+          setUser(null);
+        });
         
-        setUser(userInfo);
+        window.location.reload(); 
       }
     } catch (error) {
+      console.error('Invalid token:', error);
+      localStorage.removeItem('token');
       throw error;
     }
   };
@@ -122,6 +155,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('token');
     console.error(localStorage.getItem('token'));
     setUser(null);
+    window.location.reload(); 
   };
 
   return (

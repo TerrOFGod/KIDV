@@ -31,3 +31,4 @@ export * from './lib/success-story/success-story.create';
 export * from './lib/success-story/success-story.delete';
 export * from './lib/success-story/success-story.get-list';
 export * from './lib/success-story/success-story.update';
+export * from './lib/health/health.check';

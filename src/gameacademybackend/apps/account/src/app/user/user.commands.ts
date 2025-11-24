@@ -1,5 +1,5 @@
 import { Body, Controller } from '@nestjs/common';
-import { AccountChangePasswordProfile, AccountChangeProfile, AccountChangeRole } from '@shared/contracts';
+import { AccountChangePasswordProfile, AccountChangeProfile, AccountChangeRole, HealthCheck } from '@shared/contracts';
 import { RMQRoute, RMQValidate } from 'nestjs-rmq';
 import { THIS_USER_IS_NOT_EXISTS, WRONG_OLD_PASSWORD } from '../auth/others/account.constants';
 import { UserEntity } from './entities/user.entity';
@@ -60,5 +60,44 @@ export class UserCommands {
     await this.userRepository.updateUserById(userEntity);
 
     return { success: true };
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'user') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'user',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'user',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'user',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
   }
 }
