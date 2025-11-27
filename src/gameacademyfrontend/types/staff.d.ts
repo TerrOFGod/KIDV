@@ -2,7 +2,8 @@
 import { StaticImageData } from "next/image";
 
 // Тип для редкости сотрудника
-export type Rarity = "LEGENDARY" | "RARE" | "COMMON";
+export type Level = "Junior" | "Middle" | "Senior";
+export type PositionType = "Университетская" | "Структурная";
 
 // Тип для статистики
 export interface StaffStat {
@@ -19,7 +20,7 @@ export interface Subskill {
 // Тип для навыка
 export interface StaffSkill {
   name: string;
-  level: number;
+  level: Level;
   description?: string;
   subskills?: Subskill[];
 }
@@ -31,27 +32,29 @@ export interface StaffAchievement {
   description: string;
 }
 
+// Тип для контактов
+export interface Contact {
+  title: string;
+  value: string;
+}
+
+export interface Position {
+  type: PositionType;
+  value: string;
+}
+
 // Основной тип для сотрудника
 export interface StaffMember {
   _id?: string;
-  // Базовые поля
-  slug: string;
   name: string;
-  position: string; // Человекочитаемая должность
+  position: Position; // Человекочитаемая должность
   photo?: string; // URL изображения или статичный ресурс
   
   // Роли и квалификация
   title?: string; // Ключ для словаря ролей (например, "head", "senior")
-  rarity?: Rarity; // Уровень редкости для игрового стиля
-  
-  // Контактная информация
-  email?: string;
-  telegram?: string;
-  github?: string;
   
   // Описательные поля
   bio?: string;
-  researchInterests?: string[];
   
   // Игровые атрибуты
   stats?: StaffStat[];
@@ -59,8 +62,7 @@ export interface StaffMember {
   achievements?: StaffAchievement[];
   
   // Устаревшие/альтернативные поля (для совместимости)
-  id?: string | number; // Для обратной совместимости
   image?: string; // Альтернатива для photo
   tags?: string[];
-  contact?: string;
+  contact?: Contact[];
 }
