@@ -49,18 +49,18 @@ export interface StaffMember {
   name: string;
   position: Position; // Человекочитаемая должность
   photo?: string; // URL изображения или статичный ресурс
-  
+
   // Роли и квалификация
   title?: string; // Ключ для словаря ролей (например, "head", "senior")
-  
+
   // Описательные поля
   bio?: string;
-  
+
   // Игровые атрибуты
   stats?: StaffStat[];
   skills?: StaffSkill[];
   achievements?: StaffAchievement[];
-  
+
   // Устаревшие/альтернативные поля (для совместимости)
   image?: string; // Альтернатива для photo
   tags?: string[];
