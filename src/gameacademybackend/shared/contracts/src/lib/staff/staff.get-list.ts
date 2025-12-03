@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsArray, IsNumber, ValidateNested, IsEnum } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export namespace StaffGetList {
   export const topic = 'staff.get-list.query';
@@ -9,26 +9,21 @@ export namespace StaffGetList {
 
     @IsOptional()
     @IsString()
-    rarity?: string;
+    researchPosition?: string;
   }
   export class Response {
-    staff: {
+    staff: Array<{
       _id?: string;
-      slug: string;
       name: string;
-      position: string;
+      positions: Array<{ type: string; value: string }>;
+      educationLevel: string;
+      researchPosition: string;
       photo?: string;
-      title?: string;
-      rarity?: 'LEGENDARY' | 'RARE' | 'COMMON';
-      email?: string;
-      telegram?: string;
-      github?: string;
       bio?: string;
-      researchInterests?: string[];
       stats?: Array<{ label: string; value: number }>;
       skills?: Array<{
         name: string;
-        level: number;
+        level: string;
         description?: string;
         subskills?: Array<{ name: string; description?: string }>;
       }>;
@@ -37,11 +32,8 @@ export namespace StaffGetList {
         icon: string;
         description: string;
       }>;
-      // Устаревшие/альтернативные поля
-      id?: string | number;
-      image?: string;
       tags?: string[];
-      contact?: string;
-    }[];
+      contact?: Array<{ title: string; value: string }>;
+    }>;
   }
 }

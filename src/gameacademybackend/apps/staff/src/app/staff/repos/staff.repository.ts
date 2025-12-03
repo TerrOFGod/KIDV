@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { StaffEntity } from './../entities/staff.entity';
-import { Staff } from './../models/staff.model';
+import { StaffEntity } from '../entities/staff.entity';
+import { Staff } from '../models/staff.model';
 
 @Injectable()
 export class StaffRepository {
@@ -13,18 +13,20 @@ export class StaffRepository {
     return newStaff.save();
   }
 
-  async findStaffBySlug(slug: string) {
-    return this.staffModel.findOne({ slug }).exec();
-  }
-
   async findStaffById(id: string) {
     return this.staffModel.findById(id).exec();
   }
 
-  async findAllStaff(position?: string, rarity?: string) {
+  async findAllStaff(position?: string, researchPosition?: string) {
     const filter: any = {};
-    if (position) filter.position = position;
-    if (rarity) filter.rarity = rarity;
+
+    if (position) {
+      filter['positions.value'] = { $regex: position, $options: 'i' };
+    }
+
+    if (researchPosition) {
+      filter.researchPosition = { $regex: researchPosition, $options: 'i' };
+    }
 
     return this.staffModel.find(filter).sort({ name: 1 }).exec();
   }
@@ -42,9 +44,10 @@ export class StaffRepository {
       .find({
         $or: [
           { name: { $regex: searchTerm, $options: 'i' } },
-          { position: { $regex: searchTerm, $options: 'i' } },
+          { 'positions.value': { $regex: searchTerm, $options: 'i' } },
+          { researchPosition: { $regex: searchTerm, $options: 'i' } },
           { bio: { $regex: searchTerm, $options: 'i' } },
-          { researchInterests: { $regex: searchTerm, $options: 'i' } },
+          { tags: { $regex: searchTerm, $options: 'i' } },
         ],
       })
       .exec();

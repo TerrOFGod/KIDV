@@ -1,1131 +1,1030 @@
-# Project Structure
+## gameacademyfrontend/components/features/admin/forms/StaffForm.tsx
 
-```
-gameacademybackend/
-  .github/
-    instructions/
-      nx.instructions.md
-  .nx/
-    cache/
-      22802656858540561/
-      82677263004880010/
-      308641554798215297/
-      1750387004527401195/
-      2600180920115784087/
-      2716380066995285946/
-      4679294894341810390/
-      5056714973422445551/
-      6536560024808434103/
-      8045767685434177015/
-      8120819562647974409/
-      12305225349302614887/
-      12884219674665590219/
-      15314450056001400609/
-      17441108415188746861/
-      17637770873383017136/
-      cloud/
-        2510.08.5/
-          lib/
-            daemon/
-              process-run-end.js
-            heartbeat/
-              background-process.js
-          static/
-            login-end.html
-            login-start.html
-          index.js
-          package.json
-        verify.lock
-      terminalOutputs/
-        22802656858540561
-        82677263004880010
-        308641554798215297
-        1750387004527401195
-        2508956842822562357
-        2600180920115784087
-        2716380066995285946
-        3139097111244740777
-        4679294894341810390
-        5056714973422445551
-        5569058427139607607
-        6536560024808434103
-        8045767685434177015
-        8120819562647974409
-        12305225349302614887
-        12884219674665590219
-        13723584268966013458
-        14774090910162369329
-        15314450056001400609
-        15831928518146301814
-        16531462274902407376
-        17441108415188746861
-        17637770873383017136
-      22802656858540561-logs.tar.gz
-      22802656858540561.tar.gz
-      82677263004880010-logs.tar.gz
-      82677263004880010.tar.gz
-      4679294894341810390-logs.tar.gz
-      4679294894341810390.tar.gz
-      5056714973422445551-logs.tar.gz
-      5056714973422445551.tar.gz
-      8045767685434177015-logs.tar.gz
-      8045767685434177015.tar.gz
-      12305225349302614887-logs.tar.gz
-      12305225349302614887.tar.gz
-      17441108415188746861-logs.tar.gz
-      17441108415188746861.tar.gz
-      run.json
-    workspace-data/
-      d/
-        daemon.log
-        server-process.json
-      6fa29ea5-2f52-401b-82a7-113e10cdd299.db
-      eslint-2654242865465226088.hash
-      file-map.json
-      file-map.json~1a133dcb
-      file-map.json~1e06c058
-      file-map.json~2cab9356
-      file-map.json~2d2f0357
-      file-map.json~5c7347df
-      file-map.json~8ec60e49
-      file-map.json~24b9b9f4
-      file-map.json~68fbebeb
-      file-map.json~84d070b6
-      file-map.json~300c4159
-      file-map.json~5866ecdd
-      file-map.json~081920a3
-      file-map.json~708871a5
-      file-map.json~1461924b
-      file-map.json~a3fa579b
-      file-map.json~aaa7cbe6
-      file-map.json~ab4c96d0
-      file-map.json~b8a3c0a0
-      file-map.json~c6076b64
-      file-map.json~c6508a1c
-      file-map.json~e076bcf2
-      file-map.json~e9127133
-      file-map.json~ec124cac
-      file-map.json~f33b4e54
-      file-map.json~faf91478
-      file-map.json~fe38f30d
-      jest-7930610538513362720.hash
-      lockfile.hash
-      nx_files.nxt
-      parsed-lock-file.json
-      project-graph.json
-      project-graph.json~0f36de79
-      project-graph.json~0fbe4883
-      project-graph.json~1b3f1864
-      project-graph.json~1cc3e13b
-      project-graph.json~02a2eeff
-      project-graph.json~2b6b906a
-      project-graph.json~2be92ea5
-      project-graph.json~3bbe9103
-      project-graph.json~4ae87cac
-      project-graph.json~4ffaf266
-      project-graph.json~5f56ea79
-      project-graph.json~06d68c2d
-      project-graph.json~7b573a83
-      project-graph.json~7d16e310
-      project-graph.json~9f077420
-      project-graph.json~26cf4d16
-      project-graph.json~49f67ad2
-      project-graph.json~53b2c53b
-      project-graph.json~58fab52c
-      project-graph.json~72f53ac5
-      project-graph.json~75f58cd6
-      project-graph.json~78e6349f
-      project-graph.json~86cd7851
-      project-graph.json~91e0476d
-      project-graph.json~148f6cbb
-      project-graph.json~218d5e69
-      project-graph.json~0315add3
-      project-graph.json~398b44dc
-      project-graph.json~473a2989
-      project-graph.json~549da99a
-      project-graph.json~613da3b6
-      project-graph.json~648f77e8
-      project-graph.json~868affdb
-      project-graph.json~874e06ea
-      project-graph.json~01760e1f
-      project-graph.json~1945dd2f
-      project-graph.json~5974b908
-      project-graph.json~6091ea17
-      project-graph.json~6413f22b
-      project-graph.json~9692c4fd
-      project-graph.json~35851c60
-      project-graph.json~65782b05
-      project-graph.json~339990c0
-      project-graph.json~752369be
-      project-graph.json~2894749a
-      project-graph.json~17630562
-      project-graph.json~58520417
-      project-graph.json~a04be246
-      project-graph.json~ab93b568
-      project-graph.json~b1c35033
-      project-graph.json~b14a8835
-      project-graph.json~b55b0887
-      project-graph.json~b80a4438
-      project-graph.json~be5a08c2
-      project-graph.json~c6c27876
-      project-graph.json~c49d2b29
-      project-graph.json~cfba1f4f
-      project-graph.json~d41a5245
-      project-graph.json~d786ef9b
-      project-graph.json~de045d41
-      project-graph.json~e047c778
-      project-graph.json~e7436ea1
-      project-graph.json~ebe642e4
-      project-graph.json~ec6f1f50
-      project-graph.json~ece4417f
-      project-graph.json~eefa1bfa
-      project-graph.json~f20b3bb8
-      project-graph.json~f70c43e4
-      project-graph.json~f8047458
-      project-graph.json~fb0ed796
-      source-maps.json
-      source-maps.json~1d8de1fb
-      source-maps.json~2d3df602
-      source-maps.json~4efe0c74
-      source-maps.json~5bee3b45
-      source-maps.json~08ecab58
-      source-maps.json~9f75e5ec
-      source-maps.json~30e9ab22
-      source-maps.json~469b11ae
-      source-maps.json~5413a5be
-      source-maps.json~26975a29
-      source-maps.json~83104e23
-      source-maps.json~6483991e
-      source-maps.json~a5428734
-      source-maps.json~c5cb081e
-      source-maps.json~ca09bb8d
-      source-maps.json~cfe67227
-      source-maps.json~d96bcaf9
-      source-maps.json~d2924573
-      source-maps.json~df68bcf7
-      source-maps.json~e6f2f82f
-      source-maps.json~e141e7e8
-      source-maps.json~ee4498a8
-      source-maps.json~efd3002c
-      source-maps.json~fa307ab5
-      source-maps.json~fc623013
-      webpack-5621830741124012108.hash
-  apps/
-    .github/
-      instructions/
-        nx.instructions.md
-    account/
-      src/
-        app/
-          auth/
-            others/
-              account.constants.ts
-            auth.controller.ts
-            auth.module.ts
-            auth.service.ts
-          configs/
-            jwt.config.ts
-            mongo.config.ts
-            rmq.config.ts
-          user/
-            entities/
-              user.entity.ts
-            models/
-              user.model.ts
-            repos/
-              user.repository.ts
-            user.commands.ts
-            user.module.ts
-            user.quries.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      jest.config.ts
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      tsconfig.spec.json
-      webpack.config.js
-    api/
-      src/
-        app/
-          configs/
-            jwt.config.ts
-            rmq.config.ts
-          controllers/
-            auth.controller.ts
-            comments.controller.ts
-            news.controller.ts
-            portfolio.controller.ts
-            staff.controller.ts
-            success-story.controller.ts
-            user.controller.ts
-          dtos/
-            login.dto.ts
-            register.dto.ts
-          guards/
-            jwt.guard.ts
-            roles.guard.ts
-            user.decorator.ts
-          strategies/
-            jwt.strategy.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      jest.config.ts
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      tsconfig.spec.json
-      webpack.config.js
-    duplicate-checker/
-      app/
-        api.py
-        models.py
-        utils.py
-      main.py
-      requirements.txt
-    news/
-      src/
-        app/
-          configs/
-            mongo.config.ts
-            rmq.config.ts
-          news/
-            entities/
-              news.entity.ts
-            models/
-              news.model.ts
-            repos/
-              news.repository.ts
-            news.commands.ts
-            news.module.ts
-            news.service.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      jest.config.ts
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      tsconfig.spec.json
-      webpack.config.js
-    portfolio/
-      src/
-        app/
-          configs/
-            mongo.config.ts
-            rmq.config.ts
-          portfolio/
-            entities/
-              portfolio.entity.ts
-            models/
-              portfolio.model.ts
-            repos/
-              portfolio.repository.ts
-            portfolio.commands.ts
-            portfolio.module.ts
-            portfolio.queries.ts
-            portfolio.service.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      webpack.config.js
-    projects/
-      src/
-        admin/
-          admin-duplicates.controller.ts
-          admin-games.controller.ts
-          admin.module.ts
-        assets/
-          .gitkeep
-        comments/
-          dtos/
-            create-comment.dto.ts
-          models/
-            user.model.ts
-          schemas/
-            comment.schema.ts
-            user.schema.ts
-          comments.controller.ts
-          comments.module.ts
-          comments.service.ts
-          jwt.guard.ts
-        configs/
-          jwt.config.ts
-          minio.config.ts
-          mongo.config.ts
-          rmq.config.ts
-        duplicate/
-          schemas/
-            duplicate.schema.ts
-          duplicate.controller.ts
-          duplicate.module.ts
-          duplicate.service.ts
-        games/
-          dto/
-            create-game.dto.ts
-          schemas/
-            game.schema.ts
-          games.controller.ts
-          games.module.ts
-          games.service.ts
-        minio/
-          minio.module.ts
-          minio.service.ts
-        app.controller.ts
-        app.module.ts
-        app.service.ts
-        main.ts
-      eslint.config.mjs
-      jest.config.ts
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      tsconfig.spec.json
-      webpack.config.js
-    staff/
-      src/
-        app/
-          configs/
-            mongo.config.ts
-            rmq.config.ts
-          staff/
-            entities/
-              staff.entity.ts
-            models/
-              staff.model.ts
-            repos/
-              staff.repository.ts
-            staff.commands.ts
-            staff.module.ts
-            staff.queries.ts
-            staff.service.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      webpack.config.js
-    success-story/
-      src/
-        app/
-          configs/
-            mongo.config.ts
-            rmq.config.ts
-          success-story/
-            entities/
-              success-story.entity.ts
-            models/
-              success-story.model.ts
-            repos/
-              success-story.repository.ts
-            success-story.commands.ts
-            success-story.module.ts
-            success-story.queries.ts
-            success-story.service.ts
-          app.module.ts
-        assets/
-          .gitkeep
-        main.ts
-      eslint.config.mjs
-      project.json
-      tsconfig.app.json
-      tsconfig.json
-      webpack.config.js
-  envs/
-    .account.env
-    .api.env
-    .news.env
-    .portfolio.env
-    .projects.env
-    .staff.env
-    .success-story.env
-  shared/
-    contracts/
-      src/
-        lib/
-          account/
-            account.change-password-profile.ts
-            account.change-profile.ts
-            account.change-role.ts
-            account.delete-user.ts
-            account.login.ts
-            account.register.ts
-            account.user-info.ts
-            account.user-list.ts
-            account.user-search.ts
-          news/
-            dtos/
-              news.author.dto.ts
-              news.create.dto.ts
-              news.update.dto.ts
-            news.create.ts
-            news.delete.ts
-            news.get-by-id.ts
-            news.get-by-slug.ts
-            news.get-list.ts
-            news.update.ts
-          portfolio/
-            dtos/
-              portfolio.create.dto.ts
-              project-author.dto.ts
-              project-phase.dto.ts
-              project-skill.dto.ts
-            portfolio.create.ts
-            portfolio.delete.ts
-            portfolio.get-by-slug.ts
-            portfolio.get-list.ts
-            portfolio.update.ts
-          project/
-            comment.create.ts
-            comment.list.ts
-            game.create.ts
-            game.get-all.ts
-          staff/
-            dtos/
-              staff-achievement.dto.ts
-              staff-skill.dto.ts
-              staff-stat.dto.ts
-              staff.create.dto.ts
-              subskill.dto.ts
-            types/
-              rarity.type.ts
-            staff.create.ts
-            staff.delete.ts
-            staff.get-by-slug.ts
-            staff.get-list.ts
-            staff.update.ts
-          success-story/
-            dtos/
-              success-story.create.dto.ts
-            success-story.create.ts
-            success-story.delete.ts
-            success-story.get-list.ts
-            success-story.update.ts
-        index.ts
-      eslint.config.mjs
-      package.json
-      project.json
-      README.md
-      tsconfig.json
-      tsconfig.lib.json
-    interfaces/
-      src/
-        lib/
-          auth.interface.ts
-          news.interface.ts
-          portfolio.interface.ts
-          staff.interface.ts
-          success-story.interface.ts
-          user.interface.ts
-        index.ts
-      eslint.config.mjs
-      package.json
-      project.json
-      README.md
-      tsconfig.json
-      tsconfig.lib.json
-  .editorconfig
-  .prettierignore
-  .prettierrc
-  eslint.config.mjs
-  jest.config.ts
-  jest.preset.js
-  migrations.json
-  nx.json
-  package-lock.json
-  package.json
-  README.md
-  tsconfig.base.json
-gameacademyfrontend/
-  .next/
-    cache/
-      images/
-        dyPlHJmbSPoMU-9mB1--FVbnlxvpLuoGHNIEYMror58/
-          60.1756803191212.MrVqM4qY-ry1u2sibqkr8YtZQvkImzknUhPZvXjgCCI.Vy8iNDA5YmYtMTk5MDlhMDViNmIi.webp
-        ftDgnDzyqFv_y1Ws_ojR9BIJBc5TEUAEQ6Iz_k4Ei-o/
-          60.1760351361454.PxGMBt57bbCxQaU5zz1h3egNNXxGDHBJnACnTS6prGM.Vy8iODc4My0xOTlkZDFjZjFkZiI.webp
-        gaDUbMKxNSVkMgQ4UoNS74OnXn621JkVWsWL1wFaKrM/
-          60.1753265294537.88xwDdSByoMMLEqCBr2SmCTIC5IHmxNqujL6y6pYoQ8.IzV8MjYMHPVOT4in4TFmcaZ9lXG2B92UW-b_i6Urs38.webp
-        htcEtFbJbPAexF8F28lZPGq2l2tnf0Tp8KHGJ4aF2qg/
-          31536000.1783420818263.WHtESvw5fnrJ1qIW51S8k2UK8r_tN-PoghdPXHKB9kk.IjY1NTdhZWQzLTUyNmI4Ig.webp
-        In1cfc_68LP4mhtLgDMHiW2BIitcxj9-pyHagUfZHbk/
-          30.1756803205940.EEOZfkfS4sDcOTUT5RyWPJu6u_OTmc3rvy69JJeZuW4.IjNmNTE4LTYxNmQ1YjUyZTg2YmYi.webp
-        LGdCpfZGaeqqOCZvrDsYNCOzAsRgsz7tLNNkjjQ9xps/
-          60.1752140966182.PwjwDRntXu4t22vixoPxcJZdIA9nM28L3wZAwj_Befg.kSqxFSkeUMg7o9Wc3gQn6UXbttrRaLFWlMAkiHzTFsA.webp
-        MISAD70Rftj3kyrZDXHJwJtnSN_qU9i9yQQ60CQh6LM/
-          60.1752142473562.A5UGrq6oOXbdEGtzDmjam_OizUZHb2ej1_4mFJ-3PtA.ZDc4ZGQ3YTMyYTI4YjNjZjVhYjk1ZGY2ZTQ4YTAwODE.webp
-        nMvrNoV2PhROebPZHyAQ8tu_dRtfXxzOHvuZyJjwO_Y/
-          60.1760351361425.JIudZalk2ykiwgHVrvbZmyBCghjyC6devAqqQD2OO6Q.Vy8iODc4My0xOTlkZDFjZjFkZiI.svg
-        oNwdft2RS1WvuePSN5WGc2uojZ1-_GrZ24pdoAXsQsM/
-          60.1753177534962.PxGMBt57bbCxQaU5zz1h3egNNXxGDHBJnACnTS6prGM.3CPtPN2H0fsih4kXtvR66B3OHwEJ2rP5NrC0ouN_p6g.webp
-        RHaRc_JpN152MHUPf0MhbvupaNwgAE_bXpP-RuD2Iv4/
-          31536000.1783513828028._lJHeGTfAPR_UAtKItycc4cCPQse9YvslV7Sx3ZuMMY.ImU5ZWEyZGViOGViMzgwYjAwMDY0ZWJmNWMyNmNmNGEzIg.webp
-        uX8evUpGxFAwn5XXZH8KSO3gLiD8rD5yJ4YdPuWm87E/
-          31536000.1783419703440.FbkXWAEEB037n0NwumVk9-gorEL0G8DhciVsZgIa6Ww.IjY3MGI3MGVjLTFmYTkyIg.webp
-        UzedaWXM9_-aQq1OMk7yUxhh3QVZu_0H5i7yp_tcMto/
-          28800.1751999176631.SGVIYIKVWLn9-FUmNYQP8mTRJymncqQqVQEXDw3AuWg.IjNmNTE4LTYxNmQ1YjUyZTg2YmYi.webp
-        watYcmT9x6wJbiV7DayPuPWGZTIS91N7mCzYpHRXYZY/
-          60.1753177560347.cI9Ybjw8UzZEvRNEfM-5SBNtfmaZJBPuXkUxwLYV5aA.Vy8iNDA5YmYtMTk4MzE4NTA3M2Yi.webp
-      swc/
-        plugins/
-          v7_windows_x86_64_9.0.0/
-      webpack/
-        client-development/
-          0.pack.gz
-          1.pack.gz
-          2.pack.gz
-          3.pack.gz
-          4.pack.gz
-          5.pack.gz
-          6.pack.gz
-          7.pack.gz
-          8.pack.gz
-          9.pack.gz
-          10.pack.gz
-          11.pack.gz
-          12.pack.gz
-          13.pack.gz
-          14.pack.gz
-          15.pack.gz
-          16.pack.gz
-          17.pack.gz
-          18.pack.gz
-          19.pack.gz
-          20.pack.gz
-          21.pack.gz
-          22.pack.gz
-          23.pack.gz
-          24.pack.gz
-          25.pack.gz
-          26.pack.gz
-          27.pack.gz
-          index.pack.gz
-          index.pack.gz.old
-        client-development-fallback/
-          0.pack.gz
-          1.pack.gz
-          2.pack.gz
-          3.pack.gz
-          index.pack.gz
-          index.pack.gz.old
-        server-development/
-          0.pack.gz
-          1.pack.gz
-          2.pack.gz
-          3.pack.gz
-          4.pack.gz
-          5.pack.gz
-          6.pack.gz
-          7.pack.gz
-          8.pack.gz
-          9.pack.gz
-          10.pack.gz
-          11.pack.gz
-          12.pack.gz
-          13.pack.gz
-          14.pack.gz
-          15.pack.gz
-          16.pack.gz
-          17.pack.gz
-          18.pack.gz
-          19.pack.gz
-          20.pack.gz
-          21.pack.gz
-          index.pack.gz
-          index.pack.gz.old
-      .rscinfo
-    server/
-      app/
-        _not-found/
-          page_client-reference-manifest.js
-          page.js
-        favicon.ico/
-          route.js
-        page_client-reference-manifest.js
-        page.js
-      vendor-chunks/
-        @swc.js
-        next.js
-        react-icons.js
-      app-paths-manifest.json
-      interception-route-rewrite-manifest.js
-      middleware-build-manifest.js
-      middleware-manifest.json
-      middleware-react-loadable-manifest.js
-      next-font-manifest.js
-      next-font-manifest.json
-      pages-manifest.json
-      server-reference-manifest.js
-      server-reference-manifest.json
-      webpack-runtime.js
-    static/
-      chunks/
-        app/
-          _not-found/
-            page.js
-          error.js
-          layout.js
-          not-found.js
-          page.js
-        _app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js
-        app-pages-internals.js
-        main-app.js
-        polyfills.js
-        webpack.js
-      css/
-        app/
-          error.css
-          layout.css
-          not-found.css
-      development/
-        _buildManifest.js
-        _ssgManifest.js
-      webpack/
-        app/
-          layout.52950e48de26ba5d.hot-update.js
-          layout.f7c276fcd90ea8fd.hot-update.js
-          page.52950e48de26ba5d.hot-update.js
-        52950e48de26ba5d.webpack.hot-update.json
-        633457081244afec._.hot-update.json
-        f7c276fcd90ea8fd.webpack.hot-update.json
-        webpack.52950e48de26ba5d.hot-update.js
-        webpack.f7c276fcd90ea8fd.hot-update.js
-    types/
-      app/
-        layout.ts
-        page.ts
-      cache-life.d.ts
-      package.json
-    app-build-manifest.json
-    build-manifest.json
-    package.json
-    react-loadable-manifest.json
-    trace
-  app/
-    admin/
-      page.tsx
-    auth/
-      login/
-        login.module.css
-        page.tsx
-      register/
-        page.tsx
-        register.module.css
-    games/
-      [id]/
-        play/
-          ClientGame.tsx
-          ClientGameWrapper.tsx
-          page.tsx
-          play.module.css
-        AuthorsBlock.tsx
-        BreadcrumbsAndHeader.tsx
-        ClientCommentsSection.tsx
-        comments.module.css
-        CommentsSection.tsx
-        game-overview.module.css
-        media-gallery.module.css
-        MediaGallery.tsx
-        ModelsViewer.tsx
-        ModelsViewerWrapper.tsx
-        page.tsx
-      games.module.css
-      page.tsx
-    hall-of-fame/
-      page.tsx
-    map-success/
-      page.tsx
-    news/
-      [slug]/
-        page.tsx
-      page.tsx
-    portfolio/
-      [slug]/
-        page.tsx
-      page.tsx
-    profile/
-      page.tsx
-    staff/
-      [slug]/
-        page.tsx
-      page.tsx
-    upload/
-      page.tsx
-      upload.module.css
-    error.module.css
-    error.tsx
-    favicon.ico
-    globals.css
-    layout.tsx
-    not-found.module.css
-    not-found.tsx
-    page.module.css
-    page.tsx
-  components/
-    features/
-      admin/
-        forms/
-          NewsForm.tsx
-          PortfolioForm.tsx
-          ProjectForm.tsx
-          StaffForm.tsx
-        NewsManagement.tsx
-        PortfolioManagement.tsx
-        ProjectsManagement.tsx
-        StaffManagement.tsx
-        UsersManagement.tsx
-      auth/
-        LoginModal.tsx
-        RegisterModal.tsx
-      hallOfFame/
-        CallToAction.tsx
-        EmptyHallOfFame.tsx
-        HallOfFameHeader.tsx
-        ProjectAuthors.tsx
-        ProjectCard.tsx
-        ProjectGrid.tsx
-      news/
-        FullWidthImage.tsx
-        MarkdownContent.tsx
-        NewsCard.tsx
-        NewsFilterPanel.tsx
-        NewsGrid.tsx
-        NewsSidebar.tsx
-      portfolio/
-        detail/
-          EmptyPortfolio.tsx
-          PhaseModal.tsx
-          PortfolioDetail.tsx
-          ProjectAuthors.tsx
-          ProjectContent.tsx
-          ProjectCover.tsx
-          ProjectSidebar.tsx
-        CategoryFilter.tsx
-        EmptyProjects.tsx
-        PortfolioStats.tsx
-        ProjectCard.tsx
-        ProjectsGrid.tsx
-        SearchFilter.tsx
-      staff/
-        detail/
-          StaffAchievements.tsx
-          StaffContacts.tsx
-          StaffHeader.tsx
-          StaffProjects.tsx
-          StaffSkills.tsx
-        EmptyStaff.tsx
-        SearchFilter.tsx
-        SkillFilter.tsx
-        StaffCard.tsx
-        StaffCardGameStyle.tsx
-        StaffGrid.tsx
-      successStories/
-        SuccessMapView.tsx
-        SuccessMarker.tsx
-        YearFilter.tsx
-      Modal.tsx
-      SkillDetailModal.tsx
-      SkillTree.tsx
-      SocialLinks.tsx
-    layout/
-      AnimatedDiv.tsx
-      AnimatedSection.tsx
-      Footer.tsx
-      Header.tsx
-      Layout.tsx
-      ProjectTimeline.tsx
-    sections/
-      Awards.tsx
-      Blog.tsx
-      Contact.tsx
-      FAQ.tsx
-      Hero.tsx
-      Partners.tsx
-      Projects.tsx
-      Team.tsx
-    ui/
-      AnimatedSearchComponent.tsx
-      BackButton.tsx
-      BackToTopButton.tsx
-      ImageSlider.tsx
-      Label.tsx
-      PageTitle.tsx
-      SafeImage.tsx
-      ScrollToTop.tsx
-      SearchFilter.tsx
-      SectionWrapper.tsx
-    ClientWrapper.tsx
-    header.module.css
-    header.tsx
-    UnityCleanup.tsx
-    useAuthExp.ts
-  contexts/
-    AuthContext.tsx
-  data/
-    categories.ts
-    news.ts
-    portfolio.ts
-    roles.ts
-    staff.ts
-    successStories.ts
-  public/
-    content/
-      portfolio/
-        vr-medical-simulator.md
-      gazizov-3d-modeling-in-games.md
-      kostuk-vr-crane-training.md
-      kugurakova-game-education-strategy.md
-      uiux-hackathon-winners.md
-      vr-gamedev-methodology.md
-    images/
-      news/
-        arvr.jpg
-        hackaton.webp
-      portfolio/
-        AR-VR-in-Healthcare-1.jpg
-      staff/
-        avatar-vlada.jpg
-      avatar-placeholder.jpg
-      placeholder.jpg
-    file.svg
-    globe.svg
-    next.svg
-    vercel.svg
-    window.svg
-  types/
-    news.d.ts
-    portfolio.d.ts
-    roles.d.ts
-    staff.d.ts
-    studentProject.d.ts
-    successStories.d.ts
-  utils/
-    imageUtils.ts
-    markdownUtils.ts
-  .env.local
-  .export-ignore
-  cors.json
-  eslint.config.mjs
-  export.md
-  exportconfig.json
-  global.d.ts
-  next-env.d.ts
-  next.config.ts
-  package-lock.json
-  package.json
-  postcss.config.mjs
-  README.md
-  tailwind.config.js
-  tsconfig.json
-minio/
-  docker-compose.yml
-mongo/
-  docker-compose.yml
-rabbit/
-  docker-compose.yml
-```
+```tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// components/admin/StaffForm.tsx
+'use client';
 
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { StaffMember } from '@/types/staff';
 
+export default function StaffForm({ 
+  member, 
+  onSave, 
+  onClose 
+}: {
+  member: StaffMember | null;
+  onSave: (data: StaffMember) => void;
+  onClose: () => void;
+}) {
+  const [formData, setFormData] = useState<StaffMember>({
+    slug: member?.slug || '',
+    name: member?.name || '',
+    position: member?.position || '',
+    photo: member?.photo || '',
+    title: member?.title || '',
+    rarity: member?.rarity || 'COMMON',
+    email: member?.email || '',
+    telegram: member?.telegram || '',
+    github: member?.github || '',
+    bio: member?.bio || '',
+    researchInterests: member?.researchInterests || [],
+    stats: member?.stats || [],
+    skills: member?.skills || [],
+    achievements: member?.achievements || [],
+    tags: member?.tags || [],
+  });
 
-# Selected Files Content
+  const [newTag, setNewTag] = useState('');
+  const [newInterest, setNewInterest] = useState('');
+  const [newStat, setNewStat] = useState({ label: '', value: 0 });
+  const [newSkill, setNewSkill] = useState({ 
+    name: '', 
+    level: 50,
+    description: '',
+    subskills: [] as Array<{ name: string; description?: string }>
+  });
+  const [newSubskill, setNewSubskill] = useState({ name: '', description: '' });
+  const [newAchievement, setNewAchievement] = useState({ 
+    title: '', 
+    icon: '', 
+    description: '' 
+  });
 
-## gameacademybackend/apps/api/src/app/controllers/news.controller.ts
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSave(formData);
+  };
 
-```ts
-import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
-import { RMQService } from 'nestjs-rmq';
-import { NewsCreate, NewsUpdate, NewsDelete, NewsGetBySlug, NewsGetList } from '@shared/contracts';
-import { JWTAuthGuard } from '../guards/jwt.guard';
-import { Roles } from '../guards/roles.guard';
-import { UserRole } from '@shared/interfaces';
+  const addTag = () => {
+    if (newTag.trim() && !formData.tags?.includes(newTag.trim())) {
+      setFormData(prev => ({
+        ...prev,
+        tags: [...prev.tags!, newTag.trim()]
+      }));
+      setNewTag('');
+    }
+  };
 
-@Controller('news')
-export class NewsController {
-  constructor(private readonly rmqService: RMQService) {}
+  const removeTag = (tagToRemove: string) => {
+    setFormData(prev => ({
+      ...prev,
+      tags: prev.tags?.filter(tag => tag !== tagToRemove)
+    }));
+  };
 
-  @Get()
-  async getNewsList(@Query('category') category?: string, @Query('search') search?: string) {
-    return this.rmqService.send<NewsGetList.Request, NewsGetList.Response>(NewsGetList.topic, { category, search });
-  }
+  const addInterest = () => {
+    if (newInterest.trim() && !formData.researchInterests?.includes(newInterest.trim())) {
+      setFormData(prev => ({
+        ...prev,
+        researchInterests: [...(prev.researchInterests || []), newInterest.trim()]
+      }));
+      setNewInterest('');
+    }
+  };
 
-  @Get(':slug')
-  async getNewsBySlug(@Param('slug') slug: string) {
-    return this.rmqService.send<NewsGetBySlug.Request, NewsGetBySlug.Response>(NewsGetBySlug.topic, { slug });
-  }
+  const removeInterest = (interestToRemove: string) => {
+    setFormData(prev => ({
+      ...prev,
+      researchInterests: prev.researchInterests?.filter(interest => interest !== interestToRemove)
+    }));
+  };
 
-  @Post()
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async createNews(@Body() dto: NewsCreate.Request) {
-    return this.rmqService.send<NewsCreate.Request, NewsCreate.Response>(NewsCreate.topic, dto);
-  }
+  const addStat = () => {
+    if (newStat.label.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        stats: [...(prev.stats || []), { ...newStat }]
+      }));
+      setNewStat({ label: '', value: 0 });
+    }
+  };
 
-  @Put(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async updateNews(@Param('id') id: string, @Body() dto: NewsCreate.Request) {
-    return this.rmqService.send<NewsUpdate.Request, NewsUpdate.Response>(NewsUpdate.topic, { ...dto, id });
-  }
+  const removeStat = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      stats: prev.stats?.filter((_, i) => i !== index)
+    }));
+  };
 
-  @Delete(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async deleteNews(@Param('id') id: string) {
-    return this.rmqService.send<NewsDelete.Request, NewsDelete.Response>(NewsDelete.topic, { id });
-  }
+  const addSkill = () => {
+    if (newSkill.name.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        skills: [...(prev.skills || []), { ...newSkill }]
+      }));
+      setNewSkill({ name: '', level: 50, description: '', subskills: [] });
+    }
+  };
+
+  const removeSkill = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      skills: prev.skills?.filter((_, i) => i !== index)
+    }));
+  };
+
+  const addSubskill = () => {
+    if (newSubskill.name.trim()) {
+      setNewSkill(prev => ({
+        ...prev,
+        subskills: [...prev.subskills, { ...newSubskill }]
+      }));
+      setNewSubskill({ name: '', description: '' });
+    }
+  };
+
+  const removeSubskill = (index: number) => {
+    setNewSkill(prev => ({
+      ...prev,
+      subskills: prev.subskills.filter((_, i) => i !== index)
+    }));
+  };
+
+  const addAchievement = () => {
+    if (newAchievement.title.trim() && newAchievement.icon.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        achievements: [...(prev.achievements || []), { ...newAchievement }]
+      }));
+      setNewAchievement({ title: '', icon: '', description: '' });
+    }
+  };
+
+  const removeAchievement = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      achievements: prev.achievements?.filter((_, i) => i !== index)
+    }));
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-white rounded-xl max-w-6xl w-full max-h-[95vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-6 border-b border-gray-200">
+          <h2 className="text-2xl font-bold">
+            {member ? 'Редактирование сотрудника' : 'Новый сотрудник'}
+          </h2>
+        </div>
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          {/* Основная информация */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Полное имя *
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Slug *
+              </label>
+              <input
+                type="text"
+                value={formData.slug}
+                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Должность *
+              </label>
+              <input
+                type="text"
+                value={formData.position}
+                onChange={(e) => setFormData(prev => ({ ...prev, position: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Титул
+              </label>
+              <input
+                type="text"
+                value={formData.title || ''}
+                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Редкость
+              </label>
+              <select
+                value={formData.rarity}
+                onChange={(e) => setFormData(prev => ({ ...prev, rarity: e.target.value as any }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="COMMON">COMMON</option>
+                <option value="RARE">RARE</option>
+                <option value="LEGENDARY">LEGENDARY</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                value={formData.email || ''}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Telegram
+              </label>
+              <input
+                type="text"
+                value={formData.telegram || ''}
+                onChange={(e) => setFormData(prev => ({ ...prev, telegram: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              GitHub
+            </label>
+            <input
+              type="text"
+              value={formData.github || ''}
+              onChange={(e) => setFormData(prev => ({ ...prev, github: e.target.value }))}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              URL фотографии *
+            </label>
+            <input
+              type="url"
+              value={formData.photo}
+              onChange={(e) => setFormData(prev => ({ ...prev, photo: e.target.value }))}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Биография
+            </label>
+            <textarea
+              value={formData.bio || ''}
+              onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
+              rows={4}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          {/* Научные интересы */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Научные интересы
+            </label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {formData.researchInterests?.map((interest, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                >
+                  {interest}
+                  <button
+                    type="button"
+                    onClick={() => removeInterest(interest)}
+                    className="ml-2 hover:text-blue-600"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newInterest}
+                onChange={(e) => setNewInterest(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addInterest())}
+                placeholder="Добавить научный интерес"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <button
+                type="button"
+                onClick={addInterest}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Добавить
+              </button>
+            </div>
+          </div>
+
+          {/* Теги */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Теги
+            </label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {formData.tags?.map((tag, index) => (
+                <span
+                  key={index}
+                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-300/10 text-primary"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="ml-2 hover:text-primary/70"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                placeholder="Введите тег и нажмите Enter"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <button
+                type="button"
+                onClick={addTag}
+                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Добавить
+              </button>
+            </div>
+          </div>
+
+          {/* Статистика */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Статистика
+            </label>
+            <div className="space-y-3 mb-4">
+              {formData.stats?.map((stat, index) => (
+                <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded">
+                  <div>
+                    <span className="font-medium">{stat.label}</span>
+                    <span className="ml-2 text-gray-600">({stat.value})</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeStat(index)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4 p-4 border border-gray-200 rounded-lg">
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">Название</label>
+                <input
+                  type="text"
+                  value={newStat.label}
+                  onChange={(e) => setNewStat(prev => ({ ...prev, label: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">Значение</label>
+                <input
+                  type="number"
+                  value={newStat.value}
+                  onChange={(e) => setNewStat(prev => ({ ...prev, value: parseInt(e.target.value) }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <button
+                  type="button"
+                  onClick={addStat}
+                  className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
+                >
+                  Добавить статистику
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Навыки */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Навыки
+            </label>
+            <div className="space-y-4 mb-4">
+              {formData.skills?.map((skill, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h4 className="font-medium">{skill.name}</h4>
+                      <p className="text-sm text-gray-600">Уровень: {skill.level}%</p>
+                      {skill.description && (
+                        <p className="text-sm mt-1">{skill.description}</p>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeSkill(index)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  {skill.subskills && skill.subskills.length > 0 && (
+                    <div className="mt-2">
+                      <h5 className="text-sm font-medium mb-1">Поднавыки:</h5>
+                      <div className="flex flex-wrap gap-1">
+                        {skill.subskills.map((subskill, subIndex) => (
+                          <span
+                            key={subIndex}
+                            className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                          >
+                            {subskill.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Название навыка</label>
+                  <input
+                    type="text"
+                    value={newSkill.name}
+                    onChange={(e) => setNewSkill(prev => ({ ...prev, name: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Уровень (%)</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={newSkill.level}
+                    onChange={(e) => setNewSkill(prev => ({ ...prev, level: parseInt(e.target.value) }))}
+                    className="w-full"
+                  />
+                  <div className="text-center text-sm">{newSkill.level}%</div>
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">Описание</label>
+                <textarea
+                  value={newSkill.description}
+                  onChange={(e) => setNewSkill(prev => ({ ...prev, description: e.target.value }))}
+                  rows={2}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+
+              {/* Поднавыки */}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-2">Поднавыки</label>
+                <div className="space-y-2 mb-2">
+                  {newSkill.subskills.map((subskill, index) => (
+                    <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                      <div>
+                        <span className="font-medium">{subskill.name}</span>
+                        {subskill.description && (
+                          <span className="ml-2 text-gray-600">- {subskill.description}</span>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeSubskill(index)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid md:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={newSubskill.name}
+                    onChange={(e) => setNewSubskill(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder="Название поднавыка"
+                    className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                  <input
+                    type="text"
+                    value={newSubskill.description}
+                    onChange={(e) => setNewSubskill(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Описание"
+                    className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                  <div className="md:col-span-2">
+                    <button
+                      type="button"
+                      onClick={addSubskill}
+                      className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
+                    >
+                      Добавить поднавык
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={addSkill}
+                className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
+              >
+                Добавить навык
+              </button>
+            </div>
+          </div>
+
+          {/* Достижения */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Достижения
+            </label>
+            <div className="space-y-4 mb-4">
+              {formData.achievements?.map((achievement, index) => (
+                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-lg">{achievement.icon}</span>
+                        <h4 className="font-medium">{achievement.title}</h4>
+                      </div>
+                      <p className="text-sm mt-1">{achievement.description}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeAchievement(index)}
+                      className="text-red-600 hover:text-red-800"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Название</label>
+                  <input
+                    type="text"
+                    value={newAchievement.title}
+                    onChange={(e) => setNewAchievement(prev => ({ ...prev, title: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">Иконка (эмодзи)</label>
+                  <input
+                    type="text"
+                    value={newAchievement.icon}
+                    onChange={(e) => setNewAchievement(prev => ({ ...prev, icon: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1">Описание</label>
+                <textarea
+                  value={newAchievement.description}
+                  onChange={(e) => setNewAchievement(prev => ({ ...prev, description: e.target.value }))}
+                  rows={2}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={addAchievement}
+                className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
+              >
+                Добавить достижение
+              </button>
+            </div>
+          </div>
+
+          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              Отмена
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-blue-300 text-white rounded-lg hover:bg-blue-300/90 transition-colors"
+            >
+              {member ? 'Обновить' : 'Создать'}
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
 }
 ```
 
-## gameacademybackend/apps/api/src/app/controllers/portfolio.controller.ts
+## gameacademyfrontend/components/features/admin/StaffManagement.tsx
 
-```ts
-/* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
-import { RMQService } from 'nestjs-rmq';
-import {
-  PortfolioCreate,
-  PortfolioUpdate,
-  PortfolioDelete,
-  PortfolioGetBySlug,
-  PortfolioGetList
-} from '@shared/contracts';
-import { JWTAuthGuard } from '../guards/jwt.guard';
-import { Roles } from '../guards/roles.guard';
-import { UserRole } from '@shared/interfaces';
+```tsx
+// components/admin/StaffManagement.tsx
+'use client';
 
-@Controller('portfolio')
-export class PortfolioController {
-  constructor(private readonly rmqService: RMQService) {}
+import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { StaffMember } from '@/types/staff';
+import StaffForm from './forms/StaffForm';
+import axios from 'axios';
 
-  @Get()
-  async getPortfolioList(@Query('category') category?: string, @Query('hallOfFrame') hallOfFrame?: boolean) {
-    return this.rmqService.send<PortfolioGetList.Request, PortfolioGetList.Response>(
-      PortfolioGetList.topic,
-      { category, hallOfFrame }
-    );
+export default function StaffManagement() {
+  const [staff, setStaff] = useState<StaffMember[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingMember, setEditingMember] = useState<StaffMember | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    fetchStaff();
+  }, []);
+
+  const fetchStaff = async () => {
+    try {
+      /*
+      // Mock data
+      const mockData: StaffMember[] = [
+        {
+          _id: '1',
+          slug: 'vlada-kugurakova',
+          name: 'Кугуракова Влада Владимировна',
+          position: 'Руководитель кафедры',
+          photo: '/team/kugurakova.jpg',
+          title: 'Доцент',
+          rarity: 'LEGENDARY',
+          email: 'vlada.kugurakova@gmail.com',
+          telegram: '@vladakugurakova',
+          bio: 'Опыт работы в IT-индустрии более 10 лет...',
+          researchInterests: ['VR/AR', 'Game Development', 'Computer Vision'],
+          tags: ['Руководство', 'VR/AR', 'Исследования']
+        }
+      ];
+      setStaff(mockData);
+      */
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      axios.get<{ staff: StaffMember[] }>(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).then(res => {
+        setStaff(res.data.staff);
+      }).catch(() => {
+        setError('Не удалось загрузить команду.');
+      });
+      setError('');
+    } catch (err) {
+      setError('Не удалось загрузить список сотрудников');
+      console.error('Error fetching staff:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSave = async (staffData: StaffMember) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      if (editingMember) {
+        // Update existing
+        await axios.put(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${editingMember._id}`,
+          staffData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setStaff(prev => prev.map(item => 
+          item._id === editingMember._id ? staffData : item
+        ));
+      } else {
+        // Create new
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
+          staffData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setStaff(prev => [...prev, staffData]);
+      }
+      setIsModalOpen(false);
+      setEditingMember(null);
+    } catch (error) {
+      console.error('Error saving staff member:', error);
+      alert('Ошибка при сохранении сотрудника');
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Вы уверены, что хотите удалить этого сотрудника?')) return;
+    
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Не авторизованы');
+
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${id}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setStaff(prev => prev.filter(item => item._id !== id));
+    } catch (error) {
+      console.error('Error deleting staff member:', error);
+      alert('Ошибка при удалении сотрудника');
+    }
+  };
+
+  if (loading) {
+    return <div className="flex justify-center py-8">Загрузка...</div>;
   }
 
-  @Get(':slug')
-  async getPortfolioBySlug(@Param('slug') slug: string) {
-    return this.rmqService.send<PortfolioGetBySlug.Request, PortfolioGetBySlug.Response>(
-      PortfolioGetBySlug.topic,
-      { slug }
-    );
-  }
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-2xl font-bold">Управление командой</h2>
+          <p className="text-gray-600">Преподаватели и сотрудники кафедры</p>
+        </div>
+        <button
+          onClick={() => {
+            setEditingMember(null);
+            setIsModalOpen(true);
+          }}
+          className="bg-blue-300 text-white px-6 py-3 rounded-lg hover:bg-blue-300/90 transition-colors flex items-center space-x-2"
+        >
+          <span>+</span>
+          <span>Новый сотрудник</span>
+        </button>
+      </div>
+      
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )}
 
-  @Post()
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async createPortfolio(@Body() dto: PortfolioCreate.Request) {
-    return this.rmqService.send<PortfolioCreate.Request, PortfolioCreate.Response>(
-      PortfolioCreate.topic,
-      dto
-    );
-  }
+      {/* Статистика */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Всего сотрудников</h3>
+          <div className="text-2xl font-bold text-gray-900">{staff.length}</div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Преподавателей</h3>
+          <div className="text-2xl font-bold text-gray-900">
+            {staff.filter(m => m.position.includes('преподаватель')).length}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">LEGENDARY</h3>
+          <div className="text-2xl font-bold text-gray-900">
+            {staff.filter(m => m.rarity === 'LEGENDARY').length}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Направлений</h3>
+          <div className="text-2xl font-bold text-gray-900">
+            {new Set(staff.flatMap(m => m.researchInterests || [])).size}
+          </div>
+        </div>
+      </div>
 
-  @Put(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async updatePortfolio(@Param('id') id: string, @Body() dto: PortfolioCreate.Request) {
-    return this.rmqService.send<PortfolioUpdate.Request, PortfolioUpdate.Response>(
-      PortfolioUpdate.topic,
-      { ...dto, id }
-    );
-  }
+      {/* Таблица сотрудников */}
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Сотрудник
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Должность
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Редкость
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Контакты
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Действия
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {staff.map((member) => (
+              <tr key={member._id} className="hover:bg-gray-50">
+                <td className="px-6 py-4">
+                  <div className="flex items-center">
+                    <div className="h-10 w-10 flex-shrink-0">
+                      <img
+                        className="h-10 w-10 rounded-full object-cover"
+                        src={member.photo}
+                        alt={member.name}
+                      />
+                    </div>
+                    <div className="ml-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {member.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {member.title}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {member.position}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    member.rarity === 'LEGENDARY' ? 'bg-yellow-100 text-yellow-800' :
+                    member.rarity === 'RARE' ? 'bg-purple-100 text-purple-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {member.rarity === 'LEGENDARY' ? 'LEGENDARY' :
+                     member.rarity === 'RARE' ? 'RARE' : 'COMMON'}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <div>{member.email}</div>
+                  <div>{member.telegram}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => {
+                      setEditingMember(member);
+                      setIsModalOpen(true);
+                    }}
+                    className="text-primary hover:text-primary/80 mr-4"
+                  >
+                    Редактировать
+                  </button>
+                  <button
+                    onClick={() => handleDelete(member._id!)}
+                    className="text-red-600 hover:text-red-900"
+                  >
+                    Удалить
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
 
-  @Delete(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async deletePortfolio(@Param('id') id: string) {
-    return this.rmqService.send<PortfolioDelete.Request, PortfolioDelete.Response>(
-      PortfolioDelete.topic,
-      { id }
-    );
-  }
+        {staff.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500">Нет сотрудников. Добавьте первого!</p>
+          </div>
+        )}
+      </div>
+
+      {/* Модальное окно для сотрудников 
+      */}
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <StaffForm
+            member={editingMember}
+            onSave={handleSave}
+            onClose={() => {
+              setIsModalOpen(false);
+              setEditingMember(null);
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+    </div>
+  );
 }
+
+// Компонент StaffForm будет аналогичен предыдущим формам
 ```
 
-## gameacademybackend/apps/api/src/app/controllers/staff.controller.ts
+## gameacademyfrontend/types/staff.d.ts
 
 ```ts
-import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
-import { RMQService } from 'nestjs-rmq';
-import { 
-  StaffCreate, 
-  StaffUpdate, 
-  StaffDelete, 
-  StaffGetBySlug, 
-  StaffGetList 
-} from '@shared/contracts';
-import { JWTAuthGuard } from '../guards/jwt.guard';
-import { Roles } from '../guards/roles.guard';
-import { UserRole } from '@shared/interfaces';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { StaticImageData } from "next/image";
 
-@Controller('staff')
-export class StaffController {
-  constructor(private readonly rmqService: RMQService) {}
+// Тип для редкости сотрудника
+export type Level = "Junior" | "Middle" | "Senior";
+export type PositionType = "Научно-педагогический работник" | "Профессорско-преподавательский состав";
 
-  @Get()
-  async getStaffList(@Query('position') position?: string, @Query('rarity') rarity?: string) {
-    return this.rmqService.send<StaffGetList.Request, StaffGetList.Response>(
-      StaffGetList.topic, 
-      { position, rarity }
-    );
-  }
+// Тип для статистики
+export interface StaffStat {
+  label: string;
+  value: number;
+}
 
-  @Get(':slug')
-  async getStaffBySlug(@Param('slug') slug: string) {
-    return this.rmqService.send<StaffGetBySlug.Request, StaffGetBySlug.Response>(
-      StaffGetBySlug.topic, 
-      { slug }
-    );
-  }
+// Тип для поднавыка
+export interface Subskill {
+  name: string;
+  description?: string;
+}
 
-  @Post()
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async createStaff(@Body() dto: StaffCreate.Request) {
-    return this.rmqService.send<StaffCreate.Request, StaffCreate.Response>(
-      StaffCreate.topic, 
-      dto
-    );
-  }
+// Тип для навыка
+export interface StaffSkill {
+  name: string;
+  level: Level;
+  description?: string;
+  subskills?: Subskill[];
+}
 
-  @Put(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async updateStaff(@Param('id') id: string, @Body() dto: StaffCreate.Request) {
-    return this.rmqService.send<StaffUpdate.Request, StaffUpdate.Response>(
-      StaffUpdate.topic, 
-      { ...dto, id }
-    );
-  }
+// Тип для достижения
+export interface StaffAchievement {
+  title: string;
+  icon: string; // Название иконки (например, "FaUpload")
+  description: string;
+}
 
-  @Delete(':id')
-  @UseGuards(JWTAuthGuard)
-  @Roles(UserRole.Admin)
-  async deleteStaff(@Param('id') id: string) {
-    return this.rmqService.send<StaffDelete.Request, StaffDelete.Response>(
-      StaffDelete.topic, 
-      { id }
-    );
-  }
+// Тип для контактов
+export interface Contact {
+  title: string;
+  value: string;
+}
+
+export interface Position {
+  type: PositionType;
+  value: string;
+}
+
+// Основной тип для сотрудника
+export interface StaffMember {
+  _id?: string;
+  name: string;
+  positions: Position[]; // Человекочитаемая должность
+  educationLevel: string;
+  researchPosition: string;
+  photo?: string; // URL изображения или статичный ресурс
+
+  // Описательные поля
+  bio?: string;
+  stats?: StaffStat[];
+  skills?: StaffSkill[];
+  achievements?: StaffAchievement[];
+
+  tags?: string[];
+  contact?: Contact[];
 }
 ```
 

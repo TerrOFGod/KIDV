@@ -1,13 +1,14 @@
-import { IsString, IsOptional, IsArray, IsNumber, ValidateNested, IsEnum } from 'class-validator';
+import { IsString, IsOptional, IsArray, ValidateNested, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
 import { SubskillDto } from './subskill.dto';
+import { Level } from '../types/level.type';
 
 export class StaffSkillDto {
   @IsString()
   name: string;
 
-  @IsNumber()
-  level: number;
+  @IsEnum(['Junior', 'Middle', 'Senior'])
+  level: Level;
 
   @IsOptional()
   @IsString()

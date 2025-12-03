@@ -5,6 +5,5 @@ export namespace StaffCreate {
   export class Request extends StaffCreateDto {}
   export class Response {
     id: string;
-    slug: string;
   }
 }

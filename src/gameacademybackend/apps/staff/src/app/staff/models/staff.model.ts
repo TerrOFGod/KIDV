@@ -6,38 +6,23 @@ export type StaffDocument = HydratedDocument<Staff>;
 
 @Schema({ timestamps: true })
 export class Staff {
-  @Prop({ required: true, unique: true })
-  slug: string;
-
   @Prop({ required: true })
   name: string;
 
+  @Prop({ type: [Object] })
+  positions: Array<{ type: 'Научно-педагогический работник' | 'Профессорско-преподавательский состав'; value: string }>;
+
   @Prop({ required: true })
-  position: string;
+  educationLevel: string;
+
+  @Prop({ required: true })
+  researchPosition: string;
 
   @Prop()
   photo?: string;
 
   @Prop()
-  title?: string;
-
-  @Prop({ enum: ['LEGENDARY', 'RARE', 'COMMON'] })
-  rarity?: "LEGENDARY" | "RARE" | "COMMON";
-
-  @Prop()
-  email?: string;
-
-  @Prop()
-  telegram?: string;
-
-  @Prop()
-  github?: string;
-
-  @Prop()
   bio?: string;
-
-  @Prop({ type: [String] })
-  researchInterests?: string[];
 
   @Prop({ type: [Object] })
   stats?: Array<{ label: string; value: number }>;
@@ -45,7 +30,7 @@ export class Staff {
   @Prop({ type: [Object] })
   skills?: Array<{
     name: string;
-    level: number;
+    level: 'Junior' | 'Middle' | 'Senior';
     description?: string;
     subskills?: Array<{ name: string; description?: string }>;
   }>;
@@ -57,15 +42,11 @@ export class Staff {
     description: string;
   }>;
 
-  // Устаревшие/альтернативные поля
-  @Prop()
-  image?: string;
-
   @Prop({ type: [String] })
   tags?: string[];
 
-  @Prop()
-  contact?: string;
+  @Prop({ type: [Object] })
+  contact?: Array<{ title: string; value: string }>;
 }
 
 export const StaffSchema = SchemaFactory.createForClass(Staff);

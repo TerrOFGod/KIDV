@@ -20,40 +20,17 @@ export default function StaffManagement() {
 
   const fetchStaff = async () => {
     try {
-      /*
-      // Mock data
-      const mockData: StaffMember[] = [
-        {
-          _id: '1',
-          slug: 'vlada-kugurakova',
-          name: 'Кугуракова Влада Владимировна',
-          position: 'Руководитель кафедры',
-          photo: '/team/kugurakova.jpg',
-          title: 'Доцент',
-          rarity: 'LEGENDARY',
-          email: 'vlada.kugurakova@gmail.com',
-          telegram: '@vladakugurakova',
-          bio: 'Опыт работы в IT-индустрии более 10 лет...',
-          researchInterests: ['VR/AR', 'Game Development', 'Computer Vision'],
-          tags: ['Руководство', 'VR/AR', 'Исследования']
-        }
-      ];
-      setStaff(mockData);
-      */
       setLoading(true);
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Не авторизованы');
 
-      axios.get<{ staff: StaffMember[] }>(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
+      const response = await axios.get<{ staff: StaffMember[] }>(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
         headers: { Authorization: `Bearer ${token}` },
-      }).then(res => {
-        setStaff(res.data.staff);
-      }).catch(() => {
-        setError('Не удалось загрузить команду.');
       });
+      setStaff(response.data.staff);
       setError('');
     } catch (err) {
-      setError('Не удалось загрузить список сотрудников');
+      setError('Не удалось загрузить команду.');
       console.error('Error fetching staff:', err);
     } finally {
       setLoading(false);
@@ -65,7 +42,7 @@ export default function StaffManagement() {
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Не авторизованы');
 
-      if (editingMember) {
+      if (editingMember?._id) {
         // Update existing
         await axios.put(
           `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${editingMember._id}`,
@@ -73,16 +50,16 @@ export default function StaffManagement() {
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setStaff(prev => prev.map(item => 
-          item._id === editingMember._id ? staffData : item
+          item._id === editingMember._id ? { ...staffData, _id: editingMember._id } : item
         ));
       } else {
         // Create new
-        await axios.post(
+        const response = await axios.post<StaffMember>(
           `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
           staffData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        setStaff(prev => [...prev, staffData]);
+        setStaff(prev => [...prev, response.data]);
       }
       setIsModalOpen(false);
       setEditingMember(null);
@@ -146,21 +123,25 @@ export default function StaffManagement() {
           <div className="text-2xl font-bold text-gray-900">{staff.length}</div>
         </div>
         <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Научных работников</h3>
+          <div className="text-2xl font-bold text-gray-900">
+            {staff.filter(m => 
+              m.positions?.some(p => p.type === 'Научно-педагогический работник')
+            ).length}
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
           <h3 className="text-sm font-medium text-gray-500 mb-2">Преподавателей</h3>
           <div className="text-2xl font-bold text-gray-900">
-            {staff.filter(m => m.position.includes('преподаватель')).length}
+            {staff.filter(m => 
+              m.positions?.some(p => p.type === 'Профессорско-преподавательский состав')
+            ).length}
           </div>
         </div>
         <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">LEGENDARY</h3>
+          <h3 className="text-sm font-medium text-gray-500 mb-2">Тегов</h3>
           <div className="text-2xl font-bold text-gray-900">
-            {staff.filter(m => m.rarity === 'LEGENDARY').length}
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Направлений</h3>
-          <div className="text-2xl font-bold text-gray-900">
-            {new Set(staff.flatMap(m => m.researchInterests || [])).size}
+            {new Set(staff.flatMap(m => m.tags || [])).size}
           </div>
         </div>
       </div>
@@ -174,10 +155,10 @@ export default function StaffManagement() {
                 Сотрудник
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Должность
+                Должности
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Редкость
+                Образование
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Контакты
@@ -193,38 +174,58 @@ export default function StaffManagement() {
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full object-cover"
-                        src={member.photo}
-                        alt={member.name}
-                      />
+                      {member.photo ? (
+                        <img
+                          className="h-10 w-10 rounded-full object-cover"
+                          src={member.photo}
+                          alt={member.name}
+                        />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                          <span className="text-gray-500 text-sm">
+                            {member.name.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900">
                         {member.name}
                       </div>
                       <div className="text-sm text-gray-500">
-                        {member.title}
+                        {member.researchPosition}
                       </div>
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {member.position}
+                <td className="px-6 py-4">
+                  <div className="flex flex-wrap gap-1">
+                    {member.positions?.map((position, idx) => (
+                      <span 
+                        key={idx} 
+                        className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                      >
+                        {position.value}
+                      </span>
+                    ))}
+                  </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    member.rarity === 'LEGENDARY' ? 'bg-yellow-100 text-yellow-800' :
-                    member.rarity === 'RARE' ? 'bg-purple-100 text-purple-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
-                    {member.rarity === 'LEGENDARY' ? 'LEGENDARY' :
-                     member.rarity === 'RARE' ? 'RARE' : 'COMMON'}
-                  </span>
+                <td className="px-6 py-4 text-sm text-gray-500">
+                  {member.educationLevel}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <div>{member.email}</div>
-                  <div>{member.telegram}</div>
+                <td className="px-6 py-4">
+                  <div className="space-y-1">
+                    {member.contact?.slice(0, 2).map((contact, idx) => (
+                      <div key={idx} className="text-sm text-gray-500">
+                        <span className="font-medium">{contact.title}:</span> {contact.value}
+                      </div>
+                    ))}
+                    {member.contact && member.contact.length > 2 && (
+                      <div className="text-xs text-gray-400">
+                        +{member.contact.length - 2} еще
+                      </div>
+                    )}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
@@ -237,7 +238,7 @@ export default function StaffManagement() {
                     Редактировать
                   </button>
                   <button
-                    onClick={() => handleDelete(member._id!)}
+                    onClick={() => member._id && handleDelete(member._id)}
                     className="text-red-600 hover:text-red-900"
                   >
                     Удалить
@@ -255,9 +256,6 @@ export default function StaffManagement() {
         )}
       </div>
 
-      {/* Модальное окно для сотрудников 
-      */}
-
       <AnimatePresence>
         {isModalOpen && (
           <StaffForm
@@ -270,9 +268,6 @@ export default function StaffManagement() {
           />
         )}
       </AnimatePresence>
-
     </div>
   );
 }
-
-// Компонент StaffForm будет аналогичен предыдущим формам

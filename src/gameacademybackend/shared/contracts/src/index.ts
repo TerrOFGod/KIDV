@@ -24,7 +24,6 @@ export * from './lib/portfolio/portfolio.get-list';
 export * from './lib/portfolio/portfolio.update';
 export * from './lib/staff/staff.create';
 export * from './lib/staff/staff.delete';
-export * from './lib/staff/staff.get-by-slug';
 export * from './lib/staff/staff.get-list';
 export * from './lib/staff/staff.update';
 export * from './lib/success-story/success-story.create';

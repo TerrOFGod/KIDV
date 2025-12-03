@@ -2,21 +2,16 @@ import { Types } from 'mongoose';
 
 export interface IStaff {
   _id?: Types.ObjectId;
-  slug: string;
   name: string;
-  position: string;
+  positions: Array<{ type: 'Научно-педагогический работник' | 'Профессорско-преподавательский состав'; value: string }>;
+  educationLevel: string;
+  researchPosition: string;
   photo?: string;
-  title?: string;
-  rarity?: "LEGENDARY" | "RARE" | "COMMON";
-  email?: string;
-  telegram?: string;
-  github?: string;
   bio?: string;
-  researchInterests?: string[];
   stats?: Array<{ label: string; value: number }>;
   skills?: Array<{
     name: string;
-    level: number;
+    level: 'Junior' | 'Middle' | 'Senior';
     description?: string;
     subskills?: Array<{ name: string; description?: string }>;
   }>;
@@ -25,9 +20,6 @@ export interface IStaff {
     icon: string;
     description: string;
   }>;
-  // Устаревшие/альтернативные поля
-  id?: string | number;
-  image?: string;
   tags?: string[];
-  contact?: string;
+  contact?: Array<{ title: string; value: string }>;
 }

@@ -3,7 +3,7 @@ import { StaticImageData } from "next/image";
 
 // Тип для редкости сотрудника
 export type Level = "Junior" | "Middle" | "Senior";
-export type PositionType = "Университетская" | "Структурная";
+export type PositionType = "Научно-педагогический работник" | "Профессорско-преподавательский состав";
 
 // Тип для статистики
 export interface StaffStat {
@@ -47,22 +47,17 @@ export interface Position {
 export interface StaffMember {
   _id?: string;
   name: string;
-  position: Position; // Человекочитаемая должность
+  positions: Position[]; // Человекочитаемая должность
+  educationLevel: string;
+  researchPosition: string;
   photo?: string; // URL изображения или статичный ресурс
-
-  // Роли и квалификация
-  title?: string; // Ключ для словаря ролей (например, "head", "senior")
 
   // Описательные поля
   bio?: string;
-
-  // Игровые атрибуты
   stats?: StaffStat[];
   skills?: StaffSkill[];
   achievements?: StaffAchievement[];
 
-  // Устаревшие/альтернативные поля (для совместимости)
-  image?: string; // Альтернатива для photo
   tags?: string[];
   contact?: Contact[];
 }
