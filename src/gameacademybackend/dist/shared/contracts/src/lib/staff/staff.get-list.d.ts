@@ -2,29 +2,27 @@ export declare namespace StaffGetList {
     const topic = "staff.get-list.query";
     class Request {
         position?: string;
-        rarity?: string;
+        researchPosition?: string;
     }
     class Response {
-        staff: {
+        staff: Array<{
             _id?: string;
-            slug: string;
             name: string;
-            position: string;
+            positions: Array<{
+                type: string;
+                value: string;
+            }>;
+            educationLevel: string;
+            researchPosition: string;
             photo?: string;
-            title?: string;
-            rarity?: 'LEGENDARY' | 'RARE' | 'COMMON';
-            email?: string;
-            telegram?: string;
-            github?: string;
             bio?: string;
-            researchInterests?: string[];
             stats?: Array<{
                 label: string;
                 value: number;
             }>;
             skills?: Array<{
                 name: string;
-                level: number;
+                level: string;
                 description?: string;
                 subskills?: Array<{
                     name: string;
@@ -36,10 +34,11 @@ export declare namespace StaffGetList {
                 icon: string;
                 description: string;
             }>;
-            id?: string | number;
-            image?: string;
             tags?: string[];
-            contact?: string;
-        }[];
+            contact?: Array<{
+                title: string;
+                value: string;
+            }>;
+        }>;
     }
 }

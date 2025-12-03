@@ -17,7 +17,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }

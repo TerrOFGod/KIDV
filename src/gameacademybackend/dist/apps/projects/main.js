@@ -239403,10 +239403,10 @@ const mongo_config_1 = __webpack_require__(2565);
 const games_module_1 = __webpack_require__(2566);
 const minio_module_1 = __webpack_require__(2843);
 const comments_module_1 = __webpack_require__(2845);
-const configs_1 = __webpack_require__(2942);
+const configs_1 = __webpack_require__(2943);
 const nestjs_rmq_1 = __webpack_require__(2850);
 const duplicate_module_1 = __webpack_require__(2844);
-const admin_module_1 = __webpack_require__(2944);
+const admin_module_1 = __webpack_require__(2945);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -364552,10 +364552,10 @@ var chain = __webpack_require__(2601);
 
 const ENV_IMDS_DISABLED = "AWS_EC2_METADATA_DISABLED";
 const remoteProvider = async (init) => {
-    const { ENV_CMDS_FULL_URI, ENV_CMDS_RELATIVE_URI, fromContainerMetadata, fromInstanceMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2956));
+    const { ENV_CMDS_FULL_URI, ENV_CMDS_RELATIVE_URI, fromContainerMetadata, fromInstanceMetadata } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2957));
     if (process.env[ENV_CMDS_RELATIVE_URI] || process.env[ENV_CMDS_FULL_URI]) {
         init.logger?.debug("@aws-sdk/credential-provider-node - remoteProvider::fromHttp/fromContainerMetadata");
-        const { fromHttp } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2957));
+        const { fromHttp } = await __webpack_require__.e(/* import() */ 8).then(__webpack_require__.bind(__webpack_require__, 2958));
         return (0,chain.chain)(fromHttp(init), fromContainerMetadata(init));
     }
     if (process.env[ENV_IMDS_DISABLED] && process.env[ENV_IMDS_DISABLED] !== "false") {
@@ -364666,22 +364666,22 @@ const defaultProvider = (init = {}) => memoizeChain([
         if (!ssoStartUrl && !ssoAccountId && !ssoRegion && !ssoRoleName && !ssoSession) {
             throw new CredentialsProviderError.CredentialsProviderError("Skipping SSO provider in default chain (inputs do not include SSO fields).", { logger: init.logger });
         }
-        const { fromSSO } = await __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(__webpack_require__, 2947));
+        const { fromSSO } = await __webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(__webpack_require__, 2948));
         return fromSSO(init)(awsIdentityProperties);
     },
     async (awsIdentityProperties) => {
         init.logger?.debug("@aws-sdk/credential-provider-node - defaultProvider::fromIni");
-        const { fromIni } = await __webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(__webpack_require__, 2951));
+        const { fromIni } = await __webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(__webpack_require__, 2952));
         return fromIni(init)(awsIdentityProperties);
     },
     async (awsIdentityProperties) => {
         init.logger?.debug("@aws-sdk/credential-provider-node - defaultProvider::fromProcess");
-        const { fromProcess } = await __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(__webpack_require__, 2953));
+        const { fromProcess } = await __webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(__webpack_require__, 2954));
         return fromProcess(init)(awsIdentityProperties);
     },
     async (awsIdentityProperties) => {
         init.logger?.debug("@aws-sdk/credential-provider-node - defaultProvider::fromTokenFile");
-        const { fromTokenFile } = await __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(__webpack_require__, 2955));
+        const { fromTokenFile } = await __webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(__webpack_require__, 2956));
         return fromTokenFile(init)(awsIdentityProperties);
     },
     async () => {
@@ -378885,7 +378885,7 @@ class HttpProtocol extends _SerdeContext__WEBPACK_IMPORTED_MODULE_4__.SerdeConte
         });
     }
     async loadEventStreamCapability() {
-        const { EventStreamSerde } = await __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(__webpack_require__, 2958));
+        const { EventStreamSerde } = await __webpack_require__.e(/* import() */ 9).then(__webpack_require__.bind(__webpack_require__, 2959));
         return new EventStreamSerde({
             marshaller: this.getEventStreamMarshaller(),
             serializer: this.serializer,
@@ -382294,7 +382294,7 @@ const inferPhysicalRegion = async () => {
     }
     if (!process.env[ENV_IMDS_DISABLED]) {
         try {
-            const { getInstanceMetadataEndpoint, httpRequest } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2956));
+            const { getInstanceMetadataEndpoint, httpRequest } = await __webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(__webpack_require__, 2957));
             const endpoint = await getInstanceMetadataEndpoint();
             return (await httpRequest({ ...endpoint, path: IMDS_REGION_PATH })).toString();
         }
@@ -407667,7 +407667,7 @@ const mongoose_1 = __webpack_require__(2054);
 const comment_schema_1 = __webpack_require__(2846);
 const comments_service_1 = __webpack_require__(2848);
 const comments_controller_1 = __webpack_require__(2849);
-const user_model_1 = __webpack_require__(2941);
+const user_model_1 = __webpack_require__(2942);
 let CommentsModule = class CommentsModule {
 };
 exports.CommentsModule = CommentsModule;
@@ -411015,15 +411015,14 @@ tslib_1.__exportStar(__webpack_require__(2921), exports);
 tslib_1.__exportStar(__webpack_require__(2922), exports);
 tslib_1.__exportStar(__webpack_require__(2923), exports);
 tslib_1.__exportStar(__webpack_require__(2924), exports);
-tslib_1.__exportStar(__webpack_require__(2931), exports);
-tslib_1.__exportStar(__webpack_require__(2932), exports);
 tslib_1.__exportStar(__webpack_require__(2933), exports);
 tslib_1.__exportStar(__webpack_require__(2934), exports);
 tslib_1.__exportStar(__webpack_require__(2935), exports);
-tslib_1.__exportStar(__webpack_require__(2937), exports);
+tslib_1.__exportStar(__webpack_require__(2936), exports);
 tslib_1.__exportStar(__webpack_require__(2938), exports);
 tslib_1.__exportStar(__webpack_require__(2939), exports);
 tslib_1.__exportStar(__webpack_require__(2940), exports);
+tslib_1.__exportStar(__webpack_require__(2941), exports);
 
 
 /***/ }),
@@ -412070,31 +412069,37 @@ var StaffCreate;
 
 "use strict";
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCreateDto = void 0;
 const tslib_1 = __webpack_require__(1);
 const class_validator_1 = __webpack_require__(176);
 const class_transformer_1 = __webpack_require__(290);
-const rarity_type_1 = __webpack_require__(2926);
-const staff_stat_dto_1 = __webpack_require__(2927);
-const staff_skill_dto_1 = __webpack_require__(2928);
-const staff_achievement_dto_1 = __webpack_require__(2930);
+const position_dto_1 = __webpack_require__(2926);
+const contact_dto_1 = __webpack_require__(2928);
+const staff_stat_dto_1 = __webpack_require__(2929);
+const staff_skill_dto_1 = __webpack_require__(2930);
+const staff_achievement_dto_1 = __webpack_require__(2932);
 class StaffCreateDto {
 }
 exports.StaffCreateDto = StaffCreateDto;
 tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "slug", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => position_dto_1.PositionDto),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "position", void 0);
+], StaffCreateDto.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -412104,38 +412109,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(["LEGENDARY", "RARE", "COMMON"]),
-    tslib_1.__metadata("design:type", typeof (_a = typeof rarity_type_1.Rarity !== "undefined" && rarity_type_1.Rarity) === "function" ? _a : Object)
-], StaffCreateDto.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    tslib_1.__metadata("design:type", Array)
-], StaffCreateDto.prototype, "researchInterests", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -412159,24 +412133,46 @@ tslib_1.__decorate([
 ], StaffCreateDto.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "image", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "tags", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => contact_dto_1.ContactDto),
+    tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "contact", void 0);
 
 
 /***/ }),
 /* 2926 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PositionDto = void 0;
+const tslib_1 = __webpack_require__(1);
+const class_validator_1 = __webpack_require__(176);
+const level_type_1 = __webpack_require__(2927);
+class PositionDto {
+}
+exports.PositionDto = PositionDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsEnum)(['Научно-педагогический работник', 'Профессорско-преподавательский состав']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.PositionType !== "undefined" && level_type_1.PositionType) === "function" ? _a : Object)
+], PositionDto.prototype, "type", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], PositionDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2927 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -412185,7 +412181,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
-/* 2927 */
+/* 2928 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ContactDto = void 0;
+const tslib_1 = __webpack_require__(1);
+const class_validator_1 = __webpack_require__(176);
+class ContactDto {
+}
+exports.ContactDto = ContactDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "title", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2929 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412208,17 +412227,19 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2928 */
+/* 2930 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSkillDto = void 0;
 const tslib_1 = __webpack_require__(1);
 const class_validator_1 = __webpack_require__(176);
 const class_transformer_1 = __webpack_require__(290);
-const subskill_dto_1 = __webpack_require__(2929);
+const subskill_dto_1 = __webpack_require__(2931);
+const level_type_1 = __webpack_require__(2927);
 class StaffSkillDto {
 }
 exports.StaffSkillDto = StaffSkillDto;
@@ -412227,8 +412248,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.Level !== "undefined" && level_type_1.Level) === "function" ? _a : Object)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
@@ -412245,7 +412266,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2929 */
+/* 2931 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412269,7 +412290,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2930 */
+/* 2932 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412296,7 +412317,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2931 */
+/* 2933 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412322,33 +412343,7 @@ var StaffDelete;
 
 
 /***/ }),
-/* 2932 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StaffGetBySlug = void 0;
-const tslib_1 = __webpack_require__(1);
-const class_validator_1 = __webpack_require__(176);
-var StaffGetBySlug;
-(function (StaffGetBySlug) {
-    StaffGetBySlug.topic = 'staff.get-by-slug.query';
-    class Request {
-    }
-    tslib_1.__decorate([
-        (0, class_validator_1.IsString)(),
-        tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "slug", void 0);
-    StaffGetBySlug.Request = Request;
-    class Response {
-    }
-    StaffGetBySlug.Response = Response;
-})(StaffGetBySlug || (exports.StaffGetBySlug = StaffGetBySlug = {}));
-
-
-/***/ }),
-/* 2933 */
+/* 2934 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412371,7 +412366,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }
@@ -412380,7 +412375,7 @@ var StaffGetList;
 
 
 /***/ }),
-/* 2934 */
+/* 2935 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412407,14 +412402,14 @@ var StaffUpdate;
 
 
 /***/ }),
-/* 2935 */
+/* 2936 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryCreate = void 0;
-const success_story_create_dto_1 = __webpack_require__(2936);
+const success_story_create_dto_1 = __webpack_require__(2937);
 var SuccessStoryCreate;
 (function (SuccessStoryCreate) {
     SuccessStoryCreate.topic = 'success-story.create.command';
@@ -412428,7 +412423,7 @@ var SuccessStoryCreate;
 
 
 /***/ }),
-/* 2936 */
+/* 2937 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412479,7 +412474,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2937 */
+/* 2938 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412505,7 +412500,7 @@ var SuccessStoryDelete;
 
 
 /***/ }),
-/* 2938 */
+/* 2939 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412537,7 +412532,7 @@ var SuccessStoryGetList;
 
 
 /***/ }),
-/* 2939 */
+/* 2940 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412546,7 +412541,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryUpdate = void 0;
 const tslib_1 = __webpack_require__(1);
 const class_validator_1 = __webpack_require__(176);
-const success_story_create_dto_1 = __webpack_require__(2936);
+const success_story_create_dto_1 = __webpack_require__(2937);
 var SuccessStoryUpdate;
 (function (SuccessStoryUpdate) {
     SuccessStoryUpdate.topic = 'success-story.update.command';
@@ -412564,7 +412559,7 @@ var SuccessStoryUpdate;
 
 
 /***/ }),
-/* 2940 */
+/* 2941 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -412584,7 +412579,7 @@ var HealthCheck;
 
 
 /***/ }),
-/* 2941 */
+/* 2942 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412611,18 +412606,18 @@ exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
 
 
 /***/ }),
-/* 2942 */
+/* 2943 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(1);
-tslib_1.__exportStar(__webpack_require__(2943), exports);
+tslib_1.__exportStar(__webpack_require__(2944), exports);
 
 
 /***/ }),
-/* 2943 */
+/* 2944 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -412661,7 +412656,7 @@ exports.getRMQConfig = getRMQConfig;
 
 
 /***/ }),
-/* 2944 */
+/* 2945 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412675,8 +412670,8 @@ const games_service_1 = __webpack_require__(2567);
 const game_schema_1 = __webpack_require__(2568);
 const minio_module_1 = __webpack_require__(2843);
 const duplicate_module_1 = __webpack_require__(2844);
-const admin_games_controller_1 = __webpack_require__(2945);
-const admin_duplicates_controller_1 = __webpack_require__(2946);
+const admin_games_controller_1 = __webpack_require__(2946);
+const admin_duplicates_controller_1 = __webpack_require__(2947);
 let AdminModule = class AdminModule {
 };
 exports.AdminModule = AdminModule;
@@ -412690,7 +412685,7 @@ exports.AdminModule = AdminModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2945 */
+/* 2946 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412756,7 +412751,7 @@ exports.AdminGamesController = AdminGamesController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2946 */
+/* 2947 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -412813,12 +412808,12 @@ exports.AdminDuplicatesController = AdminDuplicatesController = tslib_1.__decora
 
 
 /***/ }),
-/* 2947 */,
 /* 2948 */,
 /* 2949 */,
 /* 2950 */,
 /* 2951 */,
-/* 2952 */
+/* 2952 */,
+/* 2953 */
 /***/ ((module) => {
 
 "use strict";

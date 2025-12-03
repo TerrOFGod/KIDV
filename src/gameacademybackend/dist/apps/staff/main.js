@@ -239406,7 +239406,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.portfolio.env' }),
+            config_1.ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.staff.env' }),
             nestjs_rmq_1.RMQModule.forRootAsync((0, configs_1.getRMQConfig)('staff')),
             mongoose_1.MongooseModule.forRootAsync((0, mongo_config_1.getMongoConfig)()),
             staff_module_1.StaffModule,
@@ -355431,8 +355431,8 @@ const mongoose_1 = __webpack_require__(2054);
 const staff_model_1 = __webpack_require__(2604);
 const staff_repository_1 = __webpack_require__(2605);
 const staff_commands_1 = __webpack_require__(2606);
-const staff_queries_1 = __webpack_require__(2665);
-const staff_service_1 = __webpack_require__(2663);
+const staff_queries_1 = __webpack_require__(2666);
+const staff_service_1 = __webpack_require__(2664);
 let StaffModule = class StaffModule {
 };
 exports.StaffModule = StaffModule;
@@ -355451,7 +355451,7 @@ exports.StaffModule = StaffModule = tslib_1.__decorate([
 
 "use strict";
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSchema = exports.Staff = void 0;
 const tslib_1 = __webpack_require__(2);
@@ -355460,17 +355460,21 @@ let Staff = class Staff {
 };
 exports.Staff = Staff;
 tslib_1.__decorate([
-    (0, mongoose_1.Prop)({ required: true, unique: true }),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "slug", void 0);
-tslib_1.__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     tslib_1.__metadata("design:type", String)
 ], Staff.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, mongoose_1.Prop)({ type: [Object] }),
+    tslib_1.__metadata("design:type", typeof (_a = typeof Array !== "undefined" && Array) === "function" ? _a : Object)
+], Staff.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, mongoose_1.Prop)({ required: true }),
     tslib_1.__metadata("design:type", String)
-], Staff.prototype, "position", void 0);
+], Staff.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    tslib_1.__metadata("design:type", String)
+], Staff.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, mongoose_1.Prop)(),
     tslib_1.__metadata("design:type", String)
@@ -355478,54 +355482,26 @@ tslib_1.__decorate([
 tslib_1.__decorate([
     (0, mongoose_1.Prop)(),
     tslib_1.__metadata("design:type", String)
-], Staff.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)({ enum: ['LEGENDARY', 'RARE', 'COMMON'] }),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
 ], Staff.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)({ type: [String] }),
-    tslib_1.__metadata("design:type", Array)
-], Staff.prototype, "researchInterests", void 0);
-tslib_1.__decorate([
-    (0, mongoose_1.Prop)({ type: [Object] }),
-    tslib_1.__metadata("design:type", typeof (_a = typeof Array !== "undefined" && Array) === "function" ? _a : Object)
-], Staff.prototype, "stats", void 0);
 tslib_1.__decorate([
     (0, mongoose_1.Prop)({ type: [Object] }),
     tslib_1.__metadata("design:type", typeof (_b = typeof Array !== "undefined" && Array) === "function" ? _b : Object)
-], Staff.prototype, "skills", void 0);
+], Staff.prototype, "stats", void 0);
 tslib_1.__decorate([
     (0, mongoose_1.Prop)({ type: [Object] }),
     tslib_1.__metadata("design:type", typeof (_c = typeof Array !== "undefined" && Array) === "function" ? _c : Object)
-], Staff.prototype, "achievements", void 0);
+], Staff.prototype, "skills", void 0);
 tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
-], Staff.prototype, "image", void 0);
+    (0, mongoose_1.Prop)({ type: [Object] }),
+    tslib_1.__metadata("design:type", typeof (_d = typeof Array !== "undefined" && Array) === "function" ? _d : Object)
+], Staff.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, mongoose_1.Prop)({ type: [String] }),
     tslib_1.__metadata("design:type", Array)
 ], Staff.prototype, "tags", void 0);
 tslib_1.__decorate([
-    (0, mongoose_1.Prop)(),
-    tslib_1.__metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: [Object] }),
+    tslib_1.__metadata("design:type", typeof (_e = typeof Array !== "undefined" && Array) === "function" ? _e : Object)
 ], Staff.prototype, "contact", void 0);
 exports.Staff = Staff = tslib_1.__decorate([
     (0, mongoose_1.Schema)({ timestamps: true })
@@ -355555,18 +355531,17 @@ let StaffRepository = class StaffRepository {
         const newStaff = new this.staffModel(staff);
         return newStaff.save();
     }
-    async findStaffBySlug(slug) {
-        return this.staffModel.findOne({ slug }).exec();
-    }
     async findStaffById(id) {
         return this.staffModel.findById(id).exec();
     }
-    async findAllStaff(position, rarity) {
+    async findAllStaff(position, researchPosition) {
         const filter = {};
-        if (position)
-            filter.position = position;
-        if (rarity)
-            filter.rarity = rarity;
+        if (position) {
+            filter['positions.value'] = { $regex: position, $options: 'i' };
+        }
+        if (researchPosition) {
+            filter.researchPosition = { $regex: researchPosition, $options: 'i' };
+        }
         return this.staffModel.find(filter).sort({ name: 1 }).exec();
     }
     async updateStaff(id, staff) {
@@ -355580,9 +355555,10 @@ let StaffRepository = class StaffRepository {
             .find({
             $or: [
                 { name: { $regex: searchTerm, $options: 'i' } },
-                { position: { $regex: searchTerm, $options: 'i' } },
+                { 'positions.value': { $regex: searchTerm, $options: 'i' } },
+                { researchPosition: { $regex: searchTerm, $options: 'i' } },
                 { bio: { $regex: searchTerm, $options: 'i' } },
-                { researchInterests: { $regex: searchTerm, $options: 'i' } },
+                { tags: { $regex: searchTerm, $options: 'i' } },
             ],
         })
             .exec();
@@ -355602,14 +355578,14 @@ exports.StaffRepository = StaffRepository = tslib_1.__decorate([
 
 "use strict";
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCommands = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2607);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const staff_service_1 = __webpack_require__(2663);
+const staff_service_1 = __webpack_require__(2664);
 let StaffCommands = class StaffCommands {
     constructor(staffService) {
         this.staffService = staffService;
@@ -355623,32 +355599,15 @@ let StaffCommands = class StaffCommands {
     async deleteStaff({ id }) {
         return this.staffService.deleteStaff(id);
     }
-    async getStaffBySlug({ slug }) {
-        const staff = await this.staffService.getStaffBySlug(slug);
-        return { staff };
-    }
-    async getStaffList(dto) {
-        const staff = await this.staffService.getStaffList(dto.position, dto.rarity);
-        return { staff: staff };
-    }
     async healthCheck({ service }) {
-        if (service !== 'staff') {
-            return {
-                status: 'error',
-                service: 'staff',
-                timestamp: new Date().toISOString(),
-                details: 'Wrong service target',
-            };
-        }
         try {
+            await this.staffService.getStaffList();
             return {
                 status: 'ok',
                 service: 'staff',
                 timestamp: new Date().toISOString(),
                 details: {
                     database: 'connected',
-                    memory: process.memoryUsage(),
-                    uptime: process.uptime(),
                 },
             };
         }
@@ -355690,27 +355649,11 @@ tslib_1.__decorate([
 ], StaffCommands.prototype, "deleteStaff", null);
 tslib_1.__decorate([
     (0, nestjs_rmq_1.RMQValidate)(),
-    (0, nestjs_rmq_1.RMQRoute)(contracts_1.StaffGetBySlug.topic),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_h = typeof contracts_1.StaffGetBySlug !== "undefined" && contracts_1.StaffGetBySlug.Request) === "function" ? _h : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
-], StaffCommands.prototype, "getStaffBySlug", null);
-tslib_1.__decorate([
-    (0, nestjs_rmq_1.RMQValidate)(),
-    (0, nestjs_rmq_1.RMQRoute)(contracts_1.StaffGetList.topic),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_k = typeof contracts_1.StaffGetList !== "undefined" && contracts_1.StaffGetList.Request) === "function" ? _k : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
-], StaffCommands.prototype, "getStaffList", null);
-tslib_1.__decorate([
-    (0, nestjs_rmq_1.RMQValidate)(),
     (0, nestjs_rmq_1.RMQRoute)(contracts_1.HealthCheck.topic),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_m = typeof contracts_1.HealthCheck !== "undefined" && contracts_1.HealthCheck.Request) === "function" ? _m : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_h = typeof contracts_1.HealthCheck !== "undefined" && contracts_1.HealthCheck.Request) === "function" ? _h : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], StaffCommands.prototype, "healthCheck", null);
 exports.StaffCommands = StaffCommands = tslib_1.__decorate([
     (0, common_1.Controller)(),
@@ -355751,15 +355694,14 @@ tslib_1.__exportStar(__webpack_require__(2643), exports);
 tslib_1.__exportStar(__webpack_require__(2644), exports);
 tslib_1.__exportStar(__webpack_require__(2645), exports);
 tslib_1.__exportStar(__webpack_require__(2646), exports);
-tslib_1.__exportStar(__webpack_require__(2653), exports);
-tslib_1.__exportStar(__webpack_require__(2654), exports);
 tslib_1.__exportStar(__webpack_require__(2655), exports);
 tslib_1.__exportStar(__webpack_require__(2656), exports);
 tslib_1.__exportStar(__webpack_require__(2657), exports);
-tslib_1.__exportStar(__webpack_require__(2659), exports);
+tslib_1.__exportStar(__webpack_require__(2658), exports);
 tslib_1.__exportStar(__webpack_require__(2660), exports);
 tslib_1.__exportStar(__webpack_require__(2661), exports);
 tslib_1.__exportStar(__webpack_require__(2662), exports);
+tslib_1.__exportStar(__webpack_require__(2663), exports);
 
 
 /***/ }),
@@ -356806,31 +356748,37 @@ var StaffCreate;
 
 "use strict";
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCreateDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const rarity_type_1 = __webpack_require__(2648);
-const staff_stat_dto_1 = __webpack_require__(2649);
-const staff_skill_dto_1 = __webpack_require__(2650);
-const staff_achievement_dto_1 = __webpack_require__(2652);
+const position_dto_1 = __webpack_require__(2648);
+const contact_dto_1 = __webpack_require__(2650);
+const staff_stat_dto_1 = __webpack_require__(2651);
+const staff_skill_dto_1 = __webpack_require__(2652);
+const staff_achievement_dto_1 = __webpack_require__(2654);
 class StaffCreateDto {
 }
 exports.StaffCreateDto = StaffCreateDto;
 tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "slug", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => position_dto_1.PositionDto),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "position", void 0);
+], StaffCreateDto.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -356840,38 +356788,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(["LEGENDARY", "RARE", "COMMON"]),
-    tslib_1.__metadata("design:type", typeof (_a = typeof rarity_type_1.Rarity !== "undefined" && rarity_type_1.Rarity) === "function" ? _a : Object)
-], StaffCreateDto.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    tslib_1.__metadata("design:type", Array)
-], StaffCreateDto.prototype, "researchInterests", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -356895,24 +356812,46 @@ tslib_1.__decorate([
 ], StaffCreateDto.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "image", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "tags", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => contact_dto_1.ContactDto),
+    tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "contact", void 0);
 
 
 /***/ }),
 /* 2648 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PositionDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+const level_type_1 = __webpack_require__(2649);
+class PositionDto {
+}
+exports.PositionDto = PositionDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsEnum)(['Научно-педагогический работник', 'Профессорско-преподавательский состав']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.PositionType !== "undefined" && level_type_1.PositionType) === "function" ? _a : Object)
+], PositionDto.prototype, "type", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], PositionDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2649 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -356921,7 +356860,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
-/* 2649 */
+/* 2650 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ContactDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+class ContactDto {
+}
+exports.ContactDto = ContactDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "title", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2651 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -356944,17 +356906,19 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2650 */
+/* 2652 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSkillDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const subskill_dto_1 = __webpack_require__(2651);
+const subskill_dto_1 = __webpack_require__(2653);
+const level_type_1 = __webpack_require__(2649);
 class StaffSkillDto {
 }
 exports.StaffSkillDto = StaffSkillDto;
@@ -356963,8 +356927,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.Level !== "undefined" && level_type_1.Level) === "function" ? _a : Object)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
@@ -356981,7 +356945,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2651 */
+/* 2653 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357005,7 +356969,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2652 */
+/* 2654 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357032,7 +356996,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2653 */
+/* 2655 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357058,33 +357022,7 @@ var StaffDelete;
 
 
 /***/ }),
-/* 2654 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StaffGetBySlug = void 0;
-const tslib_1 = __webpack_require__(2);
-const class_validator_1 = __webpack_require__(169);
-var StaffGetBySlug;
-(function (StaffGetBySlug) {
-    StaffGetBySlug.topic = 'staff.get-by-slug.query';
-    class Request {
-    }
-    tslib_1.__decorate([
-        (0, class_validator_1.IsString)(),
-        tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "slug", void 0);
-    StaffGetBySlug.Request = Request;
-    class Response {
-    }
-    StaffGetBySlug.Response = Response;
-})(StaffGetBySlug || (exports.StaffGetBySlug = StaffGetBySlug = {}));
-
-
-/***/ }),
-/* 2655 */
+/* 2656 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357107,7 +357045,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }
@@ -357116,7 +357054,7 @@ var StaffGetList;
 
 
 /***/ }),
-/* 2656 */
+/* 2657 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357143,14 +357081,14 @@ var StaffUpdate;
 
 
 /***/ }),
-/* 2657 */
+/* 2658 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryCreate = void 0;
-const success_story_create_dto_1 = __webpack_require__(2658);
+const success_story_create_dto_1 = __webpack_require__(2659);
 var SuccessStoryCreate;
 (function (SuccessStoryCreate) {
     SuccessStoryCreate.topic = 'success-story.create.command';
@@ -357164,7 +357102,7 @@ var SuccessStoryCreate;
 
 
 /***/ }),
-/* 2658 */
+/* 2659 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357215,7 +357153,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2659 */
+/* 2660 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357241,7 +357179,7 @@ var SuccessStoryDelete;
 
 
 /***/ }),
-/* 2660 */
+/* 2661 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357273,7 +357211,7 @@ var SuccessStoryGetList;
 
 
 /***/ }),
-/* 2661 */
+/* 2662 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357282,7 +357220,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryUpdate = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
-const success_story_create_dto_1 = __webpack_require__(2658);
+const success_story_create_dto_1 = __webpack_require__(2659);
 var SuccessStoryUpdate;
 (function (SuccessStoryUpdate) {
     SuccessStoryUpdate.topic = 'success-story.update.command';
@@ -357300,7 +357238,7 @@ var SuccessStoryUpdate;
 
 
 /***/ }),
-/* 2662 */
+/* 2663 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -357320,7 +357258,7 @@ var HealthCheck;
 
 
 /***/ }),
-/* 2663 */
+/* 2664 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357331,26 +357269,19 @@ exports.StaffService = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const staff_repository_1 = __webpack_require__(2605);
-const staff_entity_1 = __webpack_require__(2664);
+const staff_entity_1 = __webpack_require__(2665);
 let StaffService = class StaffService {
     constructor(staffRepository) {
         this.staffRepository = staffRepository;
     }
     async createStaff(dto) {
-        const existingStaff = await this.staffRepository.findStaffBySlug(dto.slug);
+        const existingStaff = await this.staffRepository.findStaffById(dto._id);
         if (existingStaff) {
             throw new Error('Staff with this slug already exists');
         }
         const staffEntity = new staff_entity_1.StaffEntity(dto);
         const newStaff = await this.staffRepository.createStaff(staffEntity);
-        return { id: newStaff._id.toString(), slug: newStaff.slug };
-    }
-    async getStaffBySlug(slug) {
-        const staff = await this.staffRepository.findStaffBySlug(slug);
-        if (!staff) {
-            throw new Error('Staff not found');
-        }
-        return new staff_entity_1.StaffEntity(staff.toObject()).getPublicInfo();
+        return { id: newStaff._id.toString() };
     }
     async getStaffById(id) {
         const staff = await this.staffRepository.findStaffById(id);
@@ -357359,8 +357290,8 @@ let StaffService = class StaffService {
         }
         return new staff_entity_1.StaffEntity(staff.toObject()).getPublicInfo();
     }
-    async getStaffList(position, rarity) {
-        const staff = await this.staffRepository.findAllStaff(position, rarity);
+    async getStaffList(position, researchPosition) {
+        const staff = await this.staffRepository.findAllStaff(position, researchPosition);
         return staff.map((item) => new staff_entity_1.StaffEntity(item.toObject()).getPublicInfo());
     }
     async updateStaff(dto) {
@@ -357392,7 +357323,7 @@ exports.StaffService = StaffService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2664 */
+/* 2665 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -357402,44 +357333,30 @@ exports.StaffEntity = void 0;
 class StaffEntity {
     constructor(staff) {
         this._id = staff._id;
-        this.slug = staff.slug || '';
         this.name = staff.name || '';
-        this.position = staff.position || '';
-        this.photo = staff.photo;
-        this.title = staff.title;
-        this.rarity = staff.rarity;
-        this.email = staff.email;
-        this.telegram = staff.telegram;
-        this.github = staff.github;
-        this.bio = staff.bio;
-        this.researchInterests = staff.researchInterests;
-        this.stats = staff.stats;
-        this.skills = staff.skills;
-        this.achievements = staff.achievements;
-        this.id = staff.id;
-        this.image = staff.image;
+        this.positions = staff.positions || [];
+        this.photo = staff.photo || '';
+        this.educationLevel = staff.educationLevel || '';
+        this.researchPosition = staff.researchPosition || '';
+        this.bio = staff.bio || '';
+        this.stats = staff.stats || [];
+        this.skills = staff.skills || [];
+        this.achievements = staff.achievements || [];
         this.tags = staff.tags;
         this.contact = staff.contact;
     }
     getPublicInfo() {
         return {
             _id: this._id?.toString(),
-            slug: this.slug,
             name: this.name,
-            position: this.position,
+            positions: this.positions,
+            educationLevel: this.educationLevel,
+            researchPosition: this.researchPosition,
             photo: this.photo,
-            title: this.title,
-            rarity: this.rarity,
-            email: this.email,
-            telegram: this.telegram,
-            github: this.github,
             bio: this.bio,
-            researchInterests: this.researchInterests,
             stats: this.stats,
             skills: this.skills,
             achievements: this.achievements,
-            id: this.id || this._id?.toString(),
-            image: this.image || this.photo,
             tags: this.tags,
             contact: this.contact,
         };
@@ -357449,18 +357366,19 @@ exports.StaffEntity = StaffEntity;
 
 
 /***/ }),
-/* 2665 */
+/* 2666 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var _a, _b;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffQueries = exports.StaffSearch = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
+const contracts_1 = __webpack_require__(2607);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const staff_service_1 = __webpack_require__(2663);
+const staff_service_1 = __webpack_require__(2664);
 var StaffSearch;
 (function (StaffSearch) {
     StaffSearch.topic = 'staff.search.query';
@@ -357475,6 +357393,10 @@ let StaffQueries = class StaffQueries {
     constructor(staffService) {
         this.staffService = staffService;
     }
+    async getStaffList(dto) {
+        const staff = await this.staffService.getStaffList(dto.position, dto.researchPosition);
+        return { staff: staff };
+    }
     async searchStaff({ query }) {
         const staff = await this.staffService.searchStaff(query);
         return { staff };
@@ -357483,11 +357405,19 @@ let StaffQueries = class StaffQueries {
 exports.StaffQueries = StaffQueries;
 tslib_1.__decorate([
     (0, nestjs_rmq_1.RMQValidate)(),
+    (0, nestjs_rmq_1.RMQRoute)(contracts_1.StaffGetList.topic),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_b = typeof contracts_1.StaffGetList !== "undefined" && contracts_1.StaffGetList.Request) === "function" ? _b : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], StaffQueries.prototype, "getStaffList", null);
+tslib_1.__decorate([
+    (0, nestjs_rmq_1.RMQValidate)(),
     (0, nestjs_rmq_1.RMQRoute)(StaffSearch.topic),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [StaffSearch.Request]),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], StaffQueries.prototype, "searchStaff", null);
 exports.StaffQueries = StaffQueries = tslib_1.__decorate([
     (0, common_1.Controller)(),

@@ -8,7 +8,7 @@ import { StaffModule } from './staff/staff.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.portfolio.env' }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.staff.env' }),
     RMQModule.forRootAsync(getRMQConfig('staff')),
     MongooseModule.forRootAsync(getMongoConfig()),
     StaffModule,

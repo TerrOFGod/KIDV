@@ -355431,8 +355431,8 @@ const mongoose_1 = __webpack_require__(2054);
 const portfolio_model_1 = __webpack_require__(2604);
 const portfolio_repository_1 = __webpack_require__(2605);
 const portfolio_commands_1 = __webpack_require__(2606);
-const portfolio_queries_1 = __webpack_require__(2665);
-const portfolio_service_1 = __webpack_require__(2663);
+const portfolio_queries_1 = __webpack_require__(2666);
+const portfolio_service_1 = __webpack_require__(2664);
 let PortfolioModule = class PortfolioModule {
 };
 exports.PortfolioModule = PortfolioModule;
@@ -355604,7 +355604,7 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2607);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const portfolio_service_1 = __webpack_require__(2663);
+const portfolio_service_1 = __webpack_require__(2664);
 let PortfolioCommands = class PortfolioCommands {
     constructor(portfolioService) {
         this.portfolioService = portfolioService;
@@ -355746,15 +355746,14 @@ tslib_1.__exportStar(__webpack_require__(2643), exports);
 tslib_1.__exportStar(__webpack_require__(2644), exports);
 tslib_1.__exportStar(__webpack_require__(2645), exports);
 tslib_1.__exportStar(__webpack_require__(2646), exports);
-tslib_1.__exportStar(__webpack_require__(2653), exports);
-tslib_1.__exportStar(__webpack_require__(2654), exports);
 tslib_1.__exportStar(__webpack_require__(2655), exports);
 tslib_1.__exportStar(__webpack_require__(2656), exports);
 tslib_1.__exportStar(__webpack_require__(2657), exports);
-tslib_1.__exportStar(__webpack_require__(2659), exports);
+tslib_1.__exportStar(__webpack_require__(2658), exports);
 tslib_1.__exportStar(__webpack_require__(2660), exports);
 tslib_1.__exportStar(__webpack_require__(2661), exports);
 tslib_1.__exportStar(__webpack_require__(2662), exports);
+tslib_1.__exportStar(__webpack_require__(2663), exports);
 
 
 /***/ }),
@@ -356801,31 +356800,37 @@ var StaffCreate;
 
 "use strict";
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCreateDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const rarity_type_1 = __webpack_require__(2648);
-const staff_stat_dto_1 = __webpack_require__(2649);
-const staff_skill_dto_1 = __webpack_require__(2650);
-const staff_achievement_dto_1 = __webpack_require__(2652);
+const position_dto_1 = __webpack_require__(2648);
+const contact_dto_1 = __webpack_require__(2650);
+const staff_stat_dto_1 = __webpack_require__(2651);
+const staff_skill_dto_1 = __webpack_require__(2652);
+const staff_achievement_dto_1 = __webpack_require__(2654);
 class StaffCreateDto {
 }
 exports.StaffCreateDto = StaffCreateDto;
 tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "slug", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => position_dto_1.PositionDto),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "position", void 0);
+], StaffCreateDto.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -356835,38 +356840,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(["LEGENDARY", "RARE", "COMMON"]),
-    tslib_1.__metadata("design:type", typeof (_a = typeof rarity_type_1.Rarity !== "undefined" && rarity_type_1.Rarity) === "function" ? _a : Object)
-], StaffCreateDto.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    tslib_1.__metadata("design:type", Array)
-], StaffCreateDto.prototype, "researchInterests", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -356890,24 +356864,46 @@ tslib_1.__decorate([
 ], StaffCreateDto.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "image", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "tags", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => contact_dto_1.ContactDto),
+    tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "contact", void 0);
 
 
 /***/ }),
 /* 2648 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PositionDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+const level_type_1 = __webpack_require__(2649);
+class PositionDto {
+}
+exports.PositionDto = PositionDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsEnum)(['Научно-педагогический работник', 'Профессорско-преподавательский состав']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.PositionType !== "undefined" && level_type_1.PositionType) === "function" ? _a : Object)
+], PositionDto.prototype, "type", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], PositionDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2649 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -356916,7 +356912,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
-/* 2649 */
+/* 2650 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ContactDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+class ContactDto {
+}
+exports.ContactDto = ContactDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "title", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2651 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -356939,17 +356958,19 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2650 */
+/* 2652 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSkillDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const subskill_dto_1 = __webpack_require__(2651);
+const subskill_dto_1 = __webpack_require__(2653);
+const level_type_1 = __webpack_require__(2649);
 class StaffSkillDto {
 }
 exports.StaffSkillDto = StaffSkillDto;
@@ -356958,8 +356979,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.Level !== "undefined" && level_type_1.Level) === "function" ? _a : Object)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
@@ -356976,7 +356997,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2651 */
+/* 2653 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357000,7 +357021,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2652 */
+/* 2654 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357027,7 +357048,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2653 */
+/* 2655 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357053,33 +357074,7 @@ var StaffDelete;
 
 
 /***/ }),
-/* 2654 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StaffGetBySlug = void 0;
-const tslib_1 = __webpack_require__(2);
-const class_validator_1 = __webpack_require__(169);
-var StaffGetBySlug;
-(function (StaffGetBySlug) {
-    StaffGetBySlug.topic = 'staff.get-by-slug.query';
-    class Request {
-    }
-    tslib_1.__decorate([
-        (0, class_validator_1.IsString)(),
-        tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "slug", void 0);
-    StaffGetBySlug.Request = Request;
-    class Response {
-    }
-    StaffGetBySlug.Response = Response;
-})(StaffGetBySlug || (exports.StaffGetBySlug = StaffGetBySlug = {}));
-
-
-/***/ }),
-/* 2655 */
+/* 2656 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357102,7 +357097,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }
@@ -357111,7 +357106,7 @@ var StaffGetList;
 
 
 /***/ }),
-/* 2656 */
+/* 2657 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357138,14 +357133,14 @@ var StaffUpdate;
 
 
 /***/ }),
-/* 2657 */
+/* 2658 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryCreate = void 0;
-const success_story_create_dto_1 = __webpack_require__(2658);
+const success_story_create_dto_1 = __webpack_require__(2659);
 var SuccessStoryCreate;
 (function (SuccessStoryCreate) {
     SuccessStoryCreate.topic = 'success-story.create.command';
@@ -357159,7 +357154,7 @@ var SuccessStoryCreate;
 
 
 /***/ }),
-/* 2658 */
+/* 2659 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357210,7 +357205,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2659 */
+/* 2660 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357236,7 +357231,7 @@ var SuccessStoryDelete;
 
 
 /***/ }),
-/* 2660 */
+/* 2661 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357268,7 +357263,7 @@ var SuccessStoryGetList;
 
 
 /***/ }),
-/* 2661 */
+/* 2662 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357277,7 +357272,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryUpdate = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
-const success_story_create_dto_1 = __webpack_require__(2658);
+const success_story_create_dto_1 = __webpack_require__(2659);
 var SuccessStoryUpdate;
 (function (SuccessStoryUpdate) {
     SuccessStoryUpdate.topic = 'success-story.update.command';
@@ -357295,7 +357290,7 @@ var SuccessStoryUpdate;
 
 
 /***/ }),
-/* 2662 */
+/* 2663 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -357315,7 +357310,7 @@ var HealthCheck;
 
 
 /***/ }),
-/* 2663 */
+/* 2664 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357326,7 +357321,7 @@ exports.PortfolioService = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const portfolio_repository_1 = __webpack_require__(2605);
-const portfolio_entity_1 = __webpack_require__(2664);
+const portfolio_entity_1 = __webpack_require__(2665);
 let PortfolioService = class PortfolioService {
     constructor(portfolioRepository) {
         this.portfolioRepository = portfolioRepository;
@@ -357387,7 +357382,7 @@ exports.PortfolioService = PortfolioService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2664 */
+/* 2665 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -357440,7 +357435,7 @@ exports.PortfolioEntity = PortfolioEntity;
 
 
 /***/ }),
-/* 2665 */
+/* 2666 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -357451,7 +357446,7 @@ exports.PortfolioQueries = exports.PortfolioSearch = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const portfolio_service_1 = __webpack_require__(2663);
+const portfolio_service_1 = __webpack_require__(2664);
 var PortfolioSearch;
 (function (PortfolioSearch) {
     PortfolioSearch.topic = 'portfolio.search.query';

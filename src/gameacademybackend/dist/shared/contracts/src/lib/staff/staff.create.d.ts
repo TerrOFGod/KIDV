@@ -5,6 +5,5 @@ export declare namespace StaffCreate {
     }
     class Response {
         id: string;
-        slug: string;
     }
 }

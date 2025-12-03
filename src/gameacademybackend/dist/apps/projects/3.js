@@ -3,7 +3,7 @@ exports.id = 3;
 exports.ids = [3];
 exports.modules = {
 
-/***/ 2948:
+/***/ 2949:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -43,7 +43,7 @@ const parseKnownFiles = async (init) => {
 
 /***/ }),
 
-/***/ 2949:
+/***/ 2950:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2209);
 /* harmony import */ var fs_promises__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(fs_promises__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2950);
+/* harmony import */ var _getSSOTokenFilepath__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2951);
 
 
 const tokenIntercept = {};
@@ -69,7 +69,7 @@ const getSSOTokenFromFile = async (id) => {
 
 /***/ }),
 
-/***/ 2950:
+/***/ 2951:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -93,7 +93,7 @@ const getSSOTokenFilepath = (id) => {
 
 /***/ }),
 
-/***/ 2953:
+/***/ 2954:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -105,13 +105,13 @@ __webpack_require__.d(__webpack_exports__, {
 });
 
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/parseKnownFiles.js + 1 modules
-var parseKnownFiles = __webpack_require__(2948);
+var parseKnownFiles = __webpack_require__(2949);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/getProfileName.js
 var getProfileName = __webpack_require__(2605);
 // EXTERNAL MODULE: ../../node_modules/@smithy/property-provider/dist-es/CredentialsProviderError.js
 var CredentialsProviderError = __webpack_require__(2604);
 // EXTERNAL MODULE: ../../node_modules/@smithy/shared-ini-file-loader/dist-es/externalDataInterceptor.js
-var externalDataInterceptor = __webpack_require__(2954);
+var externalDataInterceptor = __webpack_require__(2955);
 // EXTERNAL MODULE: external "child_process"
 var external_child_process_ = __webpack_require__(2161);
 // EXTERNAL MODULE: external "util"
@@ -205,14 +205,14 @@ const fromProcess = (init = {}) => async ({ callerClientConfig } = {}) => {
 
 /***/ }),
 
-/***/ 2954:
+/***/ 2955:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   externalDataInterceptor: () => (/* binding */ externalDataInterceptor)
 /* harmony export */ });
-/* harmony import */ var _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2949);
+/* harmony import */ var _getSSOTokenFromFile__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2950);
 /* harmony import */ var _readFile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2612);
 
 

@@ -3,7 +3,7 @@ exports.id = 10;
 exports.ids = [10];
 exports.modules = {
 
-/***/ 2959:
+/***/ 2960:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -515,9 +515,9 @@ var dist_es_config = __webpack_require__(2615);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.js + 3 modules
 var AwsSdkSigV4Signer = __webpack_require__(2654);
 // EXTERNAL MODULE: ../../node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsRestJsonProtocol.js + 6 modules
-var AwsRestJsonProtocol = __webpack_require__(2960);
+var AwsRestJsonProtocol = __webpack_require__(2961);
 // EXTERNAL MODULE: ../../node_modules/@smithy/core/dist-es/util-identity-and-auth/httpAuthSchemes/noAuth.js
-var noAuth = __webpack_require__(2961);
+var noAuth = __webpack_require__(2962);
 // EXTERNAL MODULE: ../../node_modules/@smithy/smithy-client/dist-es/NoOpLogger.js
 var NoOpLogger = __webpack_require__(2619);
 // EXTERNAL MODULE: ../../node_modules/@smithy/url-parser/dist-es/index.js + 1 modules

@@ -48,6 +48,7 @@ export default function StaffForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.error(formData);
     onSave(formData);
   };
 

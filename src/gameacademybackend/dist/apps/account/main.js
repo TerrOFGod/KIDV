@@ -239399,9 +239399,9 @@ const config_1 = __webpack_require__(1965);
 const mongoose_1 = __webpack_require__(2054);
 const nestjs_rmq_1 = __webpack_require__(2565);
 const auth_module_1 = __webpack_require__(2600);
-const mongo_config_1 = __webpack_require__(2750);
+const mongo_config_1 = __webpack_require__(2751);
 const user_module_1 = __webpack_require__(2684);
-const configs_1 = __webpack_require__(2751);
+const configs_1 = __webpack_require__(2752);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -355350,8 +355350,8 @@ const common_1 = __webpack_require__(1);
 const jwt_1 = __webpack_require__(2601);
 const jwt_config_1 = __webpack_require__(2683);
 const user_module_1 = __webpack_require__(2684);
-const auth_controller_1 = __webpack_require__(2748);
-const auth_service_1 = __webpack_require__(2749);
+const auth_controller_1 = __webpack_require__(2749);
+const auth_service_1 = __webpack_require__(2750);
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -361739,7 +361739,7 @@ const mongoose_1 = __webpack_require__(2054);
 const user_model_1 = __webpack_require__(2685);
 const user_repository_1 = __webpack_require__(2693);
 const user_commands_1 = __webpack_require__(2694);
-const user_quries_1 = __webpack_require__(2747);
+const user_quries_1 = __webpack_require__(2748);
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
@@ -361942,8 +361942,8 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2695);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const account_constants_1 = __webpack_require__(2744);
-const user_entity_1 = __webpack_require__(2745);
+const account_constants_1 = __webpack_require__(2745);
+const user_entity_1 = __webpack_require__(2746);
 const user_repository_1 = __webpack_require__(2693);
 const contracts_2 = __webpack_require__(2695);
 let UserCommands = class UserCommands {
@@ -362099,15 +362099,14 @@ tslib_1.__exportStar(__webpack_require__(2724), exports);
 tslib_1.__exportStar(__webpack_require__(2725), exports);
 tslib_1.__exportStar(__webpack_require__(2726), exports);
 tslib_1.__exportStar(__webpack_require__(2727), exports);
-tslib_1.__exportStar(__webpack_require__(2734), exports);
-tslib_1.__exportStar(__webpack_require__(2735), exports);
 tslib_1.__exportStar(__webpack_require__(2736), exports);
 tslib_1.__exportStar(__webpack_require__(2737), exports);
 tslib_1.__exportStar(__webpack_require__(2738), exports);
-tslib_1.__exportStar(__webpack_require__(2740), exports);
+tslib_1.__exportStar(__webpack_require__(2739), exports);
 tslib_1.__exportStar(__webpack_require__(2741), exports);
 tslib_1.__exportStar(__webpack_require__(2742), exports);
 tslib_1.__exportStar(__webpack_require__(2743), exports);
+tslib_1.__exportStar(__webpack_require__(2744), exports);
 
 
 /***/ }),
@@ -363076,31 +363075,37 @@ var StaffCreate;
 
 "use strict";
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCreateDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const rarity_type_1 = __webpack_require__(2729);
-const staff_stat_dto_1 = __webpack_require__(2730);
-const staff_skill_dto_1 = __webpack_require__(2731);
-const staff_achievement_dto_1 = __webpack_require__(2733);
+const position_dto_1 = __webpack_require__(2729);
+const contact_dto_1 = __webpack_require__(2731);
+const staff_stat_dto_1 = __webpack_require__(2732);
+const staff_skill_dto_1 = __webpack_require__(2733);
+const staff_achievement_dto_1 = __webpack_require__(2735);
 class StaffCreateDto {
 }
 exports.StaffCreateDto = StaffCreateDto;
 tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "slug", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => position_dto_1.PositionDto),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "position", void 0);
+], StaffCreateDto.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -363110,38 +363115,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(["LEGENDARY", "RARE", "COMMON"]),
-    tslib_1.__metadata("design:type", typeof (_a = typeof rarity_type_1.Rarity !== "undefined" && rarity_type_1.Rarity) === "function" ? _a : Object)
-], StaffCreateDto.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    tslib_1.__metadata("design:type", Array)
-], StaffCreateDto.prototype, "researchInterests", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -363165,24 +363139,46 @@ tslib_1.__decorate([
 ], StaffCreateDto.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "image", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "tags", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => contact_dto_1.ContactDto),
+    tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "contact", void 0);
 
 
 /***/ }),
 /* 2729 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PositionDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+const level_type_1 = __webpack_require__(2730);
+class PositionDto {
+}
+exports.PositionDto = PositionDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsEnum)(['Научно-педагогический работник', 'Профессорско-преподавательский состав']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.PositionType !== "undefined" && level_type_1.PositionType) === "function" ? _a : Object)
+], PositionDto.prototype, "type", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], PositionDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2730 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -363191,7 +363187,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
-/* 2730 */
+/* 2731 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ContactDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+class ContactDto {
+}
+exports.ContactDto = ContactDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "title", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2732 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363214,17 +363233,19 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2731 */
+/* 2733 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSkillDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const subskill_dto_1 = __webpack_require__(2732);
+const subskill_dto_1 = __webpack_require__(2734);
+const level_type_1 = __webpack_require__(2730);
 class StaffSkillDto {
 }
 exports.StaffSkillDto = StaffSkillDto;
@@ -363233,8 +363254,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.Level !== "undefined" && level_type_1.Level) === "function" ? _a : Object)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
@@ -363251,7 +363272,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2732 */
+/* 2734 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363275,7 +363296,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2733 */
+/* 2735 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363302,7 +363323,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2734 */
+/* 2736 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363328,33 +363349,7 @@ var StaffDelete;
 
 
 /***/ }),
-/* 2735 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StaffGetBySlug = void 0;
-const tslib_1 = __webpack_require__(2);
-const class_validator_1 = __webpack_require__(169);
-var StaffGetBySlug;
-(function (StaffGetBySlug) {
-    StaffGetBySlug.topic = 'staff.get-by-slug.query';
-    class Request {
-    }
-    tslib_1.__decorate([
-        (0, class_validator_1.IsString)(),
-        tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "slug", void 0);
-    StaffGetBySlug.Request = Request;
-    class Response {
-    }
-    StaffGetBySlug.Response = Response;
-})(StaffGetBySlug || (exports.StaffGetBySlug = StaffGetBySlug = {}));
-
-
-/***/ }),
-/* 2736 */
+/* 2737 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363377,7 +363372,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }
@@ -363386,7 +363381,7 @@ var StaffGetList;
 
 
 /***/ }),
-/* 2737 */
+/* 2738 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363413,14 +363408,14 @@ var StaffUpdate;
 
 
 /***/ }),
-/* 2738 */
+/* 2739 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryCreate = void 0;
-const success_story_create_dto_1 = __webpack_require__(2739);
+const success_story_create_dto_1 = __webpack_require__(2740);
 var SuccessStoryCreate;
 (function (SuccessStoryCreate) {
     SuccessStoryCreate.topic = 'success-story.create.command';
@@ -363434,7 +363429,7 @@ var SuccessStoryCreate;
 
 
 /***/ }),
-/* 2739 */
+/* 2740 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363485,7 +363480,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2740 */
+/* 2741 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363511,7 +363506,7 @@ var SuccessStoryDelete;
 
 
 /***/ }),
-/* 2741 */
+/* 2742 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363543,7 +363538,7 @@ var SuccessStoryGetList;
 
 
 /***/ }),
-/* 2742 */
+/* 2743 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -363552,7 +363547,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryUpdate = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
-const success_story_create_dto_1 = __webpack_require__(2739);
+const success_story_create_dto_1 = __webpack_require__(2740);
 var SuccessStoryUpdate;
 (function (SuccessStoryUpdate) {
     SuccessStoryUpdate.topic = 'success-story.update.command';
@@ -363570,7 +363565,7 @@ var SuccessStoryUpdate;
 
 
 /***/ }),
-/* 2743 */
+/* 2744 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -363590,7 +363585,7 @@ var HealthCheck;
 
 
 /***/ }),
-/* 2744 */
+/* 2745 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -363604,14 +363599,14 @@ exports.WRONG_OLD_PASSWORD = 'Неверный пароль';
 
 
 /***/ }),
-/* 2745 */
+/* 2746 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UserEntity = void 0;
-const bcryptjs_1 = __webpack_require__(2746);
+const bcryptjs_1 = __webpack_require__(2747);
 class UserEntity {
     constructor(user) {
         this._id = user._id;
@@ -363646,7 +363641,7 @@ exports.UserEntity = UserEntity;
 
 
 /***/ }),
-/* 2746 */
+/* 2747 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// GENERATED FILE. DO NOT EDIT.
@@ -364865,7 +364860,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// GENERATED FIL
 
 
 /***/ }),
-/* 2747 */
+/* 2748 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -364877,7 +364872,7 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2695);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const user_entity_1 = __webpack_require__(2745);
+const user_entity_1 = __webpack_require__(2746);
 const user_repository_1 = __webpack_require__(2693);
 let UserQueries = class UserQueries {
     constructor(userRepository) {
@@ -364940,7 +364935,7 @@ exports.UserQueries = UserQueries = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2748 */
+/* 2749 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -364952,7 +364947,7 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2695);
 const nestjs_rmq_1 = __webpack_require__(2565);
-const auth_service_1 = __webpack_require__(2749);
+const auth_service_1 = __webpack_require__(2750);
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -365028,7 +365023,7 @@ exports.AuthController = AuthController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2749 */
+/* 2750 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -365040,9 +365035,9 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const jwt_1 = __webpack_require__(2601);
 const interfaces_1 = __webpack_require__(2686);
-const user_entity_1 = __webpack_require__(2745);
+const user_entity_1 = __webpack_require__(2746);
 const user_repository_1 = __webpack_require__(2693);
-const account_constants_1 = __webpack_require__(2744);
+const account_constants_1 = __webpack_require__(2745);
 let AuthService = class AuthService {
     constructor(userRepository, jwtService) {
         this.userRepository = userRepository;
@@ -365084,7 +365079,7 @@ exports.AuthService = AuthService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2750 */
+/* 2751 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -365117,18 +365112,18 @@ const getMongoString = (configService) => 'mongodb://' +
 
 
 /***/ }),
-/* 2751 */
+/* 2752 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(2);
-tslib_1.__exportStar(__webpack_require__(2752), exports);
+tslib_1.__exportStar(__webpack_require__(2753), exports);
 
 
 /***/ }),
-/* 2752 */
+/* 2753 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";

@@ -13,8 +13,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),

@@ -1,37 +1,44 @@
 import { Types } from 'mongoose';
+export type Level = 'Junior' | 'Middle' | 'Senior';
+export type PositionType = 'Научно-педагогический работник' | 'Профессорско-преподавательский состав';
+export interface StaffStat {
+    label: string;
+    value: number;
+}
+export interface Subskill {
+    name: string;
+    description?: string;
+}
+export interface StaffSkill {
+    name: string;
+    level: Level;
+    description?: string;
+    subskills?: Subskill[];
+}
+export interface StaffAchievement {
+    title: string;
+    icon: string;
+    description: string;
+}
+export interface Contact {
+    title: string;
+    value: string;
+}
+export interface Position {
+    type: PositionType;
+    value: string;
+}
 export interface IStaff {
     _id?: Types.ObjectId;
-    slug: string;
     name: string;
-    position: string;
+    positions: Position[];
+    educationLevel: string;
+    researchPosition: string;
     photo?: string;
-    title?: string;
-    rarity?: "LEGENDARY" | "RARE" | "COMMON";
-    email?: string;
-    telegram?: string;
-    github?: string;
     bio?: string;
-    researchInterests?: string[];
-    stats?: Array<{
-        label: string;
-        value: number;
-    }>;
-    skills?: Array<{
-        name: string;
-        level: number;
-        description?: string;
-        subskills?: Array<{
-            name: string;
-            description?: string;
-        }>;
-    }>;
-    achievements?: Array<{
-        title: string;
-        icon: string;
-        description: string;
-    }>;
-    id?: string | number;
-    image?: string;
+    stats?: StaffStat[];
+    skills?: StaffSkill[];
+    achievements?: StaffAchievement[];
     tags?: string[];
-    contact?: string;
+    contact?: Contact[];
 }

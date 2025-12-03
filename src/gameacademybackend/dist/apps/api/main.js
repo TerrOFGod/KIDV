@@ -239406,14 +239406,14 @@ const nestjs_rmq_1 = __webpack_require__(2161);
 const jwt_config_1 = __webpack_require__(2196);
 const configs_1 = __webpack_require__(2197);
 const auth_controller_1 = __webpack_require__(2199);
-const user_controller_1 = __webpack_require__(2258);
-const jwt_strategy_1 = __webpack_require__(2262);
-const comments_controller_1 = __webpack_require__(2269);
-const news_controller_1 = __webpack_require__(2270);
-const portfolio_controller_1 = __webpack_require__(2271);
-const staff_controller_1 = __webpack_require__(2272);
-const success_story_controller_1 = __webpack_require__(2273);
-const health_controller_1 = __webpack_require__(2274);
+const user_controller_1 = __webpack_require__(2259);
+const jwt_strategy_1 = __webpack_require__(2263);
+const comments_controller_1 = __webpack_require__(2270);
+const news_controller_1 = __webpack_require__(2271);
+const portfolio_controller_1 = __webpack_require__(2272);
+const staff_controller_1 = __webpack_require__(2273);
+const success_story_controller_1 = __webpack_require__(2274);
+const health_controller_1 = __webpack_require__(2275);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -254261,8 +254261,8 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const contracts_1 = __webpack_require__(2200);
 const nestjs_rmq_1 = __webpack_require__(2161);
-const login_dto_1 = __webpack_require__(2256);
-const register_dto_1 = __webpack_require__(2257);
+const login_dto_1 = __webpack_require__(2257);
+const register_dto_1 = __webpack_require__(2258);
 let AuthContoller = class AuthContoller {
     constructor(rmqService) {
         this.rmqService = rmqService;
@@ -254361,15 +254361,14 @@ tslib_1.__exportStar(__webpack_require__(2236), exports);
 tslib_1.__exportStar(__webpack_require__(2237), exports);
 tslib_1.__exportStar(__webpack_require__(2238), exports);
 tslib_1.__exportStar(__webpack_require__(2239), exports);
-tslib_1.__exportStar(__webpack_require__(2246), exports);
-tslib_1.__exportStar(__webpack_require__(2247), exports);
 tslib_1.__exportStar(__webpack_require__(2248), exports);
 tslib_1.__exportStar(__webpack_require__(2249), exports);
 tslib_1.__exportStar(__webpack_require__(2250), exports);
-tslib_1.__exportStar(__webpack_require__(2252), exports);
+tslib_1.__exportStar(__webpack_require__(2251), exports);
 tslib_1.__exportStar(__webpack_require__(2253), exports);
 tslib_1.__exportStar(__webpack_require__(2254), exports);
 tslib_1.__exportStar(__webpack_require__(2255), exports);
+tslib_1.__exportStar(__webpack_require__(2256), exports);
 
 
 /***/ }),
@@ -255416,31 +255415,37 @@ var StaffCreate;
 
 "use strict";
 
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffCreateDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const rarity_type_1 = __webpack_require__(2241);
-const staff_stat_dto_1 = __webpack_require__(2242);
-const staff_skill_dto_1 = __webpack_require__(2243);
-const staff_achievement_dto_1 = __webpack_require__(2245);
+const position_dto_1 = __webpack_require__(2241);
+const contact_dto_1 = __webpack_require__(2243);
+const staff_stat_dto_1 = __webpack_require__(2244);
+const staff_skill_dto_1 = __webpack_require__(2245);
+const staff_achievement_dto_1 = __webpack_require__(2247);
 class StaffCreateDto {
 }
 exports.StaffCreateDto = StaffCreateDto;
 tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "slug", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "name", void 0);
 tslib_1.__decorate([
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => position_dto_1.PositionDto),
+    tslib_1.__metadata("design:type", Array)
+], StaffCreateDto.prototype, "positions", void 0);
+tslib_1.__decorate([
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "position", void 0);
+], StaffCreateDto.prototype, "educationLevel", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], StaffCreateDto.prototype, "researchPosition", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -255450,38 +255455,7 @@ tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "title", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsEnum)(["LEGENDARY", "RARE", "COMMON"]),
-    tslib_1.__metadata("design:type", typeof (_a = typeof rarity_type_1.Rarity !== "undefined" && rarity_type_1.Rarity) === "function" ? _a : Object)
-], StaffCreateDto.prototype, "rarity", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "telegram", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "github", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
 ], StaffCreateDto.prototype, "bio", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsString)({ each: true }),
-    tslib_1.__metadata("design:type", Array)
-], StaffCreateDto.prototype, "researchInterests", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
@@ -255505,24 +255479,46 @@ tslib_1.__decorate([
 ], StaffCreateDto.prototype, "achievements", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
-], StaffCreateDto.prototype, "image", void 0);
-tslib_1.__decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.IsString)({ each: true }),
     tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "tags", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    tslib_1.__metadata("design:type", String)
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => contact_dto_1.ContactDto),
+    tslib_1.__metadata("design:type", Array)
 ], StaffCreateDto.prototype, "contact", void 0);
 
 
 /***/ }),
 /* 2241 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PositionDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+const level_type_1 = __webpack_require__(2242);
+class PositionDto {
+}
+exports.PositionDto = PositionDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsEnum)(['Научно-педагогический работник', 'Профессорско-преподавательский состав']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.PositionType !== "undefined" && level_type_1.PositionType) === "function" ? _a : Object)
+], PositionDto.prototype, "type", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], PositionDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2242 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -255531,7 +255527,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
-/* 2242 */
+/* 2243 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ContactDto = void 0;
+const tslib_1 = __webpack_require__(2);
+const class_validator_1 = __webpack_require__(169);
+class ContactDto {
+}
+exports.ContactDto = ContactDto;
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "title", void 0);
+tslib_1.__decorate([
+    (0, class_validator_1.IsString)(),
+    tslib_1.__metadata("design:type", String)
+], ContactDto.prototype, "value", void 0);
+
+
+/***/ }),
+/* 2244 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255554,17 +255573,19 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2243 */
+/* 2245 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StaffSkillDto = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
 const class_transformer_1 = __webpack_require__(283);
-const subskill_dto_1 = __webpack_require__(2244);
+const subskill_dto_1 = __webpack_require__(2246);
+const level_type_1 = __webpack_require__(2242);
 class StaffSkillDto {
 }
 exports.StaffSkillDto = StaffSkillDto;
@@ -255573,8 +255594,8 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], StaffSkillDto.prototype, "name", void 0);
 tslib_1.__decorate([
-    (0, class_validator_1.IsNumber)(),
-    tslib_1.__metadata("design:type", Number)
+    (0, class_validator_1.IsEnum)(['Junior', 'Middle', 'Senior']),
+    tslib_1.__metadata("design:type", typeof (_a = typeof level_type_1.Level !== "undefined" && level_type_1.Level) === "function" ? _a : Object)
 ], StaffSkillDto.prototype, "level", void 0);
 tslib_1.__decorate([
     (0, class_validator_1.IsOptional)(),
@@ -255591,7 +255612,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2244 */
+/* 2246 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255615,7 +255636,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2245 */
+/* 2247 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255642,7 +255663,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2246 */
+/* 2248 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255668,33 +255689,7 @@ var StaffDelete;
 
 
 /***/ }),
-/* 2247 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.StaffGetBySlug = void 0;
-const tslib_1 = __webpack_require__(2);
-const class_validator_1 = __webpack_require__(169);
-var StaffGetBySlug;
-(function (StaffGetBySlug) {
-    StaffGetBySlug.topic = 'staff.get-by-slug.query';
-    class Request {
-    }
-    tslib_1.__decorate([
-        (0, class_validator_1.IsString)(),
-        tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "slug", void 0);
-    StaffGetBySlug.Request = Request;
-    class Response {
-    }
-    StaffGetBySlug.Response = Response;
-})(StaffGetBySlug || (exports.StaffGetBySlug = StaffGetBySlug = {}));
-
-
-/***/ }),
-/* 2248 */
+/* 2249 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255717,7 +255712,7 @@ var StaffGetList;
         (0, class_validator_1.IsOptional)(),
         (0, class_validator_1.IsString)(),
         tslib_1.__metadata("design:type", String)
-    ], Request.prototype, "rarity", void 0);
+    ], Request.prototype, "researchPosition", void 0);
     StaffGetList.Request = Request;
     class Response {
     }
@@ -255726,7 +255721,7 @@ var StaffGetList;
 
 
 /***/ }),
-/* 2249 */
+/* 2250 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255753,14 +255748,14 @@ var StaffUpdate;
 
 
 /***/ }),
-/* 2250 */
+/* 2251 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryCreate = void 0;
-const success_story_create_dto_1 = __webpack_require__(2251);
+const success_story_create_dto_1 = __webpack_require__(2252);
 var SuccessStoryCreate;
 (function (SuccessStoryCreate) {
     SuccessStoryCreate.topic = 'success-story.create.command';
@@ -255774,7 +255769,7 @@ var SuccessStoryCreate;
 
 
 /***/ }),
-/* 2251 */
+/* 2252 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255825,7 +255820,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2252 */
+/* 2253 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255851,7 +255846,7 @@ var SuccessStoryDelete;
 
 
 /***/ }),
-/* 2253 */
+/* 2254 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255883,7 +255878,7 @@ var SuccessStoryGetList;
 
 
 /***/ }),
-/* 2254 */
+/* 2255 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255892,7 +255887,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SuccessStoryUpdate = void 0;
 const tslib_1 = __webpack_require__(2);
 const class_validator_1 = __webpack_require__(169);
-const success_story_create_dto_1 = __webpack_require__(2251);
+const success_story_create_dto_1 = __webpack_require__(2252);
 var SuccessStoryUpdate;
 (function (SuccessStoryUpdate) {
     SuccessStoryUpdate.topic = 'success-story.update.command';
@@ -255910,7 +255905,7 @@ var SuccessStoryUpdate;
 
 
 /***/ }),
-/* 2255 */
+/* 2256 */
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -255930,7 +255925,7 @@ var HealthCheck;
 
 
 /***/ }),
-/* 2256 */
+/* 2257 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255953,7 +255948,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2257 */
+/* 2258 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255981,7 +255976,7 @@ tslib_1.__decorate([
 
 
 /***/ }),
-/* 2258 */
+/* 2259 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -255993,9 +255988,9 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
 const contracts_1 = __webpack_require__(2200);
-const jwt_guard_1 = __webpack_require__(2259);
-const user_decorator_1 = __webpack_require__(2260);
-const roles_guard_1 = __webpack_require__(2261);
+const jwt_guard_1 = __webpack_require__(2260);
+const user_decorator_1 = __webpack_require__(2261);
+const roles_guard_1 = __webpack_require__(2262);
 const interfaces_1 = __webpack_require__(2203);
 let UserController = class UserController {
     constructor(rmqService) {
@@ -256112,7 +256107,7 @@ exports.UserController = UserController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2259 */
+/* 2260 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256126,7 +256121,7 @@ exports.JWTAuthGuard = JWTAuthGuard;
 
 
 /***/ }),
-/* 2260 */
+/* 2261 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256153,7 +256148,7 @@ exports.UserId = (0, common_1.createParamDecorator)((_data, ctx) => {
 
 
 /***/ }),
-/* 2261 */
+/* 2262 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256188,7 +256183,7 @@ exports.Roles = Roles;
 
 
 /***/ }),
-/* 2262 */
+/* 2263 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256199,7 +256194,7 @@ exports.JwtStrategy = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const passport_1 = __webpack_require__(2136);
-const passport_jwt_1 = __webpack_require__(2263);
+const passport_jwt_1 = __webpack_require__(2264);
 const config_1 = __webpack_require__(1965);
 let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_jwt_1.Strategy) {
     constructor(config) {
@@ -256220,14 +256215,14 @@ exports.JwtStrategy = JwtStrategy = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2263 */
+/* 2264 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
-var Strategy = __webpack_require__(2264),
-    ExtractJwt = __webpack_require__(2268);
+var Strategy = __webpack_require__(2265),
+    ExtractJwt = __webpack_require__(2269);
 
 
 module.exports = {
@@ -256237,14 +256232,14 @@ module.exports = {
 
 
 /***/ }),
-/* 2264 */
+/* 2265 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var passport = __webpack_require__(2144)
-    , auth_hdr = __webpack_require__(2265)
+    , auth_hdr = __webpack_require__(2266)
     , util = __webpack_require__(72)
     , url = __webpack_require__(716)
-    , assign = __webpack_require__(2266);
+    , assign = __webpack_require__(2267);
 
 
 
@@ -256322,7 +256317,7 @@ util.inherits(JwtStrategy, passport.Strategy);
  *
  * Note that this should only be replaced in tests.
  */
-JwtStrategy.JwtVerifier = __webpack_require__(2267);
+JwtStrategy.JwtVerifier = __webpack_require__(2268);
 
 
 
@@ -256382,7 +256377,7 @@ JwtStrategy.prototype.authenticate = function(req, options) {
 
 
 /***/ }),
-/* 2265 */
+/* 2266 */
 /***/ ((module) => {
 
 "use strict";
@@ -256408,7 +256403,7 @@ module.exports = {
 
 
 /***/ }),
-/* 2266 */
+/* 2267 */
 /***/ ((module) => {
 
 // note: This is a polyfill to Object.assign to support old nodejs versions (0.10 / 0.12) where
@@ -256438,7 +256433,7 @@ module.exports = function(target, varArgs) {
 
 
 /***/ }),
-/* 2267 */
+/* 2268 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var jwt = __webpack_require__(2063);
@@ -256449,14 +256444,14 @@ module.exports  = function(token, secretOrKey, options, callback) {
 
 
 /***/ }),
-/* 2268 */
+/* 2269 */
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
 
 var url = __webpack_require__(716),
-    auth_hdr = __webpack_require__(2265);
+    auth_hdr = __webpack_require__(2266);
 
 // Note: express http converts all headers
 // to lower case.
@@ -256590,7 +256585,7 @@ module.exports = extractors;
 
 
 /***/ }),
-/* 2269 */
+/* 2270 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256601,7 +256596,7 @@ exports.CommentsController = void 0;
 const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
-const jwt_guard_1 = __webpack_require__(2259);
+const jwt_guard_1 = __webpack_require__(2260);
 const contracts_1 = __webpack_require__(2200);
 let CommentsController = class CommentsController {
     constructor(rmq) {
@@ -256643,7 +256638,7 @@ exports.CommentsController = CommentsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2270 */
+/* 2271 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256655,8 +256650,8 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
 const contracts_1 = __webpack_require__(2200);
-const jwt_guard_1 = __webpack_require__(2259);
-const roles_guard_1 = __webpack_require__(2261);
+const jwt_guard_1 = __webpack_require__(2260);
+const roles_guard_1 = __webpack_require__(2262);
 const interfaces_1 = __webpack_require__(2203);
 let NewsController = class NewsController {
     constructor(rmqService) {
@@ -256750,7 +256745,7 @@ exports.NewsController = NewsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2271 */
+/* 2272 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256762,8 +256757,8 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
 const contracts_1 = __webpack_require__(2200);
-const jwt_guard_1 = __webpack_require__(2259);
-const roles_guard_1 = __webpack_require__(2261);
+const jwt_guard_1 = __webpack_require__(2260);
+const roles_guard_1 = __webpack_require__(2262);
 const interfaces_1 = __webpack_require__(2203);
 let PortfolioController = class PortfolioController {
     constructor(rmqService) {
@@ -256865,7 +256860,7 @@ exports.PortfolioController = PortfolioController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2272 */
+/* 2273 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256877,18 +256872,18 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
 const contracts_1 = __webpack_require__(2200);
-const jwt_guard_1 = __webpack_require__(2259);
-const roles_guard_1 = __webpack_require__(2261);
+const jwt_guard_1 = __webpack_require__(2260);
+const roles_guard_1 = __webpack_require__(2262);
 const interfaces_1 = __webpack_require__(2203);
 let StaffController = class StaffController {
     constructor(rmqService) {
         this.rmqService = rmqService;
     }
-    async getStaffList(position, rarity) {
-        return this.rmqService.send(contracts_1.StaffGetList.topic, { position, rarity });
-    }
-    async getStaffBySlug(slug) {
-        return this.rmqService.send(contracts_1.StaffGetBySlug.topic, { slug });
+    async getStaffList(position, researchPosition) {
+        return this.rmqService.send(contracts_1.StaffGetList.topic, {
+            position,
+            researchPosition,
+        });
     }
     async createStaff(dto) {
         return this.rmqService.send(contracts_1.StaffCreate.topic, dto);
@@ -256919,18 +256914,11 @@ exports.StaffController = StaffController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__param(0, (0, common_1.Query)('position')),
-    tslib_1.__param(1, (0, common_1.Query)('rarity')),
+    tslib_1.__param(1, (0, common_1.Query)('researchPosition')),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [String, String]),
     tslib_1.__metadata("design:returntype", Promise)
 ], StaffController.prototype, "getStaffList", null);
-tslib_1.__decorate([
-    (0, common_1.Get)(':slug'),
-    tslib_1.__param(0, (0, common_1.Param)('slug')),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [String]),
-    tslib_1.__metadata("design:returntype", Promise)
-], StaffController.prototype, "getStaffBySlug", null);
 tslib_1.__decorate([
     (0, common_1.Post)(),
     (0, common_1.UseGuards)(jwt_guard_1.JWTAuthGuard),
@@ -256972,7 +256960,7 @@ exports.StaffController = StaffController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2273 */
+/* 2274 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
@@ -256984,8 +256972,8 @@ const tslib_1 = __webpack_require__(2);
 const common_1 = __webpack_require__(1);
 const nestjs_rmq_1 = __webpack_require__(2161);
 const contracts_1 = __webpack_require__(2200);
-const jwt_guard_1 = __webpack_require__(2259);
-const roles_guard_1 = __webpack_require__(2261);
+const jwt_guard_1 = __webpack_require__(2260);
+const roles_guard_1 = __webpack_require__(2262);
 const interfaces_1 = __webpack_require__(2203);
 let SuccessStoryController = class SuccessStoryController {
     constructor(rmqService) {
@@ -257077,7 +257065,7 @@ exports.SuccessStoryController = SuccessStoryController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 2274 */
+/* 2275 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";

@@ -1,7 +1,8 @@
 import { SubskillDto } from './subskill.dto';
+import { Level } from '../types/level.type';
 export declare class StaffSkillDto {
     name: string;
-    level: number;
+    level: Level;
     description?: string;
     subskills?: SubskillDto[];
 }

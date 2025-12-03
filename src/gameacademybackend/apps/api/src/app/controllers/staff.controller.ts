@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Put, Delete, Param, Query, UseGuards } from '@nestjs/common';
 import { RMQService } from 'nestjs-rmq';
-import { StaffCreate, StaffUpdate, StaffDelete, StaffGetBySlug, StaffGetList } from '@shared/contracts';
+import { StaffCreate, StaffUpdate, StaffDelete, StaffGetList } from '@shared/contracts';
 import { JWTAuthGuard } from '../guards/jwt.guard';
 import { Roles } from '../guards/roles.guard';
 import { UserRole } from '@shared/interfaces';
@@ -10,13 +10,11 @@ export class StaffController {
   constructor(private readonly rmqService: RMQService) {}
 
   @Get()
-  async getStaffList(@Query('position') position?: string, @Query('rarity') rarity?: string) {
-    return this.rmqService.send<StaffGetList.Request, StaffGetList.Response>(StaffGetList.topic, { position, rarity });
-  }
-
-  @Get(':slug')
-  async getStaffBySlug(@Param('slug') slug: string) {
-    return this.rmqService.send<StaffGetBySlug.Request, StaffGetBySlug.Response>(StaffGetBySlug.topic, { slug });
+  async getStaffList(@Query('position') position?: string, @Query('researchPosition') researchPosition?: string) {
+    return this.rmqService.send<StaffGetList.Request, StaffGetList.Response>(StaffGetList.topic, {
+      position,
+      researchPosition,
+    });
   }
 
   @Post()

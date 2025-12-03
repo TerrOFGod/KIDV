@@ -27,7 +27,6 @@ tslib_1.__exportStar(require("./lib/portfolio/portfolio.get-list"), exports);
 tslib_1.__exportStar(require("./lib/portfolio/portfolio.update"), exports);
 tslib_1.__exportStar(require("./lib/staff/staff.create"), exports);
 tslib_1.__exportStar(require("./lib/staff/staff.delete"), exports);
-tslib_1.__exportStar(require("./lib/staff/staff.get-by-slug"), exports);
 tslib_1.__exportStar(require("./lib/staff/staff.get-list"), exports);
 tslib_1.__exportStar(require("./lib/staff/staff.update"), exports);
 tslib_1.__exportStar(require("./lib/success-story/success-story.create"), exports);

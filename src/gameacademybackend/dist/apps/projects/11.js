@@ -3,7 +3,7 @@ exports.id = 11;
 exports.ids = [11];
 exports.modules = {
 
-/***/ 2960:
+/***/ 2961:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -533,7 +533,7 @@ class AwsRestJsonProtocol extends HttpBindingProtocol.HttpBindingProtocol {
 
 /***/ }),
 
-/***/ 2961:
+/***/ 2962:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);

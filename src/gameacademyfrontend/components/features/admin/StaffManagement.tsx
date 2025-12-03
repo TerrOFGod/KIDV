@@ -54,12 +54,20 @@ export default function StaffManagement() {
         ));
       } else {
         // Create new
-        const response = await axios.post<StaffMember>(
-          `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
-          staffData,
-          { headers: { Authorization: `Bearer ${token}` } }
+        console.error(JSON.stringify(staffData));
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
+            method: 'POST',
+            headers:
+            {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(staffData),
+          }
         );
-        setStaff(prev => [...prev, response.data]);
+        setStaff(prev => [...prev, staffData]);
       }
       setIsModalOpen(false);
       setEditingMember(null);
