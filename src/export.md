@@ -1,1030 +1,957 @@
-## gameacademyfrontend/components/features/admin/forms/StaffForm.tsx
-
-```tsx
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// components/admin/StaffForm.tsx
-'use client';
-
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { StaffMember } from '@/types/staff';
-
-export default function StaffForm({ 
-  member, 
-  onSave, 
-  onClose 
-}: {
-  member: StaffMember | null;
-  onSave: (data: StaffMember) => void;
-  onClose: () => void;
-}) {
-  const [formData, setFormData] = useState<StaffMember>({
-    slug: member?.slug || '',
-    name: member?.name || '',
-    position: member?.position || '',
-    photo: member?.photo || '',
-    title: member?.title || '',
-    rarity: member?.rarity || 'COMMON',
-    email: member?.email || '',
-    telegram: member?.telegram || '',
-    github: member?.github || '',
-    bio: member?.bio || '',
-    researchInterests: member?.researchInterests || [],
-    stats: member?.stats || [],
-    skills: member?.skills || [],
-    achievements: member?.achievements || [],
-    tags: member?.tags || [],
-  });
-
-  const [newTag, setNewTag] = useState('');
-  const [newInterest, setNewInterest] = useState('');
-  const [newStat, setNewStat] = useState({ label: '', value: 0 });
-  const [newSkill, setNewSkill] = useState({ 
-    name: '', 
-    level: 50,
-    description: '',
-    subskills: [] as Array<{ name: string; description?: string }>
-  });
-  const [newSubskill, setNewSubskill] = useState({ name: '', description: '' });
-  const [newAchievement, setNewAchievement] = useState({ 
-    title: '', 
-    icon: '', 
-    description: '' 
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSave(formData);
-  };
-
-  const addTag = () => {
-    if (newTag.trim() && !formData.tags?.includes(newTag.trim())) {
-      setFormData(prev => ({
-        ...prev,
-        tags: [...prev.tags!, newTag.trim()]
-      }));
-      setNewTag('');
-    }
-  };
-
-  const removeTag = (tagToRemove: string) => {
-    setFormData(prev => ({
-      ...prev,
-      tags: prev.tags?.filter(tag => tag !== tagToRemove)
-    }));
-  };
-
-  const addInterest = () => {
-    if (newInterest.trim() && !formData.researchInterests?.includes(newInterest.trim())) {
-      setFormData(prev => ({
-        ...prev,
-        researchInterests: [...(prev.researchInterests || []), newInterest.trim()]
-      }));
-      setNewInterest('');
-    }
-  };
-
-  const removeInterest = (interestToRemove: string) => {
-    setFormData(prev => ({
-      ...prev,
-      researchInterests: prev.researchInterests?.filter(interest => interest !== interestToRemove)
-    }));
-  };
-
-  const addStat = () => {
-    if (newStat.label.trim()) {
-      setFormData(prev => ({
-        ...prev,
-        stats: [...(prev.stats || []), { ...newStat }]
-      }));
-      setNewStat({ label: '', value: 0 });
-    }
-  };
-
-  const removeStat = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      stats: prev.stats?.filter((_, i) => i !== index)
-    }));
-  };
-
-  const addSkill = () => {
-    if (newSkill.name.trim()) {
-      setFormData(prev => ({
-        ...prev,
-        skills: [...(prev.skills || []), { ...newSkill }]
-      }));
-      setNewSkill({ name: '', level: 50, description: '', subskills: [] });
-    }
-  };
-
-  const removeSkill = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      skills: prev.skills?.filter((_, i) => i !== index)
-    }));
-  };
-
-  const addSubskill = () => {
-    if (newSubskill.name.trim()) {
-      setNewSkill(prev => ({
-        ...prev,
-        subskills: [...prev.subskills, { ...newSubskill }]
-      }));
-      setNewSubskill({ name: '', description: '' });
-    }
-  };
-
-  const removeSubskill = (index: number) => {
-    setNewSkill(prev => ({
-      ...prev,
-      subskills: prev.subskills.filter((_, i) => i !== index)
-    }));
-  };
-
-  const addAchievement = () => {
-    if (newAchievement.title.trim() && newAchievement.icon.trim()) {
-      setFormData(prev => ({
-        ...prev,
-        achievements: [...(prev.achievements || []), { ...newAchievement }]
-      }));
-      setNewAchievement({ title: '', icon: '', description: '' });
-    }
-  };
-
-  const removeAchievement = (index: number) => {
-    setFormData(prev => ({
-      ...prev,
-      achievements: prev.achievements?.filter((_, i) => i !== index)
-    }));
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-xl max-w-6xl w-full max-h-[95vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold">
-            {member ? 'Редактирование сотрудника' : 'Новый сотрудник'}
-          </h2>
-        </div>
-
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Основная информация */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Полное имя *
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Slug *
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Должность *
-              </label>
-              <input
-                type="text"
-                value={formData.position}
-                onChange={(e) => setFormData(prev => ({ ...prev, position: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Титул
-              </label>
-              <input
-                type="text"
-                value={formData.title || ''}
-                onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Редкость
-              </label>
-              <select
-                value={formData.rarity}
-                onChange={(e) => setFormData(prev => ({ ...prev, rarity: e.target.value as any }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              >
-                <option value="COMMON">COMMON</option>
-                <option value="RARE">RARE</option>
-                <option value="LEGENDARY">LEGENDARY</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                value={formData.email || ''}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Telegram
-              </label>
-              <input
-                type="text"
-                value={formData.telegram || ''}
-                onChange={(e) => setFormData(prev => ({ ...prev, telegram: e.target.value }))}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              GitHub
-            </label>
-            <input
-              type="text"
-              value={formData.github || ''}
-              onChange={(e) => setFormData(prev => ({ ...prev, github: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              URL фотографии *
-            </label>
-            <input
-              type="url"
-              value={formData.photo}
-              onChange={(e) => setFormData(prev => ({ ...prev, photo: e.target.value }))}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Биография
-            </label>
-            <textarea
-              value={formData.bio || ''}
-              onChange={(e) => setFormData(prev => ({ ...prev, bio: e.target.value }))}
-              rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-
-          {/* Научные интересы */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Научные интересы
-            </label>
-            <div className="flex flex-wrap gap-2 mb-2">
-              {formData.researchInterests?.map((interest, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
-                >
-                  {interest}
-                  <button
-                    type="button"
-                    onClick={() => removeInterest(interest)}
-                    className="ml-2 hover:text-blue-600"
-                  >
-                    ×
-                  </button>
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={newInterest}
-                onChange={(e) => setNewInterest(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addInterest())}
-                placeholder="Добавить научный интерес"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <button
-                type="button"
-                onClick={addInterest}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
-              >
-                Добавить
-              </button>
-            </div>
-          </div>
-
-          {/* Теги */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Теги
-            </label>
-            <div className="flex flex-wrap gap-2 mb-2">
-              {formData.tags?.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-300/10 text-primary"
-                >
-                  {tag}
-                  <button
-                    type="button"
-                    onClick={() => removeTag(tag)}
-                    className="ml-2 hover:text-primary/70"
-                  >
-                    ×
-                  </button>
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={newTag}
-                onChange={(e) => setNewTag(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                placeholder="Введите тег и нажмите Enter"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-              <button
-                type="button"
-                onClick={addTag}
-                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
-              >
-                Добавить
-              </button>
-            </div>
-          </div>
-
-          {/* Статистика */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Статистика
-            </label>
-            <div className="space-y-3 mb-4">
-              {formData.stats?.map((stat, index) => (
-                <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded">
-                  <div>
-                    <span className="font-medium">{stat.label}</span>
-                    <span className="ml-2 text-gray-600">({stat.value})</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeStat(index)}
-                    className="text-red-600 hover:text-red-800"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-4 p-4 border border-gray-200 rounded-lg">
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Название</label>
-                <input
-                  type="text"
-                  value={newStat.label}
-                  onChange={(e) => setNewStat(prev => ({ ...prev, label: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Значение</label>
-                <input
-                  type="number"
-                  value={newStat.value}
-                  onChange={(e) => setNewStat(prev => ({ ...prev, value: parseInt(e.target.value) }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <button
-                  type="button"
-                  onClick={addStat}
-                  className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
-                >
-                  Добавить статистику
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Навыки */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Навыки
-            </label>
-            <div className="space-y-4 mb-4">
-              {formData.skills?.map((skill, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h4 className="font-medium">{skill.name}</h4>
-                      <p className="text-sm text-gray-600">Уровень: {skill.level}%</p>
-                      {skill.description && (
-                        <p className="text-sm mt-1">{skill.description}</p>
-                      )}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => removeSkill(index)}
-                      className="text-red-600 hover:text-red-800"
-                    >
-                      ×
-                    </button>
-                  </div>
-                  {skill.subskills && skill.subskills.length > 0 && (
-                    <div className="mt-2">
-                      <h5 className="text-sm font-medium mb-1">Поднавыки:</h5>
-                      <div className="flex flex-wrap gap-1">
-                        {skill.subskills.map((subskill, subIndex) => (
-                          <span
-                            key={subIndex}
-                            className="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
-                          >
-                            {subskill.name}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Название навыка</label>
-                  <input
-                    type="text"
-                    value={newSkill.name}
-                    onChange={(e) => setNewSkill(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Уровень (%)</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={newSkill.level}
-                    onChange={(e) => setNewSkill(prev => ({ ...prev, level: parseInt(e.target.value) }))}
-                    className="w-full"
-                  />
-                  <div className="text-center text-sm">{newSkill.level}%</div>
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Описание</label>
-                <textarea
-                  value={newSkill.description}
-                  onChange={(e) => setNewSkill(prev => ({ ...prev, description: e.target.value }))}
-                  rows={2}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-
-              {/* Поднавыки */}
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-2">Поднавыки</label>
-                <div className="space-y-2 mb-2">
-                  {newSkill.subskills.map((subskill, index) => (
-                    <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                      <div>
-                        <span className="font-medium">{subskill.name}</span>
-                        {subskill.description && (
-                          <span className="ml-2 text-gray-600">- {subskill.description}</span>
-                        )}
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => removeSubskill(index)}
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        ×
-                      </button>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid md:grid-cols-2 gap-2">
-                  <input
-                    type="text"
-                    value={newSubskill.name}
-                    onChange={(e) => setNewSubskill(prev => ({ ...prev, name: e.target.value }))}
-                    placeholder="Название поднавыка"
-                    className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                  <input
-                    type="text"
-                    value={newSubskill.description}
-                    onChange={(e) => setNewSubskill(prev => ({ ...prev, description: e.target.value }))}
-                    placeholder="Описание"
-                    className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                  <div className="md:col-span-2">
-                    <button
-                      type="button"
-                      onClick={addSubskill}
-                      className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
-                    >
-                      Добавить поднавык
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={addSkill}
-                className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
-              >
-                Добавить навык
-              </button>
-            </div>
-          </div>
-
-          {/* Достижения */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Достижения
-            </label>
-            <div className="space-y-4 mb-4">
-              {formData.achievements?.map((achievement, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-lg">{achievement.icon}</span>
-                        <h4 className="font-medium">{achievement.title}</h4>
-                      </div>
-                      <p className="text-sm mt-1">{achievement.description}</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => removeAchievement(index)}
-                      className="text-red-600 hover:text-red-800"
-                    >
-                      ×
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="border border-gray-200 rounded-lg p-4 space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Название</label>
-                  <input
-                    type="text"
-                    value={newAchievement.title}
-                    onChange={(e) => setNewAchievement(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Иконка (эмодзи)</label>
-                  <input
-                    type="text"
-                    value={newAchievement.icon}
-                    onChange={(e) => setNewAchievement(prev => ({ ...prev, icon: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Описание</label>
-                <textarea
-                  value={newAchievement.description}
-                  onChange={(e) => setNewAchievement(prev => ({ ...prev, description: e.target.value }))}
-                  rows={2}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary"
-                />
-              </div>
-              <button
-                type="button"
-                onClick={addAchievement}
-                className="w-full bg-gray-200 text-gray-700 py-2 rounded hover:bg-gray-300 transition-colors"
-              >
-                Добавить достижение
-              </button>
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors"
-            >
-              Отмена
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-2 bg-blue-300 text-white rounded-lg hover:bg-blue-300/90 transition-colors"
-            >
-              {member ? 'Обновить' : 'Создать'}
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
-  );
-}
-```
-
-## gameacademyfrontend/components/features/admin/StaffManagement.tsx
-
-```tsx
-// components/admin/StaffManagement.tsx
-'use client';
-
-import { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import { StaffMember } from '@/types/staff';
-import StaffForm from './forms/StaffForm';
-import axios from 'axios';
-
-export default function StaffManagement() {
-  const [staff, setStaff] = useState<StaffMember[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingMember, setEditingMember] = useState<StaffMember | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>('');
-
-  useEffect(() => {
-    fetchStaff();
-  }, []);
-
-  const fetchStaff = async () => {
-    try {
-      /*
-      // Mock data
-      const mockData: StaffMember[] = [
-        {
-          _id: '1',
-          slug: 'vlada-kugurakova',
-          name: 'Кугуракова Влада Владимировна',
-          position: 'Руководитель кафедры',
-          photo: '/team/kugurakova.jpg',
-          title: 'Доцент',
-          rarity: 'LEGENDARY',
-          email: 'vlada.kugurakova@gmail.com',
-          telegram: '@vladakugurakova',
-          bio: 'Опыт работы в IT-индустрии более 10 лет...',
-          researchInterests: ['VR/AR', 'Game Development', 'Computer Vision'],
-          tags: ['Руководство', 'VR/AR', 'Исследования']
-        }
-      ];
-      setStaff(mockData);
-      */
-      setLoading(true);
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('Не авторизованы');
-
-      axios.get<{ staff: StaffMember[] }>(`${process.env.NEXT_PUBLIC_API_URL_API}/staff`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }).then(res => {
-        setStaff(res.data.staff);
-      }).catch(() => {
-        setError('Не удалось загрузить команду.');
-      });
-      setError('');
-    } catch (err) {
-      setError('Не удалось загрузить список сотрудников');
-      console.error('Error fetching staff:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSave = async (staffData: StaffMember) => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('Не авторизованы');
-
-      if (editingMember) {
-        // Update existing
-        await axios.put(
-          `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${editingMember._id}`,
-          staffData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setStaff(prev => prev.map(item => 
-          item._id === editingMember._id ? staffData : item
-        ));
-      } else {
-        // Create new
-        await axios.post(
-          `${process.env.NEXT_PUBLIC_API_URL_API}/staff`,
-          staffData,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setStaff(prev => [...prev, staffData]);
-      }
-      setIsModalOpen(false);
-      setEditingMember(null);
-    } catch (error) {
-      console.error('Error saving staff member:', error);
-      alert('Ошибка при сохранении сотрудника');
-    }
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('Вы уверены, что хотите удалить этого сотрудника?')) return;
-    
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) throw new Error('Не авторизованы');
-
-      await axios.delete(
-        `${process.env.NEXT_PUBLIC_API_URL_API}/staff/${id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setStaff(prev => prev.filter(item => item._id !== id));
-    } catch (error) {
-      console.error('Error deleting staff member:', error);
-      alert('Ошибка при удалении сотрудника');
-    }
-  };
-
-  if (loading) {
-    return <div className="flex justify-center py-8">Загрузка...</div>;
-  }
-
-  return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h2 className="text-2xl font-bold">Управление командой</h2>
-          <p className="text-gray-600">Преподаватели и сотрудники кафедры</p>
-        </div>
-        <button
-          onClick={() => {
-            setEditingMember(null);
-            setIsModalOpen(true);
-          }}
-          className="bg-blue-300 text-white px-6 py-3 rounded-lg hover:bg-blue-300/90 transition-colors flex items-center space-x-2"
-        >
-          <span>+</span>
-          <span>Новый сотрудник</span>
-        </button>
-      </div>
-      
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-          {error}
-        </div>
-      )}
-
-      {/* Статистика */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Всего сотрудников</h3>
-          <div className="text-2xl font-bold text-gray-900">{staff.length}</div>
-        </div>
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Преподавателей</h3>
-          <div className="text-2xl font-bold text-gray-900">
-            {staff.filter(m => m.position.includes('преподаватель')).length}
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">LEGENDARY</h3>
-          <div className="text-2xl font-bold text-gray-900">
-            {staff.filter(m => m.rarity === 'LEGENDARY').length}
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Направлений</h3>
-          <div className="text-2xl font-bold text-gray-900">
-            {new Set(staff.flatMap(m => m.researchInterests || [])).size}
-          </div>
-        </div>
-      </div>
-
-      {/* Таблица сотрудников */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Сотрудник
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Должность
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Редкость
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Контакты
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Действия
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {staff.map((member) => (
-              <tr key={member._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full object-cover"
-                        src={member.photo}
-                        alt={member.name}
-                      />
-                    </div>
-                    <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {member.name}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {member.title}
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {member.position}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                    member.rarity === 'LEGENDARY' ? 'bg-yellow-100 text-yellow-800' :
-                    member.rarity === 'RARE' ? 'bg-purple-100 text-purple-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
-                    {member.rarity === 'LEGENDARY' ? 'LEGENDARY' :
-                     member.rarity === 'RARE' ? 'RARE' : 'COMMON'}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <div>{member.email}</div>
-                  <div>{member.telegram}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button
-                    onClick={() => {
-                      setEditingMember(member);
-                      setIsModalOpen(true);
-                    }}
-                    className="text-primary hover:text-primary/80 mr-4"
-                  >
-                    Редактировать
-                  </button>
-                  <button
-                    onClick={() => handleDelete(member._id!)}
-                    className="text-red-600 hover:text-red-900"
-                  >
-                    Удалить
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {staff.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">Нет сотрудников. Добавьте первого!</p>
-          </div>
-        )}
-      </div>
-
-      {/* Модальное окно для сотрудников 
-      */}
-
-      <AnimatePresence>
-        {isModalOpen && (
-          <StaffForm
-            member={editingMember}
-            onSave={handleSave}
-            onClose={() => {
-              setIsModalOpen(false);
-              setEditingMember(null);
-            }}
-          />
-        )}
-      </AnimatePresence>
-
-    </div>
-  );
-}
-
-// Компонент StaffForm будет аналогичен предыдущим формам
-```
-
-## gameacademyfrontend/types/staff.d.ts
+## gameacademybackend/apps/account/src/app/auth/others/account.constants.ts
 
 ```ts
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { StaticImageData } from "next/image";
+export const THIS_USER_IS_EXISTS = 'Такой пользователь уже зарегистрирован';
+export const THIS_USER_IS_NOT_EXISTS = 'Такого пользователя не существует';
+export const WRONG_LOGIN_OR_PASSWORD = 'Неверный логин или пароль';
+export const WRONG_OLD_PASSWORD = 'Неверный пароль';
+```
 
-// Тип для редкости сотрудника
-export type Level = "Junior" | "Middle" | "Senior";
-export type PositionType = "Научно-педагогический работник" | "Профессорско-преподавательский состав";
+## gameacademybackend/apps/account/src/app/auth/auth.controller.ts
 
-// Тип для статистики
-export interface StaffStat {
-  label: string;
-  value: number;
+```ts
+import { Body, Controller } from '@nestjs/common';
+import { AccountLogin, AccountRegister, HealthCheck } from '@shared/contracts';
+import { RMQRoute, RMQValidate } from 'nestjs-rmq';
+import { AuthService } from './auth.service';
+
+@Controller()
+export class AuthController {
+  constructor(private readonly authService: AuthService) {}
+  @RMQValidate()
+  @RMQRoute(AccountRegister.topic)
+  async register(@Body() dto: AccountRegister.Request): Promise<AccountRegister.Response> {
+    return this.authService.register(dto);
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountLogin.topic)
+  async login(@Body() { email, password }: AccountLogin.Request): Promise<AccountLogin.Response> {
+    const { id } = await this.authService.validateUser(email, password);
+    return this.authService.login(id.toString());
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'auth') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'auth',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'auth',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'auth',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/auth/auth.module.ts
+
+```ts
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { getJwtConfig } from '../configs/jwt.config';
+import { UserModule } from '../user/user.module';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+
+@Module({
+  imports: [UserModule, JwtModule.registerAsync(getJwtConfig())],
+  controllers: [AuthController],
+  providers: [AuthService],
+})
+export class AuthModule {}
+```
+
+## gameacademybackend/apps/account/src/app/auth/auth.service.ts
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { AccountRegister } from '@shared/contracts';
+import { UserRole } from '@shared/interfaces';
+import { Types } from 'mongoose';
+import { UserEntity } from '../user/entities/user.entity';
+import { UserRepository } from '../user/repos/user.repository';
+import { THIS_USER_IS_EXISTS, WRONG_LOGIN_OR_PASSWORD } from './others/account.constants';
+
+@Injectable()
+export class AuthService {
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService,
+  ) {}
+
+  async register({ email, password, displayName }: AccountRegister.Request): Promise<AccountRegister.Response> {
+    const oldUser = await this.userRepository.findUser(email);
+    if (oldUser) throw new Error(THIS_USER_IS_EXISTS);
+    const newUserEntity = await new UserEntity({
+      displayName,
+      email,
+      role: UserRole.Admin,
+    }).setPassword(password);
+    const newUser = await this.userRepository.createUser(newUserEntity);
+    return { email: newUser.email };
+  }
+
+  async validateUser(email: string, password: string): Promise<{ id: Types.ObjectId }> {
+    const user = await this.userRepository.findUser(email);
+    if (!user) throw new Error(WRONG_LOGIN_OR_PASSWORD);
+    const userEntity = new UserEntity(user);
+    const isCorrectPassword = await userEntity.validatePassword(password);
+    if (!isCorrectPassword) throw new Error(WRONG_LOGIN_OR_PASSWORD);
+    return { id: user._id };
+  }
+
+  async login(id: string) {
+    return {
+      access_token: await this.jwtService.signAsync({ id }),
+    };
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/configs/jwt.config.ts
+
+```ts
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModuleAsyncOptions } from '@nestjs/jwt';
+
+export const getJwtConfig = (): JwtModuleAsyncOptions => ({
+  imports: [ConfigModule],
+  inject: [ConfigService],
+  useFactory: (configService: ConfigService) => ({
+    secret: configService.get('JWT_SECRET'),
+    signOptions: {
+      expiresIn: '4h',
+    },
+  }),
+});
+```
+
+## gameacademybackend/apps/account/src/app/configs/mongo.config.ts
+
+```ts
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModuleAsyncOptions } from '@nestjs/mongoose';
+
+export const getMongoConfig = (): MongooseModuleAsyncOptions => {
+  return {
+    useFactory: (configService: ConfigService) => ({
+      uri: getMongoString(configService),
+    }),
+    inject: [ConfigService],
+    imports: [ConfigModule],
+  };
+};
+
+const getMongoString = (configService: ConfigService) =>
+  'mongodb://' +
+  configService.get('MONGO_LOGIN') +
+  ':' +
+  configService.get('MONGO_PASSWORD') +
+  '@' +
+  configService.get('MONGO_HOST') +
+  ':' +
+  configService.get('MONGO_PORT') +
+  '/' +
+  configService.get('MONGO_DATABASE') +
+  '?authSource=' +
+  configService.get('MONGO_AUTHDATABASE');
+```
+
+## gameacademybackend/apps/account/src/app/configs/rmq.config.ts
+
+```ts
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { IRMQServiceAsyncOptions } from 'nestjs-rmq';
+
+export const getRMQConfig = (): IRMQServiceAsyncOptions => ({
+  inject: [ConfigService],
+  imports: [ConfigModule],
+  useFactory: (configService: ConfigService) => ({
+    exchangeName: configService.get('AMQP_EXCHANGE') ?? '',
+    connections: [
+      {
+        login: configService.get('AMQP_LOGIN_USER') ?? '',
+        password: configService.get('AMQP_PASSWORD_USER') ?? '',
+        host: configService.get('AMQP_HOSTNAME') ?? '',
+      },
+    ],
+    queueName: configService.get('AMQP_QUEUE') ?? '',
+    prefetchCount: 32,
+    serviceName: 'account-ms',
+  }),
+});
+```
+
+## gameacademybackend/apps/account/src/app/user/entities/user.entity.ts
+
+```ts
+import { IUser, UserRole } from '@shared/interfaces';
+import { compare, genSalt, hash } from 'bcryptjs';
+import { Types } from 'mongoose';
+
+export class UserEntity implements IUser {
+  _id?: Types.ObjectId;
+  displayName?: string;
+  email: string;
+  passwordHash: string;
+  role: UserRole;
+
+  constructor(user: Omit<IUser, 'passwordHash'>);
+  constructor(user: IUser);
+
+  constructor(user: IUser | Omit<IUser, 'passwordHash'>) {
+    this._id = user._id;
+    this.displayName = user.displayName;
+    this.email = user.email;
+    this.role = user.role;
+
+    if ('passwordHash' in user) {
+      this.passwordHash = user.passwordHash;
+    }
+  }
+
+  public getPublicProfile() {
+    return {
+      displayName: this.displayName,
+      email: this.email,
+      role: this.role,
+    };
+  }
+
+  public async setPassword(password: string) {
+    const salt = await genSalt(10);
+    this.passwordHash = await hash(password, salt);
+    return this;
+  }
+
+  public validatePassword(password: string) {
+    return compare(password, this.passwordHash);
+  }
+
+  public updateProfile(displayName: string) {
+    this.displayName = displayName;
+    return this;
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/user/models/user.model.ts
+
+```ts
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IUser, UserRole } from '@shared/interfaces';
+import { HydratedDocument } from 'mongoose';
+
+export type UserDocument = HydratedDocument<User>;
+
+@Schema({ timestamps: true })
+export class User implements IUser {
+  @Prop()
+  displayName?: string;
+
+  @Prop({ required: true })
+  email: string;
+
+  @Prop({ required: true })
+  passwordHash: string;
+
+  @Prop({
+    required: true,
+    enum: UserRole,
+    type: String,
+    default: UserRole.Guest,
+  })
+  role: UserRole;
 }
 
-// Тип для поднавыка
-export interface Subskill {
+export const UserSchema = SchemaFactory.createForClass(User);
+```
+
+## gameacademybackend/apps/account/src/app/user/repos/user.repository.ts
+
+```ts
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { UserEntity } from '../entities/user.entity';
+import { User } from '../models/user.model';
+import { IUser } from '@shared/interfaces';
+
+@Injectable()
+export class UserRepository {
+  constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
+
+  async createUser(user: UserEntity) {
+    const newUser = new this.userModel(user);
+    return newUser.save();
+  }
+
+  async findUser(email: string) {
+    return this.userModel.findOne({ email }).exec();
+  }
+
+  async findUserById(id: string) {
+    return this.userModel.findById(id).exec();
+  }
+
+  async findAllUsers(): Promise<IUser[]> {
+    return this.userModel.find().select('email displayName role').lean().exec();
+  }
+
+  async updateUserByEmail(email: string, partialEntity: Partial<UserEntity>) {
+    return this.userModel.findOneAndUpdate({ email }, partialEntity, {
+      new: true,
+    });
+  }
+
+  async updateUserById({ _id, ...rest }: UserEntity) {
+    return this.userModel.updateOne({ _id }, { $set: { ...rest } }).exec();
+  }
+
+  async deleteUser(email: string) {
+    return this.userModel.deleteOne({ email }).exec();
+  }
+
+  async searchByDisplayName(searchTerm?: string): Promise<IUser[]> {
+    const regex = searchTerm?.trim() ? new RegExp(searchTerm.trim(), 'i') : null;
+    const filter = regex ? { displayName: regex } : {};
+    return this.userModel.find(filter).select('_id email displayName role').lean().exec();
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/user/user.commands.ts
+
+```ts
+import { Body, Controller } from '@nestjs/common';
+import { AccountChangePasswordProfile, AccountChangeProfile, AccountChangeRole, HealthCheck } from '@shared/contracts';
+import { RMQRoute, RMQValidate } from 'nestjs-rmq';
+import { THIS_USER_IS_NOT_EXISTS, WRONG_OLD_PASSWORD } from '../auth/others/account.constants';
+import { UserEntity } from './entities/user.entity';
+import { UserRepository } from './repos/user.repository';
+import { AccountDeleteUser } from '@shared/contracts';
+
+@Controller()
+export class UserCommands {
+  constructor(private readonly userRepository: UserRepository) {}
+
+  @RMQValidate()
+  @RMQRoute(AccountChangeProfile.topic)
+  async userInfo(@Body() { user, id }: AccountChangeProfile.Request): Promise<AccountChangeProfile.Response> {
+    const existedUser = await this.userRepository.findUserById(id);
+    if (!existedUser) throw new Error(THIS_USER_IS_NOT_EXISTS);
+    const userEntity = new UserEntity(existedUser).updateProfile(user.displayName);
+    await this.userRepository.updateUserById(userEntity);
+    return { user };
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountChangeRole.topic)
+  async changeRole(@Body() dto: AccountChangeRole.Request): Promise<AccountChangeRole.Response> {
+    const user = await this.userRepository.findUser(dto.email);
+    if (!user) throw new Error('Пользователь не найден');
+
+    const userEntity = new UserEntity(user);
+    userEntity.role = dto.newRole;
+    await this.userRepository.updateUserById(userEntity);
+    return { profile: userEntity.getPublicProfile() };
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountDeleteUser.topic)
+  async deleteUser(@Body() { email }: AccountDeleteUser.Request): Promise<AccountDeleteUser.Response> {
+    const user = await this.userRepository.findUser(email);
+    if (!user) {
+      throw new Error('Пользователь не найден');
+    }
+    await this.userRepository.deleteUser(email);
+    return { success: true };
+  }
+
+  @RMQValidate()
+  @RMQRoute(AccountChangePasswordProfile.topic)
+  async changePassword(
+    @Body() { id, passwords }: AccountChangePasswordProfile.Request,
+  ): Promise<AccountChangePasswordProfile.Response> {
+    const existedUser = await this.userRepository.findUserById(id);
+    if (!existedUser) throw new Error(THIS_USER_IS_NOT_EXISTS);
+
+    const userEntity = new UserEntity(existedUser);
+    const isOldValid = await userEntity.validatePassword(passwords.oldPassword);
+    if (!isOldValid) throw new Error(WRONG_OLD_PASSWORD);
+
+    await userEntity.setPassword(passwords.newPassword);
+
+    await this.userRepository.updateUserById(userEntity);
+
+    return { success: true };
+  }
+
+  @RMQValidate()
+  @RMQRoute(HealthCheck.topic)
+  async healthCheck(@Body() { service }: HealthCheck.Request): Promise<HealthCheck.Response> {
+    // Проверяем, что запрос предназначен для этого сервиса
+    if (service !== 'user') {
+      // Замените на имя своего сервиса
+      return {
+        status: 'error',
+        service: 'user',
+        timestamp: new Date().toISOString(),
+        details: 'Wrong service target',
+      };
+    }
+
+    try {
+      // Здесь добавьте реальные проверки здоровья сервиса
+      // Например: проверка БД, внешних зависимостей и т.д.
+
+      return {
+        status: 'ok',
+        service: 'user',
+        timestamp: new Date().toISOString(),
+        details: {
+          database: 'connected',
+          memory: process.memoryUsage(),
+          uptime: process.uptime(),
+        },
+      };
+    } catch (error) {
+      if (error instanceof Error)
+        return {
+          status: 'error',
+          service: 'user',
+          timestamp: new Date().toISOString(),
+          details: error.message,
+        };
+    }
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/user/user.module.ts
+
+```ts
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { User, UserSchema } from './models/user.model';
+import { UserRepository } from './repos/user.repository';
+import { UserCommands } from './user.commands';
+import { UserQueries } from './user.quries';
+
+@Module({
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+  providers: [UserRepository],
+  exports: [UserRepository],
+  controllers: [UserCommands, UserQueries],
+})
+export class UserModule {
   name: string;
-  description?: string;
+}
+```
+
+## gameacademybackend/apps/account/src/app/user/user.quries.ts
+
+```ts
+import { Body, Controller } from '@nestjs/common';
+import { AccountUserInfo, UserList, UserSearch } from '@shared/contracts';
+import { RMQRoute, RMQValidate } from 'nestjs-rmq';
+import { UserEntity } from './entities/user.entity';
+import { UserRepository } from './repos/user.repository';
+
+@Controller()
+export class UserQueries {
+  constructor(private readonly userRepository: UserRepository) {}
+
+  @RMQValidate()
+  @RMQRoute(AccountUserInfo.topic)
+  async userInfo(@Body() { id }: AccountUserInfo.Request): Promise<AccountUserInfo.Response> {
+    const user = await this.userRepository.findUserById(id);
+    const profile = new UserEntity(user).getPublicProfile();
+    return { profile };
+  }
+
+  @RMQValidate()
+  @RMQRoute(UserSearch.topic)
+  async searchUsers(@Body() dto: UserSearch.Request): Promise<UserSearch.Response> {
+    const found = await this.userRepository.searchByDisplayName(dto.query);
+    return {
+      users: found.map((u) => ({
+        _id: u._id.toString(),
+        email: u.email,
+        displayName: u.displayName,
+        role: u.role,
+      })),
+    };
+  }
+
+  @RMQRoute(UserList.topic)
+  async listUsers(): Promise<UserList.Response> {
+    const users = await this.userRepository.findAllUsers();
+    return {
+      users: users.map((u) => ({
+        email: u.email,
+        displayName: u.displayName,
+        role: u.role,
+      })),
+    };
+  }
+}
+```
+
+## gameacademybackend/apps/account/src/app/app.module.ts
+
+```ts
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { RMQModule } from 'nestjs-rmq';
+import { AuthModule } from './auth/auth.module';
+import { getMongoConfig } from './configs/mongo.config';
+import { UserModule } from './user/user.module';
+import { getRMQConfig } from '@shared/configs';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'envs/.account.env' }),
+    RMQModule.forRootAsync(getRMQConfig('auth')),
+    UserModule,
+    AuthModule,
+    MongooseModule.forRootAsync(getMongoConfig()),
+  ],
+})
+export class AppModule {}
+```
+
+## gameacademybackend/apps/account/src/main.ts
+
+```ts
+/**
+ * This is not a production server yet!
+ * This is only a minimal backend to get started.
+ */
+
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app/app.module';
+
+export const setupGracefulShutdown = (app: any) => {
+  const logger = new Logger('GracefulShutdown');
+
+  process.on('SIGTERM', async () => {
+    logger.log('Received SIGTERM. Starting graceful shutdown...');
+    await app.close();
+    process.exit(0);
+  });
+
+  process.on('SIGINT', async () => {
+    logger.log('Received SIGINT. Starting graceful shutdown...');
+    await app.close();
+    process.exit(0);
+  });
+};
+
+async function bootstrap() {
+  const logger = new Logger('Bootstrap');
+  const app = await NestFactory.create(AppModule);
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
+  app.enableCors();
+
+  // Добавьте обработку необработанных исключений
+  process.on('unhandledRejection', (reason, promise) => {
+    logger.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`);
+  });
+
+  process.on('uncaughtException', (error) => {
+    logger.error(`Uncaught Exception: ${error.message}`, error.stack);
+  });
+
+  const port = process.env.PORT || 3002;
+  setupGracefulShutdown(app);
+  await app.listen(port);
+  logger.log(`🚀 Application Account is running on: http://localhost:${port}/${globalPrefix}`);
 }
 
-// Тип для навыка
-export interface StaffSkill {
-  name: string;
-  level: Level;
-  description?: string;
-  subskills?: Subskill[];
+bootstrap().catch((error) => {
+  console.error('Bootstrap failed:', error);
+  process.exit(1);
+});
+```
+
+## gameacademybackend/envs/.account.env
+
+```env
+# Должен быть идентичен .api.env
+JWT_SECRET=dev_station
+
+MONGO_LOGIN=admin
+MONGO_PASSWORD=admin
+MONGO_HOST=localhost
+MONGO_PORT=27017
+MONGO_DATABASE=academy
+MONGO_AUTHDATABASE=admin
+
+AMQP_EXCHANGE=accounts.topic.exchange
+AMQP_LOGIN_USER=admin
+AMQP_PASSWORD_USER=admin
+AMQP_QUEUE=accounts.main.queue
+AMQP_HOSTNAME=localhost
+```
+
+## gameacademybackend/shared/configs/src/lib/rmq.config.ts
+
+```ts
+import { IRMQServiceAsyncOptions } from 'nestjs-rmq';
+
+export const getRMQConfig = (serviceName: string): IRMQServiceAsyncOptions => ({
+  useFactory: () => ({
+    exchangeName: 'kidv_exchange',
+    connections: [
+      {
+        host: 'localhost',
+        port: 5672,
+        login: 'admin',
+        password: 'admin',
+      },
+    ],
+    queueName: `${serviceName}.main.queue`,
+    prefetchCount: 10,
+    serviceName: serviceName,
+    queueOptions: {
+      durable: true,
+      arguments: {
+        'x-queue-type': 'classic', // Явно указываем тип очереди
+      },
+    },
+    // Добавьте эти настройки
+    reconnectTimeInSeconds: 5,
+    heartbeatIntervalInSeconds: 30,
+    messagesTimeout: 30000,
+    isGlobalPrefetchCount: false,
+    manualAck: false,
+  }),
+  inject: [],
+});
+```
+
+## gameacademybackend/shared/configs/src/index.ts
+
+```ts
+export * from './lib/rmq.config';
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.change-password-profile.ts
+
+```ts
+import { IsString, MinLength, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+
+class ChangePasswordDto {
+  @IsString()
+  @MinLength(6, { message: 'Старый пароль должен содержать минимум 6 символов' })
+  oldPassword: string;
+
+  @IsString()
+  @MinLength(6, { message: 'Новый пароль должен содержать минимум 6 символов' })
+  newPassword: string;
 }
 
-// Тип для достижения
-export interface StaffAchievement {
-  title: string;
-  icon: string; // Название иконки (например, "FaUpload")
-  description: string;
+export namespace AccountChangePasswordProfile {
+  export const topic = 'account.change-password-profile.command';
+
+  export class Request {
+    @IsString()
+    id: string;
+
+    @Type(() => ChangePasswordDto)
+    @ValidateNested()
+    passwords: ChangePasswordDto;
+  }
+
+  export class Response {
+    success: boolean;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.change-profile.ts
+
+```ts
+import { Type } from 'class-transformer';
+import { ValidateNested, IsString } from 'class-validator';
+
+class ChangeProfileDto {
+  @IsString()
+  displayName: string;
 }
 
-// Тип для контактов
-export interface Contact {
-  title: string;
-  value: string;
+export namespace AccountChangeProfile {
+  export const topic = 'account.change-profile.command';
+
+  export class Request {
+    @IsString()
+    id: string;
+
+    @ValidateNested()
+    @Type(() => ChangeProfileDto)
+    user: ChangeProfileDto;
+  }
+
+  export class Response {}
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.change-role.ts
+
+```ts
+import { IUser, UserRole } from '@shared/interfaces';
+import { IsEnum, IsString } from 'class-validator';
+
+export namespace AccountChangeRole {
+  export const topic = 'account.change-role.command';
+
+  export class Request {
+    @IsString()
+    email: string;
+
+    @IsEnum(UserRole)
+    newRole: UserRole;
+  }
+
+  export class Response {
+    profile: Omit<IUser, 'passwordHash'>;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.delete-user.ts
+
+```ts
+import { IsEmail } from 'class-validator';
+
+export namespace AccountDeleteUser {
+  export const topic = 'account.delete-user.command';
+
+  export class Request {
+    @IsEmail()
+    email: string;
+  }
+
+  export class Response {
+    success: boolean;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.login.ts
+
+```ts
+import { IsEmail, IsString } from 'class-validator';
+
+export namespace AccountLogin {
+  export const topic = 'account.login.command';
+
+  export class Request {
+    @IsEmail()
+    email: string;
+
+    @IsString()
+    password: string;
+  }
+
+  export class Response {
+    access_token: string;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.register.ts
+
+```ts
+import { IsEmail, IsOptional, IsString } from 'class-validator';
+
+export namespace AccountRegister {
+  export const topic = 'account.register.command';
+
+  export class Request {
+    @IsEmail()
+    email: string;
+
+    @IsString()
+    password: string;
+
+    @IsOptional()
+    @IsString()
+    displayName?: string;
+  }
+
+  export class Response {
+    email: string;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.user-info.ts
+
+```ts
+import { IUser } from '@shared/interfaces';
+import { IsString } from 'class-validator';
+
+export namespace AccountUserInfo {
+  export const topic = 'account.user-info.query';
+
+  export class Request {
+    @IsString()
+    id: string;
+  }
+
+  export class Response {
+    profile: Omit<IUser, 'passwordHash'>;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.user-list.ts
+
+```ts
+export namespace UserList {
+  export const topic = 'users.list';
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  export type Request = {};
+  export type Response = { users: { email: string; displayName: string; role: string }[] };
+}
+```
+
+## gameacademybackend/shared/contracts/src/lib/account/account.user-search.ts
+
+```ts
+import { IsOptional, IsString } from 'class-validator';
+
+export namespace UserSearch {
+  export const topic = 'users.search.query';
+
+  export class Request {
+    @IsOptional()
+    @IsString()
+    query?: string;
+  }
+
+  export class Response {
+    users: Array<{
+      _id: string;
+      email: string;
+      displayName?: string;
+      role: string;
+    }>;
+  }
+}
+```
+
+## gameacademybackend/shared/contracts/src/index.ts
+
+```ts
+export * from './lib/account/account.change-profile';
+export * from './lib/account/account.change-role';
+export * from './lib/account/account.login';
+export * from './lib/account/account.register';
+export * from './lib/account/account.user-info';
+export * from './lib/account/account.user-list';
+export * from './lib/account/account.delete-user';
+export * from './lib/account/account.user-search';
+export * from './lib/account/account.change-password-profile';
+export * from './lib/project/game.create';
+export * from './lib/project/game.get-all';
+export * from './lib/project/comment.create';
+export * from './lib/project/comment.list';
+export * from './lib/news/news.create';
+export * from './lib/news/news.delete';
+export * from './lib/news/news.get-by-id';
+export * from './lib/news/news.get-by-slug';
+export * from './lib/news/news.get-list';
+export * from './lib/news/news.update';
+export * from './lib/portfolio/portfolio.create';
+export * from './lib/portfolio/portfolio.delete';
+export * from './lib/portfolio/portfolio.get-by-slug';
+export * from './lib/portfolio/portfolio.get-list';
+export * from './lib/portfolio/portfolio.update';
+export * from './lib/staff/staff.create';
+export * from './lib/staff/staff.delete';
+export * from './lib/staff/staff.get-list';
+export * from './lib/staff/staff.update';
+export * from './lib/success-story/success-story.create';
+export * from './lib/success-story/success-story.delete';
+export * from './lib/success-story/success-story.get-list';
+export * from './lib/success-story/success-story.update';
+export * from './lib/health/health.check';
+```
+
+## gameacademybackend/shared/interfaces/src/lib/auth.interface.ts
+
+```ts
+export interface IJWTPayload {
+  id: string;
+}
+```
+
+## gameacademybackend/shared/interfaces/src/lib/user.interface.ts
+
+```ts
+import { Types } from 'mongoose';
+
+export enum UserRole {
+  Guest = 'Guest',
+  Teacher = 'Teacher',
+  Student = 'Student',
+  Admin = 'Admin',
 }
 
-export interface Position {
-  type: PositionType;
-  value: string;
+export interface IUser {
+  _id?: Types.ObjectId;
+  displayName?: string;
+  email: string;
+  passwordHash: string;
+  role: UserRole;
 }
+```
 
-// Основной тип для сотрудника
-export interface StaffMember {
-  _id?: string;
-  name: string;
-  positions: Position[]; // Человекочитаемая должность
-  educationLevel: string;
-  researchPosition: string;
-  photo?: string; // URL изображения или статичный ресурс
+## gameacademybackend/shared/interfaces/src/index.ts
 
-  // Описательные поля
-  bio?: string;
-  stats?: StaffStat[];
-  skills?: StaffSkill[];
-  achievements?: StaffAchievement[];
-
-  tags?: string[];
-  contact?: Contact[];
-}
+```ts
+export * from './lib/auth.interface';
+export * from './lib/user.interface';
+export * from './lib/news.interface';
+export * from './lib/portfolio.interface';
+export * from './lib/staff.interface';
+export * from './lib/success-story.interface';
 ```
 
