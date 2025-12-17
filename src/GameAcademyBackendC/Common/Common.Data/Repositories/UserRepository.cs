@@ -1,4 +1,4 @@
-﻿using Common.Core.Interfaces;
+﻿using Common.Core.Abstractions.Interfaces.Repositories;
 using Common.Core.Models.User;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;

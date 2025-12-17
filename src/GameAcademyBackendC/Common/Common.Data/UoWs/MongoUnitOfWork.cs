@@ -1,4 +1,5 @@
-﻿using Common.Core.Interfaces;
+﻿using Common.Core.Abstractions.Interfaces.Repositories;
+using Common.Core.Abstractions.Interfaces.UoWs;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 

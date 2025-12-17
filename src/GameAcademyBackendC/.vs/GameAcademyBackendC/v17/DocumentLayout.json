@@ -43,15 +43,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Common.Messaging",
+              "Title": "Common.Messaging.csproj",
               "DocumentMoniker": "D:\\VTTrofimchuk\\Corrections\\KIDV\\src\\GameAcademyBackendC\\Common\\Common.Messaging\\Common.Messaging.csproj",
               "RelativeDocumentMoniker": "Common\\Common.Messaging\\Common.Messaging.csproj",
               "ToolTip": "D:\\VTTrofimchuk\\Corrections\\KIDV\\src\\GameAcademyBackendC\\Common\\Common.Messaging\\Common.Messaging.csproj",
               "RelativeToolTip": "Common\\Common.Messaging\\Common.Messaging.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-16T12:28:01.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:28:01.583Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "Common\\Common.Core\\Interfaces\\IRabbitMQService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:25:12.359Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:25:12.359Z"
             },
             {
               "$type": "Document",
@@ -89,8 +87,7 @@
               "RelativeToolTip": "Common\\Common.Messaging\\Events\\User\\UserDeletedEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:24:15.31Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:24:15.31Z"
             },
             {
               "$type": "Document",
@@ -102,8 +99,7 @@
               "RelativeToolTip": "Common\\Common.Messaging\\Events\\User\\UserUpdatedEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:23:42.805Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:23:42.805Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "Common\\Common.Messaging\\Events\\User\\UserCreatedEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:22:54.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:22:54.793Z"
             },
             {
               "$type": "Document",
@@ -128,8 +123,7 @@
               "RelativeToolTip": "Common\\Common.Messaging\\Events\\IntegrationEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:22:25.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-16T12:22:25.468Z"
             }
           ]
         }

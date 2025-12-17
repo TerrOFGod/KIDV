@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "yD3QyDXxlh4=",
+  "dgSpecHash": "ssL/mh0xx6k=",
   "success": true,
   "projectFilePath": "D:\\VTTrofimchuk\\Corrections\\KIDV\\src\\GameAcademyBackendC\\Common\\Common.Messaging\\Common.Messaging.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\VseTTrofimchuk\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\VseTTrofimchuk\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\VseTTrofimchuk\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.1\\microsoft.extensions.configuration.abstractions.10.0.1.nupkg.sha512",
     "C:\\Users\\VseTTrofimchuk\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.1\\microsoft.extensions.dependencyinjection.abstractions.10.0.1.nupkg.sha512",
     "C:\\Users\\VseTTrofimchuk\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.1\\microsoft.extensions.diagnostics.abstractions.10.0.1.nupkg.sha512",

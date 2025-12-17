@@ -1,11 +1,11 @@
 ﻿using Common.Core.Exceptions;
-using Common.Core.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text;
+using Common.Core.Abstractions.Interfaces.Services;
 
 namespace Common.Messaging.RabbitMQ;
 

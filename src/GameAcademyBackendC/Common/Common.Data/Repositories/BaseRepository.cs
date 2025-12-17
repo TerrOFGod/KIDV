@@ -1,9 +1,9 @@
-﻿using Common.Core.Interfaces;
-using Common.Core.Models;
+﻿using Common.Core.Models;
 using Common.Core.Models.User;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using System.Linq.Expressions;
+using Common.Core.Abstractions.Interfaces.Repositories;
 
 namespace Common.Data.Repositories;
 
